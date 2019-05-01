@@ -1,0 +1,29 @@
+﻿<div ng-controller="FieldSectionCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ languages.LAYOUT_EDITOR.MANAGE_HEADING }}</div>
+        <div class="panel-body">
+            <div role="form" class="form-inline filter">
+                <div class="form-group input-group-sm">
+                    <label>{{ languages.LAYOUT_EDITOR.MODULE_NAME_LABEL }}</label>
+                    <ui-select class="form-group-control" ng-model="layoutEditor.ModuleId" style="width: 250px"
+                        ng-change="Module_Changed()"
+                        theme="select2">
+                        <ui-select-match>{{$select.selected.Description}}</ui-select-match>
+                        <ui-select-choices repeat="item.Id as item in pickListForm.ModuleId | propsFilter: {Description: $select.search}">
+                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="form-group input-group-sm">
+                    <label>{{ languages.LAYOUT_EDITOR.SECTION_NAME }}</label>
+                    <input type="text" class="form-control" ng-model="layoutEditor.SectionName">
+                </div>
+                <button type="button" class="btn btn-default btn-sm" ng-disabled="layoutEditor.SectionName.length == 0" ng-click="AddSection()">{{ languages.LAYOUT_EDITOR.ADD_SECTION_BUTTON }}</button>
+            </div>
+            <form id="sectionform">
+                <div ng-include=" ManageSectionUrl " onload="LoadedManageSection()">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

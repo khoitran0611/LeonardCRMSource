@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_AuthenLayout.cshtml";
+}
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>Leonard</b>USA</a>
+    </div>
+
+    <div class="login-box-body">
+        <p class="login-box-msg">@ViewBag.CompleteRegistrationHeading</p>
+        @if (ViewBag.Success == true)
+        {
+            <div class="alert alert-success">
+               @ViewBag.CompleteRegistration
+                <a href="/login">@ViewBag.LoginLink </a>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+    </div>
+</div>

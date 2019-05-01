@@ -1,0 +1,20 @@
+﻿<div ng-controller="EditTaxCtrl">
+    <div class="col-md-12">
+        <form id="taxForm" name="taxForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ languages.TAX.TAX_NAME }}</label>
+                <div class="col-md-9 input-group-sm"><input type="text" class="form-control" ng-model="taxObj.TaxName" /> </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ languages.TAX.TAX_VALUE }}</label>
+                <div class="col-md-9 input-group-sm"><input type="text" class="form-control" ng-model="taxObj.TaxValue" /> </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3 control-label"></div>
+                <label class="col-md-9">
+                    <input type="checkbox" ng-model="taxObj.IsActive" />  {{ languages.TAX.IS_ACTIVE }}
+                </label>
+            </div>
+        </form>
+    </div>
+</div>

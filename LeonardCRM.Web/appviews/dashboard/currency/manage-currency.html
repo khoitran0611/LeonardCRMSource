@@ -1,0 +1,98 @@
+﻿<div ng-controller="ManageCurrencyCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{languages.CURRENCY.PAGE_TITLE}}
+                </div>
+                <div class="panel-body">
+                    <form class="col-md-12 form-horizontal" name="entityForm" role="form">
+                        <div class="form-group">
+                            <div class="divtable">
+                                <section class="row">
+                                    <div class="col-md-12">
+                                        <div class="headerrow">
+                                            <div class="col-md-3 divcol">
+                                                <div class="headercell">
+                                                    {{languages.CURRENCY.NAME}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 divcol">
+                                                <div class="headercell">
+                                                    {{languages.CURRENCY.CODE}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 divcol">
+                                                <div class="headercell">
+                                                        {{languages.CURRENCY.SYMBOL}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 divcol">
+                                                <div class="headercell">
+                                                    {{languages.CURRENCY.RATE}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 divcol">
+                                                <div class="headercell">
+                                                    {{languages.CURRENCY.STATUS}}
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                                
+                    
+                                <div class="fields-container">
+                                    <div class="row ddactive" ng-repeat="item in currencies">
+                                        <div class="col-md-12 field">
+                                            <div class="gridrow" ng-class-odd="'rowindex'" ng-class-even="'altrowindex'">
+                                                <div class="col-md-3 divcol rowlink">
+                                                    <span class="rowcell">
+                                                        {{ item.Name }}
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-2 divcol rowlink cursor-move">
+                                                    <span class="rowcell">
+                                                        <span title="{{ item.Code }}">{{ item.Code }}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-2 divcol rowlink cursor-move">
+                                                    <span class="rowcell">
+                                                        <span title="{{ item.Symbol }}">{{ item.Symbol }}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-3 divcol rowlink cursor-move">
+                                                    <span class="rowcell">
+                                                        <span title="{{ item.ConversionRate }}">{{ item.ConversionRate }}</span>
+                                                    </span>
+                                                </div>
+                                                
+                                                <div class="col-md-1 divcol rowlink cursor-move">
+                                                    <span class="rowcell">
+                                                        <input ng-disabled="true" type="checkbox" ng-model="item.IsActive"/>
+                                                    </span>
+                                                </div>
+
+                                                <div class="col-md-1 divcol rowlink ">
+                                                    <div class="rowcell">
+                                                        <button ng-hide="item.BaseCurrency" type="button" class="btn btn-info btn-xs" ng-click="editRow(item)"><i class="glyphicon glyphicon-edit"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div id="currency" class="modal-dialog">
+        <div id="currencyeditContent" ng-cloak class="ng-cloak">
+        </div>
+    </div>-->
+</div>

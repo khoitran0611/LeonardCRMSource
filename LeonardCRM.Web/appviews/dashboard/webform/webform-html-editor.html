@@ -1,0 +1,28 @@
+﻿
+<div ng-controller="WebformHtmlEditorCtrl" class="padding10 form-horizontal">
+    <ul id="WebformHtmlTab" class="nav nav-tabs">
+        <li><a href="#Webform_DisplayTab" data-toggle="tab">{{languages.WEBFORM.DISPLAY}}</a></li>
+        <li><a href="#Webform_SourceTab" data-toggle="tab">{{languages.WEBFORM.SOURCE}}</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="Webform_DisplayTab">
+            <div class="panelbody">
+                <div id="webformHtml" style="display: inline-block">
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="Webform_SourceTab">
+            <div class="panelbody">
+                <div style="display: flex">
+                    <textarea class="col-xs-10" style="height: 400px;" ng-model="html"></textarea>    
+                </div>
+            </div>
+        </div>
+    </div>            
+</div>
+<style type="text/css">
+    #webformHtml * {
+        line-height: normal;
+    }
+</style>

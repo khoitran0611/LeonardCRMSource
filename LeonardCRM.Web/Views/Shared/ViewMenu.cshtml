@@ -1,0 +1,20 @@
+﻿@model IList<LeonardCRM.DataLayer.ModelEntities.vwViewMenu>
+@{
+    Layout = null;
+}
+
+<ul class="nav nav-pills nav-stacked dl-horizontal">
+    @{
+        foreach (var view in Model)
+        {
+            <li ng-class="{active:ViewId == @view.ViewId}">
+                <a title="@view.ViewName" href="#/@view.ModuleName.ToLower()/view/@view.ViewId">
+                    <span class="badge pull-right">@view.Total</span>
+                    @view.ViewName
+                </a>
+            </li>
+        }
+    }
+</ul>
+
+

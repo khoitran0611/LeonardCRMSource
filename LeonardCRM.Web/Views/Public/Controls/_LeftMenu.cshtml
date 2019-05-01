@@ -1,0 +1,44 @@
+﻿@using Eli.Common
+@model LeonardCRM.DataLayer.ModelEntities.Eli_User
+    @if (Request.IsAuthenticated && Model != null)
+    {
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        @{
+                            if (string.IsNullOrWhiteSpace(Model.Avatar))
+                            {
+                                <img src="/Content/images/default_user.png" class="img-circle" alt="User Image">
+                            }
+                            else
+                            {
+                                <img src="@(ConfigValues.UPLOAD_DIRECTORY + @Model.Avatar)" class="img-circle" alt="User Image">
+                            }
+                        }
+                    </div>
+                    <div class="pull-left info">
+                        <p>@Model.Name</p>
+                        <!-- Status -->
+                        @*<a><i class="fa fa-circle text-success"></i> Online</a>*@
+                        <small>{{languages.FRONTEND_LEFT_MENU.MEMBER_SINCE}} @(Model.CreatedDate.HasValue ? Model.CreatedDate.Value.ToString("MMM dd, yyyy") : "N/A")</small>
+                    </div>
+                </div>
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu">
+                    <li class="header">{{languages.FRONTEND_LEFT_MENU.APPLICATION_HEADER}}</li>
+                    <!-- Optionally, you can add icons to the links -->
+                    <li ng-class="{'active':subview == 'my-applications' || subview == 'edit-applicantform'}"><a href="#/my-applications"><i class="fa fa-building"></i> <span>{{languages.FRONTEND_LEFT_MENU.MY_APPLCATIONS}}</span></a></li>
+                    <li ng-class="{'active':subview == 'applicantform'}"><a href="#/applicantform"><i class="fa fa-file"></i> <span>{{languages.FRONTEND_LEFT_MENU.SUBMIT_APPLICANT}}</span></a></li>
+                    <li ng-class="{'active':subview == 'sold'}"><a href="#/sold"><i class="fa fa-credit-card"></i> <span>{{languages.FRONTEND_LEFT_MENU.SOLD}}</span></a></li>
+                    <li class="header">{{languages.FRONTEND_LEFT_MENU.ACCOUNT_HEADER}}</li>
+                    <li ng-class="{'active':subview == 'account-setting'}"><a href="#/account-setting"><i class="fa fa-gear"></i> <span>{{languages.FRONTEND_LEFT_MENU.ACCOUNT_INFO}}</span></a></li>
+                    <li ng-class="{'active':subview == 'help'}"><a href="#/help"><i class="fa fa-question-circle"></i> <span>{{languages.FRONTEND_LEFT_MENU.HELP}}</span></a></li>
+                    <li><a href="/login"><i class="fa fa-power-off"></i> <span>{{languages.FRONTEND_LEFT_MENU.SIGN_OUT}}</span></a></li>
+                </ul><!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+    }

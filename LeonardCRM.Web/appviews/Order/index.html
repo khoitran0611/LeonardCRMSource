@@ -1,0 +1,12 @@
+﻿<div ng-controller="OrdersCtrl">
+    <div ng-switch on="subview">
+        <div ng-switch-when="list">
+            <div ng-include="'/appviews/Order/ordermanagement.html'">
+            </div>
+        </div>
+        <div ng-switch-when="addorder">
+            <div ng-include="'/appviews/Order/detail.html'">
+            </div>
+        </div>
+    </div>  
+</div>

@@ -1,0 +1,754 @@
+﻿<style type="text/css">
+    .required-ipt .input-group-addon, .required-ipt .form-control, .required-ipt .select2-choice {
+        border-color: #f00;
+    }
+
+    .required-ipt .input-group-addon {
+        border-right-color: #CCCCCC;
+    }
+
+    .required-ipt .input-group .form-control {
+        border-left-color: #CCCCCC;
+    }
+</style>
+<form name="orderform" id="orderform" ng-controller="EditSalesOrdersCtrl">
+    <div>
+
+        <ul id="Ordertab" class="nav nav-tabs">
+            <li><a href="#OrderBasicInfo" data-toggle="tab">{{languages.ORDERS.BASIC_INFORMATION}}</a></li>
+            <li ng-show="order.Id > 0"><a href="#AppInfo" data-toggle="tab">{{languages.APPLICANT_FORM.INFO_TAB}}</a></li>
+            <li><a href="#Orderattachment" data-toggle="tab">{{languages.ORDERS.ATTACHMENT}}</a></li>
+            <li><a href="#OrderNotes" data-toggle="tab">{{languages.NOTES.NOTES}}</a></li>
+            <li><a href="#OrderSystemAudit" data-toggle="tab">{{languages.SYSTEM_AUDIT.TAB_LABEL}}</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane" id="OrderBasicInfo">
+                <div class="panelbody">
+                    <div class="row">
+                        <button type="button" promise-btn="cancelPromise" ng-show="applicant.IsStore && order.Status != cancelledStatus" ng-click="cancelApp()" class="btn btn-sm btn-danger pull-right" style="margin-left: 10px">{{languages.APPLICANT_FORM.CANCEL_BTN}}</button>
+
+                        <button type="button" promise-btn="savePromise2" ng-click="viewAcceptanceForm()" ng-disabled="!(order.Id > 0 && order.Status != cancelledStatus && orginalStatus >= completedStatus)" class="btn btn-sm btn-danger pull-right" style="margin-left: 10px">{{languages.ORDERS.VIEW_ACCEPTANCE_FORM_BTN}}</button>
+
+                        <button type="button" promise-btn="savePromise1" ng-click="viewDeliveryForm()" ng-disabled="!(order.Id > 0 && order.Status != cancelledStatus && orginalStatus >= pendingCusAcceptStatus)" class="btn btn-sm btn-danger pull-right" style="margin-left: 10px">{{languages.ORDERS.VIEW_DELIVERY_FORM_BTN}}</button>
+
+                        <button type="button" promise-btn="savePromise" ng-click="viewContract()" ng-if="!isSoldProcess" ng-disabled="!(order.Id > 0 && order.Status != cancelledStatus && orginalStatus >= preApprovalStatus)" class="btn btn-sm btn-danger pull-right">{{languages.ORDERS.VIEW_CONTRACT_BTN}}</button>
+                    </div>
+
+                    <div class="form-horizontal" role="form" ng-init="myInit()">
+                        <input type="hidden" ng-model="order.id" />
+
+                        <div class="row">
+                            <!--------------------General Info-------------------->
+                            <fieldset class="col-xs-12 fieldset" ng-disabled="!order.IsAdminRoleUsers && (orginalStatus >= completedStatus || order.IsFinalize == true)">
+                                <legend class="fieldsetlegend">{{languages.ORDERS.GENERAL_INFOMATION}}</legend>
+                                <div class="row fieldsetbody">
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.GPOrderNumberControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_GP_ORDER}}
+                                                <span ng-show="order.GPOrderNumberControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.GPOrderNumber" class="form-control" ng-disabled="order.GPOrderNumberControl.Locked">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.AcceptDateControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_ACCEPT_DATE}}
+                                                <span ng-show="order.AcceptDateControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8">
+                                                <div class="input-group">
+                                                    <input class="form-control cal-xs" show-weeks="showWeeks" type="text" is-open="opened2" placeholder="{{date_format}}"
+                                                           uib-datepicker-popup="{{date_format}}" ng-model="order.AcceptDate" datepicker-options="dateOptions"
+                                                           ng-disabled="order.AcceptDateControl.Locked"
+                                                           close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                                    <span class="btn input-group-addon" ng-click="opened2 = order.IsAdminRoleUsers || !(orginalStatus >= completedStatus || order.IsFinalize == true || order.AcceptDateControl.Locked)">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.PromoCodeControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_PROMO_CODE}}
+                                                <span ng-show="order.PromoCodeControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.PromoCode" class="form-control" ng-disabled="order.PromoCodeControl.Locked" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.IsOldCustomerControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_PREVIOUS_RTO_CUSTOMER}}
+                                                <span ng-show="order.IsOldCustomerControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-1 input-group-sm">
+                                                <input type="checkbox" ng-model="order.IsOldCustomer" class="donotcallcheckbox" ng-disabled="order.IsOldCustomerControl.Locked" />
+                                            </div>
+
+                                            <!--Add Promote-->
+                                            <div class="col-xs-1 input-group-sm" ng-if="!isSoldProcess" ng-show="order.IsAddPromotionControl.Visible" style="width: 19px;">
+                                                <input type="checkbox" ng-model="order.IsAddPromotion" ng-disabled="order.IsAddPromotionControl.Locked" class="donotcallcheckbox" ng-change="order.PromotionAmt = null" />
+                                            </div>
+                                            <label class="col-xs-2 control-label" ng-if="!isSoldProcess" style="padding-left: 5px; width: 96px; padding-top: 9px;">{{languages.ORDERS.IS_ADD_PROMOTION}}</label>
+
+                                            <!--Promote Amount-->
+                                            <div class="col-xs-3 input-group-sm" ng-if="!isSoldProcess" ng-show="order.IsAddPromotionControl.Visible && order.PromotionAmtControl.Visible">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" ng-model="order.PromotionAmt" numbers-only class="form-control" ng-disabled="order.PromotionAmtControl.Locked || !order.IsAddPromotion" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.PartNumberControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_PART_NUMBER}}
+                                                <span ng-show="order.PartNumberControl.Mandatory || isSoldProcess">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-5 input-group-sm">
+                                                <input type="text" ng-model="order.PartNumber" class="form-control" ng-disabled="order.PartNumberControl.Locked" />
+                                            </div>
+
+                                            <label class="col-xs-2 control-label" ng-show="order.IsNewPartControl.Visible">
+                                                {{languages.ORDERS.ORDER_IS_NEW_PART}}
+                                                <span ng-show="order.IsNewPartControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-1 input-group-sm" ng-show="order.IsNewPartControl.Visible">
+                                                <input type="checkbox" ng-model="order.IsNewPart" class="donotcallcheckbox" ng-disabled="order.IsNewPartControl.Locked" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.CapitalizationPeriodControl.Visible" ng-if="!isSoldProcess">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_CAPITALIZATION_PERIOD}}
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm" ng-class="{'required-ipt': order.CapitalizationPeriod == null}">
+                                                <ui-select name="capitalizationPeriod" class="form-control" ng-model="order.CapitalizationPeriod" ng-disabled="order.CapitalizationPeriodControl.Locked || (!order.IsAdminRoleUsers && orginalStatus >= paidFullStatus)" theme="select2">
+                                                    <ui-select-match allow-clear="true">{{$select.selected.Description}}</ui-select-match>
+                                                    <ui-select-choices repeat="list.Id as list in pickListForm.CapitalizationPeriods | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="list.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.StoreNumberControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.STORE_NUMBER}}
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <ui-select name="storeNumber" class="form-control" ng-model="order.StoreNumber" ng-disabled="order.StoreNumberControl.Locked || (!order.IsAdminRoleUsers && orginalStatus >= pendingCusAcceptStatus)" theme="select2">
+                                                    <ui-select-match allow-clear="true">{{$select.selected.Description}}</ui-select-match>
+                                                    <ui-select-choices repeat="list.AdditionalInfo as list in pickListForm.Stores | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="list.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.SalesPriceControl.Visible" ng-if="!isSoldProcess">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_RENTAL_SALES_PRICE}}
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm" ng-class="{'required-ipt': order.SalesPrice == null}">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true" numbers-only
+                                                           ng-disabled="order.SalesPriceControl.Locked || order.CapitalizationPeriod == null"
+                                                           data-validation-error-msg="Number Only" data-validation="number" ng-model="order.SalesPrice" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.MonthlyPayment1Control.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_MONTHLY_PAYMENT_1}}
+                                                <span ng-show="order.MonthlyPayment1Control.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true" ng-change="order.PaidAtSigning = order.MonthlyPayment1 * order.NumberOfPayment;"
+                                                           ng-disabled="order.MonthlyPayment1Control.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.MonthlyPayment1" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Number Of Payment-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.NumberOfPaymentControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_NUMBER_OF_PAYMENT}}
+                                                <span ng-show="order.NumberOfPaymentControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm" ng-class="{'required-ipt': order.NumberOfPayment == null}">
+                                                <input type="text" data-validation-allowing="float" ng-change="order.PaidAtSigning = order.MonthlyPayment1 * order.NumberOfPayment; order.RampPaidAtSign = order.MonthlyPayment2 * order.NumberOfPayment;"
+                                                       ng-disabled="order.NumberOfPaymentControl.Locked"
+                                                       data-validation-error-msg="{{languages.ORDERS.ORDER_NUMBER_OF_PAYMENT + ' ' + languages.ORDERS.INVALID_NUMBER_ERROR_MESSAGE}}" numbers-only data-validation="number"
+                                                       ng-model="order.NumberOfPayment" class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <!--Rent Paid at Signing-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.PaidAtSigningControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_RENT_PAID_AT_SIGNING}}
+                                                <span ng-show="order.PaidAtSigningControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"
+                                                           ng-disabled="order.PaidAtSigningControl.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.PaidAtSigning" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.SalesTaxPercentControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_SALE_TAX_PERCENT}}
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-disabled="order.SalesTaxPercentControl.Locked" ng-change="onChangeTaxPercent()"
+                                                       numbers-only ng-model="order.SalesTaxPercent" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.ReductionPaymentControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_RENT_REDUCTION_PAYMENT}}
+                                                <span ng-show="order.ReductionPaymentControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true" ng-change="onChangeReductionPayment()"
+                                                           ng-disabled="order.ReductionPaymentControl.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.ReductionPayment" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.TaxControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_TAX}}
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm" ng-class="{'required-ipt': order.Tax == null}">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"
+                                                           ng-disabled="order.TaxControl.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.Tax" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <div class="col-xs-6 dynamic-group"></div>
+                                             
+                                        <!--Sale Tax-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.SaleTaxControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_SALE_TAX}}
+                                                <span ng-show="order.SaleTaxControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"
+                                                           ng-disabled="order.SaleTaxControl.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.SaleTax" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12" style="margin-top: 0px; margin-bottom: 15px; background: #000; border-bottom: solid 1px #E5E5E5; margin-left: 15px; width: 97%;"></div>
+
+                                    <div class="form-group col-xs-12">
+                                        <!--Ramp Part Number-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.RampPartNumberControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_RAMP_PART}}
+                                                <span ng-show="order.RampPartNumberControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.RampPartNumber" class="form-control" ng-disabled="order.RampPartNumberControl.Locked" ng-change="changeRampNumber()">
+                                            </div>
+                                        </div>
+
+                                        <!--Ramp Sale Price-->
+                                        <div class="col-xs-6 dynamic-group" ng-if="!isSoldProcess" ng-show="order.RampSalePriceControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.RAMP_SALE_PRCE}}
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"
+                                                           ng-disabled="order.RampSalePriceControl.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.RampSalePrice" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <!--Monthly Payment 2-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.MonthlyPayment2Control.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_MONTHLY_PAYMENT_2}}
+                                                <span ng-show="order.MonthlyPayment2Control.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true" ng-change="order.RampPaidAtSign = order.MonthlyPayment2 * order.NumberOfPayment;"
+                                                           ng-disabled="order.MonthlyPayment2Control.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.MonthlyPayment2" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Ramp paid at signing-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.RampPaidAtSignControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_RAMP_PAID_AT_SIGNING}}
+                                                <span ng-show="order.RampPaidAtSignControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"
+                                                           ng-disabled="order.RampPaidAtSignControl.Locked || order.RampPartNumber == null || order.RampPartNumber == ''"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.RampPaidAtSign" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <!--Ramp Reduction-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.RampReductionControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_RAMP_REDUCTION_PAYMENT}}
+                                                <span ng-show="order.RampReductionControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"  ng-change="onChangeRampReductionPayment()"  
+                                                           ng-disabled="order.RampReductionControl.Locked || order.RampPartNumber == null || order.RampPartNumber == ''"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.RampReduction" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Ramp Tax-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.RampTaxControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_RAMP_TAX}}
+                                                <span ng-show="order.RampTaxControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"
+                                                           ng-disabled="order.RampTaxControl.Locked || order.RampPartNumber == null || order.RampPartNumber == ''"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.RampTax" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <!--Total Monthly-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.TotalMonthlyControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_TOTAL_MONTHLY_PAYMENT}}
+                                                <span ng-show="order.TotalMonthlyControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <div class="input-group input-group-sm">
+                                                    <span class="input-group-addon">{{currencyFormat}}</span>
+                                                    <input type="text" data-validation-allowing="float" data-validation-optional="true"
+                                                           ng-disabled="order.TotalMonthlyControl.Locked"
+                                                           data-validation-error-msg="Number Only" numbers-only data-validation="number" ng-model="order.TotalMonthly" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group"></div>
+                                    </div>
+                                    
+                                    <div class="col-xs-12" style="margin-top: 0px; margin-bottom: 15px; background: #000; border-bottom: solid 1px #E5E5E5; margin-left: 15px; width: 97%;"></div>
+
+                                    <div class="form-group col-xs-12">
+                                        <!--Order Status On Rent Process-->
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.StatusControl.Visible">
+                                            <label class="col-xs-4 control-label">{{languages.ORDERS.ORDER_STATUS}}(<span class="mandatorysign">*</span>)</label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <ui-select name="orderstatus" class="form-control" ng-model="order.Status"
+                                                           ng-disabled="order.StatusControl.Locked || (orginalStatus > pendingCusAcceptStatus && order.Status > pendingCusAcceptStatus) || (orginalStatus == cancelledStatus) || !order.IsAdmin" theme="select2"
+                                                           data-validation="required" ng-change="onChangeStatus()"
+                                                           data-validation-error-msg="{{languages.ORDERS.MANDATORY_ORDER_STATUS}}">
+                                                    <ui-select-match allow-clear="false">{{$select.selected.Description}}</ui-select-match>
+                                                    <ui-select-choices repeat="list.Id as list in pickListForm.Status | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="list.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="!isSoldProcess && orginalStatus >= inProgressStatus && order.Status >= inProgressStatus && order.IsAdmin && order.IsApproveOrderControl.Visible">
+                                            <label class="col-xs-4 control-label"></label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="optradio" ng-disabled="order.IsApproveOrderControl.Locked" ng-model="order.IsApproveOrder" ng-value="true" ng-change="approveOrDisapprove()">{{languages.ORDERS.APPROVE_ORDER }}
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="optradio" ng-disabled="order.IsApproveOrderControl.Locked" ng-model="order.IsApproveOrder" ng-value="false" ng-change="approveOrDisapprove()">{{languages.ORDERS.DISAPPROVE_ORDER }}
+                                                </label>
+                                                <label class="radio-inline" ng-show="order.IsApproveOrder == false">
+                                                    <input type="checkbox" ng-model="order.IsCancelDisapproved" ng-change="onCancelDisapproveOrder()" />{{languages.ORDERS.CANCEL_ORDER }}
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-show="orginalStatus >= inProgressStatus && order.Status >= inProgressStatus && order.IsAdmin && order.DisapprovedReasonControl.Visible">
+                                        <div class="col-xs-6 dynamic-group"></div>
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.IsApproveOrder != null && order.IsApproveOrder == false && orginalStatus >= inProgressStatus && order.DisapprovedReasonControl.Visible">
+                                            <label class="col-xs-4 control-label">{{languages.ORDERS.DISAPPROVED_REASON}}</label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <textarea ng-model="order.DisapprovedReason" ng-disabled="order.DisapprovedReasonControl.Locked" class="form-control" style="height: 147px;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!--------------------Payment & Delivery Info--------->
+                            <fieldset class="col-xs-12 fieldset" ng-disabled="!order.IsAdminRoleUsers && (orginalStatus >= completedStatus || order.IsFinalize == true)">
+                                <legend class="fieldsetlegend">{{languages.ORDERS.PAYMENT_DELIVERY_INFO_SECTION}}</legend>
+                                <div class="row fieldsetbody">
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.POSTicketNumberControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_POS_TICKET_NUMBER}} <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.POSTicketNumber" class="form-control" ng-disabled="order.POSTicketNumberControl.Locked || (!order.IsAdminRoleUsers && orginalStatus >= pendingDeliveryStatus)" uib-tooltip-trigger="mouseenter" uib-tooltip-append-to-body="true" uib-tooltip-html-unsafe="{{languages.ORDERS.TOOTIP_POS_NUMBER}}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.SerialNumberControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_SERIAL}}
+                                                <span ng-show="order.SerialNumberControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.SerialNumber" class="form-control" ng-disabled="order.SerialNumberControl.Locked" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="!isSoldProcess">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.ColorControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.COLOR_FIELD}}
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.Color" class="form-control" ng-disabled="order.ColorControl.Locked" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.SaleDateControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.SALE_DATE}}
+                                            </label>
+                                            <div class="col-xs-8">
+                                                <div class="input-group">
+                                                    <input class="form-control cal-xs" show-weeks="showWeeks" type="text" ng-disabled="order.SaleDateControl.Locked || (!order.IsAdminRoleUsers && orginalStatus >= pendingDeliveryStatus)" is-open="opened" placeholder="{{date_format}}"
+                                                           uib-datepicker-popup="{{date_format}}" ng-model="order.SaleDate" datepicker-options="dateOptions"
+                                                           close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                                    <span class="btn input-group-addon" ng-click="opened = !(order.SaleDateControl.Locked || order.Status >= pendingDeliveryStatus)">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group col-xs-12" ng-if="isSoldProcess">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.ColorControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.COLOR_FIELD}}
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.Color" class="form-control" ng-disabled="order.ColorControl.Locked" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.SerialNumberControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.ORDER_SERIAL}} 
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" ng-model="order.SerialNumber" class="form-control" ng-disabled="order.SerialNumberControl.Locked" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.RentToOwnControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.RTO}}
+                                            </label>
+                                            <div class="col-xs-1 input-group-sm">
+                                                <input type="checkbox" ng-model="order.RentToOwn" ng-disabled="order.RentToOwnControl.Locked" class="donotcallcheckbox" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xs-6 dynamic-group" ng-show="order.ResponsibleUsersControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.ORDERS.RESPONSIBLE_USER}}<span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <ui-select class="form-control" multiple ng-model="order.UserIds"
+                                                           theme="bootstrap" ng-disabled="order.ResponsibleUsersControl.Locked || (!order.IsAdminRoleUsers && orginalStatus >= completedStatus)" sortable="true">
+                                                    <ui-select-match>{{$item.Description }}</ui-select-match>
+                                                    <ui-select-choices group-by="'Role'" repeat="item.Id as item in pickListForm.ResponsibleUsers | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!--------------------Lot Manager--------------------->
+                            <fieldset class="col-xs-12 fieldset" ng-if="!isSoldProcess" ng-show="order.SalesOrderCompletes[0] != null" ng-disabled="!order.IsAdminRoleUsers && order.IsFinalize == true">
+                                <legend class="fieldsetlegend">{{languages.ORDERS.LOT_MANAGER_SECTION}}</legend>
+                                <div class="row fieldsetbody">
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-12 dynamic-group" ng-show="order.GPOrderNumberControl.Visible">
+                                            <label class="col-xs-2 control-label">
+                                                {{languages.ORDERS.ORDER_GP_ORDER}}
+                                                <span ng-show="order.GPOrderNumberControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-4 input-group-sm">
+                                                <input type="text" ng-model="order.GPOrderNumber" class="form-control" ng-disabled="order.GPOrderNumberControl.Locked">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-12 dynamic-group" ng-show="order.GPCustomerIDControl.Visible">
+                                            <label class="col-xs-2 control-label">
+                                                {{languages.ORDERS.ORDER_RTO_CUSTOMER}}
+                                                <span ng-show="order.GPCustomerIDControl.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-4 input-group-sm">
+                                                <input type="text" ng-model="order.GPCustomerID" class="form-control" ng-disabled="order.GPCustomerIDControl.Locked" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12" style="margin-top: 0px; margin-bottom: 15px; background: #000; border-bottom: solid 1px #E5E5E5; margin-left: 15px; width: 97%;"></div>
+
+                                    <div class="form-group col-xs-12">
+                                        <label class="col-xs-2 control-label"></label>
+                                        <div class="col-xs-8 dynamic-group">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" ng-model="order.SalesOrderCompletes[0].SpokeWithCustomer" ng-focus="order.SalesOrderCompletes[0].FollowUpComment = '';" ng-change="changeSpeakCustomer()" />
+                                                <b>{{languages.ORDERS.IS_SPEAK_TO_CUSTOMER_FIELD}} </b>
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" ng-model="order.SalesOrderCompletes[0].LeftVoiceMail" ng-change="changeLeftVoice()" />
+                                                <b>{{languages.ORDERS.IS_LEFT_VOICE_MAIL}} </b>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-12 dynamic-group">
+                                            <label class="col-xs-2 control-label">
+                                                {{languages.ORDERS.CALL_DATE_FILED}}
+                                            </label>
+                                            <div class="col-xs-2">
+                                                <div class="input-group">
+                                                    <input class="form-control cal-xs" show-weeks="showWeeks" type="text" ng-disabled="!order.SalesOrderCompletes[0].SpokeWithCustomer && !order.SalesOrderCompletes[0].LeftVoiceMail" is-open="open6"
+                                                           uib-datepicker-popup="{{date_format}}" ng-model="order.SalesOrderCompletes[0].CallDate" datepicker-options="dateOptions" ng-change="changeCallDate()"
+                                                           close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                                    <span class="btn input-group-addon" ng-click="open6 = order.IsFinalize != true">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <input class="form-control cal-xs call-time-field" style="width: 80px;" type="text"
+                                                       ng-model="order.SalesOrderCompletes[0].CallTime"
+                                                       ng-disabled="!order.SalesOrderCompletes[0].SpokeWithCustomer && !order.SalesOrderCompletes[0].LeftVoiceMail" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xs-12">
+                                        <div class="col-xs-12 dynamic-group">
+                                            <label class="col-xs-2 control-label">
+                                                {{languages.ORDERS.COMMENT_FIELD}}
+                                            </label>
+                                            <div class="col-xs-8">
+                                                <textarea class="form-control cal-xs" rows="5" ng-disabled="!order.SalesOrderCompletes[0].SpokeWithCustomer && !order.SalesOrderCompletes[0].LeftVoiceMail"
+                                                          ng-model="order.SalesOrderCompletes[0].FollowUpComment"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="form-group col-xs-12" ng-if="order.SalesOrderCompletes[0].ManagerSignature != null && order.SalesOrderCompletes[0].ManagerSignature != ''">
+                                        <div class="col-xs-12 dynamic-group">
+                                            <label class="col-xs-2 control-label">
+                                                {{languages.ORDERS.MANAGER_SIGNATURE}}
+                                            </label>
+                                            <div class="col-xs-8">
+                                                <img ng-src="{{order.SalesOrderCompletes[0].ManagerSignatureUrl}}" width="250">
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="form-group col-xs-12" ng-hide="order.IsFinalize == true">
+                                        <label class="col-xs-2 control-label"></label>
+                                        <div class="col-xs-8">
+                                            <button type="button" class="btn btn-sm btn-info" ng-click="finalizeOrder()" ng-disabled="order.SalesOrderCompletes[0].CallDate == null">
+                                                {{languages.ORDERS.FOLLOW_UP_COMPLETE_BTN}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="row">
+                            <div ng-include="'/appviews/customfield/customfield.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--------------------Content of Applicant Info Tab -------------------->
+            <div class="tab-pane" id="AppInfo">
+                <div class="panelbody" ng-if="order.Id > 0">
+                    <div ng-include="'/appviews/frontend/applicantform/infoTabContent.html'"></div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="OrderNotes">
+                <div class="panelbody">
+                    <div ng-include="'/appviews/note/notes.html'"></div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="Orderattachment">
+                <div class="panelbody">
+                    <div class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-md-7" style="padding-left: 15px;">
+                                <span class="btn btn-sm btn-danger fileinput-button">
+                                    <span>{{languages.ORDERS.BROWSE}}</span>
+                                    <input type="file" multiple="" nv-file-select uploader="uploader" ng-disabled="disabled" ng-model="photo">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-repeat="uploaditem in filesUploaded" style="border-bottom: 1px dotted lightgrey; margin: 0; padding: 4px">
+                            <div class="col-md-6">
+                                <div class="form-control customerfilename">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                    <a href="{{UploadFolderUrl}}{{uploaditem.name}}" target="_blank"><strong>{{ getFileName(uploaditem.name) }}</strong></a>
+                                </div>
+                            </div>
+                            <!--Inject code here to do for the admin role-->
+                            <div class="col-md-2" ng-if="currentUserRoleId == 1">
+                                <button type="button" class="btn btn-sm btn-danger pull-right" tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{languages.ORDERS.DELETE}}" ng-click="DeleteAttachment(uploaditem.name)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
+
+                            <div class="col-md-2" ng-hide="order.Status >= completedStatus || currentUserRoleId == 1">
+                                <button type="button" class="btn btn-sm btn-danger pull-right" tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{languages.ORDERS.DELETE}}" ng-show="hasPermission" ng-click="DeleteAttachment(uploaditem.name)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-repeat="item in uploader.queue">
+                            <div class="col-md-5">
+                                <div class="form-control customerfilename" ng-hide="item.isUploaded">
+                                    <strong>{{ item.file.name }}</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2" ng-hide="item.isUploaded">
+                                <div class="customerprogressbar" ng-show="uploader.queue.length > 0">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="col-md-2 control-label"></label>
+                            <div class="col-md-5" ng-hide="item.isUploaded">
+                                <button type="button" class="btn btn-danger" ng-click="item.remove()" ng-show="!item.isUploaded">
+                                    <span class="glyphicon glyphicon-trash"></span>{{languages.ORDERS.REMOVE}}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-7">
+                                <button type="button" class="btn btn-success" ng-click="uploadAll()" ng-show="totalUploadedFiles > 0">{{languages.ORDERS.UPLOADALL}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="OrderSystemAudit">
+                <div class="panelbody">
+                    <div ng-include="'/appviews/systemaudit/index.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panelbody" style="min-height: 160px;"></div>
+    <div ng-include=" '/appviews/layouts/dialog.html' "></div>
+</form>
+

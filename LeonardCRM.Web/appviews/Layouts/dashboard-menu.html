@@ -1,0 +1,8 @@
+﻿<ul class="nav nav-pills nav-stacked dl-horizontal" ng-controller="dashboardMenuCtrl">
+    <li ng-repeat="module in dashboardModules" ng-class="{active:subview == module.Name}">
+        <a class="menulink" title="{{module.Description}}" ng-href="#/dashboard/{{module.Name}}">
+            <img ng-hide="module.MenuIcon == null || module.MenuIcon.length == 0" ng-src="{{ showimage(module.MenuIcon) }}" />
+            {{module.DisplayName}}
+        </a>
+    </li>
+</ul>

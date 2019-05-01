@@ -1,0 +1,11 @@
+﻿<div ng-controller="userCtrl">
+    <div ng-switch="subview">
+        <div ng-switch-default>
+            <div ng-include=" '/appviews/dashboard/users/manage-users.html' "></div>
+        </div>
+        <div ng-switch-when="add">
+            <div ng-include=" '/appviews/dashboard/users/details.html' "></div>
+        </div>
+    </div>
+    <div ng-include=" '/appviews/layouts/dialog.html' "></div>
+</div>

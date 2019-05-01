@@ -1,0 +1,300 @@
+﻿<ng-form name="deliveryRequestForm">
+    <section class="content">
+        <div class="row form-horizontal">
+
+            <!--Top Information-->
+            <div class="col-md-12">
+                <div class="pull-right" style="padding-right: 15px;">
+                    <div>
+                        <label>{{languages.DELIVERY_REQUEST_FORM.START_DATE}}: {{applicant.SalesOrders[0].SaleDate != null ? (applicant.SalesOrders[0].SaleDate | date:dateFormat) : '____'}}</label>
+                        <label>{{languages.DELIVERY_REQUEST_FORM.LOT}}: {{ applicant.SalesOrders[0].StoreNumber }}</label>
+                    </div>
+                    <div>
+                        <label>{{languages.DELIVERY_REQUEST_FORM.INVOICE_ORDER}} #: {{ applicant.SalesOrders[0].GPOrderNumber }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-center" style="clear: both; padding-top: 20px;">
+                <b>{{languages.DELIVERY_REQUEST_FORM.HEADING}}</b>
+            </h3>
+
+            <div class="box-body">
+
+                <h5 class="text-center">{{languages.DELIVERY_REQUEST_FORM.LETTER_HEADING}}</h5>
+                <!--Customer Information-->
+                <div>
+                    <!--Left-->
+                    <div class="col-md-6">
+
+                        <h4 class="box-title applicant-box-title"><b>{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_INFORMATION_SECTION_TITLE}}</b></h4>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_NAME}}</label>
+                            <div class="col-sm-10">
+                                <input type="text" ng-disabled="true" class="form-control input-sm" data-validation="required length" ng-model="applicant.Name" data-validation-length="2-100" data-validation-error-msg="{{languages.SALES_CUSTOMER.NAME_ERROR_MSG}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_STREET_ADDRESS}} <span>(<span class="mandatorysign">*</span>)</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control input-sm" ng-model="applicant.PhysicalStreet" ng-disabled="true">
+                            </div>
+
+                            <label class="col-sm-2 control-label">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_CITY}}</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control input-sm" ng-model="applicant.PhysicalCity" ng-disabled="true">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_STATE}}</label>
+                            <div class="col-sm-4">
+                                <select class="form-control input-sm" ng-disabled="true" ng-model="applicant.PhysicalState" ng-options="item.Id as item.Description for item in states"></select>
+                            </div>
+
+                            <label class="col-sm-2 control-label">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_ZIP}}</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control input-sm" ng-disabled="true" ng-model="applicant.PhysicalZip" maxlength="6">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_HOME_PHONE}} <span>(<span class="mandatorysign">*</span>)</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control input-sm" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.HomePhone" maxlength="20" required data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.CUSTOMER_HOME_PHONE_REQUIRE_ERROR_MSG}}">
+                            </div>
+
+                            <label class="col-sm-2 control-label">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_CELL_PHONE}} <span>(<span class="mandatorysign">*</span>)</span></label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control input-sm" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.CellPhone" maxlength="20" required data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.CUSTOMER_CELL_PHONE_REQUIRE_ERROR_MSG}}">
+                                <span style="font-size: 12px; font-weight: normal;">{{languages.DELIVERY_REQUEST_FORM.DELIVERY_PURPOSE_ONLY_LABEL}}</span>
+                            </div>
+                        </div>
+
+                        <!--Special Delivery Requirements-->
+                        <h4 class="box-title applicant-box-title"><b>{{languages.DELIVERY_REQUEST_FORM.SPECIAL_DELIVERY_REQUIREMENT_TITLE}}</b><span style="font-size: 12px;"> {{languages.DELIVERY_REQUEST_FORM.SPECIAL_DELIVERY_REQUIREMENT_SUB_TITLE}}</span></h4>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea rows="3" class="form-control input-sm" maxlength="250" ng-model="deliveryObj.DeliveryRequirement"></textarea>
+                            </div>
+                        </div>
+
+                        <!--Directions to Site-->
+                        <h4 class="box-title applicant-box-title"><b>{{languages.DELIVERY_REQUEST_FORM.DIRECTION_TO_SITE_TITLE}}</b><span style="font-size: 12px;"> {{languages.DELIVERY_REQUEST_FORM.DIRECTION_TO_SITE_SUB_TITLE}}</span></h4>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea rows="3" class="form-control input-sm" maxlength="250" ng-model="deliveryObj.DirectionToSite"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Right-->
+                    <div class="col-md-6">
+                        <div class="form-group align-center">
+                            <div class="col-sm-6">
+                                <label class="col-sm-12"><b>{{languages.DELIVERY_REQUEST_FORM.BUIDING_PART_NUMBER}}</b></label>
+                                <label>{{ applicant.SalesOrders[0].PartNumber}}</label>
+                                <!--<input type="text" class="form-control input-sm"/>-->
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-sm-12"><b>{{languages.DELIVERY_REQUEST_FORM.SERIAL_NUMBER}}</b><span style="font-size: 12px; font-weight: normal;"> - {{languages.DELIVERY_REQUEST_FORM.SERIAL_NUMBER_SUB_TITLE}}</span></label>
+                                <label>{{ applicant.SalesOrders[0].SerialNumber }}</label>
+                                <!--<input type="text" class="form-control input-sm"/>-->
+                            </div>
+                        </div>
+
+                        <!--Delivery Information-->
+                        <div class="box-title applicant-box-title col-sm-12">
+                            <span><b style="font-size: 18px;">{{languages.DELIVERY_REQUEST_FORM.DELIVERY_INFORMATION_SECTION}}</b></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{languages.DELIVERY_REQUEST_FORM.DELIVERY_TYPE_LABEL}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                            <div class="col-sm-6 radio" style="padding-top: 4px;">
+                                <label ng-repeat="t in deliveryTypes" ng-if="t.Id == deliveryTypeConstants.standardDeliveryType">
+                                    <input type="radio" name="deliveryTypes" ng-model="deliveryObj.DeliveryType"
+                                           data-validation="required"
+                                           required ng-value="t.Id"
+                                           data-validation-error-msg="{{languages.APPLICANT_FORM.DELIVERY_TYPE_REQUIRE_ERROR_MSG}}">
+                                    {{t.Description}}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{languages.DELIVERY_REQUEST_FORM.EXPECTED_DATE_OF_DELIVERY}}</label>
+
+                            <div class="col-sm-4">
+                                <label class="col-sm-12 control-label align-center">{{languages.DELIVERY_REQUEST_FORM.FIRST_CHOICE}} <span>(<span class="mandatorysign">*</span>)</span></label>
+                                <div class="input-group">
+                                    <input class="form-control input-sm cal-xs" placeholder="{{dateFormat}}" on-open-focus="false" is-open="opened3" show-weeks="showWeeks" type="text" uib-datepicker-popup="{{dateFormat}}" ng-model="deliveryObj.DeliveryDate1" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" required />
+                                    <span class="btn input-group-addon" ng-click="opened3 = true">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <label class="col-sm-12 control-label align-center">{{languages.DELIVERY_REQUEST_FORM.SECOND_CHOICE}}</label>
+                                <div class="input-group overflow-datepicker">
+                                    <input class="form-control input-sm cal-xs" placeholder="{{dateFormat}}" on-open-focus="false" is-open="opened4" show-weeks="showWeeks" type="text" uib-datepicker-popup="{{dateFormat}}" ng-model="deliveryObj.DeliveryDate2" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                    <span class="btn input-group-addon" ng-click="opened4 = true">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{languages.DELIVERY_REQUEST_FORM.PREFERRED_DELIVERY_TIME}}<span>(<span class="mandatorysign">*</span>)</span></label>
+                            <div class="col-sm-3 radio">
+                                <label ng-repeat="t in deliveryTimes">
+                                    <input type="radio" name="deliveryTimes" ng-model="deliveryObj.DeliveryTime" data-validation="required" required ng-value="t.Id" data-validation-error-msg="{{languages.APPLICANT_FORM.PREFERRED_DELIVERY_TIME_REQUIRE_ERROR_MSG}}">
+                                    {{t.Description}}&nbsp;
+                                </label>
+                            </div>
+
+                            <div class="col-sm-5 align-center">
+                                <label class="col-sm-12">{{languages.DELIVERY_REQUEST_FORM.MILES_TO_DELIVERY_SITE}} <span>(<span class="mandatorysign">*</span>)</span></label>
+                                <div>
+                                    <input type="number" class="form-control input-sm" ng-model="deliveryObj.MilesToSite" maxlength="6" required data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MILES_TO_DELIVERY_SITE_REQUIRE_ERROR_MSG}}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{languages.DELIVERY_REQUEST_FORM.WILL_CUSTOMER_BE_PRESENT}}</label>
+                            <div class="col-sm-8 radio">
+                                <label>
+                                    <input type="radio" ng-model="deliveryObj.CustomerPresent" ng-value="true">
+                                    {{languages.DELIVERY_REQUEST_FORM.YES_LABEL}}
+                                </label>
+
+                                <label>
+                                    <input type="radio" ng-model="deliveryObj.CustomerPresent" ng-value="false">
+                                    {{languages.DELIVERY_REQUEST_FORM.NO_LABEL}} <span style="font-size: 12px; font-weight: normal;">- {{languages.DELIVERY_REQUEST_FORM.NO_PRESENT_LABEL}}</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{languages.DELIVERY_REQUEST_FORM.LOAD_DOOR_FACING}}</label>
+                            <div class="col-sm-8">                                
+                                <select class="form-control input-sm" ng-model="deliveryObj.LoadDoorFacing" ng-options="item.Id as item.Description for item in loadDoorFacings">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--Notice to customer-->
+                <div class="col-md-12">
+                    <h4 class="box-title applicant-box-title"><b>{{languages.DELIVERY_REQUEST_FORM.NOTICE_TO_CUSTOMER_SECTION}}</b></h4>
+                    {{languages.DELIVERY_REQUEST_FORM.NOTICE_TO_CUSTOMER_DESCIPTION}}
+                </div>
+
+                <!--Delivery Information-->
+                <div class="col-md-12">
+                    <h4 class="box-title applicant-box-title"><b>{{languages.DELIVERY_REQUEST_FORM.DELIVERY_INFORMATION}}</b></h4>
+                    <h5><b>{{languages.DELIVERY_REQUEST_FORM.DELIVERY_INFORMATION_TITLE}}</b></h5>
+                </div>
+
+                <!--Rule-->
+                <div class="col-md-12">
+                    <div class="col-sm-8" style="padding-left: 0px;">
+                        <div class="applicant-box-title text-center important-line">{{languages.DELIVERY_REQUEST_FORM.IMPORTANT_LABEL}}</div>
+                        <ul style="display: table-cell; vertical-align: middle;">
+                            <li>{{languages.DELIVERY_REQUEST_FORM.IMPORTANT_CONTENT_FIRST}}</li>
+                            <li>{{languages.DELIVERY_REQUEST_FORM.IMPORTANT_CONTENT_SECOND}}</li>
+                            <li>{{languages.DELIVERY_REQUEST_FORM.IMPORTANT_CONTENT_THIRD}}</li>
+                        </ul>
+                    </div>
+                    <div style="display: table;">
+                        <div style="display: table-cell;">
+                            <div class="col-sm-12 form-group">
+                                <label class="col-sm-12 control-label align-center">{{languages.DELIVERY_REQUEST_FORM.DELIVERY_CUSTOMER_INITIALS}} (<span class="mandatorysign">*</span>)</label>
+                                <input type="text" class="form-control input-sm" maxlength="20" ng-model="deliveryObj.CustomerInitials" data-validation="required" data-validation-error-msg="{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_INITIAL_REQUIRED}}" required>
+                            </div>
+
+                            <div class="col-sm-12 form-group">
+                                <label class="col-sm-12 control-label align-center">{{languages.DELIVERY_REQUEST_FORM.DELIVERY_DATE}}</label>
+                                <input class="form-control input-sm cal-xs" show-weeks="showWeeks" type="text" placeholder="{{dateFormat}}"
+                                       uib-datepicker-popup="{{dateFormat}}" ng-model="deliveryObj.InitialDate" ng-disabled="true" uib-datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                            </div>
+                        </div>
+                        <div class="applicant-box-title text-center important-line">{{languages.DELIVERY_REQUEST_FORM.IMPORTANT_LABEL}}</div>
+                    </div>
+                </div>
+
+                <!--Rule Content-->
+                <div class="col-md-12" style="margin-top: 10px; clear: both;">
+                    <p>
+                        <b>(a)</b> {{languages.DELIVERY_REQUEST_FORM.DELIVERY_RULE_A}}
+                    </p>
+                    <p>
+                        <b>(b)</b> {{languages.DELIVERY_REQUEST_FORM.DELIVERY_RULE_B}}
+                    </p>
+                    <p>
+                        <b>(c)</b> {{languages.DELIVERY_REQUEST_FORM.DELIVERY_RULE_C}}
+                    </p>
+                    <p>
+                        <b>(d)</b> {{languages.DELIVERY_REQUEST_FORM.DELIVERY_RULE_D}}
+                    </p>
+                    <p>
+                        <b>(e)</b> {{languages.DELIVERY_REQUEST_FORM.DELIVERY_RULE_E}}
+                    </p>
+                    <h4 class="box-title applicant-box-title"><b>{{languages.DELIVERY_REQUEST_FORM.CHANGE_OR_CANCELLATION_SECTION}}</b></h4>
+                    <p>{{languages.DELIVERY_REQUEST_FORM.CHANGE_OR_CANCELLATION_CONTENT_FIRST}}</p>
+                    <p>
+                        <b>{{languages.DELIVERY_REQUEST_FORM.CHANGE_OR_CANCELLATION_BUILDING_MEASUREMENTS}} </b>{{languages.DELIVERY_REQUEST_FORM.CHANGE_OR_CANCELLATION_CONTENT_SECOND}}
+                    </p>
+                    <p>
+                        <b>{{languages.DELIVERY_REQUEST_FORM.CHANGE_OR_CANCELLATION_PERMIT_REQUIREMENTS}} </b>{{languages.DELIVERY_REQUEST_FORM.CHANGE_OR_CANCELLATION_CONTENT_THIRD}}
+                    </p>
+                </div>
+
+                <div class="col-md-12">
+                    <img ng-show="deliveryObj.CustomerSignImageUrl != ''" width="250" ng-src="{{deliveryObj.CustomerSignImageUrl}}" />
+                </div>
+                <div class="col-md-12">______________________________________________________________</div>
+                <div class="col-md-12">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_SIGNATURE_INCLUDE_NOTE}}</div>
+
+
+                <!--Notice to customer-->
+                <div class="col-md-12">
+                    <h4 class="box-title applicant-box-title"><b>{{languages.DELIVERY_REQUEST_FORM.DAY_OF_DELIVERY_SECTION}}</b></h4>
+                    <div class="col-md-6">
+                        <h4><b>{{languages.DELIVERY_REQUEST_FORM.WAIVER_LABEL}}</b></h4>
+                        <div class="form-group">
+                            <input class="col-sm-1" ng-disabled="!isShowCustomerSignature && deliveryObj.WaiverAccepted" type="checkbox" ng-model="deliveryObj.WaiverAccepted" ng-value="true">
+                            <div class="col-sm-11">
+                                {{languages.DELIVERY_REQUEST_FORM.WAIVER_CONTENT_FIRST}} <b><u>{{languages.DELIVERY_REQUEST_FORM.WAIVER_CONTENT_SECOND}}</u></b> {{languages.DELIVERY_REQUEST_FORM.WAIVER_CONTENT_THIRD}}
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="col-sm-12">
+                            <img ng-show="deliveryObj.CustomerSignImageUrl != ''" width="250" ng-src="{{deliveryObj.CustomerSignImageUrl}}" />
+                        </div>
+                        <div class="col-sm-12">____________________________________________________</div>
+                        <div class="col-sm-12">{{languages.DELIVERY_REQUEST_FORM.CUSTOMER_SIGNATURE}}</div>
+                    </div>                    
+                </div>
+            </div>
+            <!--end body-->
+            <div class="box-footer">
+                <div class="col-md-12">
+                    <button class="btn btn-flat" ng-disabled="!deliveryRequestForm.$valid" type="button" ng-show="isShowCustomerSignature && deliveryObj.WaiverAccepted" ng-click="openSignPopup(keySignaturePop)">{{languages.APPLICANT_FORM.CLICK_TO_SIGN_TEXT}}</button>                                        
+                </div>
+            </div>
+        </div>
+    </section>
+
+</ng-form>

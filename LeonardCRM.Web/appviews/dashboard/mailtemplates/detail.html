@@ -1,0 +1,41 @@
+﻿<div ng-controller="MailTemplateDetailCtrl">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{languages.MAILTEMPLATE.DETAIL_TITLE}}
+            </div>
+            <div class="panel-body">
+                <form name="invtemplateform" id="invtemplateform" class="col-md-12 form-horizontal" role="form">
+                   
+                     <div class="form-group">
+                        <label  class="col-md-2 control-label ">{{languages.MAILTEMPLATE.MAILTEMPLATE_NAME}}</label>
+                        <div class="col-md-7">
+                            <select id="options" ng-model="current" class="form-control" ng-change="GetMailTemplateById()" ng-options="mail.Id as mail.TemplateName for mail in mailtemplates">                                
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">{{languages.MAILTEMPLATE.SUBJECT}}</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="mailtemplate.Subject" id="txtSubject" class="form-control"/>
+                        </div>
+                    </div>
+                    
+                     <div class="form-group">
+                         <label class="col-md-2 control-label">{{languages.MAILTEMPLATE.MAILTEMPLATE_CONTENT}}</label>
+                        <div class="col-md-9">
+                            <textarea ng-model="mailtemplate.TemplateContent" style="height: 300px;" class="form-control" id="tinymce" ui-tinymce></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function insertYourContent() {
+        tinyMCE.activeEditor.execCommand('mceInsertContent', false, '@' + $('#options').val() + '@');
+    }
+</script>

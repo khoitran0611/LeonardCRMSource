@@ -1,0 +1,43 @@
+﻿<div ng-controller="OverdueAppCtrl">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b class="ng-binding">{{languages.OVERDUE_APPLICANTS.HEADING}}</b>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12 form-inline text-right form-group">
+                    <div class="form-group">
+                        <label class="control-label">{{languages.OVERDUE_APPLICANTS.MONTH_LABEL_1}}&nbsp;&nbsp;</label>
+                        <input type="text" class="form-control" numbers-only ng-model="overdueMonth" ng-enter="reloadData(true)" style="width: 55px;"/>
+                        <label class="control-label">&nbsp;&nbsp; {{languages.OVERDUE_APPLICANTS.MONTH_LABEL_2}}</label>
+                    </div>
+                    <div class="form-group" style="margin-left:10px;">
+                        <button type="button" class="btn btn-sm btn-danger" ng-disabled="!isSelectApps()" ng-click="deleteApps()">
+                            <i class="glyphicon glyphicon-remove"></i> {{languages.OVERDUE_APPLICANTS.DELETE_APPS_BTN}}
+                        </button>
+                    </div>
+                </div>
+                <table data-ng-table="tableParams" show-filter="true" class="table table-condensed table-bordered table-striped" disable-filter="isDisableFilter()">
+                    <colgroup>                        
+                        <col style="width: 120px;" />
+                        <col style="width: 82px;" />
+                    </colgroup>
+                    <tbody>
+                        <tr data-ng-repeat="row in $data">                            
+                            <td data-filter="{Id: 'number'}" data-title="languages.OVERDUE_APPLICANTS.ID_HEADER" sortable="'Id'" header-class="'align-col-ng-table'">{{row.Id}}</td>
+                            <td data-filter="{Status: 'text'}" data-title="languages.OVERDUE_APPLICANTS.STATUS_HEADER" sortable="'Status'" header-class="'align-col-ng-table'">
+                                <span class="label" ng-class="{'sts': getColorFromPicklist(row.Status) !== ''}"
+                                    ng-style="{'background-color': getColorFromPicklist(row.Status)}">{{ row.Status | picklist}}</span>
+                            </td>
+                            <td data-filter="{CustomerName: 'text'}" data-title="languages.OVERDUE_APPLICANTS.CUSTOMER_NAME_HEADER" sortable="'CustomerName'" header-class="'align-col-ng-table'">{{row.CustomerName}}</td>
+                            <td data-filter="{PartNumber: 'text'}" data-title="languages.OVERDUE_APPLICANTS.PART_NUMBER_HEADER" sortable="'PartNumber'" header-class="'align-col-ng-table'">{{row.PartNumber}}</td>
+                            <td data-filter="{ModifiedDate: 'date'}" data-title="languages.OVERDUE_APPLICANTS.LAST_MODIFIED_DATE_HEADER" sortable="'ModifiedDate'" header-class="'align-col-ng-table'">{{row.ModifiedDate | date:dateFormat}}</td>
+                            <td data-filter="{CapitalizationPeriod: 'text'}" data-title="languages.OVERDUE_APPLICANTS.CAP_PERIOD_HEADER" sortable="'CapitalizationPeriod'" header-class="'align-col-ng-table'">{{row.CapitalizationPeriod | picklist}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>   
+</div>
+

@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_Public.cshtml";
+    ViewBag.Title = "Account Management - LeonardUSA";
+}
+
+<div ng-switch="subview">
+    <div ng-switch-when="applicantform">
+        <div ng-include=" '/appviews/frontend/applicantform/details.html' "></div>
+    </div>
+    <div ng-switch-when="sold">
+        <div ng-include="'/appviews/frontend/applicantform/soldDetails.html'"></div>
+    </div>
+    <div ng-switch-when="edit-applicantform">
+        <div ng-include=" '/appviews/frontend/applicantform/appStepsPage.html' "></div>
+    </div>
+    <div ng-switch-when="my-applications">
+        <div ng-include=" '/appviews/frontend/applicantform/index.html' "></div>
+    </div>
+    <div ng-switch-when="account-setting">
+        <div ng-include=" '/appviews/profile/index.html' "></div>
+    </div>
+    <div ng-switch-when="help">
+        <div ng-include=" '/appviews/frontend/help.html' "></div>
+    </div>
+    <div ng-switch-default>
+        <div ng-include=" '/appviews/frontend/applicantform/index.html' "></div>
+    </div>
+</div>

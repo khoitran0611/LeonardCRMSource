@@ -1,0 +1,124 @@
+﻿<style type="text/css">
+    .error-ipt {
+        border-color: #f00 !important;
+    }
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+    <label style="min-width: 550px;" class="col-lg-1 col-md-4 col-sm-4 col-xs-4 row submit-app-question">{{languages.APPLICANT_FORM.QUESTION_APPLICANTS_SECTION}}</label>
+    <div style="min-width: 133px;" class="col-md-1 col-sm-1 col-xs-1 row">
+        <label class="radio-inline">
+            <input type="radio" ng-model="$parent.numOfApplicant" name="num-applicant" ng-value="1" />
+            1
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="$parent.numOfApplicant" name="num-applicant" ng-value="2" />
+            2
+        </label>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  form-group">
+    <label class="submit-app-section"><span class="col-md-1 col-sm-1 col-xs-1 submit-app-section-header">{{languages.APPLICANT_FORM.APPLICANT_SECTION_TITLE}}</span></label>
+</div>
+
+
+<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 form-group">
+    <label>{{languages.APPLICANT_FORM.NAME_APPLICANT_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+    <input type="text" class="form-control" data-validation="required" name="customer-name" ng-model="applicant.Name" data-validation-error-msg="{{languages.APPLICANT_FORM.NAME_AT_LEAST_ERROR_MSG}}">
+</div>
+
+<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12  form-group">
+    <label>
+        {{languages.APPLICANT_FORM.DRIVER_LICENSE_APPLICANT_FIELD}}<span> (<span class="mandatorysign">*</span>)</span>
+        <em>({{languages.APPLICANT_FORM.PHOTOCOPY_REQUIRED}})</em></label>
+
+    <input type="text" class="form-control" ng-model="applicant.DriverLicense" maxlength="20" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.DRIVER_LICENSE_REQUIRE_ERROR_MSG}}">
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 form-group">
+    <label>
+        {{languages.APPLICANT_FORM.PHONE_APPLICANT_FIELD}}
+            <em>({{languages.APPLICANT_FORM.LANDLINE_ONLY}})</em></label>
+    <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' name="HomePhone" data-mask ng-model="applicant.HomePhone" maxlength="20">
+</div>
+
+<div style="clear: both;"></div>
+
+<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12  form-group">
+    <label>
+        {{languages.APPLICANT_FORM.DOB_APPLICANT_FIELD}}<span> (<span class="mandatorysign">*</span>)</span>
+        <em class="text-uppercase">{{' (' + dateFormat + ')'}}</em></label>
+    <div class=" input-group">
+        <input class="form-control" placeholder="{{dateFormat}}" data-validation="date" required data-validation-format="{{dateFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.DOB_REQUIRE_ERROR_MSG}}" show-weeks=" showweeks" type="text" ng-model="applicant.DateOfBirth" ng-change="checkDOB(applicant.DateOfBirth, false)" on-open-focus="false" is-open="opened" uib-datepicker-popup="{{dateFormat}}" datepicker-options="birthDateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}"/>
+        <span class="btn input-group-addon" ng-click="opened = true">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+    </div>
+</div>
+
+<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 form-group">
+    <label>{{languages.APPLICANT_FORM.SECURITY_APPLICANT_FIELD}}</label>
+    <input type="number" class="form-control" ng-model="applicant.SocialNum" data-validation="length" data-validation-length="0-9" data-validation-error-msg="{{languages.APPLICANT_FORM.SOCIAL_SECURITY_LEN_ERROR_MSG}}">
+</div>
+
+<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group">
+    <label>{{languages.APPLICANT_FORM.CELL_PHONE_APPLICANT_FIELD}}</label>
+    <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' name="CellPhone" data-mask ng-model="applicant.CellPhone" maxlength="20">
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 form-group">
+    <label>{{languages.APPLICANT_FORM.EMAIL_APPLICANT_FIELD}} (<span class="mandatorysign">*</span>)</label>
+    <input type="text" class="form-control ipt-app-email" ng-model="applicant.Email" ng-class="{'error-ipt' : isExistEmail }"
+        data-validation="email" data-validation-error-msg="{{languages.APPLICANT_FORM.EMAIL_INVALID_ERROR_MSG}}" ng-change="checkIfExistCustomerEmail(applicant.Email)" style="border-color: red;" />
+    <span style="color: #f00;" ng-if="isExistEmail">{{languages.APPLICANT_FORM.EMAIL_EXIST_ERROR_MSG}}</span>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" ng-show="numOfApplicant == 2">
+    <label class="submit-app-section"><span class="col-md-1 col-sm-1 col-xs-1 submit-app-section-header">{{languages.APPLICANT_FORM.CO_APPLICANT_SECTION_TITLE}}</span></label>
+</div>
+
+
+<div ng-show="numOfApplicant == 2">
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+        <label>{{languages.APPLICANT_FORM.NAME_APPLICANT_FIELD}}</label>
+        <input type="text" class="form-control" ng-model="applicant.CoName" name="co-customer-name" />
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+        <label>
+            {{languages.APPLICANT_FORM.DRIVER_LICENSE_APPLICANT_FIELD}}
+            <em>({{languages.APPLICANT_FORM.PHOTOCOPY_REQUIRED}})</em></label>
+        <input type="text" class="form-control" ng-model="applicant.CoDriverLicense" maxlength="20" />
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+        <label>
+            {{languages.APPLICANT_FORM.DOB_APPLICANT_FIELD}}
+                <em class="text-uppercase">{{' (' + dateFormat + ')'}}</em></label>
+        <div class="input-group">
+            <input class="form-control" placeholder="{{dateFormat}}" show-weeks="showWeeks" type="text" data-validation="date" data-validation-optional="true" data-validation-format="{{dateFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.CO_DOB_REQUIRE_ERROR_MSG}}" ng-model="applicant.CoDateOfBirth" on-open-focus="false" is-open="opened1" uib-datepicker-popup="{{dateFormat}}" ng-change="checkDOB(applicant.CoDateOfBirth, true)" datepicker-options="birthDateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+            <span class="btn input-group-addon" ng-click="opened1 = true">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+        <label>{{languages.APPLICANT_FORM.SECURITY_APPLICANT_FIELD}}:</label>
+        <input type="number" class="form-control" ng-model="applicant.CoSocialNum" data-validation="length" data-validation-length="0-9" data-validation-error-msg="{{languages.APPLICANT_FORM.CO_SOCIAL_SECURITY_LEN_ERROR_MSG}}" />
+    </div>
+
+
+    <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+        <label>{{languages.APPLICANT_FORM.CELL_PHONE_APPLICANT_FIELD}}</label>
+        <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.CoCellPhone" maxlength="20" />
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-sm-126 form-group">
+        <label>{{languages.APPLICANT_FORM.EMAIL_APPLICANT_FIELD}}</label>
+        <input type="text" class="form-control" ng-model="applicant.CoEmail" data-validation="email" data-validation-error-msg="Email is invalid" data-validation-optional="true" />
+    </div>
+
+</div>
+

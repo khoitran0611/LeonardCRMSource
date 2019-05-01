@@ -1,0 +1,1 @@
+UPDATE Eli_EntityFields SET Mandatory = 0 WHERE FieldName = 'PartNumber' AND ModuleId = '3'

@@ -1,0 +1,24 @@
+﻿@model IList<LeonardCRM.DataLayer.ModelEntities.vwModule>
+@{
+    Layout = null;
+}
+<div>
+    @{
+        if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+        <ul class="nav navbar-btn nav-stacked">
+            @{
+                foreach (var module in Model)
+                {
+                    var link = module.Name.ToLower() + (module.DefaultViewId.HasValue ? ("/view/") + module.DefaultViewId : "");
+                    <li ng-class="{active:subview=='@module.Name.ToLower()'}"><a tooltip-append-to-body="true" tooltip-placement="right" tooltip="@module.Description" class="@module.IconClass" href="#@link">&nbsp;</a></li>
+                }
+            }
+        </ul>
+        @*<ul class="nav navbar-btn nav-stacked">
+            <li ng-class="{active:subview=='report'}"><a tooltip-append-to-body="true" tooltip-placement="right" tooltip="Report" class="glyphicon glyphicon-stats btn-lg" href="#report">&nbsp;</a></li>
+        </ul>*@
+        }
+    }
+
+</div>

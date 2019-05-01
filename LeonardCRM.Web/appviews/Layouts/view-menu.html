@@ -1,0 +1,40 @@
+﻿<ul class="nav nav-pills nav-stacked dl-horizontal" ng-controller="viewMenuCtrl">
+    <li ng-class="{active:ViewId == v.ViewId}" ng-repeat="v in viewMenus">
+        <a title="{{v.ViewName}}" ng-href="#/{{v.ModuleName}}/view/{{v.ViewId}}">
+            <span class="badge pull-right">{{v.Total}}</span>
+            {{v.ViewName}}
+        </a>
+    </li>
+    <li class="left-menu-heading" ng-show="personalViews.length > 0"><b>{{languages.VIEW.MY_VIEW_HEADING}}</b>
+    </li>
+    <li ng-class="{active:ViewId == v.ViewId}" ng-repeat="v in personalViews" class="dropdown">
+        <a title="{{v.ViewName}}" ng-href="#/{{v.ModuleName}}/view/{{v.ViewId}}">
+            <span class="badge pull-right">{{v.Total}}</span>
+            <i class="glyphicon glyphicon-edit" style="margin-right: 5px" data-toggle="dropdown" class="dropdown-toggle"></i>{{v.ViewName}}
+        </a>
+        <ul class="dropdown-menu pull-right">
+            <li>
+                <a href="#/dashboard/views/{{v.ViewId}}">{{languages.VIEW.EDIT_MY_VIEW}} <i class="glyphicon glyphicon-edit"></i></a>
+            </li>
+            <li>
+                <a ng-click="DeletePrivateView(v)">{{languages.VIEW.DELETE_MY_VIEW}} <i class="glyphicon glyphicon-trash"></i></a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<style>
+    .dropdown-menu li:hover .sub-menu
+    {
+        visibility: visible;
+    }
+
+    .dropdown:hover .dropdown-menu
+    {
+        display: block;
+    }
+
+    .nav-tabs .dropdown-menu, .nav-pills .dropdown-menu, .navbar .dropdown-menu
+    {
+        margin-top: 0;
+    }
+</style>

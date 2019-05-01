@@ -1,0 +1,104 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+    <label class="submit-app-question">{{languages.APPLICANT_FORM.QUESTION_PAYMENT_SECTION}}</label>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group row">
+    <label style="min-width: 170px;" class="col-lg-1 col-md-2 col-sm-12 col-xs-12">{{languages.APPLICANT_FORM.CHECKING_ACCOUNT}}:</label>
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="applicant.CheckingAccount" name="check-acount" ng-value="true" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.CHECKING_ACCOUNT_REQUIRE_ERROR_MSG}}" />
+                {{languages.APPLICANT_FORM.YES_LABEL}}
+            </label>
+
+            <label>
+                <input type="radio" ng-model="applicant.CheckingAccount" name="check-acount" ng-value="false" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.CHECKING_ACCOUNT_REQUIRE_ERROR_MSG}}">
+                {{languages.APPLICANT_FORM.NO_LABEL}}
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group row">
+    <label style="min-width: 170px;" class="col-lg-1 col-md-2 col-sm-12 col-xs-12">{{languages.APPLICANT_FORM.SAVING_ACCOUNT}}:</label>
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="applicant.SavingAccount" name="saving-acount" ng-value="true" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.SAVING_ACCOUNT_REQUIRE_ERROR_MSG}}" />
+                {{languages.APPLICANT_FORM.YES_LABEL}}
+            </label>
+
+            <label>
+                <input type="radio" ng-model="applicant.SavingAccount" name="saving-acount" ng-value="false" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.SAVING_ACCOUNT_REQUIRE_ERROR_MSG}}">
+                {{languages.APPLICANT_FORM.NO_LABEL}}
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group row">
+    <label style="min-width: 170px;" class="col-lg-1 col-md-2 col-sm-12 col-xs-12">{{languages.APPLICANT_FORM.ENROLL_IN_AUTOPAY}}:</label>
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="applicant.EnrollAutoPay" ng-value="true">
+                {{languages.APPLICANT_FORM.YES_LABEL}}
+            </label>
+
+            <label>
+                <input type="radio" ng-model="applicant.EnrollAutoPay" ng-value="false">
+                {{languages.APPLICANT_FORM.NO_LABEL}} <em style="padding-left: 20px;">{{languages.APPLICANT_FORM.YES_ENROLL_NOTE}}</em>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group row">
+    <label style="min-width: 170px;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1" for="drvLisenceInputFile">{{languages.APPLICANT_FORM.DRIVER_LICENSE_COPY}}</label>
+
+    <div style="min-width: 800px;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 submit-app-pd0">
+        <div class="col-md-12 margin-bottom">
+            <span class="btn btn-sm btn-danger fileinput-button btn-sm" ng-disabled ="isShowCam">
+                <span>{{languages.APPLICANT_FORM.BROWSER_BTN}}</span>
+                <input type="file" data-validation="mime size" data-validation-max-size="{{maxUploadFileSize}}M"
+                    data-validation-allowing="{{(modeParam != null && modeParam != '') ? languages.COMMON.VALID_FORMATS : languages.COMMON.IMAGE_FORMATS}}"
+                    data-validation-error-msg="{{(modeParam != null && modeParam != '') ? languages.COMMON.INVALID_UPLOAD_FILE_FORMAT : languages.COMMON.INVALID_IMAGE_FORMAT}} and max file size {{maxUploadFileSize}}MB"
+                    nv-file-select uploader="uploader" ng-model="Photo" ng-disabled="disabled || isShowCam">
+            </span>
+
+            <button class="btn btn-sm btn-info" ng-disabled ="isShowCam" ng-click="openCamera()">{{languages.APPLICANT_FORM.TAKE_PHOTO_BTN}}</button>
+        </div>
+
+        <div class="col-md-12 margin-bottom" ng-show="isShowCam" id="camera-section"></div>
+        <div class="col-md-12 margin-bottom" ng-show="isShowCam">
+            <button class="btn btn-sm btn-info" type="button" ng-click="takeSnapshot()">{{languages.APPLICANT_FORM.TAKE_SNAPSHOT_BTN}}</button>
+            <button class="btn btn-sm btn-danger" type="button" ng-click="closeCamera()">{{languages.APPLICANT_FORM.CANCEL_TAKE_PHOTO_BTN}}</button>
+        </div>
+
+        <div class="col-md-12 margin-bottom" ng-repeat="item in applicant.AttachmentFiles" style="padding-left: 15px !important;">
+            <div class="col-md-6" style="padding-left: 0 !important">
+                <div style="padding-left: 0 !important">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    <strong><a style="text-decoration: none;" target="_blank" ng-href="{{UploadFolderUrl + item}}">{{ getFileName(item) }}</a></strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 margin-bottom" ng-repeat="item in uploader.queue" ng-hide="item.isUploaded" style="padding-left: 15px !important;">
+            <div class="col-md-6" style="padding-left: 0 !important">
+                <div style="padding-left: 0 !important">
+                    <strong>{{ item.file.name }}</strong>
+                </div>
+            </div>
+            <div class="col-md-4" style="width: 150px; padding-left: 0 !important;">
+                <div class="customerprogressbar" ng-show="uploader.hasHTML5">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 margintop10" ng-show="uploader.queue.length > 0">
+            <button type="button" class="btn btn-success btn-sm" ng-click="uploadAll()">{{languages.APPLICANT_FORM.UPLOAD_BTN}}</button>
+        </div>
+    </div>
+</div>

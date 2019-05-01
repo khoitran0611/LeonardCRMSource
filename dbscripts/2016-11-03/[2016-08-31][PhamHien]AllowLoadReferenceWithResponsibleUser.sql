@@ -1,0 +1,1 @@
+UPDATE Eli_EntityFields SET IsLoadReference = 1 WHERE  ModuleId = 3 AND FieldName = 'ResponsibleUsers'

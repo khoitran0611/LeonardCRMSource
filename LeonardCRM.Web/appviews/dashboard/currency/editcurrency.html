@@ -1,0 +1,41 @@
+﻿<div ng-controller="EditCurrencyCtrl" class="padding10">
+    <form id="editCurrencyForm" name="fieldForm" class="row" role="form">
+        <div class="col-md-12">
+
+            <div class="col-md-6 form-group input-group-sm">
+                <label>{{languages.CURRENCY.NAME}}</label>
+                <select id="currName" ng-disabled="currency.Id > 0" ui-select2 ng-change="SetValue()" class="form-control" ng-model="currency.Name">
+                    <option ng-repeat="currencyname in currencyNames" value="{{currencyname.Country + ',' + currencyname.Currency}}">{{currencyname.Country + ',' + currencyname.Currency + '(' + currencyname.Symbol + ')'}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 form-group input-group-sm">
+                <label>{{languages.CURRENCY.CODE}}</label>
+                <input ng-disabled="true" type="text" class="form-control" ng-model="currency.Code">
+            </div>
+
+            <div class="col-md-6 form-group input-group-sm">
+                <label>{{languages.CURRENCY.SYMBOL}}</label>
+                <input ng-disabled="true" type="text" class="form-control" ng-model="currency.Symbol">
+            </div>
+
+            <div class="col-md-6 form-group input-group-sm">
+                <label>{{languages.CURRENCY.RATE}}</label>
+                <input ng-required="true" type="text" data-validation-allowing="float" class="form-control" ng-model="currency.ConversionRate">
+            </div>
+
+            <div class="col-md-6 form-group input-group-sm">
+                <label>{{languages.CURRENCY.ACTIVE}}</label><br />
+                <input type="checkbox" class="donotcallcheckbox" ng-model="currency.IsActive">
+            </div>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    //$('#currency').hide();
+    //hack for making the search box of select2 to be focused
+    $.ui.dialog.prototype._allowInteraction = function (e) {
+        return !!$(e.target).closest('.ui-dialog, .ui-datepicker, .select2-drop').length;
+    };
+</script>

@@ -1,0 +1,16 @@
+﻿<div>
+    <div class="form-horizontal" role="form">
+        <div class="form-group" ng-repeat="(i,role) in fromRoles">
+            <div class="checkbox col-md-8">
+                <label>
+                    {{ replaceto.replace('{0}', role.Name) }}
+                </label>
+            </div>
+            <div class="col-md-4 input-group-sm">
+                <select id="Select1" class="form-control" ng-model="role.ToRoleId">
+                    <option ng-repeat="item in toRoles" value="{{ item.Id }}">{{ item.Name }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

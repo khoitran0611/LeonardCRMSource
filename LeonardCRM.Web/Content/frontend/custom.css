@@ -1,0 +1,607 @@
+﻿.applicant-box-title {
+    padding: 5px;
+    background-color: #d2d6de;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 40%;
+    right: 40%;
+    z-index: 999999;
+    text-align: center;
+}
+
+    .loading.ng-hide {
+        opacity: 0;
+    }
+
+    .loading.ng-hide-add,
+    .loading.ng-hide-remove {
+        display: block !important;
+    }
+
+.align-center {
+    text-align: center !important;
+}
+
+.application-status {
+    font-size: 16px;
+}
+
+.important-line {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 10px;
+    font-weight: bold;
+    word-break: break-all;
+    width: 10px;
+    text-align: center;
+}
+
+/** The Magic **/
+.btn-breadcrumb .btn:not(:last-child):after {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 10px solid white;
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+    left: 100%;
+    z-index: 3;
+}
+
+.btn-breadcrumb .btn:not(:last-child):before {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 10px solid rgb(173, 173, 173);
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+    margin-left: 1px;
+    left: 100%;
+    z-index: 3;
+}
+
+/*---------------CSS for steps-------------------*/
+/** The Spacing **/
+.btn-breadcrumb .btn {
+    padding: 6px 12px 6px 24px;
+    border-color: #fff;
+    margin: 0 !important;
+    color: #fff !important;
+}
+
+    .btn-breadcrumb .btn:active {
+        background-image: none;
+        outline: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+        .btn-breadcrumb .btn:active:focus, .btn:active:hover {
+            border-color: #fff !important;
+        }
+
+    .btn-breadcrumb .btn:first-child {
+        padding: 6px 6px 6px 10px;
+    }
+
+    .btn-breadcrumb .btn:last-child {
+        padding: 6px 18px 6px 24px;
+    }
+
+    /** Default button **/
+    .btn-breadcrumb .btn.btn-default:not(:last-child):after {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-default:not(:last-child):before {
+        border-left: 10px solid #ccc;
+    }
+
+    .btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
+        border-left: 10px solid #ebebeb;
+    }
+
+    .btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
+        border-left: 10px solid #adadad;
+    }
+
+    /** Primary button **/
+    .btn-breadcrumb .btn.btn-primary:not(:last-child):after {
+        border-left: 10px solid #c4f296;
+    }
+
+    .btn-breadcrumb .btn.btn-primary:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-primary:hover:not(:last-child):after {
+        border-left: 10px solid #c4f296;
+    }
+
+    .btn-breadcrumb .btn.btn-primary:hover:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-primary {
+        background-color: #c4f296;
+    }
+
+        .btn-breadcrumb .btn.btn-primary:hover {
+            background-color: #c4f296;
+        }
+
+
+    /** Success button **/
+    .btn-breadcrumb .btn.btn-success:not(:last-child):after {
+        border-left: 10px solid #9ac4f5;
+    }
+
+    .btn-breadcrumb .btn.btn-success:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-success:hover:not(:last-child):after {
+        border-left: 10px solid #9ac4f5;
+    }
+
+    .btn-breadcrumb .btn.btn-success:hover:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-success {
+        background-color: #9ac4f5;
+    }
+
+        .btn-breadcrumb .btn.btn-success:hover {
+            background-color: #9ac4f5;
+        }
+
+    /** Danger button **/
+    .btn-breadcrumb .btn.btn-danger:not(:last-child):after {
+        border-left: 10px solid #c7c202;
+    }
+
+    .btn-breadcrumb .btn.btn-danger:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-danger:hover:not(:last-child):after {
+        border-left: 10px solid #c7c202;
+    }
+
+    .btn-breadcrumb .btn.btn-danger:hover:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-danger {
+        background-color: #c7c202;
+    }
+
+        .btn-breadcrumb .btn.btn-danger:hover {
+            background-color: #c7c202;
+        }
+
+    /** Warning button **/
+    .btn-breadcrumb .btn.btn-warning:not(:last-child):after {
+        border-left: 10px solid #eda59a;
+    }
+
+    .btn-breadcrumb .btn.btn-warning:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-warning:hover:not(:last-child):after {
+        border-left: 10px solid #eda59a;
+    }
+
+    .btn-breadcrumb .btn.btn-warning:hover:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-warning {
+        background-color: #eda59a;
+    }
+
+        .btn-breadcrumb .btn.btn-warning:hover {
+            background-color: #eda59a;
+        }
+
+    /** Info button **/
+    .btn-breadcrumb .btn.btn-info:not(:last-child):after {
+        border-left: 10px solid #169c23;
+    }
+
+    .btn-breadcrumb .btn.btn-info:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-info:hover:not(:last-child):after {
+        border-left: 10px solid #169c23;
+    }
+
+    .btn-breadcrumb .btn.btn-info:hover:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-info {
+        background-color: #169c23;
+    }
+
+        .btn-breadcrumb .btn.btn-info:hover {
+            background-color: #169c23;
+        }
+
+    /** starter button **/
+    .btn-breadcrumb .btn.btn-starter:not(:last-child):after {
+        border-left: 10px solid #f0a83a;
+    }
+
+    .btn-breadcrumb .btn.btn-starter:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-starter:hover:not(:last-child):after {
+        border-left: 10px solid #f0a83a;
+    }
+
+    .btn-breadcrumb .btn.btn-starter:hover:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-starter {
+        background-color: #f0a83a;
+    }
+
+        .btn-breadcrumb .btn.btn-starter:hover {
+            background-color: #f0a83a;
+        }
+
+    /** disabled button **/
+    .btn-breadcrumb .btn.btn-disabled:not(:last-child):after {
+        border-left: 10px solid #d2d6de;
+    }
+
+    .btn-breadcrumb .btn.btn-disabled:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-disabled:hover:not(:last-child):after {
+        border-left: 10px solid #d2d6de;
+    }
+
+    .btn-breadcrumb .btn.btn-disabled:hover:not(:last-child):before {
+        border-left: 10px solid #fff;
+    }
+
+    .btn-breadcrumb .btn.btn-disabled {
+        background-color: #d2d6de;
+    }
+
+        .btn-breadcrumb .btn.btn-disabled:hover {
+            background-color: #d2d6de;
+        }
+/*---------------End CSS for steps-------------------*/
+
+/*Fix Date Picker overflow*/
+.overflow-datepicker {
+    position: relative;
+}
+
+    .overflow-datepicker .dropdown-menu {
+        left: auto !important;
+        right: 0px;
+    }
+
+.dropdown-menu .wraper-item-typehead {
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 1px solid #cccccc;
+}
+
+.dropdown-menu .row-typehead {
+    display: table-row;
+}
+
+.dropdown-menu .cell-typehead {
+    display: table-cell;
+    min-width: 20px;
+    text-align: left;
+    padding: 5px 10px 5px 10px;
+}
+
+/*-------CSS for customer accpeptance form-------------*/
+.customer-acceptance-content-form i {
+    font-size: 15px;
+}
+
+.building-maintenance-info-section .applicant-box-title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.building-maintenance-info-section .radio {
+    padding-top: 5px;
+}
+
+.delivery-info-section .pd0 {
+    padding: 0;
+}
+
+    .delivery-info-section .pd0 .radio:first-child {
+        padding-left: 0;
+    }
+
+.customer-acceptance-content-form .box {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 4px 4px 4px #888888;
+}
+
+.customer-acceptance-content-form .rating-select {
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    border-color: #ccc;
+    display: inline-block;
+    width: 105px;
+}
+
+.customer-acceptance-content-form .bootstrap-timepicker-widget.dropdown-menu {
+    top: 110%;
+    left: 14px;
+}
+
+/*loading button*/
+@-webkit-keyframes three-quarters {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes three-quarters {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes three-quarters {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes three-quarters {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+/* Styles for old versions of IE */
+.btn-spinner {
+    font-family: sans-serif;
+    font-weight: 100;
+}
+
+    /* :not(:required) hides this rule from IE9 and below */
+    .btn-spinner:not(:required) {
+        -webkit-animation: three-quarters 1250ms infinite linear;
+        -moz-animation: three-quarters 1250ms infinite linear;
+        -ms-animation: three-quarters 1250ms infinite linear;
+        -o-animation: three-quarters 1250ms infinite linear;
+        animation: three-quarters 1250ms infinite linear;
+        border: 3px solid #8c8c8c;
+        border-right-color: transparent;
+        border-radius: 100%;
+        box-sizing: border-box;
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        overflow: hidden;
+        text-indent: -9999px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .btn-spinner:not(:required) {
+        margin-left: -22px;
+        opacity: 0;
+        transition: 0.4s margin ease-out, 0.2s opacity ease-out;
+    }
+
+.is-loading .btn-spinner {
+    transition: 0.2s margin ease-in, 0.4s opacity ease-in;
+    margin-left: 5px;
+    opacity: 1;
+}
+
+/*end loading button*/
+
+/*-------CSS for Submmiting Application Form-------------*/
+.submit-app-heading {
+    font-size: 26px;
+    font-weight:500;    
+    color:#363939;
+}
+
+.submit-app-sub-heading {
+    font-size: 14px;
+    font-weight:400;    
+    color:#363939;
+}
+
+.submit-app-require {
+    color: #5e707a;
+    font-style: italic;
+}
+
+#applicantForm .content,#applicantForm .box-footer {
+    background-color: #F9F9F9;
+}
+
+#applicantForm .box-footer {
+    border-top: 0;
+}
+
+#applicantForm div.btn-group.btn-breadcrumb {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#applicantForm .btn-breadcrumb .btn:not(:last-child):after {
+    border-left: 10px solid #5E6F78;
+}
+
+#applicantForm .btn-breadcrumb .btn:not(:last-child):before {
+    border-left: 10px solid #8d9aa2;
+}
+
+#applicantForm .btn-breadcrumb .btn {    
+    color:#8d9aa2 !important;
+    background-color: #5E6F78;
+}
+
+#applicantForm .btn-breadcrumb .btn.active-step:not(:last-child):after {
+    border-left: 10px solid #5C6E78;
+}
+
+#applicantForm .btn-breadcrumb .btn.active-step:not(:last-child):before {
+    border-left: 10px solid #fff;
+}
+
+#applicantForm .btn-breadcrumb .btn.active-step {
+    color:#fff !important;
+    background-color: #5C6E78;
+}
+
+.submit-app-action {
+    background-color:#ffdb60;
+    font-size:13px;
+    font-weight:400;
+}
+
+.submit-app-question {
+    font-size:16px;
+    font-weight:400;
+    color:#363939;
+}
+
+.submit-app-answer {
+    padding-left: 60px;
+}
+
+.submit-app-section {
+    border-bottom: 1px solid #F1F1F1;
+    padding-left:0;
+    width:100%;
+}
+
+.submit-app-section-header {
+    font-size:16px;
+    font-weight:500;
+    color:#efb900;    
+    border-bottom: 1px solid #ffdb60;
+    padding-left:0;
+    text-transform: uppercase;
+    top:1px;
+    width:150px;
+}
+
+#applicantForm em {
+   color:#5e707a;
+   font-size:12px;
+   font-weight:400;
+   font-style:italic;
+}
+
+.submit-app-field-set {
+
+}
+
+.submit-app-pd0 {
+    padding : 0;
+}
+
+#applicantForm .form-group.has-success label {
+    color:#363939;
+}
+
+#applicantForm .form-group.has-error label {
+    color:#363939;
+}
+
+.align-col-ng-table {
+    text-align:left !important;
+}
+
+[uib-typeahead-popup].dropdown-menu {
+    max-height: 363px;
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+
+.pd0 {
+    padding:0;
+}
+
+#applicantForm input.ipt-app-email {
+    border-color: red;
+}

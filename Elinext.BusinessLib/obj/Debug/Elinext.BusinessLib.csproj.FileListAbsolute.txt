@@ -1,0 +1,12 @@
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\obj\Debug\Elinext.BusinessLib.csproj.CoreCompileInputs.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\obj\Debug\Elinext.BusinessLib.csprojResolveAssemblyReference.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\Elinext.BusinessLib.dll.config
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\Elinext.BusinessLib.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\Elinext.BusinessLib.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\Elinext.DataLib.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\EntityFramework.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\Elinext.DataLib.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\Elinext.DataLib.dll.config
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\bin\Debug\EntityFramework.xml
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\obj\Debug\Elinext.BusinessLib.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.BusinessLib\obj\Debug\Elinext.BusinessLib.pdb

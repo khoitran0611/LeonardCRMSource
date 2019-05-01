@@ -1,0 +1,102 @@
+﻿<div ng-controller="customViewDetailCtrl">
+    <form class="form-horizontal" role="form" name="userForm" id="userForm">
+        <!--Columns-->
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <b>{{languages.CUSTOM_VIEW.VIEW_COLUMN}}</b>
+            </div>
+            <div class="panel-body">
+                <!--Title-->
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" for="txtViewName">{{languages.CUSTOM_VIEW.VIEW_NAME}}</label>
+                    <div class="col-sm-3 input-group-sm">
+                        <input id="txtViewName" type="text"
+                            class="form-control" ng-model="currentView.ViewName"
+                            data-validation-length="1-250" data-validation="length"
+                            data-validation-error-msg="{{languages.CUSTOM_VIEW.NAME_REQUIRED}}" required>
+                    </div>
+                </div>
+
+                <!--Column header-->
+                <div class="form-group">
+                    <label class="col-sm-1 control-label"></label>
+                    <div class="col-sm-3">
+                        <label>{{languages.CUSTOM_VIEW.AVAILABLE_COLUMNS}}</label>
+                    </div>
+                    <label class="col-sm-1 control-label"></label>
+                    <div class="col-sm-3">
+                        <label>{{languages.CUSTOM_VIEW.COLUMNS_SELECTED}}</label>
+                    </div>
+                </div>
+
+                <!--Columns-->
+                <div class="form-group">
+                    <label class="col-xs-1 control-label"></label>
+                    <div class="col-xs-5 well">
+                        <ul class="nav nav-pills nav-stacked columncontainer fields-container"
+                            ui-sortable="sortableOptions1" ng-model="currentView.Columns">
+                            <li class="field" ng-repeat="item in currentView.Columns">
+                                <a>{{item.DisplayText}} <span class="pull-right">
+                                    <input type="checkbox" ng-model="item.Visible" ng-click="$event.stopPropagation()" />
+                                    <!--<input type="text" ng-model="item.DefaultWidth" tooltip-placement="right" 
+                                        style="width: 60px;height: 30px; margin: 3px;  color: #000" tooltip-append-to-body="true" uib-tooltip="Width"/>-->
+                                </span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Conditions-->
+        <div ng-hide="currentView == null" ng-include=" '/appviews/dashboard/customviews/view-conditions.html' "></div>
+
+        <!--Order by-->
+        <div ng-hide="currentView == null" class="panel panel-success">
+            <div class="panel-heading">
+                <b>{{languages.CUSTOM_VIEW.VIEW_ORDER_BY}}</b>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-repeat="orderByCol in currentView.OrderColumns">
+                    <div class="col-sm-3 input-group-sm">
+                        <ui-select class="form-control" ng-model="orderByCol.Column" theme="select2">
+                            <ui-select-match allow-clear="false">{{$select.selected.DisplayText}}</ui-select-match>
+                            <ui-select-choices repeat="item.ColumnAlias as item in orderByColumns | propsFilter: {DisplayText: $select.search}">
+                                <div ng-bind-html="item.DisplayText | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="col-sm-2 input-group-sm">
+                        <select class="form-control" ng-model="orderByCol.Direction">
+                            <option value="" ng-selected="orderByCol.Column == null || orderByCol.Column == ''"></option>
+                            <option value="asc">{{languages.CUSTOM_VIEW.ASCENDING}}</option>
+                            <option value="desc">{{languages.CUSTOM_VIEW.DESCENDING}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Grouping-->
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <b>{{languages.CUSTOM_VIEW.VIEW_GROUP_BY}}</b>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-repeat="groupByCol in currentView.GroupColumns">
+                    <div class="col-sm-3 input-group-sm">
+                        <ui-select class="form-control" ng-model="groupByCol.GroupName" theme="select2">
+                            <ui-select-match allow-clear="true">{{$select.selected.DisplayText}}</ui-select-match>
+                            <ui-select-choices repeat="item.ColumnAlias as item in groupingColumns | propsFilter: {DisplayText: $select.search}">
+                                <div ng-bind-html="item.DisplayText | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+

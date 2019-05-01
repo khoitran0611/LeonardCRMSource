@@ -1,0 +1,197 @@
+﻿<div ng-controller="SystemAuditCtrl">
+    <div class="row">
+        <div class="col-xs-12">
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr class="headetable">
+                            <td class="width50">
+                                &nbsp;
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.SYSTEM_AUDIT.DATE_MODIFIED}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.SYSTEM_AUDIT.MODULE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.SYSTEM_AUDIT.OPERATION}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.SYSTEM_AUDIT.COLUMN}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.SYSTEM_AUDIT.VALUE_BEFORE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.SYSTEM_AUDIT.VALUE_AFTER}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.SYSTEM_AUDIT.CREATED_BY}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="width50">
+                                <div class="coverbuttonfilter">
+                                    <button type="button" tooltip-animation="true" tooltip-placement="right" tooltip="{{ languages.COMMON.FILTER_BUTTON_NOTE }}" class=" btn btn-danger btn-xs" ng-click="serverFilter()"><i class="glyphicon glyphicon-filter"></i></button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="text" class="form-control input-sm cal-xs" show-weeks="showWeeks"
+                                               datepicker-popup="{{date_format}}" ng-model="filterObj.DateModified"
+                                               is-open="opened" datepicker-options="dateOptions" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-12 input-group-sm">
+                                        <select style="width: 100%;" ui-select2="select2Options"
+                                                ng-model="filterObj.Operation">
+                                            <option value="">&nbsp;</option>
+                                            <option value="I">{{languages.SYSTEM_AUDIT.INSERT}}</option>
+                                            <option value="U">{{languages.SYSTEM_AUDIT.UPDATE}}</option>
+                                            <option value="D">{{languages.SYSTEM_AUDIT.DELETE}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="text" class="form-control input-sm" ng-model="filterObj.ColumnName" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-xs-12 input-group-sm">
+                                        <select style="width: 100%;" ui-select2="select2Options"
+                                                ng-model="filterObj.CreatedBy"
+                                                ng-options="item.Id as item.Name group by item.RoleName for item in users">
+                                            <option value="0">&nbsp;</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(i,item) in systemAudits" class="gridrow">
+                            <td class="width50">
+                                &nbsp;
+                            </td>
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        {{ item.DateModified | date:datetime_format}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        {{ item.Module }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        {{ showOperation(item.Operation) }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        {{ item.ColumnName }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        {{ item.ValueBefore }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        {{ item.ValueAfter }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        {{ item.CreatedBy }}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary btn-sm" ng-hide="isShowMore" ng-click="showMore()">Show More</button>
+            </div>
+        </div>
+    </div>
+</div>

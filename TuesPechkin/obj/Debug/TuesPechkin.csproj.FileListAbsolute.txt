@@ -1,0 +1,6 @@
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin\bin\Debug\TuesPechkin.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin\bin\Debug\TuesPechkin.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin\obj\Debug\TuesPechkin.csproj.CoreCompileInputs.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin\obj\Debug\TuesPechkin.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin\obj\Debug\TuesPechkin.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin\obj\Debug\TuesPechkin.csprojResolveAssemblyReference.cache

@@ -1,0 +1,120 @@
+﻿<div ng-controller="NoteCtrl">
+    <div class=" filter">
+        <div ng-form="noteForm" class="row">
+            <div class="form-group">
+                <span class="col-md-3">
+                    <button type="button" class="btn btn-danger btn-sm" ng-disabled="noteForm.$invalid"
+                            ng-show="hasPermission" ng-click="saveNoteClicked()">
+                        <i class="glyphicon glyphicon-plus"></i> {{languages.NOTES.SAVE_NOTE}}
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr class="headetable">
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.NOTES.NOTE_DATE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.NOTES.NOTE_DESCRIPTION}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="checkbox" ng-model="note.IsActive" ng-change="onlyActive_Checked()" />
+                                        <span>
+                                            {{languages.NOTES.ONLY_ACTIVE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(i,item) in notes track by $index" ng-class="{'gridrow active':EditMode == true && indexEdit == i}" ng-show="(CurrentParam.Id > 0 || (item.Id == undefined && EditMode == true )|| !note.IsActive || (note.IsActive && item.IsActive))">
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        <span ng-show="EditMode == false || indexEdit != i">
+                                            {{ item.NoteDate | date:date_format }}
+                                        </span>
+                                        <span ng-show="EditMode == true && indexEdit == i" class="input-group-sm">
+                                            <input type="text" placeholder="{{languages.NOTES.NOTE_DATE}}"
+                                                   class="form-control cal-xs" show-weeks="showWeeks"
+                                                   uib-datepicker-popup="{{date_format}}" ng-model="item.NoteDate" ng-click="opened = true"
+                                                   is-open="opened" datepicker-options="dateOptions"
+                                                   close-text="{{languages.NOTES.CLOSE_CALENDAR}}" required />
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span ng-show="EditMode == false || indexEdit != i" ng-bind-html="bindTrustHtml(item.Description)">
+
+                                        </span>
+                                        <span ng-show="EditMode == true && indexEdit == i" class="input-group-sm">
+                                            <textarea placeholder="{{languages.NOTES.NOTE_DESCRIPTION}}" class="form-control notetextarea"
+                                                      rows="3" ng-model="item.Description" required></textarea>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span ng-show="EditMode == false || indexEdit != i">
+                                            <input type="checkbox"
+                                                   ng-model="item.IsActive" ng-disabled="true">
+                                        </span>
+                                        <span ng-show="EditMode == true && indexEdit == i" class="input-group-sm">
+                                            <input type="checkbox"
+                                                   ng-model="item.IsActive">
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12" ng-show="EditMode == false || indexEdit != i">
+                                        <button type="button" class="btn btn-info btn-xs" ng-show="hasPermission" ng-click="editNote(i,item)"><i class="glyphicon glyphicon-edit"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-show="hasPermission" ng-click="deleteNote(i,item)"><i class="glyphicon glyphicon-trash"></i></button>
+                                    </div>
+                                    <div class="col-md-12" ng-show="EditMode == true && indexEdit == i">
+                                        <button type="button" class="btn btn-success btn-xs" ng-show="hasPermission" ng-show="hasPermission" ng-click="updateNote(i,item)"><i class="glyphicon glyphicon-floppy-disk"></i></button>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-show="hasPermission" ng-click="cancelNote(i,item)"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿<div ng-controller="AddTranslationCtrl">
+    <div class="col-md-12">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ languages.EDIT_LANGUAGE.KEY }}</label>
+                <div class="col-md-9 input-group-sm">
+                    <input type="text" class="form-control" ng-model="translationObj.Key" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ languages.EDIT_LANGUAGE.TRANSLATION }}</label>
+                <div class="col-md-9 input-group-sm">
+                    <input type="text" class="form-control" ng-model="translationObj.Translation" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ languages.EDIT_LANGUAGE.TRANSLATION_DEFAULT }}</label>
+                <div class="col-md-9 input-group-sm">
+                    <input type="text" class="form-control" ng-model="translationObj.TranslationDefault" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

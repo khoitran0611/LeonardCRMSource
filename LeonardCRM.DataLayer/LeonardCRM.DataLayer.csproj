@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E234A685-593C-4170-9BA3-BEE6BFBF393A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeonardCRM.DataLayer</RootNamespace>
+    <AssemblyName>LeonardCRM.DataLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DbExtensions">
+      <HintPath>..\packages\DbExtensions.4.2.0\lib\net40\DbExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpressionEvaluator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=90d9f15d622e2348, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExpressionEvaluator.2.0.4.0\lib\net40\ExpressionEvaluator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonRepository\CurrencyDA.cs" />
+    <Compile Include="CommonRepository\CurrencyNameDA.cs" />
+    <Compile Include="CommonRepository\DataTypeDA.cs" />
+    <Compile Include="CommonRepository\LogDA.cs" />
+    <Compile Include="CommonRepository\LoginLogDA.cs" />
+    <Compile Include="CommonRepository\MailTemplateDA.cs" />
+    <Compile Include="CommonRepository\ModulesRelationshipDA.cs" />
+    <Compile Include="CommonRepository\NoteDA.cs" />
+    <Compile Include="CommonRepository\RegistryDA.cs" />
+    <Compile Include="CommonRepository\RolesDA.cs" />
+    <Compile Include="CommonRepository\RolesPermissionsDA.cs" />
+    <Compile Include="CommonRepository\SysAuditDA.cs" />
+    <Compile Include="CommonRepository\TaxDA.cs" />
+    <Compile Include="EntityFieldRepository\EntityFieldDA.cs" />
+    <Compile Include="EntityFieldRepository\FieldDataDA.cs" />
+    <Compile Include="EntityFieldRepository\FieldSectionDA.cs" />
+    <Compile Include="EntityFieldRepository\ListNameDA.cs" />
+    <Compile Include="EntityFieldRepository\ListValueDA.cs" />
+    <Compile Include="EntityFieldRepository\ModuleDA.cs" />
+    <Compile Include="EntityFieldRepository\ModuleRelationshipDA.cs" />
+    <Compile Include="EntityFieldRepository\PicklistDependencyDA.cs" />
+    <Compile Include="ExceptionData\RollbackDataException.cs" />
+    <Compile Include="ModelEntities\BriefUser.cs" />
+    <Compile Include="ModelEntities\ColumnExport.cs" />
+    <Compile Include="ModelEntities\DeliveryInfo.cs" />
+    <Compile Include="ModelEntities\FilterOverdueAppsParams.cs" />
+    <Compile Include="ModelEntities\OverdueApps.cs" />
+    <Compile Include="ModelEntities\RelateView.cs" />
+    <Compile Include="ModelEntities\ResponsibleUserModel.cs" />
+    <Compile Include="ModelEntities\SalesOrder.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesOrderComplete.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesOrderCompleteExt.cs" />
+    <Compile Include="ModelEntities\CustomField.cs" />
+    <Compile Include="ModelEntities\Eli_Currency.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_CurrencyNames.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_DataTypes.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_EntityFields.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_FieldData.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_FieldsSection.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_FieldsSectionDetail.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_FieldsSectionDetailExt.cs" />
+    <Compile Include="ModelEntities\Eli_ListDependency.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ListDependencyDetail.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ListNames.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ListNamesExt.cs" />
+    <Compile Include="ModelEntities\Eli_ListValues.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ListValuesExt.cs" />
+    <Compile Include="ModelEntities\Eli_Log.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_LoginLog.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_MailTemplates.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ModuleRelationship.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ModuleRelationshipExt.cs" />
+    <Compile Include="ModelEntities\Eli_Modules.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_Notes.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_OnlineUsers.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_Registry.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_Roles.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_RolesExt.cs" />
+    <Compile Include="ModelEntities\Eli_RolesFields.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_RolesPermissions.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_RolesPermissionsExt.cs" />
+    <Compile Include="ModelEntities\Eli_SysAudit.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_Tax.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_TempViews.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_User.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewColumns.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewColumnsExt.cs" />
+    <Compile Include="ModelEntities\Eli_ViewConditions.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewCustom.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewCustomColumns.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewCustomConditions.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewCustomExt.cs" />
+    <Compile Include="ModelEntities\Eli_ViewGroupBy.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewOrderBy.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_Views.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Eli_ViewsExt.cs" />
+    <Compile Include="ModelEntities\Eli_WebformsExt.cs" />
+    <Compile Include="ModelEntities\fn_GetRolesHierachy_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\GetReferenceListValues_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\GoogleGraph.cs" />
+    <Compile Include="ModelEntities\LanguageExt.cs" />
+    <Compile Include="ModelEntities\LeonardEntitiesExt.cs" />
+    <Compile Include="ModelEntities\LeonardModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeonardModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\LeonardModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\LeonardModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeonardModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\NgTableModel.cs" />
+    <Compile Include="ModelEntities\PageInfo.cs" />
+    <Compile Include="ModelEntities\ReportObject.cs" />
+    <Compile Include="ModelEntities\ResourceExt.cs" />
+    <Compile Include="ModelEntities\SalesContractState.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesContractTemplate.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesContractTemplateExt.cs" />
+    <Compile Include="ModelEntities\SalesCustomer.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesCustomerExt.cs" />
+    <Compile Include="ModelEntities\SalesCustomerUser.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesCustReference.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesDocument.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesDocumentExt.cs" />
+    <Compile Include="ModelEntities\SalesInvoice.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesInvoiceExt.cs" />
+    <Compile Include="ModelEntities\SalesInvService.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesInvTax.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesInvTemplate.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesOrderDelivery.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\SalesOrderDeliveryExt.cs" />
+    <Compile Include="ModelEntities\SalesOrderExt.cs" />
+    <Compile Include="ModelEntities\SalesOrdersUser.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\Select2HierarchicalData.cs" />
+    <Compile Include="ModelEntities\SPLIT_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_CustomerReportByDays_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_CustomerReportDashboard_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_FilterSystemAudit_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_GetAllOverdueApps_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_GetCustomersByUserId_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_GetModulePermisstion_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_GetModulesByRole_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_GetRolesFieldsByRoleId_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_GetRoles_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_InvoiceReportByDays_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_InvoiceReportDashboard_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_InvoiceReportPerDays_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_OrderReportByDays_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\sp_OrderReportDashboard_Result.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\TranslationExt.cs" />
+    <Compile Include="ModelEntities\User.cs" />
+    <Compile Include="ModelEntities\ViewCustomModel.cs" />
+    <Compile Include="ModelEntities\vwAllCustomer.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwApplication.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwClient.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwCustomViewColumn.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwEntityFieldData.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwEntityFieldDataExt.cs" />
+    <Compile Include="ModelEntities\vwField.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwFieldNameDataType.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwFieldsDataType.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwListNameValue.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwModule.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwModuleEnittyRelationship.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwModuleEntityField.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwModuleHasEntityField.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwOrderCustomer.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwPicklistDependency.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwRegistry.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwSystmAudit.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwUserRole.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwViewColumn.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEntities\vwViewColumnExt.cs" />
+    <Compile Include="ModelEntities\vwViewMenu.cs">
+      <DependentUpon>LeonardModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectHelper\DynamicObjHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesRepository\SalesOrderCompleteDA.cs" />
+    <Compile Include="SalesRepository\SalesContractTemplateDA.cs" />
+    <Compile Include="SalesRepository\SalesCustomerDA.cs" />
+    <Compile Include="SalesRepository\SalesDocumentsDA.cs" />
+    <Compile Include="SalesRepository\SalesInvoiceDA.cs" />
+    <Compile Include="SalesRepository\SalesInvTemplateDA.cs" />
+    <Compile Include="SalesRepository\SalesOrderDA.cs" />
+    <Compile Include="SalesRepository\SalesOrderDeliveryDA.cs" />
+    <Compile Include="SalesRepository\SalesOrdersUsersDA.cs" />
+    <Compile Include="UserRepository\EliUserDA.cs" />
+    <Compile Include="ViewRepository\ViewBuilder.cs" />
+    <Compile Include="ViewRepository\ViewColumnDA.cs" />
+    <Compile Include="ViewRepository\ViewConditionDA.cs" />
+    <Compile Include="ViewRepository\ViewCustomDA.cs" />
+    <Compile Include="ViewRepository\ViewDA.cs" />
+    <Compile Include="ViewRepository\ViewGroupByDA.cs" />
+    <Compile Include="ViewRepository\ViewOrderByDA.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ModelEntities\LeonardModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LeonardModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelEntities\LeonardModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LeonardModel.Context.cs</LastGenOutput>
+      <DependentUpon>LeonardModel.edmx</DependentUpon>
+    </None>
+    <None Include="ModelEntities\LeonardModel.edmx.diagram">
+      <DependentUpon>LeonardModel.edmx</DependentUpon>
+    </None>
+    <None Include="ModelEntities\LeonardModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LeonardModel.cs</LastGenOutput>
+      <DependentUpon>LeonardModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eli.Common\Eli.Common.csproj">
+      <Project>{5D9BD11D-6F52-4E87-B5C8-183B6CCC2D77}</Project>
+      <Name>Eli.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Elinext.DataLib\Elinext.DataLib.csproj">
+      <Project>{2cfff838-61d0-4366-b9bd-8924ca100c3a}</Project>
+      <Name>Elinext.DataLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

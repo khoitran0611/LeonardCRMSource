@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html ng-app="LeonardCRM" ng-controller="AppController">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title ng-bind="windowTitle"></title>
+    <style>
+        .ng-cloak {
+            display: none;
+        }
+    </style>
+
+    @*Bootstrap CSS*@
+    <link rel="stylesheet" href="~/Content/font-awesome.css">
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+    <link type="text/css" href="~/Content/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />  
+
+    @Styles.Render("~/Content/style")
+    @*Upload File CSS*@
+    <noscript>
+        <link type="text/css" href="~/Content/vendor/uploadfile/jquery.fileupload-noscript.css" rel="stylesheet" />
+        <link type="text/css" href="~/Content/vendor/uploadfile/jquery.fileupload-ui-noscript.css" rel="stylesheet" />
+    </noscript>
+
+    @*Eli CRM CSS*@
+    <link type="text/css" href="~/Content/vendor/select2/select2.css" rel="stylesheet" />
+    <link type="text/css"  href="~/Content/ng-table.min.css" rel="stylesheet"  />
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="~/Scripts/vendor/others/html5.js"></script>
+    <![endif]-->
+    @*Jquery Lib & Pluggin*@
+    <script type="text/javascript" src="~/Scripts/vendor/others/es5-shim.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    
+    @*Angular Module Lib*@
+    <script type="text/javascript" src="~/Scripts/vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/vendor/angular/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/vendor/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/vendor/angular/angular-animate.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/vendor/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/shared.js"></script>
+    <script type="text/javascript" src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/vendor/others/angular-file-upload.js"></script>
+    <script type="text/javascript" src="~/Scripts/vendor/ngTable/ng-table.min.js"></script>
+
+    @Scripts.Render("~/ScriptPlugin")
+    <script src="@Url.Content("~/Scripts/vendor/form-validator/jquery.form-validator.min.js")"></script>
+    @Scripts.Render("~/script")
+</head>
+<body class="ng-cloak">
+    @RenderBody()
+
+    @*Include Loading*@
+    @*<div ng-include="'/appviews/layouts/loading-widget.html'"></div>*@
+    @*Include Confirm Dialog*@
+    <div ng-include="'/appviews/layouts/confirm-dialog.html'"></div>
+</body>
+</html>

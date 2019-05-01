@@ -1,0 +1,10 @@
+﻿<div ng-controller="ContractTemplateCtrl">
+    <div ng-switch="subview">
+         <div ng-switch-when="list">
+            <div ng-include=" '/appviews/dashboard/contracttemplates/manage-contracttemplate.html' "></div>
+        </div>
+        <div ng-switch-when="add">
+            <div ng-include=" '/appviews/dashboard/contracttemplates/detail.html' "></div>
+        </div>
+    </div>
+</div>

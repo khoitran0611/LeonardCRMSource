@@ -1,0 +1,58 @@
+﻿<form name="validate-form" id="validate-form"  style="display:none;">
+      <section class="field-content"></section>
+</form>
+
+<form name="applicantForm" role="form" id="applicantForm" ng-controller="EditApplicantFormCtrl">
+    <section class="content">
+        <div class="row">
+            <h3 class="text-center submit-app-heading form-group">{{languages.APPLICANT_FORM.HEADING}}</h3>
+            <h5 class="text-center submit-app-sub-heading form-group">{{languages.APPLICANT_FORM.LETTER_HEADING}}</h5>
+
+            <div class="row-fluid">
+                <div class="btn-group btn-breadcrumb col-md-12 form-group">
+                    <a ng-repeat="s in infoSections | orderBy : 'Order'" class="btn {{s.StepClass}}" ng-class="{'active-step': s.Order <= currentStep}" ng-style="{ 'min-width': s.MinWidth + 'px', 'cursor' : 'default' }">
+                        {{s.Order + ". " + s.Name}}
+                    </a>
+                </div>
+            </div>
+
+            <div class="box-body">
+                <div class="col-md-12 col-sm-12 form-group">
+                    <span class="submit-app-require">(<span class="mandatorysign">*</span>) {{languages.APPLICANT_FORM.REQUIRED_TEXT}}</span>
+                </div>
+
+                <div ng-show="currentStep == 1" id="section-1" class="submit-app-field-set" ng-include="'appviews/frontend/applicantform/submitAppSections/appInfoSection.html'"></div>
+
+                <div ng-show="currentStep == 2" id="section-2" class="submit-app-field-set" ng-include="'appviews/frontend/applicantform/submitAppSections/applicantSection.html'"></div>
+
+                <div ng-show="currentStep == 3" id="section-3" class="submit-app-field-set" ng-include="'appviews/frontend/applicantform/submitAppSections/addressSection.html'"></div>
+
+                <div ng-show="currentStep == 4" id="section-4" class="submit-app-field-set" ng-include="'appviews/frontend/applicantform/submitAppSections/referenceSection.html'"></div>
+
+                <div ng-show="currentStep == 5" id="section-5" class="submit-app-field-set" ng-include="'appviews/frontend/applicantform/submitAppSections/employedSection.html'"></div>
+
+                <div ng-show="currentStep == 6" id="section-6" class="submit-app-field-set form-horizontal" ng-include="'appviews/frontend/applicantform/submitAppSections/paymentSection.html'"></div>
+               
+
+                <div class="col-md-12 col-sm-12 col-xs-12 box-footer">
+                    <button type="button" class="btn pull-left submit-app-action" ng-show="currentStep > 1" ng-click="gotoBack();"><span style="left: 12px;font-size: 9px;" class="glyphicon glyphicon-menu-left"></span><span style="margin-right: 15px;font-size: 9px;" class="glyphicon glyphicon-menu-left"></span>{{languages.APPLICANT_FORM.BACK_STEP_BTN}}</button>
+                    <button type="button" promise-btn="savePromise" class="btn pull-right submit-app-action" ng-click="save()" ng-show="currentStep == 6">{{languages.APPLICANT_FORM.SUBMIT_BTN}}<span style="margin-left: 15px;" class="glyphicon glyphicon-ok"></span></button>
+                    <button type="button" class="btn pull-right submit-app-action" ng-show="currentStep < 6" ng-disabled="currentStep == 2 && isLockContiue" ng-click="gotoNext();">{{languages.APPLICANT_FORM.NEXT_STEP_BTN}}<span style="margin-left: 15px;font-size: 9px;" class="glyphicon glyphicon-menu-right"></span><span style="font-size: 9px;right: 12px;" class="glyphicon glyphicon-menu-right"></span></button>
+                    <div class="row" ng-show="currentStep == 2 || currentStep == 5" style="height:170px;"></div>
+                </div>
+               
+            </div>
+
+        </div>
+        <!--end body-->
+    </section>
+</form>
+
+<script type="text/ng-template" id="customTemplate.html">
+     <a class="wraper-item-typehead">
+        <div class="row-typehead">            
+            <div class="cell-typehead" ng-bind-html='match.model.AdditionalInfo|uibTypeaheadHighlight:query'></div>
+            <div class="cell-typehead" ng-bind-html='match.model.Description|uibTypeaheadHighlight:query'></div>
+        </div>
+     </a>
+</script>

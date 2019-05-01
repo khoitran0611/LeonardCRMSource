@@ -1,0 +1,129 @@
+﻿<div ng-controller="ManageModuleCtrl">
+    <div class="row">
+        <div class="divtable">
+            <section class="row">
+                <div class="col-md-12">
+                    <div class="headerrow">
+                        <div class="col-md-1 divcol">
+                            <div class="headercell">
+                            </div>
+                        </div>
+                        <div class="col-md-3 divcol">
+                            <div class="headercell">
+                                <a ng-click="sortGrid('DisplayName')">
+                                    {{ languages.MODULES.MODULE_NAME }}
+                                    <i ng-if="predicate ==  'DisplayName Asc'" class="up-caret"></i>
+                                    <i ng-if="predicate ==  'DisplayName Desc'" class="caret"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 divcol">
+                            <div class="headercell">
+                                <a ng-click="sortGrid('Description')">
+                                    {{ languages.MODULES.DESCRIPTION }}
+                                    <i ng-if="predicate ==  'Description Asc'" class="up-caret"></i>
+                                    <i ng-if="predicate ==  'Description Desc'" class="caret"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-2 divcol">
+                            <div class="headercell">
+                                {{ languages.MODULES.MENU_ICON }}
+                            </div>
+                        </div>
+                        <div class="col-md-1 divcol">
+                            <div class="headercell">
+                                {{ languages.MODULES.IS_ACTIVE }}
+                            </div>
+                        </div>
+                        <div class="col-md-1 divcol">
+                            <div class="headercell">
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row">
+                <div class="col-md-12">
+                    <div class="gridlocalfilter">
+                        <div class="col-md-1 divcol">
+                            <div class="inputcell input-group-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-3 divcol">
+                            <div class="inputcell input-group-sm">
+                                <input type="text" ng-model="DisplayName" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-4 divcol">
+                            <div class="inputcell input-group-sm">
+                                <input type="text" ng-model="Description" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-2 divcol">
+                            <div class="inputcell input-group-sm">
+
+                            </div>
+                        </div>
+                        <div class="col-md-1 divcol">
+                            <div class="inputcell input-group-sm">
+
+                            </div>
+                        </div>
+                        <div class="col-md-1 divcol">
+                            <div class="inputcell input-group-sm">
+
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </section>
+            <div class="fields-container" ui-sortable="sortableOptions1" ng-model="moduleDataSource">
+                <div class="row ddactive" ng-repeat="(i,item) in moduleDataSource | filter:{DisplayName:DisplayName,Description:Description}">
+                    <div class="col-md-12 field">
+                        <div class="gridrow" ng-class-odd="'rowindex'" ng-class-even="'altrowindex'">
+                            <div class="col-md-1 divcol rowlink">
+                                <span class="rowcell text-center">
+                                    <b class="badge cursor-move"><i class="glyphicon glyphicon-resize-vertical"></i></b>
+                                </span>
+                            </div>
+                            <div class="col-md-3 divcol rowlink">
+                                <span class="rowcell" title="{{ item.DisplayName }}">
+                                    {{ item.DisplayName }}
+                                </span>
+                            </div>
+                            <div class="col-md-4 divcol rowlink cursor-move">
+                                <span class="rowcell">
+                                    <span title="{{ item.Description }}">{{ item.Description }}</span>
+                                </span>
+                            </div>
+                            <div class="col-md-2 divcol rowlink cursor-move">
+                                <span class="rowcell">
+                                    <span title="{{ item.MenuIcon }}">
+                                        <img ng-hide="item.MenuIcon == '' || item.MenuIcon == null" class="imageingrid img-circle" ng-src="{{ showimage( item.MenuIcon )}}" imageonload />
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="col-md-1 divcol rowlink cursor-move">
+                                <span class="rowcell">
+                                    <span title="{{ item.IsActive }}">
+                                        <input type="checkbox" ng-checked="item.IsActive" ng-disabled="true" />
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="col-md-1 divcol rowlink ">
+                                <div class="rowcell">
+                                    <button type="button" class="btn btn-info btn-xs" ng-click="editRow(item)"><i class="glyphicon glyphicon-edit"></i></button>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

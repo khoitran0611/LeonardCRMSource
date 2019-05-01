@@ -1,0 +1,10 @@
+﻿<div ng-controller="InvoiceTemplateCtrl">
+    <div ng-switch="subview">
+         <div ng-switch-when="list">
+            <div ng-include=" '/appviews/dashboard/invoicetemplates/manage-invoicetemplate.html' "></div>
+        </div>
+        <div ng-switch-when="add">
+            <div ng-include=" '/appviews/dashboard/invoicetemplates/detail.html' "></div>
+        </div>
+    </div>
+</div>

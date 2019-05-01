@@ -1,0 +1,526 @@
+@using LeonardCRM.DataLayer.ModelEntities
+@using LeonardCRM.BusinessLayer.Common
+@using System.Linq
+@using Eli.Common
+
+@model SalesCustomer
+@{
+    Layout = "~/Views/Shared/_CustomErrorLayout.cshtml";
+    var saleOrder = Model.SalesOrders.First();
+    var saleComplete = (saleOrder != null && saleOrder.SalesOrderCompletes != null && saleOrder.SalesOrderCompletes.Any()) ? saleOrder.SalesOrderCompletes.First() : new SalesOrderComplete();   
+}
+
+@functions {    
+    public static string GetText(string key, string page = null)
+    {
+        if (page == null)
+            return LocalizeHelper.Instance.GetText("CUSTOMER_ACCEPTANCE_FORM", key);
+        return LocalizeHelper.Instance.GetText(key, page);
+    }
+}
+
+<style>
+    #customerAccpetanceForm span.text-field {
+        border-bottom: 1px solid #000;
+        min-height: 20px;
+        padding: 0;
+    }
+
+    .product-info-section div.form-group label, span  {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    body, .container, .panel, .panel-body {
+        background-color:#fff !important;
+    }
+
+    .panel {
+       border: none !important;
+    }
+</style>
+
+<link href="~/Content/frontend/custom.css" rel="stylesheet"/>
+
+<div>
+    <form name="customerAccpetanceForm" id="customerAccpetanceForm" style="margin: 0 auto;">
+        <section class="content">
+            <div class="row">
+                <!--Top Information-->
+                <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+                    <div class="pull-right col-md-2 col-sm-2 col-xs-2 form-horizontal">
+                         <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12"><b>@GetText("LOT_FIELD") : </b>&nbsp;@saleOrder.StoreNumber</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <b>@GetText("RTO_FIELD") : </b>&nbsp;@(saleOrder.RentToOwn.HasValue && saleOrder.RentToOwn.Value ? @GetText("RTO_YES_TEXT") : @GetText("RTO_NO_TEXT"))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-center" style="clear: both; padding-top: 20px;"><b>@GetText("HEADING")</b></h3>
+                <h3 class="text-center" style="margin-top: 5px;">@GetText("SUB_HEADING")</h3>
+
+                <div class="box-body customer-acceptance-content-form">
+                    <h5 class="text-center">@GetText("LETTER_HEADING")</h5>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 delivery-to-cutomer-section">
+                        <!--Delivery To Customer Section-->
+                        <h4 class="box-title applicant-box-title"><b>@GetText("DELIVERY_CUSTOMER_SECTION")</b></h4>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                            <label class="control-label">@GetText("NAME_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@Model.Name</span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 form-group">
+                            <label class="control-label">@GetText("ADDRESS_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@Model.PhysicalStreet</span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 form-group">
+                            <label class="control-label">@GetText("CITY_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@Model.PhysicalCity</span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 form-group">
+                            <label class="control-label">@GetText("STATE_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">
+                                @{                                        
+                                    var state = ((List<vwListNameValue>)ViewBag.States).SingleOrDefault(x => x.Id == Model.PhysicalState);
+                                }
+                                @(state != null ? state.Description : "	&nbsp")
+                            </span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 form-group">
+                            <label class="control-label">@GetText("ZIP_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@Model.PhysicalZip</span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 form-group">
+                            <label class="control-label">@GetText("DAYTIME_PHONE_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@Model.HomePhone</span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-3 form-group">
+                            <label class="control-label">@GetText("OTHER_PHONE_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@Model.CellPhone</span>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+                            <label class="control-label">@GetText("EMAIL_ADDRESS_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@Model.Email</span>
+                        </div>
+                    </div>
+
+                    <!--Product Infomation Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12 product-info-section">
+                        <h4 class="box-title applicant-box-title"><b>@GetText("PRODUCT_INFO_SECTION")</b></h4>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12 control-label">@GetText("SOLD_DATE_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12">@(saleOrder.SaleDate.HasValue ? saleOrder.SaleDate.Value.ToString(ViewBag.Registry.DATE_FORMAT) : "")</span>
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label class="col-md-12 control-label">@GetText("DELIVERY_DATE_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12">@(saleComplete.DeliveryDate.ToString(ViewBag.Registry.DATE_FORMAT))</span>
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label class="col-md-12 control-label">@GetText("INVOICE_NUMBER_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12">@(saleOrder.POSTicketNumber)</span>
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label class="col-md-12 control-label">@GetText("SERIAL_NUMBER_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12">@saleOrder.SerialNumber</span>
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label class="col-md-12 control-label">@GetText("PART_NUMBER_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12">@saleOrder.PartNumber</span>
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 col-xs-2 form-group">
+                            <label class="col-md-12 control-label">@GetText("COLOR_FIELD")</label>
+                            <span class="col-md-12 col-sm-12 col-xs-12">@saleOrder.Color</span>
+                        </div>
+                    </div>
+
+                    <!--Building Repair / Maintenance Information Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12 building-maintenance-info-section">
+                        <div class="box-title applicant-box-title col-md-12 col-sm-12 col-xs-12">
+                            <span class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding-left: 0px;"><b style="font-size: 18px;">@GetText("REPAIR_MAINTANCE_INFO_SECTION")</b></span>
+                            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                                <label class="col-sm-3 col-xs-3 label-control">@GetText("REPAIR_QUESTION")</label>
+                                <div class="col-sm-9 col-xs-9 radio" style="margin-top: 0px; padding-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="radio" @(saleComplete.NeedRepair == false ? "checked" : "") disabled name="rdRepair">@GetText("REPAIR_ANSWER_NO_TEXT")</label>
+                                    <label>
+                                        <input type="radio" @(saleComplete.NeedRepair == true ? "checked" : "") disabled name="rdRepair">@GetText("REPAIR_ANSWER_YES_TEXT")</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                            <span class="col-md-12 col-sm-12 col-xs-12 text-field">@saleComplete.RepairNote</span>
+                        </div>
+                    </div>
+
+                    <!--Delivery Infomation Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12 delivery-info-section">
+                        <h4 class="box-title applicant-box-title"><b>@GetText("DELIVERY_INFO_SECTION")</b> - <i>@GetText("DELIVERY_INFO_GUIDE")</i></h4>
+                        <div class="col-md-6 col-sm-12 col-xs-12 form-horizontal">
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <span class="col-sm-10 col-xs-10 radio">@GetText("QUESTION_1")</span>
+                                <div class="col-sm-2 col-xs-2 radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer1 == true ? "checked" : "") disabled name="rdDeliveryInfo1">@GetText("ANSWER_YES_TEXT")</label>
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer1 == false ? "checked" : "") disabled name="rdDeliveryInfo1">@GetText("ANSWER_NO_TEXT")</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <span class="col-sm-10 col-xs-10 radio">@GetText("QUESTION_2")</span>
+                                <div class="col-sm-2 col-xs-2 radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer2 == true ? "checked" : "") disabled name="rdDeliveryInfo2">@GetText("ANSWER_YES_TEXT")</label>
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer2 == false ? "checked" : "") disabled name="rdDeliveryInfo2">@GetText("ANSWER_NO_TEXT")</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <span class="col-sm-10 col-xs-10 radio">@GetText("QUESTION_3")</span>
+                                <div class="col-sm-2 col-xs-2 radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer3 == true ? "checked" : "") disabled name="rdDeliveryInfo3">@GetText("ANSWER_YES_TEXT")</label>
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer3 == false ? "checked" : "") disabled name="rdDeliveryInfo3">@GetText("ANSWER_NO_TEXT")</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <span class="col-sm-10 col-xs-10 radio">@GetText("QUESTION_4")</span>
+                                <div class="col-sm-2 col-xs-2 radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer4 == true ? "checked" : "") disabled name="rdDeliveryInfo4">@GetText("ANSWER_YES_TEXT")</label>
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer4 == false ? "checked" : "") disabled name="rdDeliveryInfo4">@GetText("ANSWER_NO_TEXT")</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 form-group">
+                                <span class="col-sm-10 col-xs-10 radio">@GetText("QUESTION_5")</span>
+                                <div class="col-sm-2  col-xs-2 radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer5 == true ? "checked" : "") disabled name="rdDeliveryInfo5">@GetText("ANSWER_YES_TEXT")</label>
+                                    <label>
+                                        <input type="radio" @(saleComplete.Answer5 == false ? "checked" : "") disabled name="rdDeliveryInfo5">@GetText("ANSWER_NO_TEXT")</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-md-7 col-sm-6 col-xs-6">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th class="col-md-5 col-sm-4 col-xs-4">@GetText("STANDARD_COL")</th>
+                                            <th class="col-md-5 col-sm-4 col-xs-4">@GetText("ACTUAL_COL")</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@GetText("BLOCK_USER_ROW")</td>
+                                            <td></td>
+                                            <td>@saleComplete.ActBlocksUsed</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@GetText("LABOR_HOURS_ROW")</td>
+                                            <td>@GetText("STANDARD_LABOR_HOURS_VALUE")</td>
+                                            <td>@saleComplete.ActHoursOfLabor</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@GetText("MILE_TO_DELIVERY_SITE_ROW")</td>
+                                            <td>@GetText("STANDARD_MILES_VALUE")</td>
+                                            <td>@saleComplete.ActMilesToSite</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-1 col-sm-1 col-xs-1"></div>
+                            <div class="col-md-4 col-sm-5 col-xs-5 form-group">
+                                @{                                        
+                                    var typeList = (List<vwListNameValue>)ViewBag.DeliveryTypes;
+                                    foreach (var type in typeList)
+                                    {
+                                    <div class="radio">
+                                        <label>
+                                            <input type="checkbox" @((","  + saleComplete.DeliveryType + ",").Contains("," + type.Id + ",") ? "checked" : "") disabled name="rdDeliveryInfo" /><b style="margin-left:5px;">@type.Description</b> @(type.AdditionalInfo != null && type.AdditionalInfo != "" ? "(" + type.AdditionalInfo + ")" : "")</label>
+                                    </div>
+                                    }
+                                }
+                                @*<div class="radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.DeliveryType == 0 ? "checked" : "") disabled name="rdDeliveryInfo" /><b>@GetText("OTHER_OPTION_TEXT"):</b></label>
+                                </div>*@
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 21px;">
+                                    <span class="col-md-12 col-sm-12 col-sm-12 col-xs-12 text-field">@saleComplete.DeliveryOther</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <div style="border-bottom: 1px solid; min-height: 70px;padding-bottom:2px;">
+                                    <br />
+                                    @if (!string.IsNullOrEmpty(saleComplete.DeliverySignatureUrl))
+                                    {
+                                        <img width="250" src="@saleComplete.DeliverySignatureUrl" />
+                                    }
+                                </div>
+                                <div>@GetText("DELIVERY_SIGNATURE_TEXT")</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Additional Charges & Payment Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="box-title applicant-box-title col-md-12 col-sm-12 col-xs-12">
+                            <span class="col-lg-4 col-md-5 col-sm-12 col-xs-12" style="padding-left: 0px;"><b style="font-size: 18px;">@GetText("CHARGES_PAYMENT_SECTION")</b></span>
+                            <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-12 col-xs-12 radio" style="padding-bottom: 0; margin-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="radio" @(saleComplete.IsPaidFull == true ? "checked" : "") disabled name="rdChargesPayment"><b>@GetText("PAID_FULL_OPTION")</b></label>
+                                </div>
+                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 radio" style="padding-bottom: 0; margin-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="radio" @(saleComplete.IsPaidFull == false ? "checked" : "") disabled name="rdChargesPayment"><b>@GetText("DEPOSIT_OPTION")</b></label>
+                                </div>
+                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 checkbox" style="padding-bottom: 0; margin-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="checkbox" @(saleComplete.AdditionalCharge == true ? "checked" : "") disabled><b>@GetText("ADDITION_CHARGES_OPTION")</b> - @GetText("ADDITION_CHARGES_OPTION_NOTE")</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <h5><b>@GetText("ADDITION_CHARGES_HEADING"):</b> <i style="font-size: 12px;">@GetText("ADDITION_CHARGES_HEADING_NOTE")</i></h5>
+                            <p>
+                                @GetText("ADDITION_CHARGES_LINE1")
+                                <br />
+                                @GetText("ADDITION_CHARGES_LINE2")
+                                <br />
+                                @GetText("ADDITION_CHARGES_LINE3")
+                                <br />
+                            </p>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+                            <h5><b>@GetText("PAYMENT_INFO_HEADING"):</b></h5>
+                            <div class="col-md-3 col-sm-4 col-xs-4 form-group">
+                                @{                                        
+                                    var paymentTypes = (List<vwListNameValue>)ViewBag.PayementTypes;
+                                    foreach (var item in paymentTypes)
+                                    {
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" @(saleComplete.PaymentType == item.Id ? "checked" : "") disabled name="rdPaymentInfo" /><b>@item.Description</b> <i style="font-size: 11px;">@item.AdditionalInfo</i></label>
+                                    </div>
+                                    }
+                                }
+                            </div>
+                            <div class="col-md-9 col-sm-8 col-xs-8" style="padding-left: 0;">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label class="col-md-4 col-sm-4 col-xs-4 label-control">@GetText("PAYMENT_BALANCE_FIELD"): </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span class="col-md-12 col-sm-12 col-xs-12 text-field">
+                                            @(ViewBag.Registry.CURRENCY + (saleComplete.BalanceDue == null || saleComplete.BalanceDue == 0 ? "0.00" : saleComplete.BalanceDue.Value.ToString(Constant.DecimalFormat)))
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label class="col-md-4 col-sm-4 col-xs-4 label-control">@string.Format(GetText("PAYMENT_BLOCK_FIELD"), ViewBag.Registry.CURRENCY + ViewBag.Registry.BLOCK_UNIT_PRICE) : </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span class="col-md-12 col-sm-12 col-xs-12 text-field">
+                                            @(ViewBag.Registry.CURRENCY + (saleComplete.BlockCharge == null || saleComplete.BlockCharge == 0 ? "0.00" : saleComplete.BlockCharge.Value.ToString(Constant.DecimalFormat)))
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label class="col-md-4 col-sm-4 col-xs-4 label-control">@string.Format(GetText("PAYMENT_LABOR_FIELD"), ViewBag.Registry.CURRENCY + ViewBag.Registry.MAN_HOUR_UNIT_PRICE) :</label>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span class="col-md-12 col-sm-12 col-xs-12 text-field">
+                                            @(ViewBag.Registry.CURRENCY + (saleComplete.LaborCharge == null || saleComplete.LaborCharge == 0 ? "0.00" : saleComplete.LaborCharge.Value.ToString(Constant.DecimalFormat)))
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label class="col-md-4 col-sm-4 col-xs-4 label-control">@string.Format(GetText("PAYMENT_MILE_FIELD"), ViewBag.Registry.CURRENCY + ViewBag.Registry.LOADED_MILE_UNIT_PRICE) :</label>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span class="col-md-12 col-sm-12 col-xs-12 text-field">
+                                            @(ViewBag.Registry.CURRENCY + (saleComplete.MileageCharge == null || saleComplete.MileageCharge == 0 ? "0.00" : saleComplete.MileageCharge.Value.ToString(Constant.DecimalFormat)))
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label class="col-md-4 col-sm-4 col-xs-4 label-control">@GetText("PAYMENT_TOTAL_FIELD") : </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span class="col-md-12 col-sm-12 col-xs-12 text-field">
+                                            @(ViewBag.Registry.CURRENCY + (saleComplete.TotalAmountDue == null || saleComplete.TotalAmountDue == 0 ? "0.00" : saleComplete.TotalAmountDue.Value.ToString(Constant.DecimalFormat)))
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-3 col-sm-3 col-xs-3 form-group">
+                                    <label class="control-label">@GetText("DELIVERY_INITALS_FIELD")</label><br />
+                                    @saleComplete.DeliveryPersonInitials
+                                </div>
+                                <div class="col-md-9 col-sm-9 col-xs-9 form-group">
+                                    <div style="border-bottom: 1px solid; min-height: 70px;padding-bottom:2px;">
+                                        <br />
+                                        @if (!string.IsNullOrEmpty(saleComplete.CustomerSignatureUrl))
+                                        {
+                                            <img width="250" src="@saleComplete.CustomerSignatureUrl" />
+                                        }
+                                    </div>
+                                    <div>@GetText("CUSTOMER_SIGNATURE_TEXT")</div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <!--Warranty / Customer Acceptance & Comments Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h4 class="box-title applicant-box-title col-md-12 col-sm-12 col-xs-12"><b>@GetText("WARRANTY_SECTION") - </b><i>@GetText("WARRANTY_SECTION_NOTE")</i></h4>
+                        <div class="col-md-6  col-sm-12 col-xs-12">
+                            <h5><b>@GetText("WARRANTY_HEADING"): </b></h5>
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.WarrantyReceived == true ? "checked" : "") disabled name="rdWarranty">@GetText("WARRANTY_YES_OPTION_TEXT")
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.WarrantyReceived == false ? "checked" : "") disabled name="rdWarranty">@GetText("WARRANTY_NO_OPTION_TEXT")
+                                    </label>
+                                </div>
+                            </div>
+                            <h5><b>@GetText("CUSTOMER_COMMENT"): </b></h5>
+                            <div class="form-group">
+                                <label>@GetText("SATIFY_QUESTION")</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" @(saleComplete.Satisfy == true ? "checked" : "") disabled name="rdCustomerCmd" />@GetText("SATIFY_ANSWER_YES_TEXT")</label>
+                                    <label>
+                                        <input type="radio" @(saleComplete.Satisfy == false ? "checked" : "") disabled name="rdCustomerCmd" />@GetText("SATIFY_ANSWER_NO_TEXT") - <i>@GetText("SATIFY_ANSWER_NO_NOTE")</i></label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12 form-group" style="padding-left: 0; min-height:80px; border:solid 1px #808080">
+                                @if (saleComplete.Satisfy == false)
+                                {
+                                    <p>@saleComplete.NoSatisfyComment</p>
+                                }                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="box">
+                                 @{                                        
+                                     var rating = ((List<vwListNameValue>)ViewBag.Ratings).SingleOrDefault(x => x.Id == saleComplete.Rating);
+                                }                                
+                                @(GetText("RATING_SERVICE_SALE") + " : " + (rating != null ? rating.Description : ""))                                
+                            </div>
+                            <div style="margin-top:10px;">
+                                @GetText("WARRANTY_TEXT1") <u>@Model.Name</u>@GetText("WARRANTY_TEXT2")
+                            </div>
+                            <div>
+                                <div style="border-bottom: 1px solid; min-height:70px;padding-bottom:2px;">
+                                    <br />
+                                    @if (!string.IsNullOrEmpty(saleComplete.CustomerSignatureUrl))
+                                    {
+                                        <img width="250" src="@saleComplete.CustomerSignatureUrl" />
+                                    }
+                                </div>
+                                <div>@GetText("CUSTOMER_SIGNATURE_TEXT")</div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!--Lot Manager Follow-Up Section-->
+                    @if(saleOrder.IsFinalize == true)
+                    {
+                        <div class="col-md-12 col-sm-12 col-xs-12" style="background-color:#fff !important;">
+                            <h4 class="box-title applicant-box-title col-md-12 col-sm-12 col-xs-12"><b>@GetText("MANAGER_SECTION")</b></h4>
+                            <div class="form-horizontal">
+                                <div class="col-lg-3 col-md-6 col-sm-8 col-xs-8 form-group" style="margin-left: 0;">
+                                    <span class="col-md-8 col-sm-6 col-xs-6 radio">@GetText("FOLLOW_UP_QUESTION")</span>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 radio">
+                                        <label>
+                                            <input type="radio" disabled @(saleComplete.FollowUpCall == true ?  "checked" : "") name="rdFollowUp">@GetText("FOLLOW_UP_ANSWER_YES_TEXT")</label>
+                                        <label>
+                                            <input type="radio" disabled @(saleComplete.FollowUpCall != true ?  "checked" : "")  name="rdFollowUp">@GetText("FOLLOW_UP_ANSWER_NO_TEXT")</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8 form-group" style="padding-top: 7px;">
+                                    <label class="col-md-6 col-sm-3 col-xs-3 label-control">@GetText("CALL_DATE_FIELD"): </label>
+                                    <div class="col-md-6 col-sm-8 col-xs-8">
+                                        @(saleComplete.CallDate.HasValue ? saleComplete.CallDate.Value.ToString(ViewBag.Registry.DATE_FORMAT) : "")
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8  form-group" style="padding-top: 7px;">
+                                    <label class="col-md-6 col-sm-3 col-xs-3 label-control">@GetText("CALL_TIME_FIELD"): </label>
+                                    <div class="col-md-6 col-sm-8 col-xs-8">
+                                        @(saleComplete.CallDate.HasValue ? saleComplete.CallDate.Value.ToString("HH:mm") : "")                                    
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 radio">
+                                        <label>
+                                            <input type="radio" disabled @(saleComplete.SpokeWithCustomer == true ?  "checked" : "") name="rdFollowUpOption">@GetText("FOLLOW_UP_OPTION1")</label>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 radio">
+                                        <label>
+                                            <input type="radio" disabled @(saleComplete.LeftVoiceMail == true ?  "checked" : "") name="rdFollowUpOption">@GetText("FOLLOW_UP_OPTION2")</label>
+                                    </div>
+                                </div>
+
+                            
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label class="col-md-12  col-sm-12 col-xs-12" for="comment">@GetText("FOLLOW_UP_COMMENT")</label>
+                                    <div class="col-md-12  col-sm-12 col-xs-12">
+                                      <p style="min-height:100px; border:solid 1px #808080; padding: 5px;">@saleComplete.FollowUpComment</p>
+                                </div>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <div style="border-bottom: 1px solid; min-height: 60px;">
+                                        <br />
+                                        @if (!string.IsNullOrEmpty(saleComplete.ManagerSignatureUrl))
+                                        {
+                                            <img width="250" style="margin-bottom:5px;" src="@saleComplete.ManagerSignatureUrl" />
+                                        }
+                                    </div>
+                                    <div>@GetText("MANAGER_SIGNATURE_FIELD")</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Footer-->
+                        <div class="col-md-12 col-sm-12 col-xs-12"  style="background-color:#fff !important;">
+                            <h5 class="box-title applicant-box-title"><b>@GetText("FOOTER"):</b> @GetText("FOOTER_NOTE")</h5>
+                        </div>
+                    }
+                    </div>
+                </div>
+                <!--end body-->
+        </section>
+    </form>
+</div>

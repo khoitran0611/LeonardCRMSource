@@ -1,0 +1,144 @@
+﻿<form id="roleForm" name="roleForm" ng-controller="EditRoleCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>{{languages.ROLES.BASIC_INFOMATION}}</b>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12 form-horizontal" role="form">
+                        <div class="form-group input-group-sm">
+                            <label class="col-md-2 control-label">{{languages.ROLES.NAME}}</label>
+                            <div class="col-md-4">
+                                <div ng-switch="roleName">
+                                    <div ng-switch-when="Administrator" class="input-group-sm">
+                                        <span ng-disabled="true" class="form-control" ng-bind="role.Name"></span>
+                                    </div>
+                                    <div ng-switch-default>
+                                        <div class="input-group-sm">
+                                            <input id="txtRoleName" type="text"
+                                                class="form-control" ng-model="role.Name"
+                                                data-validation-length="2-50" data-validation="length"
+                                                data-validation-error-msg="{{languages.ROLES.REQUIRED_NAME}}" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.ROLES.PARENT}}</label>
+                            <div class="col-md-4">
+                                <div ng-switch="roleName">
+                                    <div ng-switch-when="Administrator" class="input-group-sm">
+                                        <span ng-disabled="true" class="form-control"></span>
+                                    </div>
+                                    <div ng-switch-default class="input-group-sm">
+                                        <!--<select class="form-control"
+                                                ng-options="item.Id as item.Name for item in role.Roles"
+                                                ng-model="role.Parent"></select>-->
+                                        <ui-select class="form-control" ng-model="role.ParentArray" multiple theme="bootstrap">
+                                            <ui-select-match>{{$item.Name}}</ui-select-match>
+                                            <ui-select-choices repeat="item.Id as item in role.Roles | propsFilter: {Name: $select.search}">
+                                                <div ng-bind-html="item.Name | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.ROLES.DESCRIPTION}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <textarea class="form-control notetextarea" ng-model="role.Description" rows="4"></textarea>
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.ROLES.IS_HOST_ADMIN}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <div ng-switch="roleName">
+                                    <div ng-switch-when="Administrator" class="input-group-sm">
+                                        <input type="checkbox" id="chkIsHostAdmin" ng-disabled="true" ng-checked="role.IsHostAdmin" class="donotcallcheckbox">
+                                    </div>
+                                    <div ng-switch-default class="input-group-sm">
+                                        <input type="checkbox" id="chkIsHostAdmin" ng-model="role.IsHostAdmin" class="donotcallcheckbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>{{languages.ROLES.ROLE_PERMISSION}}</b>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12 form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-2 text-right">{{languages.ROLES.MODULE_NAME}}</label>
+                            <div class="col-md-1 text-center">{{languages.ROLES.FULL_CONTROL}}</div>
+                            <div class="col-md-1 text-center">{{languages.ROLES.READ}}</div>
+                            <div class="col-md-1 text-center">{{languages.ROLES.CREATE}}</div>
+                            <div class="col-md-1 text-center">{{languages.ROLES.EDIT}}</div>
+                            <div class="col-md-1 text-center">{{languages.ROLES.DELETE}}</div>
+                            <div class="col-md-1 text-center">{{languages.ROLES.IMPORT}}</div>
+                            <div class="col-md-1 text-center">{{languages.ROLES.EXPORT}}</div>
+                            <div class="col-md-2 text-center">{{languages.ROLES.CREATE_VIEW}}</div>
+                        </div>
+                        <div ng-repeat="(index,item) in role.Eli_RolesPermissions" ng-controller="roleFieldCtr">
+                            <div class="form-group input-group-sm">
+                                <div class="col-md-2 text-right" style="padding-top: 8px;"><span>{{item.Name}}</span></div>
+                                <div class="col-md-1 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" class="donotcallcheckbox" type="checkbox" ng-model="item.FullControl" ng-change="fullControlChanged(item)" /></div>
+                                <div class="col-md-1 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" class="donotcallcheckbox" type="checkbox" ng-model="item.AllowRead" ng-change="permitChanged(1,item)" /></div>
+                                <div class="col-md-1 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" class="donotcallcheckbox" type="checkbox" ng-model="item.AllowCreate" ng-change="permitChanged(4,item)" /></div>
+                                <div class="col-md-1 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" class="donotcallcheckbox" type="checkbox" ng-model="item.AllowEdit" ng-change="permitChanged(2,item)" /></div>
+                                <div class="col-md-1 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" class="donotcallcheckbox" type="checkbox" ng-model="item.AllowDelete" ng-change="permitChanged(3,item)" /></div>
+                                <div class="col-md-1 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" ng-show="item.ModuleAllowImport" class="donotcallcheckbox" type="checkbox" ng-model="item.AllowImport" ng-change="permitChanged(5,item)" /></div>
+                                <div class="col-md-1 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" ng-show="item.ModuleAllowExport" class="donotcallcheckbox" type="checkbox" ng-model="item.AllowExport" ng-change="permitChanged(6,item)" /></div>
+                                <div class="col-md-2 text-center">
+                                    <input ng-disabled="role.Name == 'Administrator'" ng-show="item.ModuleCreateView" class="donotcallcheckbox" type="checkbox" ng-model="item.AllowCreateView" ng-change="permitChanged(7,item)" /></div>
+                                <div class="col-md-1 btn-group">
+                                    <div class="rolefield-toogle" data-toggle="dropdown" aria-expanded="false" ng-click="isCollapsed = !isCollapsed;clickPanel();" ng-show="checkShowPanel(item)">
+                                        <a><i class="glyphicon glyphicon-collapse-down"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group input-group-sm">
+                                <div class="rolefield panel panel-default" role="menu" collapse="isCollapsed" ng-init="isCollapsed = true;">
+                                    <div class="panel-heading text-center disabled"><b>{{languages.ROLES.ROLE_FIELD_TITLE}}</b></div>
+                                    <div class="panel-body">
+                                        <ul class="col-menu">
+                                            <li ng-repeat="(findex,field) in role.Eli_RolesPermissions[index].EntityFields" ng-class="{'rolefield-disable': field.Mandatory}" ng-hide="(!field.Display || !field.IsActive)">
+                                                <span class="rolefield-icon">
+                                                    <span class="rolefield-unlock" ng-hide="(field.Locked || field.Mandatory)" ng-click="ChangeBlock($event, field)"></span>
+                                                    <span class="rolefield-lock" ng-hide="(!field.Locked || field.Mandatory)" ng-click="ChangeBlock($event, field)"></span>
+                                                </span>
+                                                <input type="checkbox" ng-model="field.Visible" ng-disabled="field.Mandatory">
+                                                <span ng-show="field.Mandatory"><span class="mandatorysign">*</span></span>{{field.LabelDisplay}}
+                                            </li>
+                                        </ul>
+                                        <div class="alert alert-warning rolefield-alert" role="alert">{{languages.ROLES.ROLE_FIELD_ALERT}}</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+<script type="text/javascript">
+    $('document').ready(function () {
+        $('.col-menu').bind('click', function (e) {
+            e.stopPropagation();
+        });
+    });
+</script>

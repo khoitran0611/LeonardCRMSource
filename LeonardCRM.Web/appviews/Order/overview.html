@@ -1,0 +1,30 @@
+﻿<div ng-controller="OrderOverviewCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <b>{{languages.ORDERS.OVERVIEW_HEADING}}</b>
+            <div class="pull-right">
+                <input ng-model="onlyMe" type="checkbox" />
+                {{languages.ORDERS.MY_DATA}}
+            </div>
+        </div>
+        <div class="panel-body wel-panel-height">
+            <img src="/Images/preloader.gif" ng-hide="!isLoading" />
+            <div ng-hide="isLoading">
+                <buttons-radio class="btn-group" data-toggle="buttons" model='currentValue' options='myOptions'></buttons-radio>
+                <div ng-switch="chart.displayed">
+                    <div ng-switch-when="false">
+                        <dl class="dl-horizontal" style="margin-top: 10px">
+                            <div ng-repeat="c in listData">
+                                <dt class="overview-dt"><i>{{c.CreatedDate|date:dateFormat}}</i></dt>
+                                <dd class="overview-dd"><a ng-click="openOrderDetail(defaultView, c.Id)">{{c.OrderName}}</a></dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div ng-switch-when="true">
+                        <div class="col-md-12 chart-size" google-chart chart="chart" on-ready="chartReady()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

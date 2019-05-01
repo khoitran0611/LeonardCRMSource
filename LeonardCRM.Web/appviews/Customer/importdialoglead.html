@@ -1,0 +1,219 @@
+﻿<div id="dialogLeadImport" ng-controller="ImportLeadCtrl">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">{{languages.APPOINTMENT.SELECT_FILE}}</label>
+            <div class="col-sm-8" style="width: 300px">
+                <div class="col-md-12" ng-show="uploader.queue.length == 0">
+                    <span class="btn btn-danger btn-sm fileinput-button">
+                        <span>{{languages.SALES_CUSTOMER.CHOOSE}}</span>
+                        <input type="file" data-validation="mime size" data-validation-max-size="100kb"
+                            data-validation-allowing="{{languages.EXCEL_FORMATS}}"
+                            data-validation-error-msg="{{languages.COMMON.INVALID_FILE_FORMAT}}"
+                            nv-file-select uploader="uploader" ng-module="fileImport" ng-disabled="disabled">
+                    </span>
+                </div>
+                <div class="col-md-12" ng-repeat="item in uploader.queue">
+                    <div class="col-md-12">
+                        <div class="form-control customerfilename">
+                            <i class="glyphicon glyphicon-ok" ng-show="item.isUploaded"></i>
+                            <strong>{{ item.file.name }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="customerprogressbar" ng-show="uploader.hasHTML5 && isProcess">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-success" ng-click="item.upload()" ng-show="!item.isUploaded">
+                            <span class="glyphicon glyphicon-upload"></span>
+                            <!--{{languages.SALES_CUSTOMER.UPLOAD}}-->
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="item.remove()" ng-show="!item.isUploaded">
+                            <span class="glyphicon glyphicon-trash"></span>
+                            <!--{{languages.SALES_CUSTOMER.REMOVE}}-->
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="group-inject" class="">
+            <div class="form-group">
+                <div class="row">
+                    <label for="txtColumnNameRowIndex" class="col-xs-4 control-label">{{ languages.SALES_CUSTOMER.COLUMN_NAME_ROW_INDEX }}</label>
+                    <div class="col-xs-2">
+                        <input id="txtColumnNameRowIndex" type="number" ng-model="columnNameRowIndex" class="form-control input-sm">
+                    </div>
+                    <label for="txtColumnNameRowIndex" class="col-xs-1 control-label" style="text-align: left">
+                        <a tooltip-trigger="mouseenter" tooltip-append-to-body="true" tooltip-html-unsafe="{{whatthisPopover}}">
+                            <li class="glyphicon glyphicon-question-sign" style="font-size: 1.2em;"></li>
+                        </a>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label for="txtColumnNameRowIndex" class="col-xs-4 control-label">{{ languages.SALES_CUSTOMER.SHEET_NAME }}</label>
+                    <div class="col-xs-2">
+                        <select class="form-control input-sm" ng-model="currentSheetName">
+                            <option ng-repeat="item in sheetNames" value="{{ item }}">{{ item }}</option>
+                            {{ currentSheetName}}
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-default btn-sm"
+                            ng-show="sheetNames.length > 0"
+                            ng-click="columnMapping()">
+                            {{ languages.SALES_CUSTOMER.MAPPING_BUTTON }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="isMappingError">
+                <div class="row">
+                    <label class="col-xs-2 control-label"></label>
+                    <div class="col-xs-9">
+                        <div class="alert alert-danger" ng-show="isMappingError" role="alert">
+                            <div ng-bind-html="RawHtml(ResultMsg)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="columnMappingSource.length > 0">
+                <div ng-show="parserId != 3">
+                    <div class="form-group">
+                        <div class="row">
+                            <h4 class="col-xs-3 control-label">{{ languages.SALES_CUSTOMER.COLUMN_MAPPING }}</h4>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-xs-2 control-label"></label>
+                            <div class="col-xs-9">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        {{ languages.SALES_CUSTOMER.EXCEL_COLUMN }}
+                                    </div>
+                                    <div class="col-xs-5">
+                                        {{ languages.SALES_CUSTOMER.DATABASE_COLUMN }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div style="overflow-y: scroll; overflow-x: hidden; height: 200px;">
+                        <div class="form-group" ng-repeat="item in columnMappingSource">
+                            <div class="row">
+                                <label class="col-xs-2 control-label"></label>
+                                <div class="col-xs-9">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <label style="padding-top: 8px;">
+                                                {{ item.SheetColumnName }}
+                                            </label>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <select class="form-control input-sm" ng-model="item.ObjectColumnName"
+                                                ng-options="field.FieldName as field.LabelDisplay for field in entityFieldSources">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <h4 class="col-xs-3 control-label">{{ languages.SALES_CUSTOMER.INJECTION_OPTION }}</h4>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-xs-4 control-label">{{ languages.SALES_CUSTOMER.ACTION_EMPTY_ROW }}</label>
+                    <div class="col-xs-2">
+                        <select class="form-control input-sm" ng-model="EmptyRowAction">
+                            <option value="0">Ignore</option>
+                            <option value="1">Error</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-xs-4 control-label">{{ languages.SALES_CUSTOMER.ACTION_CELL_DATA }}</label>
+                    <div class="col-xs-2">
+                        <select class="form-control input-sm" ng-model="InvalidCellDataAction">
+                            <option value="0">Ignore</option>
+                            <option value="1">Error</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-default btn-sm" btn-loading="is_validating"
+                            data-loading-text="{{ languages.SALES_CUSTOMER.PROCESSING }}"
+                            ng-click="ValidateExcelFile()">
+                            {{ languages.SALES_CUSTOMER.VALIDATE_EXCEL_BUTTON }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="showMsg">
+                <div class="row">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-9">
+                        <div class="alert alert-success" ng-show="isSuccess" role="alert">
+                            <div ng-bind-html="RawHtml(ResultMsg)">
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" ng-show="isError" role="alert">
+                            <div ng-bind-html="RawHtml(ResultMsg)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="isInjecting">
+                <div class="row">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-9">
+                        <div class="alert alert-success" role="alert">
+                            <div ng-repeat="appName in AppResult">
+                                <i class="glyphicon glyphicon-ok"></i>{{ appName.msg }}
+                            </div>
+                            <div style="margin-bottom: 10px;" ng-show="iswaiting">
+                                <img style="width: 16px; margin-right: 10px;" src="/Content/images/loading.gif" alt="">
+                                <strong>{{ languages.SALES_CUSTOMER.PROCESS_TITLE_MSG }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="isSuccess && isValid">
+                <div class="row">
+                    <label for="btnUpload" class="col-xs-2 control-label"></label>
+                    <div class="col-xs-10">
+                        <button id="preViewButton" type="button" class="btn btn-default btn-sm" ng-click="previewDataClick()">{{ languages.SALES_CUSTOMER.PREVIEW_DATA_BUTTON }}</button>
+                        <button type="button" class="btn btn-default btn-sm" ng btn-loading="is_injecting"
+                            data-loading-text="{{ languages.SALES_CUSTOMER.PROCESSING }}"
+                            ng-click="injectDataClick()" ng-show="showInjectionButton">
+                            {{ languages.SALES_CUSTOMER.START_INJECTION_BUTTON }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #dialogImport i.glyphicon {
+        padding-right: 6px;
+    }
+</style>

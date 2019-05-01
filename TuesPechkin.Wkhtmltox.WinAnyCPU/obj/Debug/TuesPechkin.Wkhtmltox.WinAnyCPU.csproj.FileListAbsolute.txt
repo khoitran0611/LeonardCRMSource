@@ -1,0 +1,10 @@
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\bin\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\bin\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\bin\Debug\TuesPechkin.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\bin\Debug\TuesPechkin.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\obj\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.csprojResolveAssemblyReference.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\obj\Debug\TuesPechkin.Properties.Resources.resources
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\obj\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.csproj.GenerateResource.Cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\obj\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.csproj.CoreCompileInputs.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\obj\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\TuesPechkin.Wkhtmltox.WinAnyCPU\obj\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.pdb

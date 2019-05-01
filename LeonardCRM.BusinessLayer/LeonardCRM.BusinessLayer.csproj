@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0400FFAF-3085-4C32-8B18-E879370749FA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeonardCRM.BusinessLayer</RootNamespace>
+    <AssemblyName>LeonardCRM.BusinessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\packages\iTextSharp.5.4.5\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ConvertHelper.cs" />
+    <Compile Include="Common\LocalizeHelper.cs" />
+    <Compile Include="Common\ObjectValidator.cs" />
+    <Compile Include="Common\Resource.cs" />
+    <Compile Include="DeliveryBM.cs" />
+    <Compile Include="Feature\OrderPdfFeature.cs" />
+    <Compile Include="Feature\OrderSendMailFeature.cs" />
+    <Compile Include="Helper\ConvertSignatureXml.cs" />
+    <Compile Include="SalesOrderDeliveryBM.cs" />
+    <Compile Include="DataControllers\SalesDeliveryApiController.cs" />
+    <Compile Include="SalesOrderCompleteBM.cs" />
+    <Compile Include="DataControllers\ContractTemplateApiController.cs" />
+    <Compile Include="DataControllers\SalesCompleteApiController.cs" />
+    <Compile Include="DataControllers\SalesDocumentApiController.cs" />
+    <Compile Include="SalesContractTemplateBM.cs" />
+    <Compile Include="DataControllers\ViewCustomApiController.cs" />
+    <Compile Include="ModulesRelationshipBM.cs" />
+    <Compile Include="CurrencyBM.cs" />
+    <Compile Include="CurrencyNameBM.cs" />
+    <Compile Include="DataControllers\CurrencyApiController.cs" />
+    <Compile Include="DataControllers\DataTypeApiController.cs" />
+    <Compile Include="DataControllers\FieldSectionApiController.cs" />
+    <Compile Include="DataControllers\ListNamesApiController.cs" />
+    <Compile Include="DataControllers\LogApiController.cs" />
+    <Compile Include="DataControllers\MailTemplateApiController.cs" />
+    <Compile Include="DataControllers\ModulesRelationshipApiController.cs" />
+    <Compile Include="DataControllers\PicklistDependencyApiController.cs" />
+    <Compile Include="DataControllers\SystemAuditApiController.cs" />
+    <Compile Include="DataControllers\TaxApiController.cs" />
+    <Compile Include="DataTypeBM.cs" />
+    <Compile Include="ExcelInjectionParsers\CustomerParser.cs" />
+    <Compile Include="ExcelInjectionParsers\Exception\ImportDuplicatedAppException.cs" />
+    <Compile Include="ExcelInjectionParsers\Exception\ImportEmptyRowException.cs" />
+    <Compile Include="ExcelInjectionParsers\Exception\ImportInvalidCellDataException.cs" />
+    <Compile Include="ExcelInjectionParsers\Exception\ImportInvalidSheetException.cs" />
+    <Compile Include="ExcelInjectionParsers\ParserBase.cs" />
+    <Compile Include="ExcelInjectionParsers\ParserData.cs" />
+    <Compile Include="ExcelInjectionParsers\ParserRepository.cs" />
+    <Compile Include="FieldSectionBM.cs" />
+    <Compile Include="LoginLogBM.cs" />
+    <Compile Include="DataControllers\EntityFieldsApiController.cs" />
+    <Compile Include="DataControllers\InvoiceTemplateApiController.cs" />
+    <Compile Include="DataControllers\LocalizeApiController.cs" />
+    <Compile Include="DataControllers\NoteApiController.cs" />
+    <Compile Include="DataControllers\RegistryApiController.cs" />
+    <Compile Include="DataControllers\RoleApiController.cs" />
+    <Compile Include="DataControllers\SalesInvoiceApiController.cs" />
+    <Compile Include="DataControllers\UserApiController.cs" />
+    <Compile Include="DataControllers\ViewApiController.cs" />
+    <Compile Include="ModuleBM.cs" />
+    <Compile Include="DataControllers\ModuleApi.cs" />
+    <Compile Include="DataControllers\SalesOrderApiController.cs" />
+    <Compile Include="EntityFieldBM.cs" />
+    <Compile Include="ListNameBM.cs" />
+    <Compile Include="ListValueBM.cs" />
+    <Compile Include="NoteBM.cs" />
+    <Compile Include="PicklistDependencyBM.cs" />
+    <Compile Include="RolesPermissionsBM.cs" />
+    <Compile Include="RolesBM.cs" />
+    <Compile Include="DataControllers\BaseApiController.cs" />
+    <Compile Include="DataControllers\SalesCustomerApiController.cs" />
+    <Compile Include="Feature\AccountFeature.cs" />
+    <Compile Include="Feature\Feature.cs" />
+    <Compile Include="HttpModules\AuthenticationModule.cs" />
+    <Compile Include="Common\Registry.cs" />
+    <Compile Include="SalesInvoiceBM.cs" />
+    <Compile Include="SalesInvTemplateBM.cs" />
+    <Compile Include="SysAuditBM.cs" />
+    <Compile Include="TaxBM.cs" />
+    <Compile Include="UserBM.cs" />
+    <Compile Include="LogBM.cs" />
+    <Compile Include="MailTemplateBM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistryBM.cs" />
+    <Compile Include="SalesCustomerBM.cs" />
+    <Compile Include="SalesDocumentsBM.cs" />
+    <Compile Include="SalesOrderBM.cs" />
+    <Compile Include="SalesOrdersUsersBM.cs" />
+    <Compile Include="Security\RequireAuthorize.cs" />
+    <Compile Include="DataControllers\AuthController.cs" />
+    <Compile Include="Security\UserPrinciple.cs" />
+    <Compile Include="Security\UserSecurity.cs" />
+    <Compile Include="ViewBM.cs" />
+    <Compile Include="ViewColumnBM.cs" />
+    <Compile Include="ViewCustomBM.cs" />
+    <Compile Include="ViewGroupByBM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Eli.Common\Eli.Common.csproj">
+      <Project>{5d9bd11d-6f52-4e87-b5c8-183b6ccc2d77}</Project>
+      <Name>Eli.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Elinext.BusinessLib\Elinext.BusinessLib.csproj">
+      <Project>{e440eb27-9922-4c00-8f9b-0e0c10b63069}</Project>
+      <Name>Elinext.BusinessLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Elinext.DataLib\Elinext.DataLib.csproj">
+      <Project>{2cfff838-61d0-4366-b9bd-8924ca100c3a}</Project>
+      <Name>Elinext.DataLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LeonardCRM.DataLayer\LeonardCRM.DataLayer.csproj">
+      <Project>{e234a685-593c-4170-9ba3-bee6bfbf393a}</Project>
+      <Name>LeonardCRM.DataLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

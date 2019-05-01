@@ -1,0 +1,96 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+    <label style="min-width: 300px;" class="col-lg-1 col-md-4 col-sm-4 col-xs-4 row submit-app-question">{{languages.APPLICANT_FORM.QUESTION_EMPLOYED_SECTION}}</label>
+    <div style="width: 630px;" class="col-lg-1 col-md-1 col-sm-1 col-xs-12 row form-inline">
+        <label class="radio" style="margin-left: 20px;">
+            <input type="radio" ng-model="applicant.SelfEmployed" name="employ-kind" ng-value="true" ng-focus="applicant.IncomeExplanation = null">
+            {{languages.APPLICANT_FORM.SELF_EMPLOYED}}
+        </label>
+        <label class="radio" style="margin-left: 20px;">
+            <input type="radio" ng-model="applicant.SelfEmployed" name="employ-kind" ng-value="false" ng-focus="applicant.TypeOfBusiness = null; applicant.IncomeExplanation = null;">
+            {{languages.APPLICANT_FORM.EMPLOYED_KIND_VALUE}}
+        </label>
+        <label class="radio" style="margin-left: 20px;">
+            <input type="radio" ng-model="applicant.SelfEmployed" name="employ-kind" ng-value="null">
+            {{languages.APPLICANT_FORM.OTHER_INCOME_VALUE}}
+        </label>
+        <input type="text" class="form-control input-sm" style="min-width:150px; width: 190px; max-width: 20vw; margin-left: 10px;" ng-model="applicant.IncomeExplanation" ng-disabled="applicant.SelfEmployed != null" />
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label class="submit-app-section"><span class="col-lg-1 col-md-1 col-sm-1 col-xs-1 submit-app-section-header">{{languages.APPLICANT_FORM.EMPLOYER_FIELD}}</span></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pd0 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.NAME_EMPLOYER_FIELD}}</label>
+                <input type="text" class="form-control" ng-model="applicant.Employer">
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.SINCE_EMPLOY_FIELD}}<em class="text-uppercase">{{' (' + monthFormat + ')'}}</em></label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="{{monthFormat}}" data-validation="date" data-validation-optional="true" data-validation-format="{{monthFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.SINCE_REQUIRE_ERROR_MSG}}" type="text" ng-model="applicant.Since" on-open-focus="false" is-open="opened3" uib-datepicker-popup="{{monthFormat}}" datepicker-options="monthOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                    <span class="btn input-group-addon" ng-click="opened3 = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+           <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>
+                    {{languages.APPLICANT_FORM.TYPE_OF_BUSINESS_FIELD}} 
+                <em>{{languages.APPLICANT_FORM.IF_SELF_EMPLOYED}}</em></label>
+
+                <input type="text" class="form-control" ng-model="applicant.TypeOfBusiness" ng-disabled="applicant.SelfEmployed == false">
+            </div>
+        </div>
+        <div class="pd0 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.SUPERVISOR_FIELD}}</label>
+                <input type="text" class="form-control" ng-model="applicant.Supervisor" />
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.WORK_PHONE_FIELD}}</label>
+                <input type="text" class="form-control" ng-model="applicant.Phone" maxlength="20" data-inputmask='"mask": "(999) 999-9999"' data-mask />
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group" ng-show="numOfApplicant == 2">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label class="submit-app-section"><span class="col-lg-1 col-md-1 col-sm-1 col-xs-1 submit-app-section-header">{{languages.APPLICANT_FORM.CO_NAME_EMPLOYER_FIELD}}</span></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pd0 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.NAME_EMPLOYER_FIELD}}</label>
+                <input type="text" class="form-control" ng-model="applicant.CoEmployer" />
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.SINCE_EMPLOY_FIELD}}<em class="text-uppercase">{{' (' + monthFormat + ')'}}</em></label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="{{monthFormat}}" type="text" ng-model="applicant.CoSince" data-validation="date" data-validation-optional="true" data-validation-format="{{monthFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.CO_SINCE_REQUIRE_ERROR_MSG}}" on-open-focus="false" is-open="opened4" uib-datepicker-popup="{{monthFormat}}" datepicker-options="monthOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                    <span class="btn input-group-addon" ng-click="opened4 = true">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="pd0 col-md-6 col-sm-6 col-xs-12">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.WORK_PHONE_FIELD}}</label>
+                <input type="text" class="form-control" ng-model="applicant.CoPhone" maxlength="20" data-inputmask='"mask": "(999) 999-9999"' data-mask />
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.SUPERVISOR_FIELD}}</label>
+                <input type="text" class="form-control" ng-model="applicant.CoSupervisor" />
+            </div>
+        </div>
+    </div>
+</div>

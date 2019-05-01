@@ -1,0 +1,121 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col1">
+    <div ng-include=" '@Url.Action("Navigation", "Home")' "></div>
+</div>
+<div class="relative">
+    <div class="col2">
+        <div class="boxmodule">
+            <div class="toolbar">
+                <a ng-href="/?mode={{hashParam}}" class="btn btn-sm btn-danger" ng-show="!isExpanded">{{languages.COMMON.SWITCH_TO_ASSISTANT_MODE_BTN}}</a>
+                <div class="collapseexpand">                    
+                    <a class="refreshbutton" ng-hide="1==1 || subview=='dashboard' || subview=='profile' || subview=='report'" ng-click="refreshViewMenu()" tooltip-append-to-body="true" tooltip-placement="bottom" tooltip="{{languages.TOOLBAR.REFRESH_BUTTON}}">
+                        <i class="glyphicon glyphicon-refresh"></i>
+                    </a>
+                    <a class="collapseexpandbutton pull-right" ng-click="collapseExpandMenu()">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="boxmodulebody">
+                <div class="scrollbar-dynamic" data-jquery-scrollbar="jqueryScrollbarOptions">
+                    <div class="boxbody asideleftmenu">
+                        @*left menu*@
+                        <div ng-switch="subview">
+                            <div ng-switch-when="dashboard">
+                                <div ng-include=" '/appviews/layouts/dashboard-menu.html' "></div>
+                            </div>
+                            @*<div ng-switch-when="report">
+                                <div ng-include=" '/appviews/layouts/report-menu.html' "></div>
+                            </div>*@
+                            <div ng-switch-default>
+                                <div ng-include=" '/appviews/layouts/view-menu.html' "></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col3">
+        <div class="boxmodule">
+            <div class="toolbar">
+                @*command buttons*@
+                <div>
+                    <div ng-include="toolbarUrl"></div>
+                </div>
+            </div>
+            @*<div class="boxmodulebody">*@
+            <div class="boxmodulebody hasstatusbar">
+                <div class="scrollbar-dynamic" data-jquery-scrollbar="jqueryScrollbarOptions">
+                    <div class="boxbody">
+                        @*content*@
+                        <div>
+                            <div ng-switch on="subview">
+                                <div ng-switch-when="home">
+                                    <div ng-include=" '/appviews/dashboard/dashboard-overview.html' "></div>
+                                </div>
+                                <div ng-switch-when="dashboard">
+                                    <div ng-include src=" '/appviews/dashboard/index.html' ">
+                                    </div>
+                                </div>
+                                <div ng-switch-when="report">
+                                    <div ng-include=" '/appviews/report/index.html' "></div>
+                                </div>
+                                <div ng-switch-when="profile">
+                                    <div ng-include=" '/appviews/profile/index.html' "></div>
+                                </div>
+                                <div ng-switch-when="customer">
+                                    <div ng-include src="'/appviews/Customer/index.html'">
+                                    </div>
+                                </div>
+                                <div ng-switch-when="order">
+                                    <div ng-include src="'/appviews/Order/index.html'">
+                                    </div>
+                                </div>
+                                <div ng-switch-when="invoice">
+                                    <div ng-include=" '/appviews/invoice/index.html'">
+                                    </div>
+                                </div>
+                                <div ng-switch-when="appointment">
+                                    <div ng-include=" '/appviews/appointment/index.html'">
+                                    </div>
+                                </div>
+                                <div ng-switch-when="notfound">
+                                    <div ng-include=" '/appviews/layouts/notfound.html'">
+                                    </div>
+                                </div>
+                                <div ng-switch-when="error">
+                                    <div ng-include=" '/appviews/layouts/error.html'">
+                                    </div>
+                                </div>
+                                <div ng-switch-when="deny">
+                                    <div ng-include=" '/appviews/layouts/deny.html'">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div ng-controller="windowStageCtrl">
+                <div ng-hide="stageVisible" class="window-stage">
+                    <div ng-repeat="(i,item) in windowsCollection" ng-include="'/appviews/Layouts/eli-window.html'" 
+                         onload="item.doneEvent()">
+                    </div>
+                </div>
+            </div>
+            @*</div>*@
+        </div>
+        @*<div class="statusbar">
+            <div class="pull-left alert alert-success" style="margin-bottom: 0; padding: 5px;">
+                <b style="color: #000">{{languages.STATUS_BAR.HOTKEYS}}</b> [ 
+                <b>Alt + Home</b>: {{languages.STATUS_BAR.HOME}} ] [ <b>F1</b>: {{languages.STATUS_BAR.DASHBOARD}} ] [ <b>F2</b>: {{languages.STATUS_BAR.CUSTOMER}} ] [ <b>F3</b>: {{languages.STATUS_BAR.ORDER}} ] [ <b>F4</b>: {{languages.STATUS_BAR.INVOICE}} ] [ <b>Alt + R</b>: {{languages.STATUS_BAR.REPORT}} ] [ <b>Alt + P</b>: {{languages.STATUS_BAR.PROFILE}} ]
+            </div>
+            
+        </div>*@
+    </div>
+</div>

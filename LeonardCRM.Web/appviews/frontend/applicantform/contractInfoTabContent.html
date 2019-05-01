@@ -1,0 +1,11 @@
+﻿<form ng-controller="ContractInfoTabContentCtrl" style="padding: 20px">    
+    <br />
+    <div data-ng-bind-html="contractContent"></div>
+    <br />    
+    <button class="btn btn-flat pull-right" 
+            type="button" 
+            ng-disabled="applicant.SalesOrders[0].Status < pendingCusAcceptStatus || applicant.SalesOrders[0].POSTicketNumber == null" 
+            ng-show="isShowSignature && isHaveContent && applicant.SalesOrders[0].Status != cancelledStatus" 
+            ng-click="openSignPopup(keySignaturePop)">{{languages.APPLICANT_FORM.CLICK_TO_SIGN_TEXT}}</button>
+    <br />
+</form>

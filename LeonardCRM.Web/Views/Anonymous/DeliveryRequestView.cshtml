@@ -1,0 +1,431 @@
+@using LeonardCRM.DataLayer.ModelEntities
+@using LeonardCRM.BusinessLayer.Common
+@using System.Linq
+@using Eli.Common
+
+@model SalesCustomer
+@{
+    Layout = "~/Views/Shared/_CustomErrorLayout.cshtml";
+    var resourceHelper = LocalizeHelper.Instance;
+    var saleOrder = Model.SalesOrders.Single();
+    var saleOrderDelivery = (saleOrder != null && saleOrder.SalesOrderDeliveries != null && saleOrder.SalesOrderDeliveries.Any()) ? saleOrder.SalesOrderDeliveries.First() : new SalesOrderDelivery();
+    var saleComplete = (saleOrder != null && saleOrder.SalesOrderCompletes != null && saleOrder.SalesOrderCompletes.Any()) ? saleOrder.SalesOrderCompletes.First() : new SalesOrderComplete();
+}
+<link href="~/Content/frontend/custom.css" rel="stylesheet" />
+<style>
+    .form-group div {
+        padding-top: 7px;
+    }
+
+    .pd-top0 {
+        padding-top: 0px !important;
+    }
+
+    #content {
+        width: 1000px;
+        margin: 0px auto;
+        padding: 15px;
+    }
+
+    .panel {
+        border: none;
+    }
+
+        body, .container, .panel div:not(.box-title), .form-horizontal .form-group {
+            background-color: #fff !important;
+        }
+</style>
+<div>
+    <form name="deliveryRequestForm" id="deliveryRequestForm" style="margin: 0 auto;">
+        <section class="content">
+            <div class="row form-horizontal">
+
+                <!--Top Information-->
+                <div class="col-md-12 col-xs-12">
+                    <div class="pull-right" style="padding-right: 15px;">
+                        <div>
+                            <label>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "START_DATE"): @(saleOrder.SaleDate.HasValue ? saleOrder.SaleDate.Value.ToString(ViewBag.Registry.DATE_FORMAT) : "____")</label>
+                            <label>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "LOT"): @(saleOrder.StoreNumber)</label>
+                        </div>
+                        <div>
+                            <label>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "INVOICE_ORDER") #: @(saleOrder.GPOrderNumber)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-center" style="clear: both; padding-top: 20px;">
+                    <b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "HEADING")</b>
+                </h3>
+
+                <div class="box-body">
+                    <h5 class="text-center">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "LETTER_HEADING")</h5>
+                    <!--Customer Information-->
+                    <div>
+                        <!--Left-->
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+
+                            <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_INFORMATION_SECTION_TITLE")</b></h4>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-xs-2 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_NAME")</label>
+                                <div class="col-sm-10 col-xs-10 pd-top0">
+                                    @Model.Name
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-xs-2 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_STREET_ADDRESS")</label>
+                                <div class="col-sm-4 col-xs-4 pd-top0">
+                                    @Model.PhysicalStreet
+                                </div>
+                                <label class="col-sm-2 col-xs-2 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_CITY")</label>
+                                <div class="col-sm-4 col-xs-4 pd-top0">
+                                    @Model.PhysicalCity
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-xs-2 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_STATE")</label>
+                                <div class="col-sm-4 col-xs-4 pd-top0">
+                                    @{
+                                        var state = ((List<vwListNameValue>)ViewBag.States).SingleOrDefault(x => x.Id == Model.PhysicalState);
+                                    }
+                                    @(state != null ? state.Description : "")
+                                </div>
+
+                                <label class="col-sm-2 col-xs-2 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_ZIP")</label>
+                                <div class="col-sm-4 col-xs-4 pd-top0">
+                                    @Model.PhysicalZip
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 col-xs-2 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_HOME_PHONE")</label>
+                                <div class="col-sm-4 col-xs-4 pd-top0">
+                                    @Model.HomePhone
+                                </div>
+
+                                <label class="col-sm-2 col-xs-2 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_CELL_PHONE")</label>
+                                <div class="col-sm-4 col-xs-4 pd-top0">
+                                    @Model.CellPhone
+                                    <span style="font-size: 12px; font-weight: normal;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_PURPOSE_ONLY_LABEL")</span>
+                                </div>
+                            </div>
+
+                            <!--Special Delivery Requirements-->
+                            <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "SPECIAL_DELIVERY_REQUIREMENT_TITLE") </b><span style="font-size: 12px;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "SPECIAL_DELIVERY_REQUIREMENT_SUB_TITLE")</span></h4>
+                            <div class="form-group">
+                                <div class="col-sm-12 col-xs-12">
+                                    @saleOrderDelivery.DeliveryRequirement
+                                </div>
+                            </div>
+
+                            <!--Directions to Site-->
+                            <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DIRECTION_TO_SITE_TITLE") </b><span style="font-size: 12px;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DIRECTION_TO_SITE_SUB_TITLE")</span></h4>
+                            <div class="form-group">
+                                <div class="col-sm-12 col-xs-12">
+                                    @saleOrderDelivery.DirectionToSite
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Right-->
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group align-center">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label class="col-sm-12 col-xs-12"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "BUIDING_PART_NUMBER")</b></label>
+                                        <label class="col-sm-12 col-xs-12">@saleOrder.PartNumber</label>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <label class="col-sm-12 col-xs-12"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "SERIAL_NUMBER")</b></label>
+                                        <label class="col-sm-12 col-xs-12">@saleOrder.SerialNumber</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @if (!string.IsNullOrEmpty(saleOrder.RampPartNumber))
+                                    {
+                                        <div class="col-sm-6 col-xs-6">
+                                            <label class="col-sm-12 col-xs-12"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "RAMP_PART_NUMBER")</b></label>
+                                            <label class="col-sm-12 col-xs-12">@saleOrder.RampPartNumber</label>
+                                        </div>
+                                    }
+                                </div>                               
+                            </div>
+
+
+                            <!--Delivery Information-->
+                            <div class="box-title applicant-box-title col-sm-12 col-xs-12">
+                                <span><b style="font-size: 18px;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_INFORMATION_SECTION")</b></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-4 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_TYPE_LABEL")</label>
+
+                                <div class="col-sm-8 col-xs-8 radio" style="padding-top: 4px;">
+                                    @{
+                                        var typeList = ((List<vwListNameValue>)ViewBag.DeliveryTypes).Where(x => x.Id == DeliveryType.StandardDelivery.GetHashCode());
+                                        foreach (var type in typeList)
+                                        {
+                                            <label>
+                                                <input type="radio" name="deliveryTypes" disabled @(saleOrderDelivery.DeliveryType == type.Id ? "checked" : "")>@type.Description &nbsp;
+                                            </label>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-4 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "EXPECTED_DATE_OF_DELIVERY")</label>
+
+                                <div class="col-sm-4 col-xs-4" style="padding-top: 0;">
+                                    <label class="col-sm-12 col-xs-12 control-label align-center">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "FIRST_CHOICE")</label>
+                                    <div class="col-sm-12 col-xs-12 align-center">
+                                        @(saleOrderDelivery.DeliveryDate1.HasValue ? saleOrderDelivery.DeliveryDate1.Value.ToShortDateString() : "")
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-4" style="padding-top: 0;">
+                                    <label class="col-sm-12 col-xs-12 control-label align-center" style="padding-left: 0;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "SECOND_CHOICE")</label>
+                                    <div class="col-sm-12 col-xs-12 align-center">
+                                        @(saleOrderDelivery.DeliveryDate2.HasValue ? saleOrderDelivery.DeliveryDate2.Value.ToShortDateString() : "")
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-4 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "PREFERRED_DELIVERY_TIME")</label>
+                                <div class="col-sm-3 col-xs-3 radio">
+                                    @{
+                                        var timeList = (List<vwListNameValue>)ViewBag.DeliveryTimes;
+                                        foreach (var time in timeList)
+                                        {
+                                            <label>
+                                                <input type="radio" name="deliveryTimes" disabled @(saleOrderDelivery.DeliveryTime == time.Id ? "checked" : "")>@time.Description &nbsp;
+                                            </label>
+                                        }
+                                    }
+                                </div>
+
+                                <div class="col-sm-5 col-xs-5 align-center">
+                                    <label class="col-sm-12 col-xs-12">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "MILES_TO_DELIVERY_SITE")</label>
+                                    <div>
+                                        @saleOrderDelivery.MilesToSite
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-4 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "WILL_CUSTOMER_BE_PRESENT")</label>
+                                <div class="col-sm-8 col-xs-8 radio">
+                                    <label>
+                                        <input type="radio" disabled @(saleOrderDelivery.CustomerPresent ? "checked" : "")>
+                                        @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "YES_LABEL")
+                                    </label>
+
+                                    <label>
+                                        <input type="radio" disabled @(!saleOrderDelivery.CustomerPresent ? "checked" : "")>
+                                        @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "NO_LABEL") <span style="font-size: 12px; font-weight: normal;">- @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "NO_PRESENT_LABEL")</span>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 col-xs-4 control-label">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "LOAD_DOOR_FACING")</label>
+                                @if (saleOrderDelivery.LoadDoorFacing != null)
+                                {
+                                    var loadDoorFacing = ((List<vwListNameValue>)ViewBag.LoadDoorFacings).SingleOrDefault(x => x.Id == saleOrderDelivery.LoadDoorFacing);
+
+                                    <div class="col-sm-8 col-xs-8" style="padding-top: 0;">
+                                        @(loadDoorFacing != null ? loadDoorFacing.Description : "")
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-8 col-xs-8" style="padding-top: 0; border-bottom: solid 1px; height:24px;"></div>
+                                }
+                            </div>
+
+                            <!--Move Job-->
+                            @if (@saleOrderDelivery.DeliveryType == DeliveryType.MoveJob.GetHashCode())
+                            {
+                                <div>
+                                    <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "MOVE_JOB_SECTION")</b><span style="font-size: 12px;"> - @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "MOVE_JOB_SUB_TITLE")</span></h4>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-xs-3  control-label">
+                                            <b style="font-size: 17px;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "TO_LABEL")</b>
+                                            <div style="font-weight: normal;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "ADDRESS_LABEL")}</div>
+                                        </label>
+                                        <div class="col-sm-9 col-xs-9">
+                                            @saleOrderDelivery.MoveToAddress
+                                            @*<textarea class="form-control input-sm" maxlength="100" ng-model="applicant.SalesOrders[0].SalesOrderDeliveries[0].MoveToAddress"></textarea>*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 col-xs-3 control-label">
+                                            <b style="font-size: 17px;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "FROM_LABEL")</b>
+                                            <div style="font-weight: normal;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "ADDRESS_LABEL")</div>
+                                        </label>
+                                        <div class="col-sm-9 col-xs-9">
+                                            @saleOrderDelivery.MoveFromAddress
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!--Notice to customer-->
+                    <div class="col-md-12 col-xs-12">
+                        <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "NOTICE_TO_CUSTOMER_SECTION")</b></h4>
+                        @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "NOTICE_TO_CUSTOMER_DESCIPTION")
+                    </div>
+
+                    <!--Delivery Information-->
+                    <div class="col-md-12 col-xs-12">
+                        <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_INFORMATION")</b></h4>
+                        <h5><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_INFORMATION_TITLE")</b></h5>
+                    </div>
+
+                    <!--Rule-->
+                    <div class="col-md-12 col-xs-12">
+                        <div class="col-sm-8 col-xs-8" style="padding-left: 0px;">
+                            <div class="applicant-box-title text-center important-line">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "IMPORTANT_LABEL")</div>
+                            <ul style="display: table-cell; vertical-align: middle;">
+                                <li>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "IMPORTANT_CONTENT_FIRST")</li>
+                                <li>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "IMPORTANT_CONTENT_SECOND")</li>
+                                <li>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "IMPORTANT_CONTENT_THIRD")</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 col-xs-4" style="display: table;">
+                            <div style="display: table-cell;">
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <label class="col-sm-12 col-xs-12 control-label align-center">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_CUSTOMER_INITIALS")</label>
+                                    <label class="col-sm-12 col-xs-12 control-label align-center">@saleOrderDelivery.CustomerInitials</label>
+                                </div>
+
+                                <div class="col-sm-12 col-xs-12 form-group">
+                                    <label class="col-sm-12 col-xs-12 control-label align-center">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_DATE")</label>
+                                    <label class="col-sm-12 col-xs-12 control-label align-center">@(saleOrderDelivery.InitialDate.HasValue ? saleOrderDelivery.InitialDate.Value.ToShortDateString() : "")</label>
+                                </div>
+                            </div>
+                            <div class="applicant-box-title text-center important-line" style="height:180px;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "IMPORTANT_LABEL")</div>
+                        </div>
+                    </div>
+
+                    <!--Rule Content-->
+                    <div class="col-md-12 col-xs-12" style="margin-top: 10px; clear: both;">
+                        <p>
+                            <b>(a)</b> @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_RULE_A")
+                        </p>
+                        <p>
+                            <b>(b)</b> @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_RULE_B")
+                        </p>
+                        <p>
+                            <b>(c)</b> @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_RULE_C")
+                        </p>
+                        <p>
+                            <b>(d)</b> @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_RULE_D")
+                        </p>
+                        <p>
+                            <b>(e)</b> @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DELIVERY_RULE_E")
+                        </p>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CHANGE_OR_CANCELLATION_SECTION")</b></h4>
+                        <p>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CHANGE_OR_CANCELLATION_CONTENT_FIRST")</p>
+                        <p>
+                            <b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CHANGE_OR_CANCELLATION_BUILDING_MEASUREMENTS") </b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CHANGE_OR_CANCELLATION_CONTENT_SECOND")
+                        </p>
+                        <p>
+                            <b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CHANGE_OR_CANCELLATION_PERMIT_REQUIREMENTS") </b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CHANGE_OR_CANCELLATION_CONTENT_THIRD")
+                        </p>
+                    </div>
+                    @if (!string.IsNullOrEmpty(saleOrderDelivery.CustomerSignImageUrl))
+                    {
+                        <div class="col-md-12 col-xs-12">
+                            <img width="250" src="@saleOrderDelivery.CustomerSignImageUrl" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12 col-xs-12">_____________________________________</div>
+                    }
+                    <div class="col-md-12 col-xs-12">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_SIGNATURE_INCLUDE_NOTE")</div>
+
+
+                    <!--Notice to customer-->
+                    <div class="col-md-12 col-xs-12">
+                        <h4 class="box-title applicant-box-title"><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DAY_OF_DELIVERY_SECTION")</b></h4>
+                        <div class="col-md-6 col-xs-6">
+                            <h4><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "WAIVER_LABEL")</b></h4>
+                            <div class="form-group">
+                                <input class="col-sm-1 col-xs-1" type="checkbox" disabled @(saleOrderDelivery.WaiverAccepted == true ? "checked" : "")>
+                                <div class="col-sm-11 col-xs-11" style="padding-top: 0;">
+                                    @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "WAIVER_CONTENT_FIRST") <b><u>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "WAIVER_CONTENT_SECOND")</u></b> @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "WAIVER_CONTENT_THIRD")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6">
+                            <h4><b>@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_ACCEPTANCE_FORM_LABEL")</b></h4>
+                            <div class="form-group">
+                                <div class="col-sm-9 col-xs-9" style="padding-top: 0;">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_ACCEPTANCE_FORM_CONTENT")</div>
+                                <div class="col-sm-3 col-xs-3 radio" style="padding-top: 0;">
+                                    <label>
+                                        <input type="radio" disabled @(saleOrderDelivery.CustomerAccepted == true ? "checked" : "")>
+                                        @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "YES_LABEL")
+                                    </label>
+
+                                    <label>
+                                        <input type="radio" disabled @(saleOrderDelivery.CustomerAccepted != true ? "checked" : "")>
+                                        @resourceHelper.GetText("DELIVERY_REQUEST_FORM", "NO_LABEL")
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <h4 class="box-title"></h4>
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                @if (!string.IsNullOrEmpty(saleOrderDelivery.CustomerSignImageUrl))
+                                {
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img width="250" src="@saleOrderDelivery.CustomerSignImageUrl" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-12 col-xs-12">_____________________________________</div>
+                                }
+                                <div class="col-sm-12 col-xs-12">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "CUSTOMER_SIGNATURE")</div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-6">
+                            <div class="form-group">
+                                @if (!string.IsNullOrEmpty(saleComplete.DeliverySignatureUrl) && File.Exists(Server.MapPath(saleComplete.DeliverySignatureUrl.Split('?')[0])))
+                                {
+                                    <div class="col-sm-12 col-xs-12">
+                                        <img width="250" src="@saleComplete.DeliverySignatureUrl" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-12 col-xs-12">_____________________________________</div>
+                                }
+                                <div class="col-sm-12 col-xs-12">@resourceHelper.GetText("DELIVERY_REQUEST_FORM", "DRIVER_SIGNATURE")</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end body-->
+            </div>
+        </section>
+    </form>
+</div>

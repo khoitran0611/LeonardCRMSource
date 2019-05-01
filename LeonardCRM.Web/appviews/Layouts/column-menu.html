@@ -1,0 +1,30 @@
+﻿<div ng-controller="ColumnMenuCtrl">
+    <div class="btn-group">
+        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <i class="glyphicon glyphicon-th-list"></i> <span class="caret"></span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" role="menu">
+            <div class="text-center disabled" style="  border-bottom: 1px solid #e5e5e5; padding-bottom: 4px;"><b>Columns visibility</b></div>
+            <ul class="col-menu">
+                <li ng-repeat="item in MenuFields">
+                    <span class="col-menu-item">
+                        <input type="checkbox" ng-model="item.Selected" ng-change="Selected(item)"> {{ item.LabelDisplay }}
+                    </span>
+                </li>
+            </ul>
+            <div class="divider"></div>
+            <div class="text-center">
+                <button type="button" class="btn btn-danger btn-sm" ng-click="ApplyToGridView()">Apply</button>
+                <button type="button" class="btn btn-danger btn-sm" ng-click="Cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('document').ready(function () {
+        $('.col-menu').bind('click', function (e) {
+            e.stopPropagation();
+        });
+    });
+</script>

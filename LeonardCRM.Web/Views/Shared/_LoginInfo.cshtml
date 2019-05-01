@@ -1,0 +1,58 @@
+﻿@using Eli.Common
+@model LeonardCRM.DataLayer.ModelEntities.Eli_User
+@{
+    Layout = null;
+}
+<div class="pull-right">
+    <div class="btn-group">
+        @{
+            if (string.IsNullOrEmpty(Model.Avatar))
+            {
+                <div class="btn btn-default btn-sm glyphicon glyphicon-user" data-toggle="dropdown" style="padding: 4px 10px;">
+                </div>
+            }
+            else
+            {
+            <div class="btn btn-default btn-sm glyphicon" data-toggle="dropdown" style="padding: 1px 12px 3px 12px">
+                <img src="@ConfigValues.UPLOAD_DIRECTORY@Model.Avatar" style="width:20px; height: 20px; border: 0"/>
+            </div>
+            }
+        }
+
+        <div class="btn btn-default btn-sm dropdown-toggle glyphicon" data-toggle="dropdown" style="padding-top: 3px">
+            <span class="caret"></span>
+        </div>
+        <ul class="dropdown-menu pull-right" role="menu">
+            <li style="padding: 10px">
+                <table cellpadding="4">
+                    <tr>
+                        <td rowspan="2">
+                            <a href="#profile">
+                                @{
+                                    if (!string.IsNullOrEmpty(Model.Avatar))
+                                    {
+                                    <img src="@ConfigValues.UPLOAD_DIRECTORY@Model.Avatar" style="width: 100px; height: 100px; border: 0"/>
+                                    }
+                                    else
+                                    {
+                                    <div class="btn btn-default glyphicon glyphicon-user" style="width: 100px; height: 100px; border: 0; font-size: 70px;"></div>
+                                    }
+                                }
+                            </a>
+                        </td>
+                        <td align="center">
+                            @Model.Name
+                            <br />
+                            <a href="mailto:@Model.Email">@Model.Email</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center"><a href="#profile" class="btn btn-sm btn-info">{{languages.LOGIN_INFO.VIEW_PROFILE}}</a></td>
+                    </tr>
+                </table>
+            </li>
+            <li class="divider"></li>
+            <li class="text-center"><a href="/login">{{languages.LOGIN_INFO.SIGN_OUT}}</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+﻿<ul class="nav nav-pills nav-stacked dl-horizontal" ng-controller="reportMenuCtrl">
+    <li ng-repeat="module in dashboardModules" ng-class="{active:subview == module.Name}">
+        <a title="{{module.Description}}" ng-href="#/report/{{module.Name}}">{{module.DisplayName}}
+        </a>
+    </li>
+</ul>

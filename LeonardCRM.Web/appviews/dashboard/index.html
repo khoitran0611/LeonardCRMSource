@@ -1,0 +1,69 @@
+﻿<div ng-controller="dashboardCtrl">
+    <div ng-switch="subview">
+        <div ng-switch-default>
+            Eli CRM Dashboard
+        </div>
+        <div ng-switch-when="users">
+            <div ng-include=" '/appviews/dashboard/users/index.html' "></div>
+        </div>
+        <div ng-switch-when="roles">
+            <div ng-include=" '/appviews/dashboard/roles/index.html' "></div>
+        </div>
+        <div ng-switch-when="profiles">
+            <div ng-include=" '/appviews/dashboard/profiles/index.html' "></div>
+        </div>
+        <div ng-switch-when="settings">
+            <div ng-include=" '/appviews/dashboard/settings/index.html' "></div>
+        </div>
+        <div ng-switch-when="picklist">
+            <div ng-include=" '/appviews/dashboard/picklist/index.html' "></div>
+        </div>
+        <div ng-switch-when="views">
+            <div ng-include=" '/appviews/dashboard/views/index.html' "></div>
+        </div>
+        <div ng-switch-when="invoice_templates">
+            <div ng-include=" '/appviews/dashboard/invoicetemplates/index.html' "></div>
+        </div>
+        <div ng-switch-when="contract_templates">
+            <div ng-include=" '/appviews/dashboard/contracttemplates/index.html' "></div>
+        </div>
+        <div ng-switch-when="mail_templates">
+            <div ng-include=" '/appviews/dashboard/mailtemplates/index.html' "></div>
+        </div>
+        <div ng-switch-when="language_editor">
+            <div ng-include=" '/appviews/dashboard/languageeditor/index.html' "></div>
+        </div>
+        <div ng-switch-when="entity_fields">
+            <div ng-include=" '/appviews/dashboard/entityfields/index.html' "></div>
+        </div>
+        <div ng-switch-when="log">
+            <div ng-include=" '/appviews/dashboard/log/index.html' "></div>
+        </div>
+        <div ng-switch-when="modules">
+            <div ng-include=" '/appviews/dashboard/modules/index.html' "></div>
+        </div>
+        <div ng-switch-when="currency">
+            <div ng-include=" '/appviews/dashboard/currency/index.html' "></div>
+        </div>
+        <div ng-switch-when="tax">
+            <div ng-include=" '/appviews/dashboard/tax/index.html' "></div>
+        </div>
+        <div ng-switch-when="picklist_dependency">
+            <div ng-include=" '/appviews/dashboard/picklistdependency/index.html' "></div>
+        </div>
+
+        <div ng-switch-when="webform">
+            <div ng-include=" '/appviews/dashboard/webform/index.html' "></div>
+        </div>
+        <div ng-switch-when="layout_editor">
+            <div ng-include=" '/appviews/dashboard/layouteditor/index.html' "></div>
+        </div>
+
+         <div ng-switch-when="module_relationship">
+            <div ng-include=" '/appviews/dashboard/modulesRelationship/index.html' "></div>
+        </div>
+        <div ng-switch-when="overdue_applicants">
+            <div ng-include=" '/appviews/dashboard/overdueApplicant/index.html' "></div>
+        </div>
+    </div>
+</div>

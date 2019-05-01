@@ -1,0 +1,7 @@
+﻿@{
+    Layout = "~/Views/Shared/_CustomErrorLayout.cshtml";
+}
+<div class="alert alert-danger">
+    @ViewBag.Msg
+</div>
+<a href="@Url.Action("Index","Public")" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-home"></i> Back Home page</a>

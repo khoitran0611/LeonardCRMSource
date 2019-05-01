@@ -1,0 +1,2859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeonardEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Eli_Currency">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="Symbol" Type="nvarchar" MaxLength="10" />
+    <Property Name="ConversionRate" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+    <Property Name="BaseCurrency" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_CurrencyNames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="Currency" Type="nvarchar" MaxLength="100" />
+    <Property Name="Symbol" Type="nvarchar" MaxLength="10" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedBy" Type="nchar" MaxLength="10" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Eli_DataTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="IsText" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsTextArea" Type="bit" Nullable="false" />
+    <Property Name="IsTime" Type="bit" Nullable="false" />
+    <Property Name="IsEmail" Type="bit" Nullable="false" />
+    <Property Name="IsUrl" Type="bit" Nullable="false" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="IsImage" Type="bit" Nullable="false" />
+    <Property Name="IsPublic" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_EntityFields">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="DataTypeId" Type="int" Nullable="false" />
+    <Property Name="MinLength" Type="int" />
+    <Property Name="DataLength" Type="int" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="Mandatory" Type="bit" Nullable="false" />
+    <Property Name="ListNameId" Type="int" />
+    <Property Name="ListSql" Type="nvarchar(max)" />
+    <Property Name="AdvanceSearch" Type="bit" />
+    <Property Name="DefaultValue" Type="nvarchar(max)" />
+    <Property Name="Deletable" Type="bit" />
+    <Property Name="Searchable" Type="bit" />
+    <Property Name="Sortable" Type="bit" />
+    <Property Name="AllowGroup" Type="bit" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="IsUnique" Type="bit" Nullable="false" />
+    <Property Name="PrimaryKey" Type="bit" Nullable="false" />
+    <Property Name="ForeignKey" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsWebform" Type="bit" Nullable="false" />
+    <Property Name="IsTextShow" Type="bit" />
+    <Property Name="RegularExpression" Type="nvarchar" MaxLength="50" />
+    <Property Name="Point" Type="int" />
+    <Property Name="IsLoadReference" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_FieldData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustFieldId" Type="int" Nullable="false" />
+    <Property Name="FieldData" Type="nvarchar(max)" />
+    <Property Name="MaterRecordId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Eli_FieldsSection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SectionName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="tinyint" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_FieldsSectionDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SectionId" Type="int" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="tinyint" Nullable="false" />
+    <Property Name="LeftSide" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_ListDependency">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="MasterFieldId" Type="int" Nullable="false" />
+    <Property Name="ChildFieldId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Eli_ListDependencyDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="MasterValueId" Type="int" Nullable="false" />
+    <Property Name="ChildValueId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Eli_ListNames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Module" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_ListValues">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListNameId" Type="int" Nullable="false" />
+    <Property Name="LookupId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdditionalInfo" Type="nvarchar" MaxLength="100" />
+    <Property Name="ListOrder" Type="int" Nullable="false" />
+    <Property Name="Editable" Type="bit" Nullable="false" />
+    <Property Name="Color" Type="nchar" MaxLength="7" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="User" Type="varchar" MaxLength="50" />
+    <Property Name="Message" Type="varchar" MaxLength="2000" Nullable="false" />
+    <Property Name="Exception" Type="varchar" MaxLength="4000" />
+    <Property Name="Url" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Eli_LoginLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="Eli_MailTemplates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TemplateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="TemplateContent" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Eli_ModuleRelationship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MasterFieldId" Type="int" Nullable="false" />
+    <Property Name="ChildFieldId" Type="int" Nullable="false" />
+    <Property Name="MasterDisplayColumn" Type="nvarchar" MaxLength="50" />
+    <Property Name="Alias" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Eli_Modules">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="FeatureName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
+    <Property Name="Dashboard" Type="bit" Nullable="false" />
+    <Property Name="DefaultTable" Type="nvarchar" MaxLength="50" />
+    <Property Name="IconClass" Type="nvarchar" MaxLength="100" />
+    <Property Name="MenuIcon" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="Parent" Type="int" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="RelatedTo" Type="int" />
+    <Property Name="NeedPickList" Type="bit" Nullable="false" />
+    <Property Name="ReportModule" Type="bit" Nullable="false" />
+    <Property Name="AllowCreateView" Type="bit" Nullable="false" />
+    <Property Name="AllowImport" Type="bit" Nullable="false" />
+    <Property Name="AllowExport" Type="bit" Nullable="false" />
+    <Property Name="IsWebform" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_Notes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoteDate" Type="date" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="RecordId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_OnlineUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="LoggedTime" Type="datetime" Nullable="false" />
+    <Property Name="AccessToken" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_Registry">
+    <Key>
+      <PropertyRef Name="RegistryID" />
+    </Key>
+    <Property Name="RegistryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Eli_Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" />
+    <Property Name="Parent" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsHostAdmin" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Eli_RolesFields">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Locked" Type="bit" Nullable="false" />
+    <Property Name="Visible" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Eli_RolesPermissions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="AllowRead" Type="bit" Nullable="false" />
+    <Property Name="AllowCreate" Type="bit" Nullable="false" />
+    <Property Name="AllowEdit" Type="bit" Nullable="false" />
+    <Property Name="AllowDelete" Type="bit" Nullable="false" />
+    <Property Name="AllowImport" Type="bit" Nullable="false" />
+    <Property Name="AllowExport" Type="bit" Nullable="false" />
+    <Property Name="AllowCreateView" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_SysAudit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="MasterRecordId" Type="int" Nullable="false" />
+    <Property Name="Operation" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ValueBefore" Type="nvarchar(max)" />
+    <Property Name="ValueAfter" Type="nvarchar(max)" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Eli_Tax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TaxName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TaxValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_TempViews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsPublic" Type="bit" Nullable="false" />
+    <Property Name="Shared" Type="bit" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="QueryScript" Type="nvarchar(max)" />
+    <Property Name="ParentId" Type="nvarchar" MaxLength="250" />
+    <Property Name="LoadChildView" Type="bit" Nullable="false" />
+    <Property Name="DefaultView" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ViewParentId" Type="int" Nullable="false" />
+    <Property Name="IsCollapsed" Type="bit" />
+    <Property Name="CollapseStatus" Type="nvarchar" MaxLength="2000" />
+  </EntityType>
+  <EntityType Name="Eli_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="ActivationCode" Type="uniqueidentifier" />
+    <Property Name="Avatar" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="LastLogin" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="StoreId" Type="int" />
+    <Property Name="Signature" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Eli_ViewColumns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="Width" Type="varchar" MaxLength="50" />
+    <Property Name="Visible" Type="bit" Nullable="false" />
+    <Property Name="IsCommand" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Eli_ViewConditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="Operator" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FilterValue" Type="nvarchar(max)" />
+    <Property Name="FilterValue1" Type="nvarchar(max)" />
+    <Property Name="IsAND" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Eli_ViewCustom">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsPublic" Type="bit" Nullable="false" />
+    <Property Name="DefaultView" Type="bit" Nullable="false" />
+    <Property Name="SelectClause" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="FromClause" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="WhereClause" Type="nvarchar" MaxLength="2000" />
+    <Property Name="DefaultFilterStr" Type="nvarchar" MaxLength="250" />
+    <Property Name="PageSize" Type="int" />
+    <Property Name="OrderBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GroupBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="MasterViewId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="Code" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Eli_ViewCustomColumns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewCustomId" Type="int" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="Visible" Type="bit" Nullable="false" />
+    <Property Name="DefaultWidth" Type="varchar" MaxLength="5" />
+    <Property Name="ColumnAlias" Type="nvarchar" MaxLength="50" />
+    <Property Name="TableAlias" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" />
+    <Property Name="DataType" Type="int" />
+    <Property Name="DisplayText" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Eli_ViewCustomConditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="Operator" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FilterValue" Type="nvarchar(max)" />
+    <Property Name="FilterValue1" Type="nvarchar(max)" />
+    <Property Name="IsAND" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Eli_ViewGroupBy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Eli_ViewOrderBy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="OrderDirection" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Eli_Views">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ViewName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="IsPublic" Type="bit" Nullable="false" />
+    <Property Name="Shared" Type="bit" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="QueryScript" Type="nvarchar(max)" />
+    <Property Name="ParentId" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="LoadChildView" Type="bit" Nullable="false" />
+    <Property Name="DefaultView" Type="bit" Nullable="false" />
+    <Property Name="PageSize" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="MasterViewId" Type="int" />
+    <Property Name="UserRole" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsCollapsed" Type="bit" />
+    <Property Name="CollapseStatus" Type="nvarchar" MaxLength="2000" />
+  </EntityType>
+  <EntityType Name="SalesContractState">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractId" Type="int" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesContractTemplates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TemplateName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="TemplateContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="SalesCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="SocialNum" Type="int" />
+    <Property Name="DriverLicense" Type="nvarchar" MaxLength="20" />
+    <Property Name="HomePhone" Type="nvarchar" MaxLength="100" />
+    <Property Name="CellPhone" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="PhysicalStreet" Type="nvarchar" MaxLength="100" />
+    <Property Name="PhysicalCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhysicalState" Type="int" />
+    <Property Name="PhysicalZip" Type="nchar" MaxLength="6" />
+    <Property Name="MailingStreet" Type="nvarchar" MaxLength="100" />
+    <Property Name="MailingCity" Type="nvarchar" MaxLength="50" />
+    <Property Name="MailingState" Type="int" />
+    <Property Name="MailingZip" Type="nchar" MaxLength="6" />
+    <Property Name="AtAddressSince" Type="date" />
+    <Property Name="ResidenceType" Type="int" />
+    <Property Name="LandType" Type="int" />
+    <Property Name="LandlordName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LandlordPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="CheckingAccount" Type="bit" />
+    <Property Name="SavingAccount" Type="bit" />
+    <Property Name="EnrollAutoPay" Type="bit" />
+    <Property Name="CoName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CoDateOfBirth" Type="date" />
+    <Property Name="CoSocialNum" Type="int" />
+    <Property Name="CoDriverLicense" Type="nvarchar" MaxLength="20" />
+    <Property Name="CoCellPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="CoEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="Employer" Type="nvarchar" MaxLength="150" />
+    <Property Name="Since" Type="date" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Supervisor" Type="nvarchar" MaxLength="100" />
+    <Property Name="CoEmployer" Type="nvarchar" MaxLength="150" />
+    <Property Name="CoSince" Type="date" />
+    <Property Name="CoPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="CoSupervisor" Type="nvarchar" MaxLength="100" />
+    <Property Name="TypeOfBusiness" Type="nvarchar" MaxLength="100" />
+    <Property Name="BusinessSince" Type="date" />
+    <Property Name="ResponsibleUsers" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SelfEmployed" Type="bit" />
+    <Property Name="IncomeExplanation" Type="nvarchar" MaxLength="250" />
+    <Property Name="CustomerInitials" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsSameMailingAddress" Type="bit" />
+  </EntityType>
+  <EntityType Name="SalesCustomerUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="SalesCustReferences">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Relationship" Type="int" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesDocuments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Folder" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="SalesInvoices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvTemplateId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="OrderId" Type="int" />
+    <Property Name="IssuedDate" Type="date" Nullable="false" />
+    <Property Name="Details" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CurrencyId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="ResponsibleUsers" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="SalesInvServices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="Comments" Type="nvarchar" MaxLength="500" />
+    <Property Name="Cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="InvId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesInvTaxes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="TaxId" Type="int" Nullable="false" />
+    <Property Name="TaxValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="SalesInvTemplates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TemplateName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="TemplateContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="SalesOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="GPCustomerID" Type="nvarchar" MaxLength="50" />
+    <Property Name="AcceptDate" Type="date" />
+    <Property Name="PromoCode" Type="nvarchar" MaxLength="10" />
+    <Property Name="GPOrderNumber" Type="nvarchar" MaxLength="10" />
+    <Property Name="StoreNumber" Type="int" />
+    <Property Name="IsOldCustomer" Type="bit" />
+    <Property Name="PartNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsNewPart" Type="bit" />
+    <Property Name="MonthlyPayment1" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyPayment2" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PaidAtSigning" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RampPaidAtSign" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ReductionPayment" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RampReduction" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RampTax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalMonthly" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RampPartNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="CapitalizationPeriod" Type="int" />
+    <Property Name="LesseeSignature" Type="nvarchar" MaxLength="50" />
+    <Property Name="SignatureDate" Type="datetime" />
+    <Property Name="SignatureIP" Type="char" MaxLength="15" />
+    <Property Name="CoSignature" Type="nvarchar" MaxLength="50" />
+    <Property Name="CoSignatureDate" Type="datetime" />
+    <Property Name="CoSignatureIP" Type="char" MaxLength="15" />
+    <Property Name="ResponsibleUsers" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="POSTicketNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="RentToOwn" Type="bit" />
+    <Property Name="SaleDate" Type="date" />
+    <Property Name="IsFinalize" Type="bit" />
+    <Property Name="TotalPoint" Type="int" />
+    <Property Name="SaleTax" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="NumberOfPayment" Type="int" Nullable="false" />
+    <Property Name="IsAddPromotion" Type="bit" />
+    <Property Name="PromotionAmt" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DisapprovedReason" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsApproveOrder" Type="bit" />
+    <Property Name="SalesTaxPercent" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RampSalePrice" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="DriverAssigned" Type="bit" Nullable="false" />
+    <Property Name="IsSold" Type="bit" />
+  </EntityType>
+  <EntityType Name="SalesOrderComplete">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="DeliveryDate" Type="date" Nullable="false" />
+    <Property Name="NeedRepair" Type="bit" />
+    <Property Name="RepairNote" Type="nvarchar" MaxLength="250" />
+    <Property Name="Answer1" Type="bit" />
+    <Property Name="Answer2" Type="bit" />
+    <Property Name="Answer3" Type="bit" />
+    <Property Name="Answer4" Type="bit" />
+    <Property Name="Answer5" Type="bit" />
+    <Property Name="DeliveryType" Type="nvarchar" MaxLength="50" />
+    <Property Name="DeliveryOther" Type="nvarchar" MaxLength="20" />
+    <Property Name="ActBlocksUsed" Type="int" />
+    <Property Name="ActHoursOfLabor" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ActMilesToSite" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceDue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AdditionalCharge" Type="bit" Nullable="false" />
+    <Property Name="PaymentType" Type="int" />
+    <Property Name="BlockCharge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="LaborCharge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MileageCharge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmountDue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WarrantyReceived" Type="bit" />
+    <Property Name="Satisfy" Type="bit" />
+    <Property Name="NoSatisfyComment" Type="nvarchar" MaxLength="250" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="Signature" Type="nvarchar" MaxLength="50" />
+    <Property Name="SignDate" Type="datetime" />
+    <Property Name="SignIP" Type="nchar" MaxLength="15" />
+    <Property Name="FollowUpCall" Type="bit" />
+    <Property Name="CallDate" Type="datetime" />
+    <Property Name="SpokeWithCustomer" Type="bit" />
+    <Property Name="FollowUpComment" Type="nvarchar" MaxLength="250" />
+    <Property Name="ManagerSignature" Type="nvarchar" MaxLength="50" />
+    <Property Name="ManagerSignDate" Type="datetime" />
+    <Property Name="ManagerSignIP" Type="nchar" MaxLength="15" />
+    <Property Name="DeliverSignature" Type="nvarchar" MaxLength="20" />
+    <Property Name="DeliverSignDate" Type="datetime" />
+    <Property Name="DeliverSignIP" Type="nchar" MaxLength="15" />
+    <Property Name="DeliveryPersonInitials" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="LeftVoiceMail" Type="bit" />
+  </EntityType>
+  <EntityType Name="SalesOrderDelivery">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="DeliveryType" Type="int" Nullable="false" />
+    <Property Name="DeliveryDate1" Type="date" />
+    <Property Name="DeliveryDate2" Type="date" />
+    <Property Name="DeliveryTime" Type="int" />
+    <Property Name="MilesToSite" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CustomerPresent" Type="bit" Nullable="false" />
+    <Property Name="LoadDoorFacing" Type="int" />
+    <Property Name="MoveFromAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="MoveToAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="DeliveryRequirement" Type="nvarchar" MaxLength="250" />
+    <Property Name="DirectionToSite" Type="nvarchar" MaxLength="250" />
+    <Property Name="CustomerInitials" Type="nvarchar" MaxLength="20" />
+    <Property Name="InitialDate" Type="datetime" />
+    <Property Name="CustomerSignature" Type="nvarchar" MaxLength="50" />
+    <Property Name="CustomerSignDate" Type="datetime" />
+    <Property Name="CustomerSignIP" Type="nchar" MaxLength="15" />
+    <Property Name="WaiverAccepted" Type="bit" />
+    <Property Name="CustomerAccepted" Type="bit" />
+    <Property Name="DriverName" Type="nvarchar" MaxLength="100" />
+    <Property Name="DriverSignature" Type="nvarchar" MaxLength="50" />
+    <Property Name="DriverSignDate" Type="datetime" />
+    <Property Name="DriverSignIP" Type="nchar" MaxLength="15" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalesOrdersUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwAllCustomers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwAllCustomers">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="ResponsibleUser" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ResponsibleUser" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwApplication' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwApplication">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="StatusCode" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="StatusCode" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="PartNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="TotalMonthly" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StoreNumber" Type="int" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ResponsibleUsers" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwClients' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwClients">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ResponsibleUser" Type="int" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwCustomViewColumns' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwCustomViewColumns">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ViewCustomId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="IsImage" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="Visible" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="TableAlias" />
+      <PropertyRef Name="TypeName" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ViewCustomId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsText" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsTextArea" Type="bit" Nullable="false" />
+    <Property Name="IsTime" Type="bit" Nullable="false" />
+    <Property Name="IsEmail" Type="bit" Nullable="false" />
+    <Property Name="IsUrl" Type="bit" Nullable="false" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="IsImage" Type="bit" Nullable="false" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="Sortable" Type="bit" />
+    <Property Name="Searchable" Type="bit" />
+    <Property Name="Mandatory" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="AllowGroup" Type="bit" />
+    <Property Name="Visible" Type="bit" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="Deletable" Type="bit" />
+    <Property Name="ColumnAlias" Type="nvarchar" MaxLength="50" />
+    <Property Name="TableAlias" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" />
+    <Property Name="ForeignKey" Type="bit" />
+    <Property Name="DataType" Type="int" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DisplayText" Type="nvarchar" MaxLength="100" />
+    <Property Name="DefaultWidth" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwEntityFieldData' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwEntityFieldData">
+    <Key>
+      <PropertyRef Name="TypeName" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="IsImage" />
+      <PropertyRef Name="IsPublic" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="DataTypeId" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="Locked" />
+      <PropertyRef Name="LeftSide" />
+      <PropertyRef Name="FieldOrder" />
+      <PropertyRef Name="SectionId" />
+      <PropertyRef Name="SectionName" />
+    </Key>
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="IsText" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsTextArea" Type="bit" Nullable="false" />
+    <Property Name="IsTime" Type="bit" Nullable="false" />
+    <Property Name="IsEmail" Type="bit" Nullable="false" />
+    <Property Name="IsUrl" Type="bit" Nullable="false" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="IsImage" Type="bit" Nullable="false" />
+    <Property Name="IsPublic" Type="bit" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="DataTypeId" Type="int" Nullable="false" />
+    <Property Name="MinLength" Type="int" />
+    <Property Name="DataLength" Type="int" />
+    <Property Name="Deletable" Type="bit" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="ListSql" Type="nvarchar(max)" />
+    <Property Name="ListNameId" Type="int" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="Mandatory" Type="bit" Nullable="false" />
+    <Property Name="ForeignKey" Type="bit" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Visible" Type="bit" />
+    <Property Name="Locked" Type="bit" Nullable="false" />
+    <Property Name="LeftSide" Type="bit" Nullable="false" />
+    <Property Name="FieldOrder" Type="tinyint" Nullable="false" />
+    <Property Name="SectionId" Type="int" Nullable="false" />
+    <Property Name="SectionName" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwFieldNameDataTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwFieldNameDataTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ViewId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="IsCommand" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="TypeName" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="LoadChildView" />
+      <PropertyRef Name="IsImage" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="Visible" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="Locked" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsCommand" Type="bit" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsText" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsTextArea" Type="bit" Nullable="false" />
+    <Property Name="IsTime" Type="bit" Nullable="false" />
+    <Property Name="IsEmail" Type="bit" Nullable="false" />
+    <Property Name="IsUrl" Type="bit" Nullable="false" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="LoadChildView" Type="bit" Nullable="false" />
+    <Property Name="DefaultTable" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsImage" Type="bit" Nullable="false" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="Sortable" Type="bit" />
+    <Property Name="Searchable" Type="bit" />
+    <Property Name="Mandatory" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="AllowGroup" Type="bit" />
+    <Property Name="Width" Type="varchar" MaxLength="50" />
+    <Property Name="Visible" Type="bit" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="Locked" Type="bit" Nullable="false" />
+    <Property Name="Show" Type="bit" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Deletable" Type="bit" />
+    <Property Name="IsTextShow" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwFields' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwFields">
+    <Key>
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsCurrency" />
+    </Key>
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdvanceSearch" Type="bit" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="Sortable" Type="bit" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="AllowGroup" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwFieldsDataType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwFieldsDataType">
+    <Key>
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="DataTypeId" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="IsUnique" />
+      <PropertyRef Name="PrimaryKey" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="ForeignKey" />
+      <PropertyRef Name="Display" />
+    </Key>
+    <Property Name="FieldName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsText" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsTextArea" Type="bit" Nullable="false" />
+    <Property Name="IsTime" Type="bit" Nullable="false" />
+    <Property Name="IsEmail" Type="bit" Nullable="false" />
+    <Property Name="IsUrl" Type="bit" Nullable="false" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="DataTypeId" Type="int" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="DataLength" Type="int" />
+    <Property Name="Mandatory" Type="bit" Nullable="false" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsUnique" Type="bit" Nullable="false" />
+    <Property Name="PrimaryKey" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="Deletable" Type="bit" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="ForeignKey" Type="bit" Nullable="false" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="RegularExpression" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsTextShow" Type="bit" />
+    <Property Name="Point" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwListNameValues' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwListNameValues">
+    <Key>
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="LookupId" />
+      <PropertyRef Name="Description" />
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="ListOrder" />
+    </Key>
+    <Property Name="FieldName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="ListNameId" Type="int" />
+    <Property Name="LookupId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+    <Property Name="AdditionalInfo" Type="nvarchar" MaxLength="100" />
+    <Property Name="ListOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwModuleEnittyRelationships' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwModuleEnittyRelationships">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="MasterId" />
+      <PropertyRef Name="MasterFieldName" />
+      <PropertyRef Name="MasterModuleId" />
+      <PropertyRef Name="ChildId" />
+      <PropertyRef Name="ChildFieldName" />
+      <PropertyRef Name="ChildModuleId" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="MasterModule" />
+      <PropertyRef Name="ChildModule" />
+      <PropertyRef Name="DataTypeId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="MasterId" Type="int" Nullable="false" />
+    <Property Name="MasterFieldName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MasterForeignKey" Type="bit" />
+    <Property Name="MasterModuleId" Type="int" Nullable="false" />
+    <Property Name="MasterDefaultTable" Type="nvarchar" MaxLength="50" />
+    <Property Name="MasterDisplayColumn" Type="nvarchar" MaxLength="50" />
+    <Property Name="MasterAlias" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChildId" Type="int" Nullable="false" />
+    <Property Name="ChildFieldName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ChildForeignKey" Type="bit" />
+    <Property Name="ChildModuleId" Type="int" Nullable="false" />
+    <Property Name="ChildDefaultTable" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChildDisplayColumn" Type="nvarchar" MaxLength="50" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MasterModule" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ChildModule" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="DataTypeId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwModuleEntityFields' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwModuleEntityFields">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="Display" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ForeignKey" Type="bit" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="DefaultTable" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="Mandatory" Type="bit" Nullable="false" />
+    <Property Name="Deletable" Type="bit" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="IsTextShow" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwModuleHasEntityFields' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwModuleHasEntityFields">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="FeatureName" />
+      <PropertyRef Name="Dashboard" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Parent" />
+      <PropertyRef Name="IsPublished" />
+      <PropertyRef Name="NeedPickList" />
+      <PropertyRef Name="IsWebform" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="FeatureName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
+    <Property Name="Dashboard" Type="bit" Nullable="false" />
+    <Property Name="DefaultTable" Type="nvarchar" MaxLength="50" />
+    <Property Name="IconClass" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="Parent" Type="int" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="RelatedTo" Type="int" />
+    <Property Name="NeedPickList" Type="bit" Nullable="false" />
+    <Property Name="IsWebform" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwModules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwModules">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="FeatureName" />
+      <PropertyRef Name="Dashboard" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Parent" />
+      <PropertyRef Name="IsPublished" />
+      <PropertyRef Name="ReportModule" />
+      <PropertyRef Name="NeedPickList" />
+      <PropertyRef Name="AllowCreateView" />
+      <PropertyRef Name="AllowImport" />
+      <PropertyRef Name="AllowExport" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="FeatureName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
+    <Property Name="Dashboard" Type="bit" Nullable="false" />
+    <Property Name="DefaultTable" Type="nvarchar" MaxLength="50" />
+    <Property Name="IconClass" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="Parent" Type="int" Nullable="false" />
+    <Property Name="IsPublished" Type="bit" Nullable="false" />
+    <Property Name="DefaultViewId" Type="int" />
+    <Property Name="ReportModule" Type="bit" Nullable="false" />
+    <Property Name="NeedPickList" Type="bit" Nullable="false" />
+    <Property Name="MenuIcon" Type="nvarchar" MaxLength="100" />
+    <Property Name="AllowCreateView" Type="bit" Nullable="false" />
+    <Property Name="AllowImport" Type="bit" Nullable="false" />
+    <Property Name="AllowExport" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwOrderCustomer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwOrderCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwPicklistDependency' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwPicklistDependency">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="MasterFieldId" />
+      <PropertyRef Name="ChildFieldId" />
+      <PropertyRef Name="MasterValueId" />
+      <PropertyRef Name="ChildValueId" />
+    </Key>
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="MasterFieldId" Type="int" Nullable="false" />
+    <Property Name="ChildFieldId" Type="int" Nullable="false" />
+    <Property Name="MasterValueId" Type="int" Nullable="false" />
+    <Property Name="ChildValueId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwRegistry' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwRegistry">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="RegistryID" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="ntext" />
+    <Property Name="RegistryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwSystmAudit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwSystmAudit">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Module" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="MasterRecordId" />
+      <PropertyRef Name="Operation" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" />
+    <Property Name="Module" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="MasterRecordId" Type="int" Nullable="false" />
+    <Property Name="Operation" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="100" />
+    <Property Name="ValueBefore" Type="nvarchar(max)" />
+    <Property Name="ValueAfter" Type="nvarchar(max)" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwUserRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwUserRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwViewColumns' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwViewColumns">
+    <Key>
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="Locked" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsLoadReference" />
+    </Key>
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="ColumnName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="IsDate" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="IsMultiSelecttBox" Type="bit" Nullable="false" />
+    <Property Name="IsCheckBox" Type="bit" Nullable="false" />
+    <Property Name="ListNameId" Type="int" />
+    <Property Name="LabelDisplay" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ForeignKey" Type="bit" />
+    <Property Name="ListSql" Type="nvarchar(max)" />
+    <Property Name="AdvanceSearch" Type="bit" />
+    <Property Name="Display" Type="bit" Nullable="false" />
+    <Property Name="IsDateTime" Type="bit" Nullable="false" />
+    <Property Name="IsDecimal" Type="bit" Nullable="false" />
+    <Property Name="IsInteger" Type="bit" Nullable="false" />
+    <Property Name="Sortable" Type="bit" />
+    <Property Name="IsCurrency" Type="bit" Nullable="false" />
+    <Property Name="AllowGroup" Type="bit" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="Locked" Type="bit" Nullable="false" />
+    <Property Name="Point" Type="int" />
+    <Property Name="Visible" Type="bit" />
+    <Property Name="IsTextShow" Type="bit" />
+    <Property Name="Mandatory" Type="bit" Nullable="false" />
+    <Property Name="IsLoadReference" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'LeonardUSA_v1.dbo.vwViewMenu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwViewMenu">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="ModuleName" />
+      <PropertyRef Name="ViewName" />
+      <PropertyRef Name="ViewId" />
+      <PropertyRef Name="Total" />
+      <PropertyRef Name="Shared" />
+      <PropertyRef Name="DefaultView" />
+      <PropertyRef Name="SortOrder" />
+    </Key>
+    <Property Name="ModuleId" Type="int" Nullable="false" />
+    <Property Name="ModuleName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="ViewName" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="ViewId" Type="int" Nullable="false" />
+    <Property Name="Total" Type="int" Nullable="false" />
+    <Property Name="Shared" Type="bit" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="DefaultView" Type="bit" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="UserRole" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Eli_CustomFields_Eli_DataTypes">
+    <End Role="Eli_DataTypes" Type="Self.Eli_DataTypes" Multiplicity="1" />
+    <End Role="Eli_EntityFields" Type="Self.Eli_EntityFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_DataTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_EntityFields">
+        <PropertyRef Name="DataTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_CustomFields_Eli_Modules">
+    <End Role="Eli_Modules" Type="Self.Eli_Modules" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_EntityFields" Type="Self.Eli_EntityFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Modules">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_EntityFields">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_FieldData_Eli_CustomFields">
+    <End Role="Eli_EntityFields" Type="Self.Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_FieldData" Type="Self.Eli_FieldData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_FieldData">
+        <PropertyRef Name="CustFieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_FieldsSectionDetail_Eli_EntityFields">
+    <End Role="Eli_EntityFields" Type="Self.Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_FieldsSectionDetail" Type="Self.Eli_FieldsSectionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_FieldsSectionDetail">
+        <PropertyRef Name="FieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_FieldsSectionDetail_Eli_FieldsSection">
+    <End Role="Eli_FieldsSection" Type="Self.Eli_FieldsSection" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_FieldsSectionDetail" Type="Self.Eli_FieldsSectionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_FieldsSection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_FieldsSectionDetail">
+        <PropertyRef Name="SectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ListValues_Eli_ListNames">
+    <End Role="Eli_ListNames" Type="Self.Eli_ListNames" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ListValues" Type="Self.Eli_ListValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ListNames">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ListValues">
+        <PropertyRef Name="ListNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_PicklistValues_Eli_PicklistConditions">
+    <End Role="Eli_ListDependency" Type="Self.Eli_ListDependency" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ListDependencyDetail" Type="Self.Eli_ListDependencyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ListDependency">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ListDependencyDetail">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_RolesFields_Eli_EntityFields">
+    <End Role="Eli_EntityFields" Type="Self.Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_RolesFields" Type="Self.Eli_RolesFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesFields">
+        <PropertyRef Name="FieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_RolesFields_Eli_Roles">
+    <End Role="Eli_Roles" Type="Self.Eli_Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_RolesFields" Type="Self.Eli_RolesFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesFields">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_RolesPermissions_Eli_Modules">
+    <End Role="Eli_Modules" Type="Self.Eli_Modules" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_RolesPermissions" Type="Self.Eli_RolesPermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Modules">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesPermissions">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_RolesPermissions_Eli_Roles">
+    <End Role="Eli_Roles" Type="Self.Eli_Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_RolesPermissions" Type="Self.Eli_RolesPermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesPermissions">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_User_Eli_Roles">
+    <End Role="Eli_Roles" Type="Self.Eli_Roles" Multiplicity="1" />
+    <End Role="Eli_User" Type="Self.Eli_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_User_SysAudit">
+    <End Role="Eli_User" Type="Self.Eli_User" Multiplicity="0..1" />
+    <End Role="Eli_SysAudit" Type="Self.Eli_SysAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_SysAudit">
+        <PropertyRef Name="ModifiedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewColumns_Eli_Views">
+    <End Role="Eli_Views" Type="Self.Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewColumns" Type="Self.Eli_ViewColumns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewColumns">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewConditions_Eli_Views">
+    <End Role="Eli_Views" Type="Self.Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewConditions" Type="Self.Eli_ViewConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewConditions">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewCustom_Eli_User">
+    <End Role="Eli_User" Type="Self.Eli_User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewCustom" Type="Self.Eli_ViewCustom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustom">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewCustomColumns_Eli_EntityFields">
+    <End Role="Eli_EntityFields" Type="Self.Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewCustomColumns" Type="Self.Eli_ViewCustomColumns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustomColumns">
+        <PropertyRef Name="FieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewCustomColumns_Eli_ViewCustom">
+    <End Role="Eli_ViewCustom" Type="Self.Eli_ViewCustom" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewCustomColumns" Type="Self.Eli_ViewCustomColumns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ViewCustom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustomColumns">
+        <PropertyRef Name="ViewCustomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewGroupBy_Eli_Views">
+    <End Role="Eli_Views" Type="Self.Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewGroupBy" Type="Self.Eli_ViewGroupBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewGroupBy">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewOrderBy_Eli_Views">
+    <End Role="Eli_Views" Type="Self.Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewOrderBy" Type="Self.Eli_ViewOrderBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewOrderBy">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_Views_Eli_Modules">
+    <End Role="Eli_Modules" Type="Self.Eli_Modules" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_Views" Type="Self.Eli_Views" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Modules">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_Views">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesContractStore_SalesContractTemplates">
+    <End Role="SalesContractTemplates" Type="Self.SalesContractTemplates" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesContractState" Type="Self.SalesContractState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesContractTemplates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesContractState">
+        <PropertyRef Name="ContractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesCustomerRef_SalesCustomer">
+    <End Role="SalesCustomer" Type="Self.SalesCustomer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesCustReferences" Type="Self.SalesCustReferences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCustomer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesCustReferences">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesCustomerUsers_Eli_User">
+    <End Role="Eli_User" Type="Self.Eli_User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesCustomerUsers" Type="Self.SalesCustomerUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesCustomerUsers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesCustomerUsers_SalesCustomer">
+    <End Role="SalesCustomer" Type="Self.SalesCustomer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesCustomerUsers" Type="Self.SalesCustomerUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCustomer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesCustomerUsers">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesDocuments_SalesOrder">
+    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesDocuments" Type="Self.SalesDocuments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesDocuments">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvoices_Eli_Currency">
+    <End Role="Eli_Currency" Type="Self.Eli_Currency" Multiplicity="0..1" />
+    <End Role="SalesInvoices" Type="Self.SalesInvoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Currency">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvoices">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvoices_SalesInvTemplates">
+    <End Role="SalesInvTemplates" Type="Self.SalesInvTemplates" Multiplicity="1" />
+    <End Role="SalesInvoices" Type="Self.SalesInvoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesInvTemplates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvoices">
+        <PropertyRef Name="InvTemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvoices_SalesOrder">
+    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesInvoices" Type="Self.SalesInvoices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvoices">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvServices_SalesInvoices">
+    <End Role="SalesInvoices" Type="Self.SalesInvoices" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesInvServices" Type="Self.SalesInvServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesInvoices">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvServices">
+        <PropertyRef Name="InvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvTaxes_SalesInvoices">
+    <End Role="SalesInvoices" Type="Self.SalesInvoices" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesInvTaxes" Type="Self.SalesInvTaxes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesInvoices">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvTaxes">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrder_SalesCustomer">
+    <End Role="SalesCustomer" Type="Self.SalesCustomer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCustomer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrder">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrderComplete_SalesOrder">
+    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesOrderComplete" Type="Self.SalesOrderComplete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrderComplete">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrderDelivery_SalesOrder">
+    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesOrderDelivery" Type="Self.SalesOrderDelivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrderDelivery">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrdersUsers_Eli_User">
+    <End Role="Eli_User" Type="Self.Eli_User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesOrdersUsers" Type="Self.SalesOrdersUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrdersUsers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrdersUsers_SalesOrder">
+    <End Role="SalesOrder" Type="Self.SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SalesOrdersUsers" Type="Self.SalesOrdersUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrdersUsers">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ViewCustomConditions_Eli_ViewCustom">
+    <End Role="Eli_ViewCustom" Type="Self.Eli_ViewCustom" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Eli_ViewCustomConditions" Type="Self.Eli_ViewCustomConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ViewCustom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustomConditions">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_CheckResponsibleUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+    <Parameter Name="source" Type="nvarchar" Mode="In" />
+    <Parameter Name="param" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="fn_CurrencyConversion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+    <Parameter Name="selectedCurrencyId" Type="int" Mode="In" />
+    <Parameter Name="currentCurrencyId" Type="int" Mode="In" />
+    <Parameter Name="moneyValue" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="fn_FindLastIndexOf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="String" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Char" Type="varchar" Mode="In" />
+    <Parameter Name="NumberOfOccurrence" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_GetNameInListNameValuesById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_GetNamesInListValuesById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+    <Parameter Name="Ids" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="fn_GetRolesHierachy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roleId" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="GetReferenceListValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="moduleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_AdvanceSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModuleId" Type="int" Mode="In" />
+    <Parameter Name="ViewId" Type="int" Mode="In" />
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="sqlScripts" Type="nvarchar" Mode="In" />
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="roleId" Type="int" Mode="In" />
+    <Parameter Name="pageIndex" Type="int" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="sortDirection" Type="nvarchar" Mode="In" />
+    <Parameter Name="totalRow" Type="int" Mode="InOut" />
+    <Parameter Name="defaultOderBy" Type="bit" Mode="In" />
+    <Parameter Name="columnGroup" Type="nvarchar" Mode="In" />
+    <Parameter Name="groupJsonStr" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="sp_CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="email" Type="nvarchar" Mode="In" />
+    <Parameter Name="loginName" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="status" Type="int" Mode="In" />
+    <Parameter Name="phone" Type="nvarchar" Mode="In" />
+    <Parameter Name="createdby" Type="bigint" Mode="In" />
+    <Parameter Name="modifiedby" Type="bigint" Mode="In" />
+    <Parameter Name="roleid" Type="int" Mode="In" />
+    <Parameter Name="acivecode" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="dateOfBirth" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="sp_CustomerReportByDays" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="createdBy" Type="int" Mode="In" />
+    <Parameter Name="numberOfDays" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_CustomerReportDashboard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="responsibleUsers" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_DeleteUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ids" Type="varchar" Mode="In" />
+    <Parameter Name="denyStr" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="sp_DeleteViews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdArray" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameArray" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="sp_FilterSystemAudit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="moduleId" Type="int" Mode="In" />
+    <Parameter Name="recordId" Type="int" Mode="In" />
+    <Parameter Name="dateModified" Type="date" Mode="In" />
+    <Parameter Name="operation" Type="nvarchar" Mode="In" />
+    <Parameter Name="columnName" Type="nvarchar" Mode="In" />
+    <Parameter Name="createdBy" Type="int" Mode="In" />
+    <Parameter Name="pageIndex" Type="int" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="totalRow" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_GetAllOverdueApps" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="PartNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="CapitalizationPeriod" Type="nvarchar" Mode="In" />
+    <Parameter Name="ModifiedDate" Type="date" Mode="In" />
+    <Parameter Name="pageIndex" Type="int" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="sortExpression" Type="nvarchar" Mode="In" />
+    <Parameter Name="expectedMonth" Type="int" Mode="In" />
+    <Parameter Name="totalRow" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_GetCustomersByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetModulePermisstion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetModulesByRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="currentRoleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetRolesFieldsByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="roleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_GetSubView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModuleId" Type="int" Mode="In" />
+    <Parameter Name="ViewId" Type="int" Mode="In" />
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="roleId" Type="int" Mode="In" />
+    <Parameter Name="pageIndex" Type="int" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="sortDirection" Type="nvarchar" Mode="In" />
+    <Parameter Name="totalRow" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_GetTotalForView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="viewId" Type="int" Mode="In" />
+    <Parameter Name="roleId" Type="int" Mode="In" />
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="return" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_GetView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModuleId" Type="int" Mode="In" />
+    <Parameter Name="ViewId" Type="int" Mode="In" />
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="roleId" Type="int" Mode="In" />
+    <Parameter Name="pageIndex" Type="int" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="sortDirection" Type="nvarchar" Mode="In" />
+    <Parameter Name="totalRow" Type="int" Mode="InOut" />
+    <Parameter Name="defaultOderBy" Type="bit" Mode="In" />
+    <Parameter Name="columnGroup" Type="nvarchar" Mode="In" />
+    <Parameter Name="groupJsonStr" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="sp_GetViewCustom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ViewId" Type="int" Mode="In" />
+    <Parameter Name="userId" Type="int" Mode="In" />
+    <Parameter Name="roleId" Type="int" Mode="In" />
+    <Parameter Name="pageIndex" Type="int" Mode="In" />
+    <Parameter Name="pageSize" Type="int" Mode="In" />
+    <Parameter Name="sortExpression" Type="nvarchar" Mode="In" />
+    <Parameter Name="filterStr" Type="nvarchar" Mode="In" />
+    <Parameter Name="totalRow" Type="int" Mode="InOut" />
+    <Parameter Name="columnGroup" Type="nvarchar" Mode="In" />
+    <Parameter Name="groupJsonStr" Type="nvarchar(max)" Mode="InOut" />
+  </Function>
+  <Function Name="sp_InvoiceReportByDays" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="createdBy" Type="int" Mode="In" />
+    <Parameter Name="numberOfDays" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_InvoiceReportDashboard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="Status" Type="int" Mode="In" />
+    <Parameter Name="users" Type="nvarchar" Mode="In" />
+    <Parameter Name="byClient" Type="bit" Mode="In" />
+    <Parameter Name="currencyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_InvoiceReportPerDays" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="createdBy" Type="int" Mode="In" />
+    <Parameter Name="numberOfDays" Type="int" Mode="In" />
+    <Parameter Name="currencyId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_OrderReportByDays" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="createdBy" Type="int" Mode="In" />
+    <Parameter Name="numberOfDays" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_OrderReportDashboard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="datetime" Mode="In" />
+    <Parameter Name="ToDate" Type="datetime" Mode="In" />
+    <Parameter Name="Status" Type="int" Mode="In" />
+    <Parameter Name="users" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SPLIT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DELIMITER" Type="varchar" Mode="In" />
+    <Parameter Name="LIST" Type="nvarchar(max)" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="Id" Type="smallint" Nullable="false" />
+          <Property Name="VALUE" Type="nvarchar(max)" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <EntityContainer Name="LeonardEntitiesStoreContainer">
+    <EntitySet Name="Eli_Currency" EntityType="Self.Eli_Currency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_CurrencyNames" EntityType="Self.Eli_CurrencyNames" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_DataTypes" EntityType="Self.Eli_DataTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_EntityFields" EntityType="Self.Eli_EntityFields" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_FieldData" EntityType="Self.Eli_FieldData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_FieldsSection" EntityType="Self.Eli_FieldsSection" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_FieldsSectionDetail" EntityType="Self.Eli_FieldsSectionDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ListDependency" EntityType="Self.Eli_ListDependency" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ListDependencyDetail" EntityType="Self.Eli_ListDependencyDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ListNames" EntityType="Self.Eli_ListNames" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ListValues" EntityType="Self.Eli_ListValues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_Log" EntityType="Self.Eli_Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_LoginLog" EntityType="Self.Eli_LoginLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_MailTemplates" EntityType="Self.Eli_MailTemplates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ModuleRelationship" EntityType="Self.Eli_ModuleRelationship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_Modules" EntityType="Self.Eli_Modules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_Notes" EntityType="Self.Eli_Notes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_OnlineUsers" EntityType="Self.Eli_OnlineUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_Registry" EntityType="Self.Eli_Registry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_Roles" EntityType="Self.Eli_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_RolesFields" EntityType="Self.Eli_RolesFields" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_RolesPermissions" EntityType="Self.Eli_RolesPermissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_SysAudit" EntityType="Self.Eli_SysAudit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_Tax" EntityType="Self.Eli_Tax" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_TempViews" EntityType="Self.Eli_TempViews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_User" EntityType="Self.Eli_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ViewColumns" EntityType="Self.Eli_ViewColumns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ViewConditions" EntityType="Self.Eli_ViewConditions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ViewCustom" EntityType="Self.Eli_ViewCustom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ViewCustomColumns" EntityType="Self.Eli_ViewCustomColumns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ViewCustomConditions" EntityType="Self.Eli_ViewCustomConditions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ViewGroupBy" EntityType="Self.Eli_ViewGroupBy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_ViewOrderBy" EntityType="Self.Eli_ViewOrderBy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Eli_Views" EntityType="Self.Eli_Views" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesContractState" EntityType="Self.SalesContractState" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesContractTemplates" EntityType="Self.SalesContractTemplates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesCustomer" EntityType="Self.SalesCustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesCustomerUsers" EntityType="Self.SalesCustomerUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesCustReferences" EntityType="Self.SalesCustReferences" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesDocuments" EntityType="Self.SalesDocuments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesInvoices" EntityType="Self.SalesInvoices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesInvServices" EntityType="Self.SalesInvServices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesInvTaxes" EntityType="Self.SalesInvTaxes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesInvTemplates" EntityType="Self.SalesInvTemplates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrder" EntityType="Self.SalesOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrderComplete" EntityType="Self.SalesOrderComplete" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrderDelivery" EntityType="Self.SalesOrderDelivery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrdersUsers" EntityType="Self.SalesOrdersUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vwAllCustomers" EntityType="Self.vwAllCustomers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwAllCustomers].[Id] AS [Id], 
+[vwAllCustomers].[Name] AS [Name], 
+[vwAllCustomers].[ResponsibleUser] AS [ResponsibleUser], 
+[vwAllCustomers].[RoleId] AS [RoleId]
+FROM [dbo].[vwAllCustomers] AS [vwAllCustomers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwApplication" EntityType="Self.vwApplication" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwApplication].[Id] AS [Id], 
+[vwApplication].[Status] AS [Status], 
+[vwApplication].[StatusCode] AS [StatusCode], 
+[vwApplication].[Name] AS [Name], 
+[vwApplication].[PartNumber] AS [PartNumber], 
+[vwApplication].[TotalMonthly] AS [TotalMonthly], 
+[vwApplication].[StoreNumber] AS [StoreNumber], 
+[vwApplication].[CreatedBy] AS [CreatedBy], 
+[vwApplication].[ResponsibleUsers] AS [ResponsibleUsers]
+FROM [dbo].[vwApplication] AS [vwApplication]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwClients" EntityType="Self.vwClients" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwClients].[Id] AS [Id], 
+[vwClients].[Name] AS [Name], 
+[vwClients].[ResponsibleUser] AS [ResponsibleUser], 
+[vwClients].[RoleId] AS [RoleId]
+FROM [dbo].[vwClients] AS [vwClients]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwCustomViewColumns" EntityType="Self.vwCustomViewColumns" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwCustomViewColumns].[Id] AS [Id], 
+[vwCustomViewColumns].[ViewCustomId] AS [ViewCustomId], 
+[vwCustomViewColumns].[ColumnName] AS [ColumnName], 
+[vwCustomViewColumns].[SortOrder] AS [SortOrder], 
+[vwCustomViewColumns].[LabelDisplay] AS [LabelDisplay], 
+[vwCustomViewColumns].[IsInteger] AS [IsInteger], 
+[vwCustomViewColumns].[IsDate] AS [IsDate], 
+[vwCustomViewColumns].[IsDecimal] AS [IsDecimal], 
+[vwCustomViewColumns].[IsText] AS [IsText], 
+[vwCustomViewColumns].[IsList] AS [IsList], 
+[vwCustomViewColumns].[IsTextArea] AS [IsTextArea], 
+[vwCustomViewColumns].[IsTime] AS [IsTime], 
+[vwCustomViewColumns].[IsEmail] AS [IsEmail], 
+[vwCustomViewColumns].[IsUrl] AS [IsUrl], 
+[vwCustomViewColumns].[IsMultiSelecttBox] AS [IsMultiSelecttBox], 
+[vwCustomViewColumns].[IsCheckBox] AS [IsCheckBox], 
+[vwCustomViewColumns].[IsImage] AS [IsImage], 
+[vwCustomViewColumns].[Display] AS [Display], 
+[vwCustomViewColumns].[Sortable] AS [Sortable], 
+[vwCustomViewColumns].[Searchable] AS [Searchable], 
+[vwCustomViewColumns].[Mandatory] AS [Mandatory], 
+[vwCustomViewColumns].[IsDateTime] AS [IsDateTime], 
+[vwCustomViewColumns].[IsCurrency] AS [IsCurrency], 
+[vwCustomViewColumns].[AllowGroup] AS [AllowGroup], 
+[vwCustomViewColumns].[Visible] AS [Visible], 
+[vwCustomViewColumns].[FieldId] AS [FieldId], 
+[vwCustomViewColumns].[Deletable] AS [Deletable], 
+[vwCustomViewColumns].[ColumnAlias] AS [ColumnAlias], 
+[vwCustomViewColumns].[TableAlias] AS [TableAlias], 
+[vwCustomViewColumns].[IsDefault] AS [IsDefault], 
+[vwCustomViewColumns].[ForeignKey] AS [ForeignKey], 
+[vwCustomViewColumns].[DataType] AS [DataType], 
+[vwCustomViewColumns].[TypeName] AS [TypeName], 
+[vwCustomViewColumns].[DisplayText] AS [DisplayText], 
+[vwCustomViewColumns].[DefaultWidth] AS [DefaultWidth]
+FROM [dbo].[vwCustomViewColumns] AS [vwCustomViewColumns]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwEntityFieldData" EntityType="Self.vwEntityFieldData" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwEntityFieldData].[TypeName] AS [TypeName], 
+[vwEntityFieldData].[IsInteger] AS [IsInteger], 
+[vwEntityFieldData].[IsDate] AS [IsDate], 
+[vwEntityFieldData].[IsDateTime] AS [IsDateTime], 
+[vwEntityFieldData].[IsDecimal] AS [IsDecimal], 
+[vwEntityFieldData].[IsCurrency] AS [IsCurrency], 
+[vwEntityFieldData].[IsText] AS [IsText], 
+[vwEntityFieldData].[IsList] AS [IsList], 
+[vwEntityFieldData].[IsTextArea] AS [IsTextArea], 
+[vwEntityFieldData].[IsTime] AS [IsTime], 
+[vwEntityFieldData].[IsEmail] AS [IsEmail], 
+[vwEntityFieldData].[IsUrl] AS [IsUrl], 
+[vwEntityFieldData].[IsMultiSelecttBox] AS [IsMultiSelecttBox], 
+[vwEntityFieldData].[IsCheckBox] AS [IsCheckBox], 
+[vwEntityFieldData].[IsImage] AS [IsImage], 
+[vwEntityFieldData].[IsPublic] AS [IsPublic], 
+[vwEntityFieldData].[FieldId] AS [FieldId], 
+[vwEntityFieldData].[FieldName] AS [FieldName], 
+[vwEntityFieldData].[LabelDisplay] AS [LabelDisplay], 
+[vwEntityFieldData].[ModuleId] AS [ModuleId], 
+[vwEntityFieldData].[DataTypeId] AS [DataTypeId], 
+[vwEntityFieldData].[MinLength] AS [MinLength], 
+[vwEntityFieldData].[DataLength] AS [DataLength], 
+[vwEntityFieldData].[Deletable] AS [Deletable], 
+[vwEntityFieldData].[IsActive] AS [IsActive], 
+[vwEntityFieldData].[Display] AS [Display], 
+[vwEntityFieldData].[ListSql] AS [ListSql], 
+[vwEntityFieldData].[ListNameId] AS [ListNameId], 
+[vwEntityFieldData].[SortOrder] AS [SortOrder], 
+[vwEntityFieldData].[Mandatory] AS [Mandatory], 
+[vwEntityFieldData].[ForeignKey] AS [ForeignKey], 
+[vwEntityFieldData].[RoleId] AS [RoleId], 
+[vwEntityFieldData].[Visible] AS [Visible], 
+[vwEntityFieldData].[Locked] AS [Locked], 
+[vwEntityFieldData].[LeftSide] AS [LeftSide], 
+[vwEntityFieldData].[FieldOrder] AS [FieldOrder], 
+[vwEntityFieldData].[SectionId] AS [SectionId], 
+[vwEntityFieldData].[SectionName] AS [SectionName]
+FROM [dbo].[vwEntityFieldData] AS [vwEntityFieldData]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwFieldNameDataTypes" EntityType="Self.vwFieldNameDataTypes" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwFieldNameDataTypes].[Id] AS [Id], 
+[vwFieldNameDataTypes].[ViewId] AS [ViewId], 
+[vwFieldNameDataTypes].[ColumnName] AS [ColumnName], 
+[vwFieldNameDataTypes].[IsCommand] AS [IsCommand], 
+[vwFieldNameDataTypes].[SortOrder] AS [SortOrder], 
+[vwFieldNameDataTypes].[LabelDisplay] AS [LabelDisplay], 
+[vwFieldNameDataTypes].[ModuleId] AS [ModuleId], 
+[vwFieldNameDataTypes].[TypeName] AS [TypeName], 
+[vwFieldNameDataTypes].[IsInteger] AS [IsInteger], 
+[vwFieldNameDataTypes].[IsDate] AS [IsDate], 
+[vwFieldNameDataTypes].[IsDecimal] AS [IsDecimal], 
+[vwFieldNameDataTypes].[IsText] AS [IsText], 
+[vwFieldNameDataTypes].[IsList] AS [IsList], 
+[vwFieldNameDataTypes].[IsTextArea] AS [IsTextArea], 
+[vwFieldNameDataTypes].[IsTime] AS [IsTime], 
+[vwFieldNameDataTypes].[IsEmail] AS [IsEmail], 
+[vwFieldNameDataTypes].[IsUrl] AS [IsUrl], 
+[vwFieldNameDataTypes].[IsMultiSelecttBox] AS [IsMultiSelecttBox], 
+[vwFieldNameDataTypes].[IsCheckBox] AS [IsCheckBox], 
+[vwFieldNameDataTypes].[Name] AS [Name], 
+[vwFieldNameDataTypes].[LoadChildView] AS [LoadChildView], 
+[vwFieldNameDataTypes].[DefaultTable] AS [DefaultTable], 
+[vwFieldNameDataTypes].[IsImage] AS [IsImage], 
+[vwFieldNameDataTypes].[Display] AS [Display], 
+[vwFieldNameDataTypes].[Sortable] AS [Sortable], 
+[vwFieldNameDataTypes].[Searchable] AS [Searchable], 
+[vwFieldNameDataTypes].[Mandatory] AS [Mandatory], 
+[vwFieldNameDataTypes].[IsDateTime] AS [IsDateTime], 
+[vwFieldNameDataTypes].[IsCurrency] AS [IsCurrency], 
+[vwFieldNameDataTypes].[AllowGroup] AS [AllowGroup], 
+[vwFieldNameDataTypes].[Width] AS [Width], 
+[vwFieldNameDataTypes].[Visible] AS [Visible], 
+[vwFieldNameDataTypes].[FieldId] AS [FieldId], 
+[vwFieldNameDataTypes].[Locked] AS [Locked], 
+[vwFieldNameDataTypes].[Show] AS [Show], 
+[vwFieldNameDataTypes].[RoleId] AS [RoleId], 
+[vwFieldNameDataTypes].[Deletable] AS [Deletable], 
+[vwFieldNameDataTypes].[IsTextShow] AS [IsTextShow]
+FROM [dbo].[vwFieldNameDataTypes] AS [vwFieldNameDataTypes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwFields" EntityType="Self.vwFields" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwFields].[FieldId] AS [FieldId], 
+[vwFields].[ColumnName] AS [ColumnName], 
+[vwFields].[ModuleId] AS [ModuleId], 
+[vwFields].[SortOrder] AS [SortOrder], 
+[vwFields].[IsDate] AS [IsDate], 
+[vwFields].[IsList] AS [IsList], 
+[vwFields].[IsMultiSelecttBox] AS [IsMultiSelecttBox], 
+[vwFields].[IsCheckBox] AS [IsCheckBox], 
+[vwFields].[LabelDisplay] AS [LabelDisplay], 
+[vwFields].[AdvanceSearch] AS [AdvanceSearch], 
+[vwFields].[Display] AS [Display], 
+[vwFields].[IsDateTime] AS [IsDateTime], 
+[vwFields].[IsDecimal] AS [IsDecimal], 
+[vwFields].[IsInteger] AS [IsInteger], 
+[vwFields].[Sortable] AS [Sortable], 
+[vwFields].[IsCurrency] AS [IsCurrency], 
+[vwFields].[AllowGroup] AS [AllowGroup]
+FROM [dbo].[vwFields] AS [vwFields]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwFieldsDataType" EntityType="Self.vwFieldsDataType" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwFieldsDataType].[FieldName] AS [FieldName], 
+[vwFieldsDataType].[IsInteger] AS [IsInteger], 
+[vwFieldsDataType].[IsDate] AS [IsDate], 
+[vwFieldsDataType].[IsDecimal] AS [IsDecimal], 
+[vwFieldsDataType].[IsText] AS [IsText], 
+[vwFieldsDataType].[IsList] AS [IsList], 
+[vwFieldsDataType].[IsTextArea] AS [IsTextArea], 
+[vwFieldsDataType].[IsTime] AS [IsTime], 
+[vwFieldsDataType].[IsEmail] AS [IsEmail], 
+[vwFieldsDataType].[IsUrl] AS [IsUrl], 
+[vwFieldsDataType].[IsMultiSelecttBox] AS [IsMultiSelecttBox], 
+[vwFieldsDataType].[IsCheckBox] AS [IsCheckBox], 
+[vwFieldsDataType].[DataTypeId] AS [DataTypeId], 
+[vwFieldsDataType].[ModuleId] AS [ModuleId], 
+[vwFieldsDataType].[DataLength] AS [DataLength], 
+[vwFieldsDataType].[Mandatory] AS [Mandatory], 
+[vwFieldsDataType].[LabelDisplay] AS [LabelDisplay], 
+[vwFieldsDataType].[IsUnique] AS [IsUnique], 
+[vwFieldsDataType].[PrimaryKey] AS [PrimaryKey], 
+[vwFieldsDataType].[IsDateTime] AS [IsDateTime], 
+[vwFieldsDataType].[FieldId] AS [FieldId], 
+[vwFieldsDataType].[Deletable] AS [Deletable], 
+[vwFieldsDataType].[IsCurrency] AS [IsCurrency], 
+[vwFieldsDataType].[ForeignKey] AS [ForeignKey], 
+[vwFieldsDataType].[Display] AS [Display], 
+[vwFieldsDataType].[RegularExpression] AS [RegularExpression], 
+[vwFieldsDataType].[IsTextShow] AS [IsTextShow], 
+[vwFieldsDataType].[Point] AS [Point]
+FROM [dbo].[vwFieldsDataType] AS [vwFieldsDataType]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwListNameValues" EntityType="Self.vwListNameValues" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwListNameValues].[FieldName] AS [FieldName], 
+[vwListNameValues].[ModuleId] AS [ModuleId], 
+[vwListNameValues].[ListNameId] AS [ListNameId], 
+[vwListNameValues].[LookupId] AS [LookupId], 
+[vwListNameValues].[Description] AS [Description], 
+[vwListNameValues].[Id] AS [Id], 
+[vwListNameValues].[Active] AS [Active], 
+[vwListNameValues].[AdditionalInfo] AS [AdditionalInfo], 
+[vwListNameValues].[ListOrder] AS [ListOrder]
+FROM [dbo].[vwListNameValues] AS [vwListNameValues]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwModuleEnittyRelationships" EntityType="Self.vwModuleEnittyRelationships" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwModuleEnittyRelationships].[Id] AS [Id], 
+[vwModuleEnittyRelationships].[MasterId] AS [MasterId], 
+[vwModuleEnittyRelationships].[MasterFieldName] AS [MasterFieldName], 
+[vwModuleEnittyRelationships].[MasterForeignKey] AS [MasterForeignKey], 
+[vwModuleEnittyRelationships].[MasterModuleId] AS [MasterModuleId], 
+[vwModuleEnittyRelationships].[MasterDefaultTable] AS [MasterDefaultTable], 
+[vwModuleEnittyRelationships].[MasterDisplayColumn] AS [MasterDisplayColumn], 
+[vwModuleEnittyRelationships].[MasterAlias] AS [MasterAlias], 
+[vwModuleEnittyRelationships].[ChildId] AS [ChildId], 
+[vwModuleEnittyRelationships].[ChildFieldName] AS [ChildFieldName], 
+[vwModuleEnittyRelationships].[ChildForeignKey] AS [ChildForeignKey], 
+[vwModuleEnittyRelationships].[ChildModuleId] AS [ChildModuleId], 
+[vwModuleEnittyRelationships].[ChildDefaultTable] AS [ChildDefaultTable], 
+[vwModuleEnittyRelationships].[ChildDisplayColumn] AS [ChildDisplayColumn], 
+[vwModuleEnittyRelationships].[LabelDisplay] AS [LabelDisplay], 
+[vwModuleEnittyRelationships].[MasterModule] AS [MasterModule], 
+[vwModuleEnittyRelationships].[ChildModule] AS [ChildModule], 
+[vwModuleEnittyRelationships].[DataTypeId] AS [DataTypeId]
+FROM [dbo].[vwModuleEnittyRelationships] AS [vwModuleEnittyRelationships]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwModuleEntityFields" EntityType="Self.vwModuleEntityFields" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwModuleEntityFields].[Id] AS [Id], 
+[vwModuleEntityFields].[FieldName] AS [FieldName], 
+[vwModuleEntityFields].[ForeignKey] AS [ForeignKey], 
+[vwModuleEntityFields].[IsList] AS [IsList], 
+[vwModuleEntityFields].[ModuleId] AS [ModuleId], 
+[vwModuleEntityFields].[Name] AS [Name], 
+[vwModuleEntityFields].[DefaultTable] AS [DefaultTable], 
+[vwModuleEntityFields].[IsCheckBox] AS [IsCheckBox], 
+[vwModuleEntityFields].[IsDecimal] AS [IsDecimal], 
+[vwModuleEntityFields].[IsInteger] AS [IsInteger], 
+[vwModuleEntityFields].[IsDate] AS [IsDate], 
+[vwModuleEntityFields].[IsDateTime] AS [IsDateTime], 
+[vwModuleEntityFields].[IsCurrency] AS [IsCurrency], 
+[vwModuleEntityFields].[Mandatory] AS [Mandatory], 
+[vwModuleEntityFields].[Deletable] AS [Deletable], 
+[vwModuleEntityFields].[IsMultiSelecttBox] AS [IsMultiSelecttBox], 
+[vwModuleEntityFields].[Display] AS [Display], 
+[vwModuleEntityFields].[IsTextShow] AS [IsTextShow]
+FROM [dbo].[vwModuleEntityFields] AS [vwModuleEntityFields]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwModuleHasEntityFields" EntityType="Self.vwModuleHasEntityFields" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwModuleHasEntityFields].[Id] AS [Id], 
+[vwModuleHasEntityFields].[Name] AS [Name], 
+[vwModuleHasEntityFields].[DisplayName] AS [DisplayName], 
+[vwModuleHasEntityFields].[FeatureName] AS [FeatureName], 
+[vwModuleHasEntityFields].[Description] AS [Description], 
+[vwModuleHasEntityFields].[Dashboard] AS [Dashboard], 
+[vwModuleHasEntityFields].[DefaultTable] AS [DefaultTable], 
+[vwModuleHasEntityFields].[IconClass] AS [IconClass], 
+[vwModuleHasEntityFields].[IsActive] AS [IsActive], 
+[vwModuleHasEntityFields].[SortOrder] AS [SortOrder], 
+[vwModuleHasEntityFields].[Parent] AS [Parent], 
+[vwModuleHasEntityFields].[IsPublished] AS [IsPublished], 
+[vwModuleHasEntityFields].[RelatedTo] AS [RelatedTo], 
+[vwModuleHasEntityFields].[NeedPickList] AS [NeedPickList], 
+[vwModuleHasEntityFields].[IsWebform] AS [IsWebform]
+FROM [dbo].[vwModuleHasEntityFields] AS [vwModuleHasEntityFields]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwModules" EntityType="Self.vwModules" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwModules].[Id] AS [Id], 
+[vwModules].[Name] AS [Name], 
+[vwModules].[DisplayName] AS [DisplayName], 
+[vwModules].[FeatureName] AS [FeatureName], 
+[vwModules].[Description] AS [Description], 
+[vwModules].[Dashboard] AS [Dashboard], 
+[vwModules].[DefaultTable] AS [DefaultTable], 
+[vwModules].[IconClass] AS [IconClass], 
+[vwModules].[IsActive] AS [IsActive], 
+[vwModules].[SortOrder] AS [SortOrder], 
+[vwModules].[Parent] AS [Parent], 
+[vwModules].[IsPublished] AS [IsPublished], 
+[vwModules].[DefaultViewId] AS [DefaultViewId], 
+[vwModules].[ReportModule] AS [ReportModule], 
+[vwModules].[NeedPickList] AS [NeedPickList], 
+[vwModules].[MenuIcon] AS [MenuIcon], 
+[vwModules].[AllowCreateView] AS [AllowCreateView], 
+[vwModules].[AllowImport] AS [AllowImport], 
+[vwModules].[AllowExport] AS [AllowExport]
+FROM [dbo].[vwModules] AS [vwModules]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwOrderCustomer" EntityType="Self.vwOrderCustomer" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwOrderCustomer].[Id] AS [Id], 
+[vwOrderCustomer].[Status] AS [Status], 
+[vwOrderCustomer].[CreatedDate] AS [CreatedDate], 
+[vwOrderCustomer].[CreatedBy] AS [CreatedBy], 
+[vwOrderCustomer].[ModifiedDate] AS [ModifiedDate], 
+[vwOrderCustomer].[ModifiedBy] AS [ModifiedBy], 
+[vwOrderCustomer].[IsActive] AS [IsActive], 
+[vwOrderCustomer].[CustomerId] AS [CustomerId]
+FROM [dbo].[vwOrderCustomer] AS [vwOrderCustomer]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwPicklistDependency" EntityType="Self.vwPicklistDependency" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwPicklistDependency].[ModuleId] AS [ModuleId], 
+[vwPicklistDependency].[MasterFieldId] AS [MasterFieldId], 
+[vwPicklistDependency].[ChildFieldId] AS [ChildFieldId], 
+[vwPicklistDependency].[MasterValueId] AS [MasterValueId], 
+[vwPicklistDependency].[ChildValueId] AS [ChildValueId]
+FROM [dbo].[vwPicklistDependency] AS [vwPicklistDependency]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwRegistry" EntityType="Self.vwRegistry" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwRegistry].[Name] AS [Name], 
+[vwRegistry].[Value] AS [Value], 
+[vwRegistry].[RegistryID] AS [RegistryID]
+FROM [dbo].[vwRegistry] AS [vwRegistry]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwSystmAudit" EntityType="Self.vwSystmAudit" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwSystmAudit].[Id] AS [Id], 
+[vwSystmAudit].[DateModified] AS [DateModified], 
+[vwSystmAudit].[Module] AS [Module], 
+[vwSystmAudit].[ModuleId] AS [ModuleId], 
+[vwSystmAudit].[MasterRecordId] AS [MasterRecordId], 
+[vwSystmAudit].[Operation] AS [Operation], 
+[vwSystmAudit].[ColumnName] AS [ColumnName], 
+[vwSystmAudit].[ValueBefore] AS [ValueBefore], 
+[vwSystmAudit].[ValueAfter] AS [ValueAfter], 
+[vwSystmAudit].[CreatedBy] AS [CreatedBy], 
+[vwSystmAudit].[UserId] AS [UserId]
+FROM [dbo].[vwSystmAudit] AS [vwSystmAudit]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwUserRoles" EntityType="Self.vwUserRoles" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwUserRoles].[Id] AS [Id], 
+[vwUserRoles].[Name] AS [Name], 
+[vwUserRoles].[RoleId] AS [RoleId], 
+[vwUserRoles].[RoleName] AS [RoleName]
+FROM [dbo].[vwUserRoles] AS [vwUserRoles]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwViewColumns" EntityType="Self.vwViewColumns" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwViewColumns].[FieldId] AS [FieldId], 
+[vwViewColumns].[ColumnName] AS [ColumnName], 
+[vwViewColumns].[ModuleId] AS [ModuleId], 
+[vwViewColumns].[SortOrder] AS [SortOrder], 
+[vwViewColumns].[IsDate] AS [IsDate], 
+[vwViewColumns].[IsList] AS [IsList], 
+[vwViewColumns].[IsMultiSelecttBox] AS [IsMultiSelecttBox], 
+[vwViewColumns].[IsCheckBox] AS [IsCheckBox], 
+[vwViewColumns].[ListNameId] AS [ListNameId], 
+[vwViewColumns].[LabelDisplay] AS [LabelDisplay], 
+[vwViewColumns].[ForeignKey] AS [ForeignKey], 
+[vwViewColumns].[ListSql] AS [ListSql], 
+[vwViewColumns].[AdvanceSearch] AS [AdvanceSearch], 
+[vwViewColumns].[Display] AS [Display], 
+[vwViewColumns].[IsDateTime] AS [IsDateTime], 
+[vwViewColumns].[IsDecimal] AS [IsDecimal], 
+[vwViewColumns].[IsInteger] AS [IsInteger], 
+[vwViewColumns].[Sortable] AS [Sortable], 
+[vwViewColumns].[IsCurrency] AS [IsCurrency], 
+[vwViewColumns].[AllowGroup] AS [AllowGroup], 
+[vwViewColumns].[RoleId] AS [RoleId], 
+[vwViewColumns].[Locked] AS [Locked], 
+[vwViewColumns].[Point] AS [Point], 
+[vwViewColumns].[Visible] AS [Visible], 
+[vwViewColumns].[IsTextShow] AS [IsTextShow], 
+[vwViewColumns].[Mandatory] AS [Mandatory], 
+[vwViewColumns].[IsLoadReference] AS [IsLoadReference]
+FROM [dbo].[vwViewColumns] AS [vwViewColumns]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwViewMenu" EntityType="Self.vwViewMenu" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vwViewMenu].[ModuleId] AS [ModuleId], 
+[vwViewMenu].[ModuleName] AS [ModuleName], 
+[vwViewMenu].[ViewName] AS [ViewName], 
+[vwViewMenu].[ViewId] AS [ViewId], 
+[vwViewMenu].[Total] AS [Total], 
+[vwViewMenu].[Shared] AS [Shared], 
+[vwViewMenu].[CreatedBy] AS [CreatedBy], 
+[vwViewMenu].[DefaultView] AS [DefaultView], 
+[vwViewMenu].[SortOrder] AS [SortOrder], 
+[vwViewMenu].[UserRole] AS [UserRole]
+FROM [dbo].[vwViewMenu] AS [vwViewMenu]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Eli_CustomFields_Eli_DataTypes" Association="Self.FK_Eli_CustomFields_Eli_DataTypes">
+      <End Role="Eli_DataTypes" EntitySet="Eli_DataTypes" />
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_CustomFields_Eli_Modules" Association="Self.FK_Eli_CustomFields_Eli_Modules">
+      <End Role="Eli_Modules" EntitySet="Eli_Modules" />
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_FieldData_Eli_CustomFields" Association="Self.FK_Eli_FieldData_Eli_CustomFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_FieldData" EntitySet="Eli_FieldData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_FieldsSectionDetail_Eli_EntityFields" Association="Self.FK_Eli_FieldsSectionDetail_Eli_EntityFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_FieldsSectionDetail" EntitySet="Eli_FieldsSectionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_FieldsSectionDetail_Eli_FieldsSection" Association="Self.FK_Eli_FieldsSectionDetail_Eli_FieldsSection">
+      <End Role="Eli_FieldsSection" EntitySet="Eli_FieldsSection" />
+      <End Role="Eli_FieldsSectionDetail" EntitySet="Eli_FieldsSectionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ListValues_Eli_ListNames" Association="Self.FK_Eli_ListValues_Eli_ListNames">
+      <End Role="Eli_ListNames" EntitySet="Eli_ListNames" />
+      <End Role="Eli_ListValues" EntitySet="Eli_ListValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_PicklistValues_Eli_PicklistConditions" Association="Self.FK_Eli_PicklistValues_Eli_PicklistConditions">
+      <End Role="Eli_ListDependency" EntitySet="Eli_ListDependency" />
+      <End Role="Eli_ListDependencyDetail" EntitySet="Eli_ListDependencyDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_RolesFields_Eli_EntityFields" Association="Self.FK_Eli_RolesFields_Eli_EntityFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_RolesFields" EntitySet="Eli_RolesFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_RolesFields_Eli_Roles" Association="Self.FK_Eli_RolesFields_Eli_Roles">
+      <End Role="Eli_Roles" EntitySet="Eli_Roles" />
+      <End Role="Eli_RolesFields" EntitySet="Eli_RolesFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_RolesPermissions_Eli_Modules" Association="Self.FK_Eli_RolesPermissions_Eli_Modules">
+      <End Role="Eli_Modules" EntitySet="Eli_Modules" />
+      <End Role="Eli_RolesPermissions" EntitySet="Eli_RolesPermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_RolesPermissions_Eli_Roles" Association="Self.FK_Eli_RolesPermissions_Eli_Roles">
+      <End Role="Eli_Roles" EntitySet="Eli_Roles" />
+      <End Role="Eli_RolesPermissions" EntitySet="Eli_RolesPermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_User_Eli_Roles" Association="Self.FK_Eli_User_Eli_Roles">
+      <End Role="Eli_Roles" EntitySet="Eli_Roles" />
+      <End Role="Eli_User" EntitySet="Eli_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_User_SysAudit" Association="Self.FK_Eli_User_SysAudit">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="Eli_SysAudit" EntitySet="Eli_SysAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewColumns_Eli_Views" Association="Self.FK_Eli_ViewColumns_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewColumns" EntitySet="Eli_ViewColumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewConditions_Eli_Views" Association="Self.FK_Eli_ViewConditions_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewConditions" EntitySet="Eli_ViewConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewCustom_Eli_User" Association="Self.FK_Eli_ViewCustom_Eli_User">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="Eli_ViewCustom" EntitySet="Eli_ViewCustom" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewCustomColumns_Eli_EntityFields" Association="Self.FK_Eli_ViewCustomColumns_Eli_EntityFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_ViewCustomColumns" EntitySet="Eli_ViewCustomColumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewCustomColumns_Eli_ViewCustom" Association="Self.FK_Eli_ViewCustomColumns_Eli_ViewCustom">
+      <End Role="Eli_ViewCustom" EntitySet="Eli_ViewCustom" />
+      <End Role="Eli_ViewCustomColumns" EntitySet="Eli_ViewCustomColumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewGroupBy_Eli_Views" Association="Self.FK_Eli_ViewGroupBy_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewGroupBy" EntitySet="Eli_ViewGroupBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewOrderBy_Eli_Views" Association="Self.FK_Eli_ViewOrderBy_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewOrderBy" EntitySet="Eli_ViewOrderBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_Views_Eli_Modules" Association="Self.FK_Eli_Views_Eli_Modules">
+      <End Role="Eli_Modules" EntitySet="Eli_Modules" />
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesContractStore_SalesContractTemplates" Association="Self.FK_SalesContractStore_SalesContractTemplates">
+      <End Role="SalesContractTemplates" EntitySet="SalesContractTemplates" />
+      <End Role="SalesContractState" EntitySet="SalesContractState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesCustomerRef_SalesCustomer" Association="Self.FK_SalesCustomerRef_SalesCustomer">
+      <End Role="SalesCustomer" EntitySet="SalesCustomer" />
+      <End Role="SalesCustReferences" EntitySet="SalesCustReferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesCustomerUsers_Eli_User" Association="Self.FK_SalesCustomerUsers_Eli_User">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="SalesCustomerUsers" EntitySet="SalesCustomerUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesCustomerUsers_SalesCustomer" Association="Self.FK_SalesCustomerUsers_SalesCustomer">
+      <End Role="SalesCustomer" EntitySet="SalesCustomer" />
+      <End Role="SalesCustomerUsers" EntitySet="SalesCustomerUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesDocuments_SalesOrder" Association="Self.FK_SalesDocuments_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrder" />
+      <End Role="SalesDocuments" EntitySet="SalesDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvoices_Eli_Currency" Association="Self.FK_SalesInvoices_Eli_Currency">
+      <End Role="Eli_Currency" EntitySet="Eli_Currency" />
+      <End Role="SalesInvoices" EntitySet="SalesInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvoices_SalesInvTemplates" Association="Self.FK_SalesInvoices_SalesInvTemplates">
+      <End Role="SalesInvTemplates" EntitySet="SalesInvTemplates" />
+      <End Role="SalesInvoices" EntitySet="SalesInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvoices_SalesOrder" Association="Self.FK_SalesInvoices_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrder" />
+      <End Role="SalesInvoices" EntitySet="SalesInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvServices_SalesInvoices" Association="Self.FK_SalesInvServices_SalesInvoices">
+      <End Role="SalesInvoices" EntitySet="SalesInvoices" />
+      <End Role="SalesInvServices" EntitySet="SalesInvServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvTaxes_SalesInvoices" Association="Self.FK_SalesInvTaxes_SalesInvoices">
+      <End Role="SalesInvoices" EntitySet="SalesInvoices" />
+      <End Role="SalesInvTaxes" EntitySet="SalesInvTaxes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrder_SalesCustomer" Association="Self.FK_SalesOrder_SalesCustomer">
+      <End Role="SalesCustomer" EntitySet="SalesCustomer" />
+      <End Role="SalesOrder" EntitySet="SalesOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrderComplete_SalesOrder" Association="Self.FK_SalesOrderComplete_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrder" />
+      <End Role="SalesOrderComplete" EntitySet="SalesOrderComplete" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrderDelivery_SalesOrder" Association="Self.FK_SalesOrderDelivery_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrder" />
+      <End Role="SalesOrderDelivery" EntitySet="SalesOrderDelivery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrdersUsers_Eli_User" Association="Self.FK_SalesOrdersUsers_Eli_User">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="SalesOrdersUsers" EntitySet="SalesOrdersUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrdersUsers_SalesOrder" Association="Self.FK_SalesOrdersUsers_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrder" />
+      <End Role="SalesOrdersUsers" EntitySet="SalesOrdersUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewCustomConditions_Eli_ViewCustom" Association="Self.FK_ViewCustomConditions_Eli_ViewCustom">
+      <End Role="Eli_ViewCustom" EntitySet="Eli_ViewCustom" />
+      <End Role="Eli_ViewCustomConditions" EntitySet="Eli_ViewCustomConditions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

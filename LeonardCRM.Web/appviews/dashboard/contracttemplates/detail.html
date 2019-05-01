@@ -1,0 +1,55 @@
+﻿<div ng-controller="ContractTemplateDetailCtrl">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{languages.CONTRACT_TEMPLATE.BASIC_INFORMATION}}
+            </div>
+            <div class="panel-body">
+                <form name="invtemplateform" id="invtemplateform" class="col-md-12 form-horizontal" role="form" ng-init="myInit()">
+                    <div class="form-group">
+                        <label for="txtTemplateName" class="col-md-2 control-label">{{languages.CONTRACT_TEMPLATE.CONTRACT_TEMPLATE_NAME}}</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="txtTemplateName" ng-model="contractTemplate.TemplateName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtTemplateName" class="col-md-2 control-label">{{languages.CONTRACT_TEMPLATE.STATE_FIELD}}</label>
+                        <div class="col-md-4">
+                            <ui-select class="form-control" multiple ng-model="contractTemplate.StateIds"
+                                theme="bootstrap" sortable="true">
+                                <ui-select-match>{{$item.Description }}</ui-select-match>
+                                <ui-select-choices repeat="item.Id as item in pickListForm.States | propsFilter: {Description: $select.search}">
+                                    <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <label style="text-align: left; width: 87px;" class="col-md-2 control-label ">{{languages.CONTRACT_TEMPLATE.CONTRACT_INFO}}</label>
+                        <div class="col-md-3">
+                            <ui-select class="form-control" ng-model="insertField.value" theme="select2">
+                                <ui-select-match allow-clear="true">{{$select.selected.LabelDisplay}}</ui-select-match>
+                                <ui-select-choices group-by="groupFind" repeat="col.ColumnName as col in columns | propsFilter: {LabelDisplay: $select.search}">
+                                    <div ng-bind-html="col.LabelDisplay | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <button class="btn btn-danger btn-sm" ng-click="insertYourContent()">{{languages.CONTRACT_TEMPLATE.INSERT_LABLE}}</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-9"><strong>{{languages.CONTRACT_TEMPLATE.USAGE_EXPRESSION_GUIDE}}</strong></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">{{languages.CONTRACT_TEMPLATE.CONTRACT_TEMPLATE_CONTENT}}</label>
+                        <div class="col-md-9">
+                            <textarea ng-model="contractTemplate.TemplateContent" style="height: 500px;" class="form-control" id="tinymce" ui-tinymce></textarea>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

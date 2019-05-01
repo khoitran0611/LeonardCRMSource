@@ -1,0 +1,157 @@
+﻿<div ng-controller="ManageEntityFieldCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>{{ languages.ENTITY_FIELD.HEADING }}</b>
+                </div>
+                <div class="panel-body">
+                    <form class="col-md-12 form-horizontal" name="entityForm" role="form">
+                        <div class="form-group input-group-sm">
+                            <label style="margin-left: 10px;">{{ languages.ENTITY_FIELD.MODULE }}</label>
+                            <select class="form-control" style="margin: 0 5px; display: inline-block;width: 33.3333%" ng-model="fieldModuleId" ng-change="ModuleChanged()"
+                                    ng-options="item.Id as item.DisplayName for item in moduleSources"></select>
+                            
+                            <button class="btn btn-default btn-sm" type="button" ng-click="updateOrder()"><i class="glyphicon glyphicon-floppy-save"></i> {{ languages.ENTITY_FIELD.UPDATE_SORT }}</button>
+                        </div>
+                        <div class="form-group">
+                            <div class="divtable">
+                                <section class="row">
+                                    <div class="col-md-12">
+                                        <div class="headerrow">
+                                            <div class="col-md-1 divcol">
+                                                <div class="headercell">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 divcol">
+                                                <div class="headercell">
+                                                    <a ng-click="sortGrid('FieldName')">
+                                                        {{ languages.ENTITY_FIELD.FIELD_NAME }}
+                                                        <i ng-if="predicate ==  'FieldName Asc'" class="up-caret"></i>
+                                                        <i ng-if="predicate ==  'FieldName Desc'" class="caret"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 divcol">
+                                                <div class="headercell">
+                                                    <a ng-click="sortGrid('LabelDisplay')">
+                                                        {{ languages.ENTITY_FIELD.LABLE_DISPLAY }}
+                                                        <i ng-if="predicate ==  'LabelDisplay Asc'" class="up-caret"></i>
+                                                        <i ng-if="predicate ==  'LabelDisplay Desc'" class="caret"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 divcol">
+                                                <div class="headercell">
+                                                    <a ng-click="sortGrid('Point')">
+                                                        {{ languages.ENTITY_FIELD.POINT }}
+                                                        <i ng-if="predicate ==  'Point Asc'" class="up-caret"></i>
+                                                        <i ng-if="predicate ==  'Point Desc'" class="caret"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 divcol">
+                                                <div class="headercell">
+                                                        {{ languages.ENTITY_FIELD.DESCRIPTION }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 divcol">
+                                                <div class="headercell">
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                                
+                                <section class="row">
+                                    <div class="col-md-12">
+                                        <div class="gridlocalfilter">
+                                            <div class="col-md-1 divcol">
+                                                <div class="inputcell input-group-sm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 divcol">
+                                                <div class="inputcell input-group-sm">
+                                                    <input type="text" ng-model="FieldName" class="form-control input-sm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 divcol">
+                                                <div class="inputcell input-group-sm">
+                                                    <input type="text" ng-model="LabelDisplay" class="form-control input-sm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 divcol">
+                                                <div class="inputcell input-group-sm">
+                                                    <input type="text" numbers-only ng-model="Point" class="form-control input-sm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 divcol">
+                                                <div class="inputcell input-group-sm">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 divcol">
+                                                <div class="inputcell input-group-sm">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="fields-container" ui-sortable="sortableOptions1" ng-model="entityFieldSources">
+                                    <div class="row ddactive" ng-repeat="(i,item) in entityFieldSources | filter:{FieldName:FieldName,LabelDisplay:LabelDisplay}">
+                                        <div class="col-md-12 field">
+                                            <div class="gridrow" ng-class-odd="'rowindex'" ng-class-even="'altrowindex'">
+                                                <div class="col-md-1 divcol rowlink">
+                                                    <span class="rowcell text-center">
+                                                        <b class="badge cursor-move"><i class="glyphicon glyphicon-resize-vertical"></i></b>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-3 divcol rowlink">
+                                                    <span class="rowcell">
+                                                        {{ item.FieldName }}
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-3 divcol rowlink cursor-move">
+                                                    <span class="rowcell">
+                                                        <span title="{{ item.LabelDisplay }}">{{ item.LabelDisplay }}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-1 divcol rowlink">
+                                                    <span class="rowcell">
+                                                        <span title="{{ item.Point }}">{{ item.Point }}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-3 divcol rowlink cursor-move">
+                                                    <span class="rowcell">
+                                                        <span title="{{ item.Description }}">{{ item.Description }}</span>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-1 divcol rowlink ">
+                                                    <div class="rowcell">
+                                                        <button type="button" class="btn btn-info btn-xs" ng-click="editRow(item)"><i class="glyphicon glyphicon-edit"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-xs" ng-show=" item.Deletable" ng-click="deleteRow(item)"><i class="glyphicon glyphicon-trash"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-dialog-edit" class="modal-dialog">
+        <div id="entityeditContent" ng-cloak class="ng-cloak">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#modal-dialog-edit').hide();
+</script>

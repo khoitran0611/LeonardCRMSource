@@ -1,0 +1,58 @@
+﻿<form class="form-horizontal">
+    <div class="sigPad" ng-show="applicant.CustomerInitials == null || applicant.CustomerInitials == ''">
+        <label for="name">{{languages.APPLICANT_FORM.INITIAL_NAME}}</label>
+        <input type="text" name="inital-customer-name" id="inital-customer-name">
+        <br />
+        <br />
+    </div>
+
+    <div id="employee-sigPad" class="sigPad" ng-show="applicant.SalesOrders[0].LesseeSignature == null || applicant.SalesOrders[0].LesseeSignature == ''">
+        <label>{{languages.APPLICANT_FORM.PRINT_CUSTOMER_NAME}}</label>
+        <input type="text" id="print-name-customer" class="name"/>
+        
+        <label style="margin-top:15px" for="typed-customer-siganture" class="typeSignLabel">{{languages.APPLICANT_FORM.TYPED_SIGNATURE_LABEL}}</label>
+        <input type="text" id="typed-customer-siganture" class="typeSignInput" placeholder="{{languages.APPLICANT_FORM.TYPED_SIGNATURE_PLACEHOLDER}}"/>
+        
+        <p class="drawItDesc">{{languages.APPLICANT_FORM.EMPLOYEE_SIGN_TEXT}}</p>
+        <p class="typeItDesc">{{languages.APPLICANT_FORM.EMPLOYEE_SIGN_TEXT}}</p>
+
+        <ul class="sigNav">
+            <li class="typeIt"><a href="#type-it">{{languages.APPLICANT_FORM.TYPE_SIGN_TEXT}}</a></li>
+            <li class="drawIt"><a href="#draw-it">{{languages.APPLICANT_FORM.SIGN_HERE_TEXT}}</a></li>
+            <li class="clearButton"><a href="#clear">{{languages.APPLICANT_FORM.CLEAR_SIGNATURE_BTN}}</a></li>
+        </ul>
+
+        <div class="sig sigWrapper">
+            <div class="typed" style="display: block; font-size: 67px; padding-top: 37px; border-color:#666666;"></div>
+            <canvas id="employeeSignCanvas" class="pad" width="350" height="110"></canvas>
+            <input type="hidden" name="output" class="output">
+        </div>
+    </div>
+
+    <div id="coEmployee-sigPad" ng-show="applicant.CoName != null && applicant.CoName != ''" class="sigPad" style="margin-top: 10px;">
+        <label>{{languages.APPLICANT_FORM.PRINT_CO_CUSTOMER_NAME}}</label>
+        <input type="text" id="print-name-co-customer" class="name"/>
+        
+        <label style="margin-top:15px" for="name" class="typeSignLabel">{{languages.APPLICANT_FORM.TYPED_SIGNATURE_LABEL}}</label>
+        <input type="text" id="type-co-customer-signature" class="typeSignInput" placeholder="{{languages.APPLICANT_FORM.TYPED_SIGNATURE_PLACEHOLDER}}"/>
+
+        <p class="typeItDesc">{{languages.APPLICANT_FORM.EMPLOYEE_SIGN_TEXT}}</p>
+        <p class="drawItDesc">{{languages.APPLICANT_FORM.CO_EMPLOYEE_SIGN_TEXT}}</p>
+
+        <ul class="sigNav">
+            <li class="typeIt"><a href="#type-it">{{languages.APPLICANT_FORM.TYPE_SIGN_TEXT}}</a></li>
+            <li class="drawIt"><a href="#draw-it">{{languages.APPLICANT_FORM.SIGN_HERE_TEXT}}</a></li>
+            <li class="clearButton"><a href="#clear">{{languages.APPLICANT_FORM.CLEAR_SIGNATURE_BTN}}</a></li>
+        </ul>
+        <div class="sig sigWrapper">
+            <div class="typed" style="display: block; font-size: 67px; padding-top: 37px;"></div>
+            <canvas id="coEmployeeSignCanvas" class="pad" width="350" height="110"></canvas>
+            <input type="hidden" name="output" class="output">
+        </div>
+    </div>
+
+    <div class="form-group list-inline" style="border-top: 1px solid #e5e5e5; padding-right: 15px; padding-top: 15px; margin-top: 20px;">
+        <button ng-click="hidePopup()" style="margin-right: 5px; float: right" class="btn btn-sm btn-default" type="button">{{languages.APPLICANT_FORM.CANCEL_SIGNATURE_BTN}}</button>
+        <button ng-click="saveSignPopup()" style="margin-right: 5px; float: right" class="btn btn-sm btn-primary" type="button">{{languages.APPLICANT_FORM.ACCEPT_SIGNATURE_BTN}}</button>
+    </div>
+</form>

@@ -1,0 +1,81 @@
+.advantages-gomobile{	
+	background: #f4f5f7 !important;
+			filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-gomobile.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-gomobile.png', sizingMethod='scale')";
+	}
+.advantages-customize{	
+	background: #f4f5f7 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-customize.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-customize.png', sizingMethod='scale')";
+	}
+.advantages-integrate{	
+	background: #f4f5f7 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-integrate.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-integrate.png', sizingMethod='scale')";
+	}
+.advantages-manage{	
+	background: #f4f5f7 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-manage.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-manage.png', sizingMethod='scale')";
+	}
+.advantages-monitor{	
+	background: #f4f5f7 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-monitor.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-monitor.png', sizingMethod='scale')";
+	}
+.advantages-create{	
+	height: 41px !important;
+	width: 190px !important;
+	background: #f4f5f7 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-create.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/advantages-sx-create.png', sizingMethod='scale')";
+	}
+.wrapper-menu{
+	height: 68px !important;
+	line-height: 68px !important;
+}
+.header .wrapper{
+	position: relative;
+	top: 15px;
+	left: -30px;
+	height: 41px !important;
+	width: 190px !important;
+	background: 0 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/header-logo.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/header-logo.png', sizingMethod='scale')";
+	}
+.dropdown-menu{
+	right: -75px;
+	top: -15px;
+}
+.banner-info{
+	background: #fff !important;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/banner-info-xs.jpg', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/banner-info-xs.jpg', sizingMethod='scale')";
+}
+.play-video{
+	background: 0 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/play-video-lg.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/play-video-lg.png', sizingMethod='scale')";
+}
+.contacts .wrapper{
+	background: 0 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/contacts-maps-xs.jpg', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/contacts-maps-xs.jpg', sizingMethod='scale')";
+}
+.icon-s{
+	background:  0 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/crm_skype@2.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/crm_skype@2.png', sizingMethod='scale')";
+}
+.icon-e{
+	background:  0 !important;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/crm_mail@2.png', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/crm_mail@2.png', sizingMethod='scale')";
+}
+.banner-video{
+	background: 0 !important;
+	width: 320px;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/videoslide@2x.jpg', sizingMethod='scale');
+			-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/videoslide@2x.jpg', sizingMethod='scale')";
+}

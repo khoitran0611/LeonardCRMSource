@@ -1,0 +1,43 @@
+﻿<div class="row" ng-controller="PagingGridCtrl">
+    <div class="col-xs-12">
+        <div class="row" ng-hide="TotalRow == 0 || PageSize == maxPageSize">
+            <div class="dib fl">
+                  <uib-pagination total-items="TotalRow"
+                            items-per-page="PageSize"
+                            previous-text="{{languages.COMMON.PAGER_PREVIOUS}}"
+                            next-text="{{languages.COMMON.PAGER_NEXT}}"
+                            first-text="{{languages.COMMON.PAGER_FIRST}}"
+                            last-text="{{languages.COMMON.PAGER_LAST}}"
+                            ng-model="PageIndex"
+                            max-size="MaxPage"
+                            class="pagination-sm"
+                            ng-change="pageChanged()"
+                            boundary-links="true"></uib-pagination>
+            </div>
+            <div class="totalofgrid text-right dib fl paddingtop7 marginleft8">
+                <label class="control-label fontweightnormal">{{languages.GRID_VIEW.GO_TO_PAGE}}</label>
+            </div>
+            <div class="totalofgrid dib fl marginleft4 width60">
+                <input class="form-control input-sm" ng-enter="setPageIndex()" ng-model="pageIndexInput" />
+            </div>
+            <div class="totalofgrid dib fl marginleft4 paddingtop7">
+                <label class="control-label fontweightnormal">/ {{TotalPages}} {{languages.GRID_VIEW.PAGES}}</label>
+            </div>
+            <div class="pull-right totalofgrid dib" ng-hide="TotalRow == 0 || PageSize == maxPageSize">
+                <label class="control-label fontweightnormal">
+                    {{ languages.GRID_VIEW.SHOW }}
+                </label>
+                <div class="control-label dib">
+                    <select ng-model="PageSize" class="form-control input-sm ddlPageSize" ng-options='item for item in ListPageSizeNumber' ng-change="pageSize_Changed()"></select>
+                </div>
+                <label class="control-label">
+                    {{ languages.GRID_VIEW.ITEM_PER_PAGE }}
+                </label>
+                <label class="control-label" style="margin-left: 15px;">
+                    <strong>{{ DisplayItem }}</strong>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+

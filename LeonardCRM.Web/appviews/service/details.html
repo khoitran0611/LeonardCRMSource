@@ -1,0 +1,157 @@
+﻿<div class="row" ng-controller="ServiceDetailCtrl">
+    <div class="col-xs-12">
+
+        <div class="col-xs-12 form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">{{languages.SERVICES.SERVICE_NAME}}</label>
+                <div class="input-group-sm col-md-4">
+                    <input type="text" data-validation-optional="true" data-validation-error-msg="{{languages.SERVICES.SERVICE_NAME_REQUIRED}}" ng-model="service.ServiceName" class="form-control">
+                </div>
+                <label class="col-xs-2 control-label">{{languages.SERVICES.COST}}</label>
+                <div class="input-group-sm col-xs-4">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">{{currencyFormat}}</span>
+                        <input type="text" data-validation="number" data-validation-allowing="float" data-validation-optional="true" data-validation-error-msg="{{languages.SERVICES.COST_REQUIRED}}" ng-model="service.Cost" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">{{languages.SERVICES.DESCRIPTION}}</label>
+                <div class="col-md-4">
+                    <textarea ng-model="service.Description" class="form-control"></textarea>
+                </div>
+                <label class="col-xs-2 control-label">{{languages.SERVICES.COMMENTS}}</label>
+                <div class="col-md-4">
+                    <textarea ng-model="service.Comments" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label"></label>
+                <div class="input-group-sm col-xs-4">
+                    <button type="button" ng-disabled="service.ServiceName.length == 0 || service.ServiceName == null || service.Cost.length == 0 || service.Cost ==null" class="btn btn-sm btn-danger" ng-click="addservice()">{{languages.SERVICES.ADD_SERVICE}}</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12">
+
+                    <table class="table table-bordered" ng-show="arrayService.length > 0">
+                        <thead>
+                            <tr class="headetable">
+                                <th><i class="glyphicon glyphicon-info-sign" tooltip-append-to-body="false" tooltip-placement="right" tooltip="{{languages.SERVICES.DOUBLE_CLICK_EDIT_TOOLTIP}}"></i></th>
+                                <th>{{languages.SERVICES.SERVICE_NAME}}</th>
+                                <th>{{languages.SERVICES.DESCRIPTION}}</th>
+                                <th>{{languages.SERVICES.COMMENTS}}</th>
+                                <th class="text-right">{{languages.SERVICES.COST}}</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in arrayService" ng-dblclick="item.isEditting = true">
+                                <td>{{$index + 1}}</td>
+                                <td class="textmiddle">
+                                    <span ng-hide="item.isEditting">{{item.ServiceName}}</span>
+                                    <input class="form-control" width="100%" type="text" required ng-model="item.ServiceName" ng-show="item.isEditting" />
+                                </td>
+                                <td class="textmiddle">
+                                    <span ng-hide="item.isEditting">{{item.Description}}</span>
+                                    <textarea class="form-control" width="100%" ng-model="item.Description" ng-show="item.isEditting" />
+                                </td>
+                                <td class="textmiddle">
+                                    <span ng-hide="item.isEditting">{{item.Comments}}</span>
+                                    <textarea class="form-control" width="100%" ng-model="item.Comments" ng-show="item.isEditting" />
+                                </td>
+                                <td class="textrightandmiddle">
+                                    <span ng-hide="item.isEditting">{{item.Cost|currency:currencyFormat}}</span>
+                                    <input width="100%" type="text" required data-validation="number" data-validation-allowing="float" ng-show="item.isEditting" data-validation-optional="false" data-validation-error-msg="{{languages.SERVICES.COST_REQUIRED}}" ng-model="item.Cost" class="form-control">
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-xs-12 text-right">
+                                            <button type="button" ng-show="item.isEditting" class="btn btn-success btn-xs" ng-click="saveItem(item)"><i class="glyphicon glyphicon-ok"></i></button>
+                                            <button ng-hide="item.isEditting" class="btn btn-danger btn-xs" ng-click="deleteService($index)"><i class="glyphicon glyphicon-remove"></i></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="row">
+                                        <div class="pull-right">
+                                            <b>Pre Tax Total</b>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    {{totalCost|currency:currencyFormat}}
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="row">
+                                        <div class="pull-right" style="position: relative;">
+                                            <div class="text-right">
+                                                <b>(+) <a ng-click="showTax=1">{{languages.TAX.TAX}}</a></b>
+                                            </div>
+                                            <div ng-show="showTax==1" class="tax-popup panel panel-info" style="position: absolute; right: 0px; top: -80px; width: 350px;">
+                                                <div class="panel-heading">
+                                                    <input type="checkbox" ng-model="taxUsed" />
+                                                    <b>{{languages.TAX.INCLUDING_TAX}}</b> <a class="label label-primary" ng-click="copyTaxes()" ng-show="taxTotal == 0 && taxUsed">{{languages.TAX.COPY_BASE_TAX}}</a>
+                                                    <a ng-click="showTax=0"><i class="glyphicon glyphicon-remove-circle pull-right"></i></a>
+                                                </div>
+                                                <div class="panel-body" style="background-color: #f6f6f6">
+                                                    <table width="100%" class="table-bordered">
+                                                        <tr ng-repeat="tax in Taxes">
+                                                            <td width="30%" class="tax-cell">
+                                                                <input ng-disabled="!taxUsed" class="col-md-9" type="text" ng-change="updateTaxTotal($index, tax.TaxValue)" ng-model="tax.TaxValue" />&nbsp;%
+                                                            </td>
+                                                            <td width="40%" class="text-center tax-cell">{{tax.TaxName}}</td>
+                                                            <td width="30%" class="tax-cell text-right">
+                                                                <div class="well well-small tax-cell">{{(tax.TaxValue*totalCost)/100|currency:currencyFormat}}</div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <div ng-show="Taxes.length==0">{{languages.TAX.NO_TAX}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    {{taxTotal|currency:currencyFormat}}
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="row">
+                                        <div class="pull-right">
+                                            <b>{{languages.SERVICES.TOTAL_COST}}</b>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    <b>{{(totalCost + taxTotal)|currency:currencyFormat}}</b>
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,153 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+    <label class="submit-app-question">{{languages.APPLICANT_FORM.QUESTION_ADDRESS_SECTION}}</label>
+    <div class="checkbox-inline" style="margin-left: 5px;">
+        <label>
+            <input type="checkbox" ng-model="applicant.IsSameMailingAddress" ng-change="changeSameMailingChk()"><b>{{languages.APPLICANT_FORM.YES_LABEL}}</b></label>
+    </div>
+</div>
+
+<div class="col-xs-12" ng-class="{'col-lg-6 col-md-6 col-sm-6': applicant.IsSameMailingAddress != true, 'col-lg-12 col-md-12 col-sm-12' : applicant.IsSameMailingAddress == true}">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label class="submit-app-section"><span class="col-lg-5 col-md-6 col-sm-5 col-xs-6 submit-app-section-header">{{languages.APPLICANT_FORM.MAILLING_ADDRESS_FIELD}}</span></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 pd0" ng-class="{'col-lg-12 col-md-12 col-sm-12': applicant.IsSameMailingAddress != true, 'col-lg-6 col-md-6 col-sm-6' : applicant.IsSameMailingAddress == true}">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.MAILLING_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <input type="text" class="form-control" ng-model="applicant.MailingStreet" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_ADDRESS_REQUIRE_ERROR_MSG}}">
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.CITY_MAILLING_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <input type="text" class="form-control" ng-model="applicant.MailingCity" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_CITY_REQUIRE_ERROR_MSG}}">
+            </div>
+        </div>
+        <div class="col-xs-12 pd0" ng-class="{'col-lg-12 col-md-12 col-sm-12': applicant.IsSameMailingAddress != true, 'col-lg-6 col-md-6 col-sm-6' : applicant.IsSameMailingAddress == true}">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.ZIP_PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <input type="text" class="form-control" ng-model="applicant.MailingZip" maxlength="6" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_ZIP_REQUIRE_ERROR_MSG}}">
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.STATE_PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <select class="form-control" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILING_STATE_REQUIRE_ERROR_MSG}}" ng-model="applicant.MailingState" ng-options="item.Id as item.Description for item in maillingStates"></select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-hide="applicant.IsSameMailingAddress == true">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label class="submit-app-section"><span class="col-lg-5 col-md-6 col-sm-5 col-xs-6 submit-app-section-header">{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_FIELD}}</span></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control physical-address" ng-model="applicant.PhysicalStreet" ng-disabled="applicant.IsSameMailingAddress" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_REQUIRE_ERROR_MSG}}">
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.CITY_PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control physical-address" ng-model="applicant.PhysicalCity" ng-disabled="applicant.IsSameMailingAddress" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_CITY_REQUIRE_ERROR_MSG}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.ZIP_MAILLING_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control physical-address" ng-model="applicant.PhysicalZip" ng-disabled="applicant.IsSameMailingAddress" maxlength="6" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_ZIP_REQUIRE_ERROR_MSG}}">
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.STATE_MAILLING_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <select class="form-control physical-address" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_STATE_REQUIRE_ERROR_MSG}}" ng-disabled="applicant.IsSameMailingAddress" ng-model="applicant.PhysicalState" ng-options="item.Id as item.Description for item in states"></select>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row">
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>
+                {{languages.APPLICANT_FORM.AT_ADDRESS_SINCE_FIELD}}<span> (<span class="mandatorysign">*</span>)</span>
+                <em class="text-uppercase">{{' (' + monthFormat + ')'}}</em></label>
+            <div class="input-group">
+                <input class="form-control" placeholder="{{monthFormat}}" data-validation="date" required data-validation-format="{{monthFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.ADDRESS_SINCE_REQUIRE_ERROR_MSG}}" on-open-focus="false" is-open="opened2" type="text" ng-model="applicant.AtAddressSince" uib-datepicker-popup="{{monthFormat}}" datepicker-options="addressSinceOptions" ng-change="checkAddressSince()" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" required />
+                <span class="btn input-group-addon" ng-click="opened2 = true">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 form-group">
+            <label class="col-md-12 col-sm-12 col-xs-12 visible-lg-block" style="height: 18px;"></label>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 submit-app-pd0">
+                <label style="min-width: 126px; margin-bottom: 0px;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 submit-app-pd0">{{languages.APPLICANT_FORM.OWN_RENT_RESIDENCE_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <div style="min-width: 115px; margin-bottom: 0px;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 submit-app-pd0">
+                    <label ng-repeat="t in residenceTypes" class="radio-inline">
+                        <input type="radio" name="resType" ng-model="applicant.ResidenceType" ng-change="updateLandLordInfo()" data-validation="required" ng-value="t.Id" style="margin-top: 2px;" />
+                        {{t.Description}}&nbsp;
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 form-group">
+            <label class="col-md-12 col-sm-12 col-xs-12 visible-lg-block" style="height: 18px;"></label>
+            <div class="col-lg-12 col-md-12 col-sm-12 submit-app-pd0">
+                <label style="min-width: 126px; margin-bottom: 0px;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 submit-app-pd0">{{languages.APPLICANT_FORM.OWN_RENT_LAND_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <div style="min-width: 115px; margin-bottom: 0px;" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 submit-app-pd0">
+                    <label ng-repeat="t in landTypes" class="radio-inline">
+                        <input type="radio" name="landType" ng-model="applicant.LandType" ng-change="updateLandLordInfo()" data-validation="required" ng-value="t.Id" style="margin-top: 2px;" />
+                        {{t.Description}}&nbsp;
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+    <b>{{languages.APPLICANT_FORM.NOTE_LABEL}}</b>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.NAME_LANDLORD_FIELD}}</label>
+            <input type="text" class="form-control" ng-model="applicant.LandlordName" ng-disabled="!isEnableLandLordField()">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.PHONE_ADDRESS_FIELD}}</label>
+            <input type="text" class="form-control" ng-model="applicant.LandlordPhone" data-inputmask='"mask": "(999) 999-9999"' data-mask maxlength="20" ng-disabled="!isEnableLandLordField()" />
+        </div>
+    </div>
+</div>
+
+<!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label class="submit-app-section"><span class="col-lg-3 col-md-3 col-sm-4 col-xs-5 submit-app-section-header">{{languages.APPLICANT_FORM.DELIVERY_ADDRESS_FIELD}}</span></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.DELIVERY_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control" ng-model="applicant.DeliveryStreet" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.DELIVERY_ADDRESS_REQUIRE_ERROR_MSG}}" />
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.CITY_DELIVERY_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control" ng-model="applicant.DeliveryCity" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.DELIVERY_CITY_REQUIRE_ERROR_MSG}}">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.STATE_DELIVERY_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <select class="form-control" data-validation="required" data-validation-error-msg="Delivery State is required" ng-model="applicant.DeliveryState" ng-options="item.Id as item.Description for item in states"></select>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.ZIP_DELIVERY_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control" ng-model="applicant.DeliveryZip" maxlength="6" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.DELIVERY_ZIP_REQUIRE_ERROR_MSG}}">
+        </div>
+    </div>
+</div>-->

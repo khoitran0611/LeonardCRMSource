@@ -1,0 +1,14 @@
+﻿<div ng-controller="advanceSearchCtrl">
+    <a class="btn btn-sm dropdown-toggle" id="advance" ng-click="showSearchDialog()"><i class="glyphicon glyphicon-search"></i>&nbsp;{{languages.SEARCH_FORM.TITLE}}</a>
+    <div id="advanceForm">
+        <div id="dialog-edit" class="modal-dialog">
+            <div id="searchContent" style="padding: 10px" ng-cloak class="ng-cloak"></div>
+        </div>
+        <div id="dialog-viewname" class="modal-dialog">
+            <div id="viewNameContent" style="padding: 10px" ng-cloak class="ng-cloak"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#dialog-edit,#dialog-viewname').hide();
+</script>

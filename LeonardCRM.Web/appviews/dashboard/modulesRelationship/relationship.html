@@ -1,0 +1,183 @@
+﻿<style type="text/css">
+    .div-limited {
+        height: 300px; 
+        overflow-y: auto; 
+        overflow-x: hidden
+    }
+</style>
+
+
+<div ng-controller="ManageRelationshipCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>{{ languages.RELATIONSHIP.RELATIONSHIP_TITLE }}</b>
+                </div>
+                <div class="panel-body">
+                    <form class="col-md-4 form-horizontal" role="form">
+                        <div class="form-group input-group-sm">
+                            <label style="margin-left: 10px;">{{ languages.RELATIONSHIP.MASTER_MODULE }}</label>
+                            <select class="form-control" style="margin: 0 5px; display: inline-block;"
+                                ng-model="masterModuleId" ng-change="MasterModuleChanged()"
+                                ng-options="item.Id as item.DisplayName for item in masterModules">
+                            </select>
+                        </div>
+                        <div class="form-group div-limited">
+                            <div class="divtable">
+                                <section class="row">
+                                    <div class="col-md-12">
+                                        <div class="headerrow">
+                                            <div class="col-md-1 divcol">
+                                            </div>
+                                            <div class="col-md-5 divcol">
+                                                <div class="headercell">
+                                                    {{ languages.ENTITY_FIELD.FIELD_NAME }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 divcol">
+                                                <div class="headercell">
+                                                    {{ languages.RELATIONSHIP.DISPLAY_NAME }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <div class="row ddactive" ng-repeat="(i,item) in entityFieldsMasterModule | filter:{FieldName:FieldName}">
+                                    <div class="col-md-12 field">
+                                        <div class="gridrow">
+                                            <div class="col-md-1 divcol">
+                                                <span class="rowcell">
+                                                    <input type="radio" ng-checked="isEntityMasterChecked(item.Id)" ng-click="selectMasterRow.entity = item">
+                                                </span>
+                                            </div>
+                                            <div class="col-md-5 divcol">
+                                                <span class="rowcell">{{ item.FieldName }}
+                                                </span>
+                                            </div>
+                                            <div class="col-md-4 divcol">
+                                                <span class="rowcell">
+                                                    <input type="radio" ng-checked="isDisplayNameChecked(item.Id)" ng-click="selectDisplayName.entity = item">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="column col-sm-1" style="margin-left: 10px; margin-top: 200px; text-align: center;">
+                        <button type="button" class="btn btn-info btn-xs"
+                            ng-disabled="CanNotCreateRelationship()" ng-click="CreateRelationship()">
+                            Create
+                        </button>
+                    </div>
+
+                    <form style="margin-left: 3px;" class="col-md-3 form-horizontal" role="form">
+                        <div class="form-group input-group-sm">
+                            <label style="margin-left: 10px;">{{ languages.RELATIONSHIP.CHILD_MODULE }}</label>
+                            <select class="form-control" style="margin: 0 5px; display: inline-block;"
+                                ng-model="childModuleId" ng-change="ChildModuleChanged()"
+                                ng-options="item.Id as item.DisplayName for item in childModules">
+                            </select>
+                        </div>
+                        <div class="form-group div-limited">
+                            <div class="divtable">
+                                <section class="row">
+                                    <div class="col-md-12">
+                                        <div class="headerrow">
+                                            <div class="col-md-1 divcol">
+                                            </div>
+                                            <div class="col-md-5 divcol">
+                                                <div class="headercell">
+                                                    {{ languages.ENTITY_FIELD.FIELD_NAME }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <div class="row ddactive" ng-repeat="(i,item) in entityFieldsChildModule | filter:{FieldName:FieldName}">
+                                    <div class="col-md-12 field">
+                                        <div class="gridrow">
+                                            <div class="col-md-1 divcol">
+                                                <span class="rowcell">
+                                                    <span title="true">
+                                                        <input type="radio" ng-checked="isEntityChildChecked(item.Id)" ng-click="selectChildRow.entity = item">
+                                                    </span>
+                                                </span>
+                                            </div>
+
+                                            <div class="col-md-5 divcol">
+                                                <span class="rowcell">{{ item.FieldName }}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="form-group">
+                    <div class="divtable">
+                        <section class="row">
+                            <div class="col-md-12">
+                                <div class="headerrow">
+                                    <div class="col-md-2 divcol">
+                                        <div class="headercell">
+                                            {{ languages.RELATIONSHIP.MASTER_NAME }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 divcol">
+                                        <div class="headercell">
+                                            {{ languages.RELATIONSHIP.CHILD_NAME }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 divcol">
+                                        <div class="headercell">
+                                            {{ languages.RELATIONSHIP.DISPLAY_NAME }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1 divcol">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="row ddactive" ng-repeat="relationship in modulesRelationship">
+                            <div class="col-md-12 field">
+                                <div class="gridrow">
+                                    <div class="col-md-2 divcol">
+                                        <span class="rowcell">{{ relationship.MasterFieldName }}</span>
+                                    </div>
+
+                                    <div class="col-md-2 divcol">
+                                        <span class="rowcell">{{ relationship.ChildFieldName }}</span>
+                                    </div>
+
+                                    <div class="col-md-2 divcol">
+                                        <span class="rowcell">{{ relationship.MasterDisplayColumn }}</span>
+                                    </div>
+
+                                    <div class="col-md-1 divcol">
+                                        <button type="button" class="btn btn-default btn-xs" tooltip="Delete Relationship" 
+                                            ng-click="DeleteRelationship(relationship.Id)">
+                                            <i class="glyphicon glyphicon-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

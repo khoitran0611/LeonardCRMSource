@@ -1,0 +1,11 @@
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\obj\Debug\Elinext.DataLib.csproj.CoreCompileInputs.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\obj\Debug\Elinext.DataLib.csprojResolveAssemblyReference.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\bin\Debug\Elinext.DataLib.dll.config
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\bin\Debug\Elinext.DataLib.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\bin\Debug\Elinext.DataLib.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\bin\Debug\EntityFramework.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\bin\Debug\EntityFramework.SqlServer.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\bin\Debug\EntityFramework.xml
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\bin\Debug\EntityFramework.SqlServer.xml
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\obj\Debug\Elinext.DataLib.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Elinext.DataLib\obj\Debug\Elinext.DataLib.pdb

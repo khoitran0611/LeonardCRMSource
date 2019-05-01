@@ -1,0 +1,17 @@
+﻿<div ng-controller="CustomersCtrl">
+    <div ng-switch on="subview">
+        <div ng-switch-when="list">
+            <div ng-include="'/appviews/Customer/managecustomers.html'">
+            </div>
+        </div>
+        <div ng-switch-when="addcustomer">
+            <div ng-include="'/appviews/Customer/detail.html'">
+            </div>
+        </div>
+        <div ng-switch-default>
+            <div ng-include="'/appviews/Customer/managecustomers.html'">
+            </div>
+           
+        </div>
+    </div>
+</div>

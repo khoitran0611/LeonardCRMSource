@@ -1,0 +1,133 @@
+﻿<div ng-controller="viewDetailCtrl">
+    <form class="form-horizontal" role="form" name="userForm" id="userForm">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <b>{{languages.VIEW.VIEW_COLUMN}}</b>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label" for="ddlModule">{{languages.VIEW.MODULE_NAME}}</label>
+                    <div class="col-sm-3 input-group-sm">
+                        <select class="form-control" ng-disabled="currentView.Id > 0" ng-model="currentView.ModuleId" ng-change="module_SelectChanged()"
+                                ng-options="item.Id as item.DisplayName for item in currentView.NameValues.modules"></select>
+                    </div>
+                    <label class="col-sm-1 control-label" for="txtViewName">{{languages.VIEW.VIEW_NAME}}</label>
+                    <div class="col-sm-3 input-group-sm">
+                        <input id="txtViewName" type="text"
+                               class="form-control" ng-model="currentView.ViewName" 
+                               data-validation-length="4-250" data-validation="length"
+                               data-validation-error-msg="{{languages.VIEW.NAME_REQUIRED}}" required>
+                    </div>
+                    <label class="col-sm-1 control-label">{{languages.VIEW.USER_ROLE_VIEW}}</label>
+                    <div class="col-sm-3 inpute-group-sm">
+                        <ui-select class="form-control" ng-model="currentView.UserRoleArray" multiple theme="bootstrap">
+                            <ui-select-match>{{$item.Description}}</ui-select-match>
+                            <ui-select-choices repeat="item.Id as item in roles | propsFilter: {Description: $select.search}">
+                                <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label"></label>
+                    <div class="col-sm-3">
+                        <label>{{languages.VIEW.AVAILABLE_COLUMNS}}</label>
+                    </div>
+                    <label class="col-sm-1 control-label"></label>
+                    <div class="col-sm-3">
+                        <label>{{languages.VIEW.COLUMNS_SELECTED}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-1 control-label"></label>
+                    <div class="col-xs-7 well">
+                        <ul class="nav nav-pills nav-stacked columncontainer fields-container"
+                            ui-sortable="sortableOptions1" ng-model="currentView.Eli_ViewColumns">
+                            <li class="field" ng-repeat="item in currentView.Eli_ViewColumns">
+                                <a>{{item.LabelDisplay}}
+                                    <span class="pull-right">
+                                                             <input type="checkbox" ng-model="item.Visible" ng-click="$event.stopPropagation()" />
+                                        <input type="text" ng-model="item.Width" 
+                                            style="width: 60px; margin: 3px; color: #000" 
+                                            tooltip-append-to-body="true" tooltip-placement="right" uib-tooltip="Width" />
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-show="currentView.Shared == true" class="form-group">
+                    <label class="col-sm-1 control-label" for="chkIsPublic">{{languages.VIEW.VIEW_PARENT}}</label>
+                    <div class="col-sm-3 input-group-sm">
+                        <select style="width: 100%;" cs-readonly="currentView.DefaultView" ui-select2="select2Options" multiple
+                                ng-model="currentView.Parent">
+                            <option ng-repeat="item in viewlist" value="{{ item.Id }}">{{ item.ViewName }}</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-1 control-label" for="chkIsActive">{{languages.VIEW.IS_ACTIVE}}</label>
+                    <div class="col-sm-1 input-group-sm" style="width: 40px">
+                        <input type="checkbox" id="chkIsActive"
+                               ng-model="currentView.IsActive" class="donotcallcheckbox">
+                    </div>
+                    <label class="col-sm-1 control-label" for="chkDefaultView">{{languages.VIEW.DEFAULT_VIEW}}</label>
+                    <div class="col-sm-1 input-group-sm" style="width: 40px">
+                        <input type="checkbox" id="chkDefaultView" ng-model="currentView.DefaultView" ng-change="defaultViewChange()" class="donotcallcheckbox">
+                    </div>
+                    <label class="col-sm-1 control-label" for="chkLoadChildView">{{languages.VIEW.LOAD_CHILD_VIEW}}</label>
+                    <div class="col-sm-1 input-group-sm" style="width: 40px">
+                        <input type="checkbox" id="chkLoadChildView" ng-change="loadChildViewChange()"
+                               ng-model="currentView.LoadChildView" class="donotcallcheckbox">
+                    </div>
+                    <label class="col-sm-1 control-label" for="chkLoadChildView">Sort Order</label>
+                    <div class="col-sm-1 input-group-sm">
+                        <input type="number" ng-model="currentView.SortOrder" class="form-control" data-validation="required"
+                               data-validation-error-msg="Required!" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-hide="currentView == null" ng-include=" '/appviews/dashboard/views/view-conditions.html' "></div>
+        <div ng-hide="currentView == null" class="panel panel-success">
+            <div class="panel-heading">
+                <b>{{languages.VIEW.VIEW_ORDER_BY}}</b>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-repeat="orderByCol in currentView.Eli_ViewOrderBy">
+                    <div class="col-sm-3 input-group-sm">
+                        <ui-select class="form-control" ng-model="orderByCol.FieldId" theme="select2" ng-change="orderByChange(orderByCol.FieldId)">
+                            <ui-select-match allow-clear="true">{{$select.selected.LabelDisplay}}</ui-select-match>
+                            <ui-select-choices repeat="item.FieldId as item in fieldsSortable | propsFilter: {LabelDisplay: $select.search}">
+                                <div ng-bind-html="item.LabelDisplay | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="col-sm-2 input-group-sm">
+                        <select class="form-control" ng-model="orderByCol.OrderDirection">
+                            <option value="Asc">{{languages.VIEW.ASCENDING}}</option>
+                            <option value="Desc">{{languages.VIEW.DESCENDING}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div ng-show="fieldsGroup.length > 0" class="panel panel-success">
+            <div class="panel-heading">
+                <b>{{languages.VIEW.VIEW_GROUP_BY}}</b>
+            </div>
+            <div class="panel-body">
+                <div class="form-group" ng-repeat="groupByCol in currentView.Eli_ViewGroupBy">
+                    <div class="col-sm-3 input-group-sm">
+                        <ui-select class="form-control" ng-model="groupByCol.FieldId" theme="select2" ng-change="groupByChange(groupByCol.FieldId)">
+                            <ui-select-match allow-clear="true">{{$select.selected.LabelDisplay}}</ui-select-match>
+                            <ui-select-choices repeat="item.FieldId as item in fieldsGroup | propsFilter: {LabelDisplay: $select.search}">
+                                <div ng-bind-html="item.LabelDisplay | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

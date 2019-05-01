@@ -1,0 +1,1 @@
+UPDATE Eli_RolesPermissions SET AllowCreate = 0 WHERE ModuleId = 3

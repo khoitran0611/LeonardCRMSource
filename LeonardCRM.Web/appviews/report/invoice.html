@@ -1,0 +1,75 @@
+﻿<div class="clear"></div>
+<div ng-controller="InvoiceReportCtrl">
+    <div class="row">
+        <form class="form-horizontal col-md-12" role="form">
+            <fieldset>
+                <legend>{{languages.REPORT.REPORT_PARAMETER}}</legend>
+            </fieldset>
+            <div class="form-group">
+                <label class="col-md-1 control-label">{{languages.INVOICES.STATUS}}</label>
+                <div class="col-md-2 input-group-sm">
+                    <select class="form-control" ng-model="reportObj.Status">
+                        <option value="0">{{ languages.INVOICES.ALL }}</option>
+                        <option ng-repeat="item in listValues" value="{{ item.Id }}">{{ item.Description }}</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">{{languages.INVOICES.CURRENCY}}</label>
+                <div class="col-md-2 input-group-sm">
+                    <select class="form-control" ng-model="reportObj.Currency" ng-change="currencyChanged()">
+                        <option ng-repeat="item in listCurrency" value="{{ item.Id }}">{{ item.Name + ' (' + item.Symbol + ')' }}</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">{{languages.REPORT.FROM_DATE}}</label>
+                <div class="col-md-2 input-group input-group-sm" style="width: 135px;float: left;">
+                    <input type="text" ng-model="reportObj.FromDate" is-open="opened1"
+                           class="form-control cal-xs" show-weeks="showWeeks"
+                           datepicker-popup="{{date_format}}"
+                           datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}"
+                           required />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+                <label class="col-md-1 control-label" style="width: 70px">{{languages.REPORT.TO_DATE}}</label>
+                <div class="col-md-2 input-group input-group-sm" style="width: 135px">
+                    <input type="text" ng-model="reportObj.ToDate" is-open="opened2"
+                           class="form-control cal-xs" show-weeks="showWeeks"
+                           datepicker-popup="{{date_format}}"
+                           datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}"
+                           required />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" style="width: 115px">{{languages.INVOICES.STAFF}}</label>
+                <div class="col-md-3 input-group-sm">
+                    <select ui-select2 style="width: 100%;" ng-model="staffs" data-placeholder="All"
+                            ng-options="item.Id as item.Name group by item.RoleName for item in users"
+                            multiple></select>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="updateStaff()"><i class="glyphicon glyphicon-stats"></i></button>
+                </div>
+                <label class="col-md-2 control-label" style="width: 130px">{{languages.INVOICES.CLIENT}}</label>
+                <div class="col-md-3 input-group-sm">
+                    <select ui-select2 style="width: 100%;" ng-model="clients" multiple data-placeholder="All">
+                        <option ng-repeat="item in customers" value="{{ item.Id }}">{{ item.Name }}</option>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-default btn-sm" ng-click="updateClient()"><i class="glyphicon glyphicon-stats"></i></button>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div id="staff" google-chart chart="staffChart" style="{{staffChart.cssStyle}}" on-ready="chartReady()" />
+                </div>
+                <div class="col-md-6">
+                    <div id="client" google-chart chart="clientChart" style="{{staffChart.cssStyle}}" on-ready="chartReady()" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

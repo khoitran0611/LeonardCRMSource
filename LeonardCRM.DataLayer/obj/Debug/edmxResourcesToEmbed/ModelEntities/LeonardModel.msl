@@ -1,0 +1,1538 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LeonardEntitiesStoreContainer" CdmEntityContainer="LeonardUSAEntities">
+    <FunctionImportMapping FunctionName="LeonardEntities.Store.SPLIT" FunctionImportName="SPLIT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.SPLIT_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetReferenceListValues" FunctionName="LeonardEntities.Store.GetReferenceListValues">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.GetReferenceListValues_Result">
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_AdvanceSearch" FunctionName="LeonardEntities.Store.sp_AdvanceSearch" />
+    <FunctionImportMapping FunctionImportName="sp_CreateUser" FunctionName="LeonardEntities.Store.sp_CreateUser" />
+    <FunctionImportMapping FunctionImportName="sp_CustomerReportByDays" FunctionName="LeonardEntities.Store.sp_CustomerReportByDays">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_CustomerReportByDays_Result">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_CustomerReportDashboard" FunctionName="LeonardEntities.Store.sp_CustomerReportDashboard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_CustomerReportDashboard_Result">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_DeleteUsers" FunctionName="LeonardEntities.Store.sp_DeleteUsers" />
+    <FunctionImportMapping FunctionImportName="sp_DeleteViews" FunctionName="LeonardEntities.Store.sp_DeleteViews" />
+    <FunctionImportMapping FunctionImportName="sp_FilterSystemAudit" FunctionName="LeonardEntities.Store.sp_FilterSystemAudit" />
+    <FunctionImportMapping FunctionImportName="sp_GetCustomersByUserId" FunctionName="LeonardEntities.Store.sp_GetCustomersByUserId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_GetCustomersByUserId_Result">
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetModulePermisstion" FunctionName="LeonardEntities.Store.sp_GetModulePermisstion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_GetModulePermisstion_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="ModuleParent" ColumnName="ModuleParent" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AllowRead" ColumnName="AllowRead" />
+          <ScalarProperty Name="AllowCreate" ColumnName="AllowCreate" />
+          <ScalarProperty Name="AllowEdit" ColumnName="AllowEdit" />
+          <ScalarProperty Name="AllowDelete" ColumnName="AllowDelete" />
+          <ScalarProperty Name="AllowImport" ColumnName="AllowImport" />
+          <ScalarProperty Name="AllowExport" ColumnName="AllowExport" />
+          <ScalarProperty Name="AllowCreateView" ColumnName="AllowCreateView" />
+          <ScalarProperty Name="Dashboard" ColumnName="Dashboard" />
+          <ScalarProperty Name="ModuleCreateView" ColumnName="ModuleCreateView" />
+          <ScalarProperty Name="ModuleAllowImport" ColumnName="ModuleAllowImport" />
+          <ScalarProperty Name="ModuleAllowExport" ColumnName="ModuleAllowExport" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetModulesByRole" FunctionName="LeonardEntities.Store.sp_GetModulesByRole" />
+    <FunctionImportMapping FunctionImportName="sp_GetRoles" FunctionName="LeonardEntities.Store.sp_GetRoles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_GetRoles_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="IsHostAdmin" ColumnName="IsHostAdmin" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetRolesFieldsByRoleId" FunctionName="LeonardEntities.Store.sp_GetRolesFieldsByRoleId">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_GetRolesFieldsByRoleId_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="FId" ColumnName="FId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetSubView" FunctionName="LeonardEntities.Store.sp_GetSubView" />
+    <FunctionImportMapping FunctionImportName="sp_GetTotalForView" FunctionName="LeonardEntities.Store.sp_GetTotalForView" />
+    <FunctionImportMapping FunctionImportName="sp_GetView" FunctionName="LeonardEntities.Store.sp_GetView" />
+    <FunctionImportMapping FunctionImportName="sp_GetViewCustom" FunctionName="LeonardEntities.Store.sp_GetViewCustom" />
+    <FunctionImportMapping FunctionImportName="sp_InvoiceReportByDays" FunctionName="LeonardEntities.Store.sp_InvoiceReportByDays">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_InvoiceReportByDays_Result">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_InvoiceReportDashboard" FunctionName="LeonardEntities.Store.sp_InvoiceReportDashboard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_InvoiceReportDashboard_Result">
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_InvoiceReportPerDays" FunctionName="LeonardEntities.Store.sp_InvoiceReportPerDays">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_InvoiceReportPerDays_Result">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="TotalNew" ColumnName="TotalNew" />
+          <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_OrderReportByDays" FunctionName="LeonardEntities.Store.sp_OrderReportByDays">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_OrderReportByDays_Result">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_OrderReportDashboard" FunctionName="LeonardEntities.Store.sp_OrderReportDashboard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_OrderReportDashboard_Result">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="fn_GetRolesHierachy" FunctionName="LeonardEntities.Store.fn_GetRolesHierachy" />
+    <EntitySetMapping Name="Eli_Currency">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Currency">
+        <MappingFragment StoreEntitySet="Eli_Currency">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="BaseCurrency" ColumnName="BaseCurrency" />
+          <ScalarProperty Name="ConversionRate" ColumnName="ConversionRate" />
+          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_CurrencyNames">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_CurrencyNames">
+        <MappingFragment StoreEntitySet="Eli_CurrencyNames">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_DataTypes">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_DataTypes">
+        <MappingFragment StoreEntitySet="Eli_DataTypes">
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="IsImage" ColumnName="IsImage" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="IsUrl" ColumnName="IsUrl" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsTime" ColumnName="IsTime" />
+          <ScalarProperty Name="IsTextArea" ColumnName="IsTextArea" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsText" ColumnName="IsText" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_EntityFields">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_EntityFields">
+        <MappingFragment StoreEntitySet="Eli_EntityFields">
+          <ScalarProperty Name="IsLoadReference" ColumnName="IsLoadReference" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="RegularExpression" ColumnName="RegularExpression" />
+          <ScalarProperty Name="IsTextShow" ColumnName="IsTextShow" />
+          <ScalarProperty Name="IsWebform" ColumnName="IsWebform" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ForeignKey" ColumnName="ForeignKey" />
+          <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
+          <ScalarProperty Name="IsUnique" ColumnName="IsUnique" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="AllowGroup" ColumnName="AllowGroup" />
+          <ScalarProperty Name="Sortable" ColumnName="Sortable" />
+          <ScalarProperty Name="Searchable" ColumnName="Searchable" />
+          <ScalarProperty Name="Deletable" ColumnName="Deletable" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="AdvanceSearch" ColumnName="AdvanceSearch" />
+          <ScalarProperty Name="ListSql" ColumnName="ListSql" />
+          <ScalarProperty Name="ListNameId" ColumnName="ListNameId" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="DataLength" ColumnName="DataLength" />
+          <ScalarProperty Name="MinLength" ColumnName="MinLength" />
+          <ScalarProperty Name="DataTypeId" ColumnName="DataTypeId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_FieldData">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_FieldData">
+        <MappingFragment StoreEntitySet="Eli_FieldData">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="MaterRecordId" ColumnName="MaterRecordId" />
+          <ScalarProperty Name="FieldData" ColumnName="FieldData" />
+          <ScalarProperty Name="CustFieldId" ColumnName="CustFieldId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_FieldsSection">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_FieldsSection">
+        <MappingFragment StoreEntitySet="Eli_FieldsSection">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_FieldsSectionDetail">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_FieldsSectionDetail">
+        <MappingFragment StoreEntitySet="Eli_FieldsSectionDetail">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LeftSide" ColumnName="LeftSide" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ListDependency">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ListDependency">
+        <MappingFragment StoreEntitySet="Eli_ListDependency">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ChildFieldId" ColumnName="ChildFieldId" />
+          <ScalarProperty Name="MasterFieldId" ColumnName="MasterFieldId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ListDependencyDetail">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ListDependencyDetail">
+        <MappingFragment StoreEntitySet="Eli_ListDependencyDetail">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ChildValueId" ColumnName="ChildValueId" />
+          <ScalarProperty Name="MasterValueId" ColumnName="MasterValueId" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ListNames">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ListNames">
+        <MappingFragment StoreEntitySet="Eli_ListNames">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Module" ColumnName="Module" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ListName" ColumnName="ListName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ListValues">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ListValues">
+        <MappingFragment StoreEntitySet="Eli_ListValues">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Editable" ColumnName="Editable" />
+          <ScalarProperty Name="ListOrder" ColumnName="ListOrder" />
+          <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+          <ScalarProperty Name="ListNameId" ColumnName="ListNameId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_Log">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Log">
+        <MappingFragment StoreEntitySet="Eli_Log">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Exception" ColumnName="Exception" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="Logger" ColumnName="Logger" />
+          <ScalarProperty Name="Level" ColumnName="Level" />
+          <ScalarProperty Name="Thread" ColumnName="Thread" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_LoginLog">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_LoginLog">
+        <MappingFragment StoreEntitySet="Eli_LoginLog">
+          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_MailTemplates">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_MailTemplates">
+        <MappingFragment StoreEntitySet="Eli_MailTemplates">
+          <ScalarProperty Name="TemplateContent" ColumnName="TemplateContent" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ModuleRelationship">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ModuleRelationship">
+        <MappingFragment StoreEntitySet="Eli_ModuleRelationship">
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="MasterDisplayColumn" ColumnName="MasterDisplayColumn" />
+          <ScalarProperty Name="ChildFieldId" ColumnName="ChildFieldId" />
+          <ScalarProperty Name="MasterFieldId" ColumnName="MasterFieldId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_Modules">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Modules">
+        <MappingFragment StoreEntitySet="Eli_Modules">
+          <ScalarProperty Name="IsWebform" ColumnName="IsWebform" />
+          <ScalarProperty Name="AllowExport" ColumnName="AllowExport" />
+          <ScalarProperty Name="AllowImport" ColumnName="AllowImport" />
+          <ScalarProperty Name="AllowCreateView" ColumnName="AllowCreateView" />
+          <ScalarProperty Name="ReportModule" ColumnName="ReportModule" />
+          <ScalarProperty Name="NeedPickList" ColumnName="NeedPickList" />
+          <ScalarProperty Name="RelatedTo" ColumnName="RelatedTo" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+          <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+          <ScalarProperty Name="DefaultTable" ColumnName="DefaultTable" />
+          <ScalarProperty Name="Dashboard" ColumnName="Dashboard" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FeatureName" ColumnName="FeatureName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_Notes">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Notes">
+        <MappingFragment StoreEntitySet="Eli_Notes">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="NoteDate" ColumnName="NoteDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_OnlineUsers">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_OnlineUsers">
+        <MappingFragment StoreEntitySet="Eli_OnlineUsers">
+          <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+          <ScalarProperty Name="LoggedTime" ColumnName="LoggedTime" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_Registry">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Registry">
+        <MappingFragment StoreEntitySet="Eli_Registry">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RegistryID" ColumnName="RegistryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_RolesFields">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_RolesFields">
+        <MappingFragment StoreEntitySet="Eli_RolesFields">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_RolesPermissions">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_RolesPermissions">
+        <MappingFragment StoreEntitySet="Eli_RolesPermissions">
+          <ScalarProperty Name="AllowCreateView" ColumnName="AllowCreateView" />
+          <ScalarProperty Name="AllowExport" ColumnName="AllowExport" />
+          <ScalarProperty Name="AllowImport" ColumnName="AllowImport" />
+          <ScalarProperty Name="AllowDelete" ColumnName="AllowDelete" />
+          <ScalarProperty Name="AllowEdit" ColumnName="AllowEdit" />
+          <ScalarProperty Name="AllowCreate" ColumnName="AllowCreate" />
+          <ScalarProperty Name="AllowRead" ColumnName="AllowRead" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_SysAudit">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_SysAudit">
+        <MappingFragment StoreEntitySet="Eli_SysAudit">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ValueAfter" ColumnName="ValueAfter" />
+          <ScalarProperty Name="ValueBefore" ColumnName="ValueBefore" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="MasterRecordId" ColumnName="MasterRecordId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_Tax">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Tax">
+        <MappingFragment StoreEntitySet="Eli_Tax">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TaxValue" ColumnName="TaxValue" />
+          <ScalarProperty Name="TaxName" ColumnName="TaxName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_TempViews">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_TempViews">
+        <MappingFragment StoreEntitySet="Eli_TempViews">
+          <ScalarProperty Name="CollapseStatus" ColumnName="CollapseStatus" />
+          <ScalarProperty Name="IsCollapsed" ColumnName="IsCollapsed" />
+          <ScalarProperty Name="ViewParentId" ColumnName="ViewParentId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="DefaultView" ColumnName="DefaultView" />
+          <ScalarProperty Name="LoadChildView" ColumnName="LoadChildView" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="QueryScript" ColumnName="QueryScript" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="Shared" ColumnName="Shared" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="ViewName" ColumnName="ViewName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ViewColumns">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ViewColumns">
+        <MappingFragment StoreEntitySet="Eli_ViewColumns">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsCommand" ColumnName="IsCommand" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ViewConditions">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ViewConditions">
+        <MappingFragment StoreEntitySet="Eli_ViewConditions">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsAND" ColumnName="IsAND" />
+          <ScalarProperty Name="FilterValue1" ColumnName="FilterValue1" />
+          <ScalarProperty Name="FilterValue" ColumnName="FilterValue" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ViewCustom">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ViewCustom">
+        <MappingFragment StoreEntitySet="Eli_ViewCustom">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="MasterViewId" ColumnName="MasterViewId" />
+          <ScalarProperty Name="GroupBy" ColumnName="GroupBy" />
+          <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+          <ScalarProperty Name="PageSize" ColumnName="PageSize" />
+          <ScalarProperty Name="DefaultFilterStr" ColumnName="DefaultFilterStr" />
+          <ScalarProperty Name="WhereClause" ColumnName="WhereClause" />
+          <ScalarProperty Name="FromClause" ColumnName="FromClause" />
+          <ScalarProperty Name="SelectClause" ColumnName="SelectClause" />
+          <ScalarProperty Name="DefaultView" ColumnName="DefaultView" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="ViewName" ColumnName="ViewName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ViewCustomColumns">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ViewCustomColumns">
+        <MappingFragment StoreEntitySet="Eli_ViewCustomColumns">
+          <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="TableAlias" ColumnName="TableAlias" />
+          <ScalarProperty Name="ColumnAlias" ColumnName="ColumnAlias" />
+          <ScalarProperty Name="DefaultWidth" ColumnName="DefaultWidth" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="ViewCustomId" ColumnName="ViewCustomId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ViewCustomConditions">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ViewCustomConditions">
+        <MappingFragment StoreEntitySet="Eli_ViewCustomConditions">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsAND" ColumnName="IsAND" />
+          <ScalarProperty Name="FilterValue1" ColumnName="FilterValue1" />
+          <ScalarProperty Name="FilterValue" ColumnName="FilterValue" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ViewGroupBy">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ViewGroupBy">
+        <MappingFragment StoreEntitySet="Eli_ViewGroupBy">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_ViewOrderBy">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_ViewOrderBy">
+        <MappingFragment StoreEntitySet="Eli_ViewOrderBy">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="OrderDirection" ColumnName="OrderDirection" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_Views">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Views">
+        <MappingFragment StoreEntitySet="Eli_Views">
+          <ScalarProperty Name="CollapseStatus" ColumnName="CollapseStatus" />
+          <ScalarProperty Name="IsCollapsed" ColumnName="IsCollapsed" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="MasterViewId" ColumnName="MasterViewId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="PageSize" ColumnName="PageSize" />
+          <ScalarProperty Name="DefaultView" ColumnName="DefaultView" />
+          <ScalarProperty Name="LoadChildView" ColumnName="LoadChildView" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="QueryScript" ColumnName="QueryScript" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="Shared" ColumnName="Shared" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="ViewName" ColumnName="ViewName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesContractStates">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesContractState">
+        <MappingFragment StoreEntitySet="SalesContractState">
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+          <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesContractTemplates">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesContractTemplate">
+        <MappingFragment StoreEntitySet="SalesContractTemplates">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TemplateContent" ColumnName="TemplateContent" />
+          <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesCustomerUsers">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesCustomerUser">
+        <MappingFragment StoreEntitySet="SalesCustomerUsers">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesDocuments">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesDocument">
+        <MappingFragment StoreEntitySet="SalesDocuments">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Folder" ColumnName="Folder" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesInvoices">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesInvoice">
+        <MappingFragment StoreEntitySet="SalesInvoices">
+          <ScalarProperty Name="ResponsibleUsers" ColumnName="ResponsibleUsers" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="InvTemplateId" ColumnName="InvTemplateId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesInvServices">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesInvService">
+        <MappingFragment StoreEntitySet="SalesInvServices">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="InvId" ColumnName="InvId" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesInvTaxes">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesInvTax">
+        <MappingFragment StoreEntitySet="SalesInvTaxes">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TaxValue" ColumnName="TaxValue" />
+          <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesInvTemplates">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesInvTemplate">
+        <MappingFragment StoreEntitySet="SalesInvTemplates">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TemplateContent" ColumnName="TemplateContent" />
+          <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrdersUsers">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesOrdersUser">
+        <MappingFragment StoreEntitySet="SalesOrdersUsers">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifedDate" ColumnName="ModifedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwAllCustomers">
+      <EntityTypeMapping TypeName="LeonardEntities.vwAllCustomer">
+        <MappingFragment StoreEntitySet="vwAllCustomers">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwClients">
+      <EntityTypeMapping TypeName="LeonardEntities.vwClient">
+        <MappingFragment StoreEntitySet="vwClients">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ResponsibleUser" ColumnName="ResponsibleUser" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwCustomViewColumns">
+      <EntityTypeMapping TypeName="LeonardEntities.vwCustomViewColumn">
+        <MappingFragment StoreEntitySet="vwCustomViewColumns">
+          <ScalarProperty Name="DefaultWidth" ColumnName="DefaultWidth" />
+          <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="DataType" ColumnName="DataType" />
+          <ScalarProperty Name="ForeignKey" ColumnName="ForeignKey" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="TableAlias" ColumnName="TableAlias" />
+          <ScalarProperty Name="ColumnAlias" ColumnName="ColumnAlias" />
+          <ScalarProperty Name="Deletable" ColumnName="Deletable" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="AllowGroup" ColumnName="AllowGroup" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="Searchable" ColumnName="Searchable" />
+          <ScalarProperty Name="Sortable" ColumnName="Sortable" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="IsImage" ColumnName="IsImage" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="IsUrl" ColumnName="IsUrl" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsTime" ColumnName="IsTime" />
+          <ScalarProperty Name="IsTextArea" ColumnName="IsTextArea" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsText" ColumnName="IsText" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ViewCustomId" ColumnName="ViewCustomId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwEntityFieldDatas">
+      <EntityTypeMapping TypeName="LeonardEntities.vwEntityFieldData">
+        <MappingFragment StoreEntitySet="vwEntityFieldData">
+          <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+          <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+          <ScalarProperty Name="FieldOrder" ColumnName="FieldOrder" />
+          <ScalarProperty Name="LeftSide" ColumnName="LeftSide" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ForeignKey" ColumnName="ForeignKey" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="ListNameId" ColumnName="ListNameId" />
+          <ScalarProperty Name="ListSql" ColumnName="ListSql" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Deletable" ColumnName="Deletable" />
+          <ScalarProperty Name="DataLength" ColumnName="DataLength" />
+          <ScalarProperty Name="MinLength" ColumnName="MinLength" />
+          <ScalarProperty Name="DataTypeId" ColumnName="DataTypeId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="IsImage" ColumnName="IsImage" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="IsUrl" ColumnName="IsUrl" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsTime" ColumnName="IsTime" />
+          <ScalarProperty Name="IsTextArea" ColumnName="IsTextArea" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsText" ColumnName="IsText" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwFieldNameDataTypes">
+      <EntityTypeMapping TypeName="LeonardEntities.vwFieldNameDataType">
+        <MappingFragment StoreEntitySet="vwFieldNameDataTypes">
+          <ScalarProperty Name="IsTextShow" ColumnName="IsTextShow" />
+          <ScalarProperty Name="Deletable" ColumnName="Deletable" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Show" ColumnName="Show" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="AllowGroup" ColumnName="AllowGroup" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="Searchable" ColumnName="Searchable" />
+          <ScalarProperty Name="Sortable" ColumnName="Sortable" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="IsImage" ColumnName="IsImage" />
+          <ScalarProperty Name="DefaultTable" ColumnName="DefaultTable" />
+          <ScalarProperty Name="LoadChildView" ColumnName="LoadChildView" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="IsUrl" ColumnName="IsUrl" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsTime" ColumnName="IsTime" />
+          <ScalarProperty Name="IsTextArea" ColumnName="IsTextArea" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsText" ColumnName="IsText" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="IsCommand" ColumnName="IsCommand" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwFields">
+      <EntityTypeMapping TypeName="LeonardEntities.vwField">
+        <MappingFragment StoreEntitySet="vwFields">
+          <ScalarProperty Name="AllowGroup" ColumnName="AllowGroup" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="Sortable" ColumnName="Sortable" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="AdvanceSearch" ColumnName="AdvanceSearch" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwFieldsDataTypes">
+      <EntityTypeMapping TypeName="LeonardEntities.vwFieldsDataType">
+        <MappingFragment StoreEntitySet="vwFieldsDataType">
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="IsTextShow" ColumnName="IsTextShow" />
+          <ScalarProperty Name="RegularExpression" ColumnName="RegularExpression" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="ForeignKey" ColumnName="ForeignKey" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="Deletable" ColumnName="Deletable" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="PrimaryKey" ColumnName="PrimaryKey" />
+          <ScalarProperty Name="IsUnique" ColumnName="IsUnique" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="DataLength" ColumnName="DataLength" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="DataTypeId" ColumnName="DataTypeId" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="IsUrl" ColumnName="IsUrl" />
+          <ScalarProperty Name="IsEmail" ColumnName="IsEmail" />
+          <ScalarProperty Name="IsTime" ColumnName="IsTime" />
+          <ScalarProperty Name="IsTextArea" ColumnName="IsTextArea" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsText" ColumnName="IsText" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwListNameValues">
+      <EntityTypeMapping TypeName="LeonardEntities.vwListNameValue">
+        <MappingFragment StoreEntitySet="vwListNameValues">
+          <ScalarProperty Name="ListOrder" ColumnName="ListOrder" />
+          <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+          <ScalarProperty Name="ListNameId" ColumnName="ListNameId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwModuleEnittyRelationships">
+      <EntityTypeMapping TypeName="LeonardEntities.vwModuleEnittyRelationship">
+        <MappingFragment StoreEntitySet="vwModuleEnittyRelationships">
+          <ScalarProperty Name="DataTypeId" ColumnName="DataTypeId" />
+          <ScalarProperty Name="ChildModule" ColumnName="ChildModule" />
+          <ScalarProperty Name="MasterModule" ColumnName="MasterModule" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="ChildDisplayColumn" ColumnName="ChildDisplayColumn" />
+          <ScalarProperty Name="ChildDefaultTable" ColumnName="ChildDefaultTable" />
+          <ScalarProperty Name="ChildModuleId" ColumnName="ChildModuleId" />
+          <ScalarProperty Name="ChildForeignKey" ColumnName="ChildForeignKey" />
+          <ScalarProperty Name="ChildFieldName" ColumnName="ChildFieldName" />
+          <ScalarProperty Name="ChildId" ColumnName="ChildId" />
+          <ScalarProperty Name="MasterAlias" ColumnName="MasterAlias" />
+          <ScalarProperty Name="MasterDisplayColumn" ColumnName="MasterDisplayColumn" />
+          <ScalarProperty Name="MasterDefaultTable" ColumnName="MasterDefaultTable" />
+          <ScalarProperty Name="MasterModuleId" ColumnName="MasterModuleId" />
+          <ScalarProperty Name="MasterForeignKey" ColumnName="MasterForeignKey" />
+          <ScalarProperty Name="MasterFieldName" ColumnName="MasterFieldName" />
+          <ScalarProperty Name="MasterId" ColumnName="MasterId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwModuleEntityFields">
+      <EntityTypeMapping TypeName="LeonardEntities.vwModuleEntityField">
+        <MappingFragment StoreEntitySet="vwModuleEntityFields">
+          <ScalarProperty Name="IsTextShow" ColumnName="IsTextShow" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="Deletable" ColumnName="Deletable" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="DefaultTable" ColumnName="DefaultTable" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="ForeignKey" ColumnName="ForeignKey" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwModuleHasEntityFields">
+      <EntityTypeMapping TypeName="LeonardEntities.vwModuleHasEntityField">
+        <MappingFragment StoreEntitySet="vwModuleHasEntityFields">
+          <ScalarProperty Name="IsWebform" ColumnName="IsWebform" />
+          <ScalarProperty Name="NeedPickList" ColumnName="NeedPickList" />
+          <ScalarProperty Name="RelatedTo" ColumnName="RelatedTo" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+          <ScalarProperty Name="DefaultTable" ColumnName="DefaultTable" />
+          <ScalarProperty Name="Dashboard" ColumnName="Dashboard" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FeatureName" ColumnName="FeatureName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwModules">
+      <EntityTypeMapping TypeName="LeonardEntities.vwModule">
+        <MappingFragment StoreEntitySet="vwModules">
+          <ScalarProperty Name="AllowExport" ColumnName="AllowExport" />
+          <ScalarProperty Name="AllowImport" ColumnName="AllowImport" />
+          <ScalarProperty Name="AllowCreateView" ColumnName="AllowCreateView" />
+          <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+          <ScalarProperty Name="NeedPickList" ColumnName="NeedPickList" />
+          <ScalarProperty Name="ReportModule" ColumnName="ReportModule" />
+          <ScalarProperty Name="DefaultViewId" ColumnName="DefaultViewId" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+          <ScalarProperty Name="DefaultTable" ColumnName="DefaultTable" />
+          <ScalarProperty Name="Dashboard" ColumnName="Dashboard" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="FeatureName" ColumnName="FeatureName" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwOrderCustomers">
+      <EntityTypeMapping TypeName="LeonardEntities.vwOrderCustomer">
+        <MappingFragment StoreEntitySet="vwOrderCustomer">
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwPicklistDependencies">
+      <EntityTypeMapping TypeName="LeonardEntities.vwPicklistDependency">
+        <MappingFragment StoreEntitySet="vwPicklistDependency">
+          <ScalarProperty Name="ChildValueId" ColumnName="ChildValueId" />
+          <ScalarProperty Name="MasterValueId" ColumnName="MasterValueId" />
+          <ScalarProperty Name="ChildFieldId" ColumnName="ChildFieldId" />
+          <ScalarProperty Name="MasterFieldId" ColumnName="MasterFieldId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwRegistries">
+      <EntityTypeMapping TypeName="LeonardEntities.vwRegistry">
+        <MappingFragment StoreEntitySet="vwRegistry">
+          <ScalarProperty Name="RegistryID" ColumnName="RegistryID" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwSystmAudits">
+      <EntityTypeMapping TypeName="LeonardEntities.vwSystmAudit">
+        <MappingFragment StoreEntitySet="vwSystmAudit">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ValueAfter" ColumnName="ValueAfter" />
+          <ScalarProperty Name="ValueBefore" ColumnName="ValueBefore" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="MasterRecordId" ColumnName="MasterRecordId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="Module" ColumnName="Module" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwUserRoles">
+      <EntityTypeMapping TypeName="LeonardEntities.vwUserRole">
+        <MappingFragment StoreEntitySet="vwUserRoles">
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesCustReferences">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesCustReference">
+        <MappingFragment StoreEntitySet="SalesCustReferences">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwViewMenus">
+      <EntityTypeMapping TypeName="LeonardEntities.vwViewMenu">
+        <MappingFragment StoreEntitySet="vwViewMenu">
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="DefaultView" ColumnName="DefaultView" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Shared" ColumnName="Shared" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="ViewId" ColumnName="ViewId" />
+          <ScalarProperty Name="ViewName" ColumnName="ViewName" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesCustomers">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesCustomer">
+        <MappingFragment StoreEntitySet="SalesCustomer">
+          <ScalarProperty Name="IsSameMailingAddress" ColumnName="IsSameMailingAddress" />
+          <ScalarProperty Name="CustomerInitials" ColumnName="CustomerInitials" />
+          <ScalarProperty Name="IncomeExplanation" ColumnName="IncomeExplanation" />
+          <ScalarProperty Name="SelfEmployed" ColumnName="SelfEmployed" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ResponsibleUsers" ColumnName="ResponsibleUsers" />
+          <ScalarProperty Name="BusinessSince" ColumnName="BusinessSince" />
+          <ScalarProperty Name="TypeOfBusiness" ColumnName="TypeOfBusiness" />
+          <ScalarProperty Name="CoSupervisor" ColumnName="CoSupervisor" />
+          <ScalarProperty Name="CoPhone" ColumnName="CoPhone" />
+          <ScalarProperty Name="CoSince" ColumnName="CoSince" />
+          <ScalarProperty Name="CoEmployer" ColumnName="CoEmployer" />
+          <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Since" ColumnName="Since" />
+          <ScalarProperty Name="Employer" ColumnName="Employer" />
+          <ScalarProperty Name="CoEmail" ColumnName="CoEmail" />
+          <ScalarProperty Name="CoCellPhone" ColumnName="CoCellPhone" />
+          <ScalarProperty Name="CoDriverLicense" ColumnName="CoDriverLicense" />
+          <ScalarProperty Name="CoSocialNum" ColumnName="CoSocialNum" />
+          <ScalarProperty Name="CoDateOfBirth" ColumnName="CoDateOfBirth" />
+          <ScalarProperty Name="CoName" ColumnName="CoName" />
+          <ScalarProperty Name="EnrollAutoPay" ColumnName="EnrollAutoPay" />
+          <ScalarProperty Name="SavingAccount" ColumnName="SavingAccount" />
+          <ScalarProperty Name="CheckingAccount" ColumnName="CheckingAccount" />
+          <ScalarProperty Name="LandlordPhone" ColumnName="LandlordPhone" />
+          <ScalarProperty Name="LandlordName" ColumnName="LandlordName" />
+          <ScalarProperty Name="LandType" ColumnName="LandType" />
+          <ScalarProperty Name="ResidenceType" ColumnName="ResidenceType" />
+          <ScalarProperty Name="AtAddressSince" ColumnName="AtAddressSince" />
+          <ScalarProperty Name="MailingZip" ColumnName="MailingZip" />
+          <ScalarProperty Name="MailingState" ColumnName="MailingState" />
+          <ScalarProperty Name="MailingCity" ColumnName="MailingCity" />
+          <ScalarProperty Name="MailingStreet" ColumnName="MailingStreet" />
+          <ScalarProperty Name="PhysicalZip" ColumnName="PhysicalZip" />
+          <ScalarProperty Name="PhysicalState" ColumnName="PhysicalState" />
+          <ScalarProperty Name="PhysicalCity" ColumnName="PhysicalCity" />
+          <ScalarProperty Name="PhysicalStreet" ColumnName="PhysicalStreet" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+          <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+          <ScalarProperty Name="DriverLicense" ColumnName="DriverLicense" />
+          <ScalarProperty Name="SocialNum" ColumnName="SocialNum" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_GetAllOverdueApps" FunctionName="LeonardEntities.Store.sp_GetAllOverdueApps">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="LeonardEntities.sp_GetAllOverdueApps_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CapitalizationPeriod" ColumnName="CapitalizationPeriod" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="vwViewColumns">
+      <EntityTypeMapping TypeName="LeonardEntities.vwViewColumn">
+        <MappingFragment StoreEntitySet="vwViewColumns">
+          <ScalarProperty Name="IsLoadReference" ColumnName="IsLoadReference" />
+          <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+          <ScalarProperty Name="IsTextShow" ColumnName="IsTextShow" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Locked" ColumnName="Locked" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="AllowGroup" ColumnName="AllowGroup" />
+          <ScalarProperty Name="IsCurrency" ColumnName="IsCurrency" />
+          <ScalarProperty Name="Sortable" ColumnName="Sortable" />
+          <ScalarProperty Name="IsInteger" ColumnName="IsInteger" />
+          <ScalarProperty Name="IsDecimal" ColumnName="IsDecimal" />
+          <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="AdvanceSearch" ColumnName="AdvanceSearch" />
+          <ScalarProperty Name="ListSql" ColumnName="ListSql" />
+          <ScalarProperty Name="ForeignKey" ColumnName="ForeignKey" />
+          <ScalarProperty Name="LabelDisplay" ColumnName="LabelDisplay" />
+          <ScalarProperty Name="ListNameId" ColumnName="ListNameId" />
+          <ScalarProperty Name="IsCheckBox" ColumnName="IsCheckBox" />
+          <ScalarProperty Name="IsMultiSelecttBox" ColumnName="IsMultiSelecttBox" />
+          <ScalarProperty Name="IsList" ColumnName="IsList" />
+          <ScalarProperty Name="IsDate" ColumnName="IsDate" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwApplications">
+      <EntityTypeMapping TypeName="LeonardEntities.vwApplication">
+        <MappingFragment StoreEntitySet="vwApplication">
+          <ScalarProperty Name="ResponsibleUsers" ColumnName="ResponsibleUsers" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="StoreNumber" ColumnName="StoreNumber" />
+          <ScalarProperty Name="TotalMonthly" ColumnName="TotalMonthly" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_Roles">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_Roles">
+        <MappingFragment StoreEntitySet="Eli_Roles">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsHostAdmin" ColumnName="IsHostAdmin" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrders">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesOrder">
+        <MappingFragment StoreEntitySet="SalesOrder">
+          <ScalarProperty Name="IsSold" ColumnName="IsSold" />
+          <ScalarProperty Name="DriverAssigned" ColumnName="DriverAssigned" />
+          <ScalarProperty Name="RampSalePrice" ColumnName="RampSalePrice" />
+          <ScalarProperty Name="SalesTaxPercent" ColumnName="SalesTaxPercent" />
+          <ScalarProperty Name="IsApproveOrder" ColumnName="IsApproveOrder" />
+          <ScalarProperty Name="DisapprovedReason" ColumnName="DisapprovedReason" />
+          <ScalarProperty Name="PromotionAmt" ColumnName="PromotionAmt" />
+          <ScalarProperty Name="IsAddPromotion" ColumnName="IsAddPromotion" />
+          <ScalarProperty Name="NumberOfPayment" ColumnName="NumberOfPayment" />
+          <ScalarProperty Name="SaleTax" ColumnName="SaleTax" />
+          <ScalarProperty Name="TotalPoint" ColumnName="TotalPoint" />
+          <ScalarProperty Name="IsFinalize" ColumnName="IsFinalize" />
+          <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+          <ScalarProperty Name="RentToOwn" ColumnName="RentToOwn" />
+          <ScalarProperty Name="POSTicketNumber" ColumnName="POSTicketNumber" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ResponsibleUsers" ColumnName="ResponsibleUsers" />
+          <ScalarProperty Name="CoSignatureIP" ColumnName="CoSignatureIP" />
+          <ScalarProperty Name="CoSignatureDate" ColumnName="CoSignatureDate" />
+          <ScalarProperty Name="CoSignature" ColumnName="CoSignature" />
+          <ScalarProperty Name="SignatureIP" ColumnName="SignatureIP" />
+          <ScalarProperty Name="SignatureDate" ColumnName="SignatureDate" />
+          <ScalarProperty Name="LesseeSignature" ColumnName="LesseeSignature" />
+          <ScalarProperty Name="CapitalizationPeriod" ColumnName="CapitalizationPeriod" />
+          <ScalarProperty Name="RampPartNumber" ColumnName="RampPartNumber" />
+          <ScalarProperty Name="TotalMonthly" ColumnName="TotalMonthly" />
+          <ScalarProperty Name="RampTax" ColumnName="RampTax" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="RampReduction" ColumnName="RampReduction" />
+          <ScalarProperty Name="ReductionPayment" ColumnName="ReductionPayment" />
+          <ScalarProperty Name="RampPaidAtSign" ColumnName="RampPaidAtSign" />
+          <ScalarProperty Name="PaidAtSigning" ColumnName="PaidAtSigning" />
+          <ScalarProperty Name="MonthlyPayment2" ColumnName="MonthlyPayment2" />
+          <ScalarProperty Name="MonthlyPayment1" ColumnName="MonthlyPayment1" />
+          <ScalarProperty Name="IsNewPart" ColumnName="IsNewPart" />
+          <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="PartNumber" ColumnName="PartNumber" />
+          <ScalarProperty Name="IsOldCustomer" ColumnName="IsOldCustomer" />
+          <ScalarProperty Name="StoreNumber" ColumnName="StoreNumber" />
+          <ScalarProperty Name="GPOrderNumber" ColumnName="GPOrderNumber" />
+          <ScalarProperty Name="PromoCode" ColumnName="PromoCode" />
+          <ScalarProperty Name="AcceptDate" ColumnName="AcceptDate" />
+          <ScalarProperty Name="GPCustomerID" ColumnName="GPCustomerID" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrderCompletes">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesOrderComplete">
+        <MappingFragment StoreEntitySet="SalesOrderComplete">
+          <ScalarProperty Name="LeftVoiceMail" ColumnName="LeftVoiceMail" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="DeliveryPersonInitials" ColumnName="DeliveryPersonInitials" />
+          <ScalarProperty Name="DeliverSignIP" ColumnName="DeliverSignIP" />
+          <ScalarProperty Name="DeliverSignDate" ColumnName="DeliverSignDate" />
+          <ScalarProperty Name="DeliverSignature" ColumnName="DeliverSignature" />
+          <ScalarProperty Name="ManagerSignIP" ColumnName="ManagerSignIP" />
+          <ScalarProperty Name="ManagerSignDate" ColumnName="ManagerSignDate" />
+          <ScalarProperty Name="ManagerSignature" ColumnName="ManagerSignature" />
+          <ScalarProperty Name="FollowUpComment" ColumnName="FollowUpComment" />
+          <ScalarProperty Name="SpokeWithCustomer" ColumnName="SpokeWithCustomer" />
+          <ScalarProperty Name="CallDate" ColumnName="CallDate" />
+          <ScalarProperty Name="FollowUpCall" ColumnName="FollowUpCall" />
+          <ScalarProperty Name="SignIP" ColumnName="SignIP" />
+          <ScalarProperty Name="SignDate" ColumnName="SignDate" />
+          <ScalarProperty Name="Signature" ColumnName="Signature" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="NoSatisfyComment" ColumnName="NoSatisfyComment" />
+          <ScalarProperty Name="Satisfy" ColumnName="Satisfy" />
+          <ScalarProperty Name="WarrantyReceived" ColumnName="WarrantyReceived" />
+          <ScalarProperty Name="TotalAmountDue" ColumnName="TotalAmountDue" />
+          <ScalarProperty Name="MileageCharge" ColumnName="MileageCharge" />
+          <ScalarProperty Name="LaborCharge" ColumnName="LaborCharge" />
+          <ScalarProperty Name="BlockCharge" ColumnName="BlockCharge" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="AdditionalCharge" ColumnName="AdditionalCharge" />
+          <ScalarProperty Name="BalanceDue" ColumnName="BalanceDue" />
+          <ScalarProperty Name="ActMilesToSite" ColumnName="ActMilesToSite" />
+          <ScalarProperty Name="ActHoursOfLabor" ColumnName="ActHoursOfLabor" />
+          <ScalarProperty Name="ActBlocksUsed" ColumnName="ActBlocksUsed" />
+          <ScalarProperty Name="DeliveryOther" ColumnName="DeliveryOther" />
+          <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+          <ScalarProperty Name="Answer5" ColumnName="Answer5" />
+          <ScalarProperty Name="Answer4" ColumnName="Answer4" />
+          <ScalarProperty Name="Answer3" ColumnName="Answer3" />
+          <ScalarProperty Name="Answer2" ColumnName="Answer2" />
+          <ScalarProperty Name="Answer1" ColumnName="Answer1" />
+          <ScalarProperty Name="RepairNote" ColumnName="RepairNote" />
+          <ScalarProperty Name="NeedRepair" ColumnName="NeedRepair" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrderDeliveries">
+      <EntityTypeMapping TypeName="LeonardEntities.SalesOrderDelivery">
+        <MappingFragment StoreEntitySet="SalesOrderDelivery">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="DriverSignIP" ColumnName="DriverSignIP" />
+          <ScalarProperty Name="DriverSignDate" ColumnName="DriverSignDate" />
+          <ScalarProperty Name="DriverSignature" ColumnName="DriverSignature" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="CustomerAccepted" ColumnName="CustomerAccepted" />
+          <ScalarProperty Name="WaiverAccepted" ColumnName="WaiverAccepted" />
+          <ScalarProperty Name="CustomerSignIP" ColumnName="CustomerSignIP" />
+          <ScalarProperty Name="CustomerSignDate" ColumnName="CustomerSignDate" />
+          <ScalarProperty Name="CustomerSignature" ColumnName="CustomerSignature" />
+          <ScalarProperty Name="InitialDate" ColumnName="InitialDate" />
+          <ScalarProperty Name="CustomerInitials" ColumnName="CustomerInitials" />
+          <ScalarProperty Name="DirectionToSite" ColumnName="DirectionToSite" />
+          <ScalarProperty Name="DeliveryRequirement" ColumnName="DeliveryRequirement" />
+          <ScalarProperty Name="MoveToAddress" ColumnName="MoveToAddress" />
+          <ScalarProperty Name="MoveFromAddress" ColumnName="MoveFromAddress" />
+          <ScalarProperty Name="LoadDoorFacing" ColumnName="LoadDoorFacing" />
+          <ScalarProperty Name="CustomerPresent" ColumnName="CustomerPresent" />
+          <ScalarProperty Name="MilesToSite" ColumnName="MilesToSite" />
+          <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+          <ScalarProperty Name="DeliveryDate2" ColumnName="DeliveryDate2" />
+          <ScalarProperty Name="DeliveryDate1" ColumnName="DeliveryDate1" />
+          <ScalarProperty Name="DeliveryType" ColumnName="DeliveryType" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eli_User">
+      <EntityTypeMapping TypeName="LeonardEntities.Eli_User">
+        <MappingFragment StoreEntitySet="Eli_User">
+          <ScalarProperty Name="Signature" ColumnName="Signature" />
+          <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

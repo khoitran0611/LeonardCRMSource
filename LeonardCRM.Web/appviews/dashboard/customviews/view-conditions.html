@@ -1,0 +1,205 @@
+﻿<div ng-controller="customViewConditionCtrl" id="viewCondition">
+
+    <!--And Conditions-->
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            {{languages.SEARCH_FORM.ALL_CONDITIONS_HEADER}}
+            <img src="/Images/preloader.gif" ng-hide="!isLoading" />
+        </div>
+        <div class="panel-body" ng-hide="isLoading">
+            <div class="form-group condition" ng-repeat="cd in andConditions">
+                <div class="col-sm-3">
+                    <!--column-->      
+                    <ui-select id="ddlColumns" class="form-control" ng-model="cd.ColumnName"
+                        ng-change="changeType($index)" theme="select2">
+                        <ui-select-match>{{$select.selected.DisplayText}}</ui-select-match>
+                        <ui-select-choices repeat="item.ColumnAlias as item in columns | propsFilter: {DisplayText: $select.search}">
+                            <div ng-bind-html="item.DisplayText | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>      
+                </div>
+                <div class="col-sm-3">
+                    <!--operators-->
+                    <select id="ddlOperator" class="form-control" ng-model="cd.Operator" ng-change="changeOperator($index)">
+                        <option ng-if="!(cd.Type == 'listbox')" value="=">{{languages.SEARCH_OPERATOR.EQUAL}}(=)</option>
+                        <option ng-if="!(cd.Type == 'listbox')" value="<>">{{languages.SEARCH_OPERATOR.NOT_EQUAL}}(&ne;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value="Between">{{languages.SEARCH_OPERATOR.BETWEEN}}(a &le; b &le; c)</option>
+                        <option ng-if="!(cd.Type != 'list' || cd.Type == 'date' || cd.Type == 'check' || cd.Type == 'number')" value="LIKE">{{languages.SEARCH_OPERATOR.CONTAIN}}</option>
+                        <option ng-if="!(cd.Type != 'listbox')" value="not in">{{languages.SEARCH_OPERATOR.NOT_CONTAIN}}</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type != 'list' || cd.Type == 'date' || cd.Type == 'check' || cd.Type == 'number')" value="StartsWith">{{languages.SEARCH_OPERATOR.START_WITH}}</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value=">">{{languages.SEARCH_OPERATOR.GREATER_THAN}}(&gt;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value="<">{{languages.SEARCH_OPERATOR.LESS_THAN}}(&lt;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value=">=">{{languages.SEARCH_OPERATOR.GREATER_THAN_EQUAL}}(&ge;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value="<=">{{languages.SEARCH_OPERATOR.LESS_THAN_EQUAL}}(&le;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text' || cd.Type == 'number')" value="Within">{{languages.SEARCH_OPERATOR.WITHIN}}</option>
+                    </select>
+                </div>
+
+                <div ng-class="{'col-sm-5 not-date': cd.Type != 'date', 'col-sm-5': cd.Type == 'date'}" ng-switch="cd.Type" style="width: 300px; overflow:visible;">
+                    <!--filter value-->
+                    <div ng-switch-when="text">
+                        <input class="form-control col-sm-3" type="text" placeholder="keyword" ng-model="cd.FilterValue" style="width: 140px" />
+                    </div>
+                    <div ng-switch-when="number">
+                        <input class="form-control col-sm-3" numbers-only  ng-model="cd.FilterValue" style="width: 140px" />
+                        <input class="form-control col-sm-3" ng-show="cd.Operator == 'Between'" numbers-only ng-model="cd.FilterValue1" style="width: 140px; margin-left: 4px" />
+                    </div>
+
+                    <ui-select ng-if="cd.Type == 'list'" class="form-control" ng-model="cd.FilterValue" theme="select2">
+                        <ui-select-match>{{$select.selected.Description}}</ui-select-match>
+                        <ui-select-choices repeat="item.Description + '@@' as item in cd.ListValues | propsFilter: {Description: $select.search}">
+                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>                    
+
+                    <select  ng-switch-when="listbox" class="form-control" ui-select2 multiple ng-model="cd.FilterValue">
+                            <option ng-repeat="c in cd.ListValues" value="{{c.Id}}" ng-selected="cd.FilterValue == c.Id" ng-bind="c.Description"></option>
+                    </select>
+
+                    <div ng-switch-when="check" style="padding-top: 8px">
+                        <input ng-model="cd.FilterValue" ng-checked="cd.FilterValue == 'True' || cd.FilterValue == true" type="checkbox" />&nbsp;{{cd.FilterValue == true || cd.FilterValue == 'True'? 'True':'False'}}
+                    </div>
+                    <div ng-switch-when="date">
+                        <div ng-switch="cd.Operator">
+                            <div ng-switch-when="Within">
+                                <select class="form-control col-sm-3" ng-model="cd.FilterValue">
+                                    <option value="-7">{{languages.SEARCH_FORM.LAST}} 7 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-30">{{languages.SEARCH_FORM.LAST}} 30 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-60">{{languages.SEARCH_FORM.LAST}} 60 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-90">{{languages.SEARCH_FORM.LAST}} 90 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-120">{{languages.SEARCH_FORM.LAST}} 120 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+7">{{languages.SEARCH_FORM.NEXT}} 7 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+30">{{languages.SEARCH_FORM.NEXT}} 30 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+60">{{languages.SEARCH_FORM.NEXT}} 60 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+90">{{languages.SEARCH_FORM.NEXT}} 90 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+120">{{languages.SEARCH_FORM.NEXT}} 120 {{languages.SEARCH_FORM.DAYS}}</option>
+                                </select>
+                            </div>
+                            <div ng-switch-default>
+                                <input formatteddate="cd.FilterValue" class="form-control col-sm-3 cal-xs" show-weeks="showWeeks" type="text"
+                                       on-open-focus="false" uib-datepicker-popup="{{date_format}}" ng-focus="opened = true" is-open="opened"
+                                    ng-model="cd.FilterValue" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" style="width: 140px;" />
+                                <input formatteddate="cd.FilterValue1" ng-hide="cd.Operator != 'Between'" class="form-control col-sm-3 cal-xs" show-weeks="showWeeks" type="text"
+                                       on-open-focus="false" uib-datepicker-popup="{{date_format}}" ng-focus="opened1 = true" is-open="opened1"
+                                    ng-model="cd.FilterValue1" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" style="width: 140px; margin-left: 4px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="padding-top: 10px; width: 20px">
+                    <a class="danger" ng-click="removeAndCondition($index)"><i class="glyphicon glyphicon-trash"></i></a>
+                </div>
+            </div>
+            <button class="btn btn-sm btn-danger" ng-disabled="columns.length==0" type="button" ng-click="addAndCondition()">{{languages.SEARCH_FORM.ADD_BUTTON}}</button>
+        </div>
+    </div>
+
+    <!--Or Conditions-->
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            {{languages.SEARCH_FORM.ANY_CONDITIONS_HEADER}}
+            <img src="/Images/preloader.gif" ng-hide="!isLoading" />
+        </div>
+        <div class="panel-body" ng-hide="isLoading">
+            <div class="form-group condition" ng-repeat="cd in orConditions">
+                <div class="col-sm-3">
+                    <!--column-->
+                    <ui-select id="Ui-select1" class="form-control" ng-model="cd.ColumnName"
+                        ng-change="changeOrType($index)" theme="select2">
+                        <ui-select-match>{{$select.selected.DisplayText}}</ui-select-match>
+                        <ui-select-choices repeat="item.ColumnAlias as item in columns | propsFilter: {DisplayText: $select.search}">
+                            <div ng-bind-html="item.DisplayText | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>  
+                </div>
+                <div class="col-sm-3">
+                    <!--operators-->
+                    <select class="form-control" ng-model="cd.Operator" ng-change="changeOrOperator($index)">
+                        <option ng-if="!(cd.Type == 'listbox')" value="=">{{languages.SEARCH_OPERATOR.EQUAL}}(=)</option>
+                        <option ng-if="!(cd.Type == 'listbox')" value="<>">{{languages.SEARCH_OPERATOR.NOT_EQUAL}}(&ne;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value="Between">{{languages.SEARCH_OPERATOR.BETWEEN}}(a &le; b &le; c)</option>
+                        <option ng-if="!(cd.Type != 'list' || cd.Type == 'date' || cd.Type == 'check' || cd.Type == 'number')" value="LIKE">{{languages.SEARCH_OPERATOR.CONTAIN}}</option>
+                        <option ng-if="!(cd.Type != 'listbox')" value="not in">{{languages.SEARCH_OPERATOR.NOT_CONTAIN}}</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type != 'list' || cd.Type == 'date' || cd.Type == 'check' || cd.Type == 'number')" value="StartsWith">{{languages.SEARCH_OPERATOR.START_WITH}}</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value=">">{{languages.SEARCH_OPERATOR.GREATER_THAN}}(&gt;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value="<">{{languages.SEARCH_OPERATOR.LESS_THAN}}(&lt;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value=">=">{{languages.SEARCH_OPERATOR.GREATER_THAN_EQUAL}}(&ge;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text')" value="<=">{{languages.SEARCH_OPERATOR.LESS_THAN_EQUAL}}(&le;)</option>
+                        <option ng-if="!(cd.Type == 'listbox' || cd.Type == 'list' || cd.Type == 'check' || cd.Type == 'text' || cd.Type == 'number')" value="Within">{{languages.SEARCH_OPERATOR.WITHIN}}</option>
+                    </select>
+                </div>
+                <div ng-class="{'col-sm-5 not-date': cd.Type != 'date', 'col-sm-5': cd.Type == 'date'}" ng-switch="cd.Type" style="width: 300px; overflow:visible;">
+                    <!--filter value-->
+                    <div ng-switch-when="text">
+                        <input class="form-control col-sm-3" type="text" placeholder="keyword" ng-model="cd.FilterValue" style="width: 140px" />
+                    </div>
+                    <div ng-switch-when="number">
+                        <input class="form-control col-sm-3" numbers-only  ng-model="cd.FilterValue" style="width: 140px" />
+                        <input class="form-control col-sm-3" ng-show="cd.Operator == 'Between'" type="number" string-to-number numbers-only ng-model="cd.FilterValue1" style="width: 140px; margin-left: 4px" />
+                    </div>
+                    <ui-select ng-if="cd.Type == 'list'" class="form-control" ng-model="cd.FilterValue" theme="select2">
+                        <ui-select-match>{{$select.selected.Description}}</ui-select-match>
+                        <ui-select-choices repeat="item.Description + '@@' as item in cd.ListValues | propsFilter: {Description: $select.search}">
+                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <select  ng-switch-when="listbox" class="form-control" ui-select2 multiple ng-model="cd.FilterValue">
+                            <option ng-repeat="c in cd.ListValues" value="{{c.Id}}" ng-selected="cd.FilterValue == c.Id" ng-bind="c.Description"></option>
+                    </select>
+                    <div ng-switch-when="check" style="padding-top: 8px">
+                        <input ng-model="cd.FilterValue" ng-checked="cd.FilterValue == 'True' || cd.FilterValue == true" type="checkbox" />&nbsp;{{cd.FilterValue == true || cd.FilterValue == 'True'? 'True':'False'}}
+                    </div>
+                    <div ng-switch-when="date">
+                        <div ng-switch="cd.Operator">
+                            <div ng-switch-when="Within">
+                                <select class="form-control col-sm-3" ng-model="cd.FilterValue">
+                                    <option value="-7">{{languages.SEARCH_FORM.LAST}} 7 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-30">{{languages.SEARCH_FORM.LAST}} 30 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-60">{{languages.SEARCH_FORM.LAST}} 60 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-90">{{languages.SEARCH_FORM.LAST}} 90 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="-120">{{languages.SEARCH_FORM.LAST}} 120 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+7">{{languages.SEARCH_FORM.NEXT}} 7 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+30">{{languages.SEARCH_FORM.NEXT}} 30 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+60">{{languages.SEARCH_FORM.NEXT}} 60 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+90">{{languages.SEARCH_FORM.NEXT}} 90 {{languages.SEARCH_FORM.DAYS}}</option>
+                                    <option value="+120">{{languages.SEARCH_FORM.NEXT}} 120 {{languages.SEARCH_FORM.DAYS}}</option>
+                                </select>
+                            </div>
+                            <div ng-switch-default>
+                                <input formatteddate="cd.FilterValue" class="form-control col-sm-3 cal-xs" show-weeks="showWeeks" type="text"
+                                       on-open-focus="false" uib-datepicker-popup="{{date_format}}" ng-focus="opened = true" is-open="opened"
+                                       ng-model="cd.FilterValue" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" style="width: 140px;"/>
+
+                                <input formatteddate="cd.FilterValue1" ng-hide="cd.Operator != 'Between'" class="form-control col-sm-3 cal-xs" show-weeks="showWeeks" type="text"
+                                       on-open-focus="false" uib-datepicker-popup="{{date_format}}"  ng-focus="opened1 = true" is-open="opened1"
+                                    ng-model="cd.FilterValue1" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" style="width: 140px; margin-left: 4px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1" style="padding-top: 10px; width: 20px">
+                    <a class="danger" ng-click="removeOrCondition($index)"><i class="glyphicon glyphicon-trash"></i></a>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-danger" ng-disabled="columns.length==0 || andConditions.length == 0" ng-click="addOrCondition()">{{languages.SEARCH_FORM.ADD_BUTTON}}</button>
+        </div>
+    </div>
+</div>
+<style>
+    .condition
+    {
+        padding-bottom: 30px;
+    }
+
+    .not-date
+    {
+        overflow: hidden;
+        height: 34px;
+    }
+</style>
+<script>
+    //hack for making the search box of select2 to be focused
+    $.ui.dialog.prototype._allowInteraction = function (e) {
+        return !!$(e.target).closest('.ui-dialog, .ui-datepicker, .select2-drop').length;
+    };
+</script>

@@ -1,0 +1,35 @@
+﻿<style type="text/css">
+    .clickable-row:hover {
+        cursor: pointer;
+    }
+</style>
+
+<div ng-controller="ManageApplications">
+    <table data-ng-table="tableParams"  show-filter="true" class="table table-condensed table-bordered table-striped">
+        <colgroup>
+          <col style="width: 60px;" />
+          <col style="width: 120px;" />
+          <col style="width: 82px;" />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <tbody>
+            <tr data-ng-repeat="row in $data" class="clickable-row" ng-click="onClickRow(row.Id)">
+                <td><a href="#/my-applications/{{row.Id}}" style="line-height: 7px;"><i class="fa fa-pencil btn-small btn" tooltip="{{languages.MANAGE_APPLICATION.EDIT_APP_BTN}}"
+                    tooltip-trigger="mouseenter"
+                    tooltip-animation="true" tooltip-placement="left"></i></a></td>
+                <td data-filter="{Id: 'number'}" data-title="languages.MANAGE_APPLICATION.ID_COL" sortable="'Id'" header-class="'align-col-ng-table'">{{row.Id}}</td>
+                <td data-filter="{Status: 'text'}" data-title="languages.MANAGE_APPLICATION.STATUS_COL" sortable="'Status'" header-class="'align-col-ng-table'">
+                    <span class="label" ng-class="{'sts': getColorFromPicklist(row.Status) !== ''}"
+                        ng-style="{'background-color': getColorFromPicklist(row.Status)}">{{ row.Status | picklist}}</span>
+                </td>
+                <td data-filter="{Name: 'text'}" data-title="languages.MANAGE_APPLICATION.CUSTOMER_COL" sortable="'Name'" header-class="'align-col-ng-table'">{{row.Name}}</td>
+                <td data-filter="{PartNumber: 'text'}" data-title="languages.MANAGE_APPLICATION.ACCEPTED_DATE_COL" sortable="'PartNumber'" header-class="'align-col-ng-table'">{{row.PartNumber}}</td>
+                <td data-filter="{StoreNumber: 'text'}" data-title="languages.MANAGE_APPLICATION.STORE_NUMBER_COL" sortable="'StoreNumber'" header-class="'align-col-ng-table'">{{row.StoreNumber}}</td>
+                <td data-filter="{TotalMonthly: 'number'}" data-title="languages.MANAGE_APPLICATION.PROMO_CODE_COL" sortable="'TotalMonthly'" header-class="'align-col-ng-table'">{{row.TotalMonthly}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div style="clear: both;"></div>

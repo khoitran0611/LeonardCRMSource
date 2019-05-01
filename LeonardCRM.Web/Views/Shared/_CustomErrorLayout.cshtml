@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+</head>
+    <body>
+        <div class="container" id="content">
+            <div class="panel">
+                <div class="panel-body">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

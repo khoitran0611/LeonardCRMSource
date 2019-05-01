@@ -1,0 +1,259 @@
+﻿<div ng-controller="CustomFieldCtrl">
+    <fieldset class="col-xs-12 fieldset" ng-repeat="section in sections" ng-class="{'fieldset-topborder':section.Collapsed}">
+        <legend class="fieldsetlegend" ng-click="section.Collapsed = !section.Collapsed">
+            <span class="legendcollapse">
+                <i ng-class="{'glyphicon':true,'glyphicon-plus':section.Collapsed==true,'glyphicon-minus':section.Collapsed == false} "></i>
+            </span>
+            <span>{{ section.SectionName }}</span>
+        </legend>
+        <div class="row" uib-collapse="section.Collapsed">
+            <div class="col-xs-6">
+                <div class="panel-body">
+                    <div class="form-group" ng-repeat="field in section.LeftSide">
+                        <div ng-switch="field.TypeName">
+                            <div ng-switch-when="Date">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-show="field.IsDate" ng-disabled="field.Locked" class="form-control input-sm cal-xs"
+                                           show-weeks="showWeeks" type="text" on-open-focus="false" uib-datepicker-popup="{{date_format}}" ng-focus="LeftOpened = true" is-open="LeftOpened"
+                                        ng-model="field.FieldData" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                </div>
+                            </div>
+                            <div ng-switch-when="Time">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <select ng-required="field.Mandatory" style="width: 80px" ng-disabled="field.Locked" ui-select2 ng-model="field.selectedhour">
+                                        <option ng-hide="field.Mandatory" value="{{nullvalue.Id}}">&nbsp;</option>
+                                        <option ng-repeat="h in hour" value="{{h}}">{{h}}</option>
+                                    </select>
+                                    <select ng-required="field.Mandatory" style="width: 80px" ng-disabled="field.Locked" ui-select2 ng-model="field.selectedminute">
+                                        <option ng-hide="field.Mandatory" value="{{nullvalue.Id}}">&nbsp;</option>
+                                        <option ng-repeat="m in minute" value="{{m}}">{{m}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-switch-when="DateTime">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-show="field.IsDateTime" ng-disabled="field.Locked"
+                                           class="form-control input-sm cal-xs" show-weeks="showWeeks" type="text"
+                                           on-open-focus="false" uib-datepicker-popup="{{date_format}}" ng-focus="LeftOpened = true" is-open="LeftOpened"
+                                        ng-model="field.FieldData" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                </div>
+                            </div>
+                            <div ng-switch-when="TextArea">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <textarea ng-model="field.FieldData" ng-required="field.Mandatory"
+                                              class="form-control input-sm" ng-disabled="field.Locked"></textarea>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="List">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <ui-select ng-required="field.Mandatory" class="form-control" ng-model="field.FieldData"
+                                        ng-change="Combobox_Changed(field)"
+                                        ng-disabled="field.Locked"
+                                        theme="select2">
+                                        <ui-select-match allow-clear="{{field.Mandatory == false}}">{{($select.selected.AdditionalInfo == null || $select.selected.AdditionalInfo == ''? $select.selected.Description:($select.selected.Description + ' (' + $select.selected.AdditionalInfo + ')'))}}</ui-select-match>
+                                        <ui-select-choices repeat="item.Id as item in field.ListValues | propsFilter: {Description: $select.search}">
+                                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                            <small ng-hide="item.AdditionalInfo == null || item.AdditionalInfo == ''">
+                                                    ({{item.AdditionalInfo}})
+                                            </small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="MultiSelectBox">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <ui-select style="width: 99.9%" multiple ng-model="field.FieldData"
+                                        theme="bootstrap" ng-disabled="field.Locked" sortable="true"
+                                        >
+                                        <ui-select-match>{{$item.AdditionalInfo == null || $item.AdditionalInfo == ''? $item.Description:($item.Description + ' (' + $item.AdditionalInfo + ')')}}</ui-select-match>
+                                        <ui-select-choices repeat="item.Id as item in field.ListValues | propsFilter: {Description: $select.search}">
+                                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                                <small ng-hide="item.AdditionalInfo == null || item.AdditionalInfo == ''">
+                                                    ({{item.AdditionalInfo}})
+                                                </small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="CheckBox">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-disabled="field.Locked" type="checkbox" ng-checked="field.FieldData == 'True'" class="donotcallcheckbox" ng-model="field.FieldData" />
+                                </div>
+                            </div>
+                            <div ng-switch-default>
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-disabled="field.Locked" ng-model="field.FieldData" class="form-control" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="panel-body">
+                    <div class="form-group" ng-repeat="field in section.RightSide">
+                        <div ng-switch="field.TypeName">
+                            <div ng-switch-when="Date">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-show="field.IsDate" ng-disabled="field.Locked" 
+                                        class="form-control input-sm cal-xs" show-weeks="showWeeks" type="text"
+                                           on-open-focus="false" uib-datepicker-popup="{{date_format}}" ng-focus="RightOpened = true" is-open="RightOpened"
+                                        ng-model="field.FieldData" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                </div>
+                            </div>
+                            <div ng-switch-when="Time">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <select ng-required="field.Mandatory" style="width: 80px" ng-disabled="field.Locked" ui-select2 ng-model="field.selectedhour">
+                                        <option ng-hide="field.Mandatory" value="{{nullvalue.Id}}">&nbsp;</option>
+                                        <option ng-repeat="h in hour" value="{{h}}">{{h}}</option>
+                                    </select>
+                                    <select ng-required="field.Mandatory" style="width: 80px" ng-disabled="field.Locked" ui-select2 ng-model="field.selectedminute">
+                                        <option ng-hide="field.Mandatory" value="{{nullvalue.Id}}">&nbsp;</option>
+                                        <option ng-repeat="m in minute" value="{{m}}">{{m}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-switch-when="DateTime">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-show="field.IsDateTime" ng-disabled="field.Locked"
+                                           class="form-control input-sm cal-xs" show-weeks="showWeeks" type="text"
+                                           on-open-focus="false" uib-datepicker-popup="{{date_format}}" ng-focus="RightOpened = true" is-open="RightOpened"
+                                        ng-model="field.FieldData" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                </div>
+                            </div>
+                            <div ng-switch-when="TextArea">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <textarea ng-model="field.FieldData" ng-required="field.Mandatory"
+                                              class="form-control input-sm" ng-disabled="field.Locked"></textarea>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="List">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <ui-select ng-required="field.Mandatory" class="form-control" ng-model="field.FieldData"
+                                        ng-change="Combobox_Changed(field)"
+                                        ng-disabled="field.Locked"
+                                        theme="select2">
+                                        <ui-select-match allow-clear="{{field.Mandatory == false}}">{{$select.selected.AdditionalInfo == null || $select.selected.AdditionalInfo == ''? $select.selected.Description:($select.selected.Description + ' (' + $select.selected.AdditionalInfo + ')')}}</ui-select-match>
+                                        <ui-select-choices repeat="item.Id as item in field.ListValues | propsFilter: {Description: $select.search}">
+                                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                            <small ng-hide="item.AdditionalInfo == null || item.AdditionalInfo == ''">
+                                                    ({{item.AdditionalInfo}})
+                                            </small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="MultiSelectBox">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <ui-select style="width: 99.9%" multiple ng-model="field.FieldData"
+                                        theme="bootstrap" ng-disabled="field.Locked" sortable="true">
+                                        <ui-select-match>{{$item.AdditionalInfo == null || $item.AdditionalInfo == ''? $item.Description:($item.Description + ' (' + $item.AdditionalInfo + ')')}}</ui-select-match>
+                                        <ui-select-choices repeat="item.Id as item in field.ListValues | propsFilter: {Description: $select.search}">
+                                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                                <small ng-hide="item.AdditionalInfo == null || item.AdditionalInfo == ''">
+                                                    ({{item.AdditionalInfo}})
+                                                </small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+
+                            <div ng-switch-when="CheckBox">
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-disabled="field.Locked" type="checkbox" ng-checked="field.FieldData == 'True'" class="donotcallcheckbox" ng-model="field.FieldData" />
+                                </div>
+                            </div>
+                            <div ng-switch-default>
+                                <label class="col-xs-4 control-label">
+                                    {{field.LabelDisplay}}
+                                    <span ng-show="field.Mandatory">(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input ng-required="field.Mandatory" ng-disabled="field.Locked" ng-model="field.FieldData" class="form-control" type="text" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+
+
+
+
+
+
+
+
+
+

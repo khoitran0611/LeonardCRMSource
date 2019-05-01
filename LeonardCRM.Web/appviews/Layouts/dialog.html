@@ -1,0 +1,16 @@
+﻿<div class="modal fade" id="dialogDetail" role="dialog" aria-labelledby="FormTitle" aria-hidden="true" ng-controller="dialogCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                <h4 class="modal-title" id="FormTitle">{{FormTitle}}</h4>
+            </div>
+            <div class="modal-body" ng-include="detailFormUrl">
+            </div>
+            <div class="modal-footer" ng-if="NeedFooterCommand">
+                <button type="button" ng-if="NeedSaveCommand" class="btn btn-sm btn-primary" ng-show="hasPermission" ng-click="Save()">Save</button>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal" ng-click="CloseDialog()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿<div ng-controller="PaidOverviewCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <b>{{languages.INVOICES.INVOICED_PAID_OVERVIEW_HEADING}}</b>
+            
+            <div class="pull-right">
+                <input ng-model="onlyMe" type="checkbox" /> {{languages.INVOICES.MY_DATA}}
+            </div>
+            <div class="pull-right">
+                {{languages.INVOICES.CURRENCY}}
+                <select ng-model="currency" ng-change="currencyChanged()" style="margin-right: 10px;">
+                    <option ng-repeat="item in listCurrency" value="{{ item.Id }}">{{ item.Name + ' (' + item.Symbol + ')' }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="panel-body wel-panel-height">
+            <img src="/Images/preloader.gif" ng-hide="!isLoading" />
+            <div ng-hide="isLoading">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-model="currentValue" btn-radio="7">
+                        <span class="db">{{ languages.REPORT.LAST_7_DAYS }}</span>
+                        <span class="tinytable">
+                            <span class="tinytablerow">
+                                <span class="tinytablecell tinyvline">
+                                    <span class="blocktotal"><b>{{ languages.INVOICES.INVOICED }}</b></span>
+                                </span>
+                                <span class="tinytablecell">
+                                    <span class="blocktotal"><b>{{ languages.INVOICES.PAID }}</b></span>
+                                </span>
+                            </span>
+                            <span class="tinytablerow">
+                                <span class="tinytablecell tinyvline">
+                                    <span class="blocktotal">{{ totalInvoicedWeek | currency:currencySymbol }}</span>
+                                </span>
+                                <span class="tinytablecell">
+                                    <span class="blocktotal">{{ totalPaidWeek | currency:currencySymbol }}</span>
+                                </span>
+                            </span>
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-model="currentValue" btn-radio="30">
+                        <span class="db">{{ languages.REPORT.LAST_30_DAYS }}</span>
+                        <span class="tinytable">
+                            <span class="tinytablerow">
+                                <span class="tinytablecell tinyvline">
+                                    <span class="blocktotal"><b>{{languages.INVOICES.INVOICED }}</b></span>
+                                </span>
+                                <span class="tinytablecell">
+                                    <span class="blocktotal"><b>{{ languages.INVOICES.PAID }}</b></span>
+                                </span>
+                            </span>
+                            <span class="tinytablerow">
+                                <span class="tinytablecell tinyvline">
+                                    <span class="blocktotal">{{ totalInvoicedMonth | currency:currencySymbol }}</span>
+                                </span>
+                                <span class="tinytablecell">
+                                    <span class="blocktotal">{{ totalPaidMonth | currency:currencySymbol }}</span>
+                                </span>
+                            </span>
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-default" ng-model="currentValue" btn-radio="365">
+                        <span class="db">{{ languages.REPORT.CURRENT_YEAR }}</span>
+                        <span class="tinytable">
+                            <span class="tinytablerow">
+                                <span class="tinytablecell tinyvline">
+                                    <span class="blocktotal"><b>{{ languages.INVOICES.INVOICED }}</b></span>
+                                </span>
+                                <span class="tinytablecell">
+                                    <span class="blocktotal"><b>{{ languages.INVOICES.PAID }}</b></span>
+                                </span>
+                            </span>
+                            <span class="tinytablerow">
+                                <span class="tinytablecell tinyvline">
+                                    <span class="blocktotal">{{ totalInvoicedYear | currency:currencySymbol }}</span>
+                                </span>
+                                <span class="tinytablecell">
+                                    <span class="blocktotal">{{ totalPaidYear | currency:currencySymbol }}</span>
+                                </span>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+                <div class="col-xs-12 chart-size" google-chart chart="chart" on-ready="chartReady()" />
+            </div>
+        </div>
+    </div>
+</div>

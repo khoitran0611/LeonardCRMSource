@@ -1,0 +1,2628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeonardEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="fn_GetRolesHierachy_Result">
+    <Property Name="Id" Type="Int32" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SPLIT_Result">
+    <Property Name="Id" Type="Int16" Nullable="false" />
+    <Property Name="VALUE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </ComplexType>
+  <EntityContainer Name="LeonardUSAEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="SPLIT" IsComposable="true" ReturnType="Collection(LeonardEntities.SPLIT_Result)">
+      <Parameter Name="DELIMITER" Mode="In" Type="String" />
+      <Parameter Name="LIST" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetReferenceListValues" ReturnType="Collection(LeonardEntities.GetReferenceListValues_Result)">
+      <Parameter Name="moduleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_AdvanceSearch">
+      <Parameter Name="ModuleId" Mode="In" Type="Int32" />
+      <Parameter Name="ViewId" Mode="In" Type="Int32" />
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="sqlScripts" Mode="In" Type="String" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+      <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="sortDirection" Mode="In" Type="String" />
+      <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+      <Parameter Name="defaultOderBy" Mode="In" Type="Boolean" />
+      <Parameter Name="columnGroup" Mode="In" Type="String" />
+      <Parameter Name="groupJsonStr" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_CreateOrder">
+      <Parameter Name="OrderName" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="Int32" />
+      <Parameter Name="Budget" Mode="In" Type="Decimal" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedBy" Mode="In" Type="Int32" />
+      <Parameter Name="useridlist" Mode="In" Type="String" />
+      <Parameter Name="customeridlist" Mode="In" Type="String" />
+      <Parameter Name="filenamelist" Mode="In" Type="String" />
+      <Parameter Name="foldername" Mode="In" Type="String" />
+      <Parameter Name="addedOrderId" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_CreateUser">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="loginName" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="status" Mode="In" Type="Int32" />
+      <Parameter Name="phone" Mode="In" Type="String" />
+      <Parameter Name="createdby" Mode="In" Type="Int64" />
+      <Parameter Name="modifiedby" Mode="In" Type="Int64" />
+      <Parameter Name="roleid" Mode="In" Type="Int32" />
+      <Parameter Name="acivecode" Mode="In" Type="Guid" />
+      <Parameter Name="dateOfBirth" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_CustomerReportByDays" ReturnType="Collection(LeonardEntities.sp_CustomerReportByDays_Result)">
+      <Parameter Name="createdBy" Mode="In" Type="Int32" />
+      <Parameter Name="numberOfDays" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_CustomerReportDashboard" ReturnType="Collection(LeonardEntities.sp_CustomerReportDashboard_Result)">
+      <Parameter Name="responsibleUsers" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteUsers">
+      <Parameter Name="Ids" Mode="In" Type="String" />
+      <Parameter Name="denyStr" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_DeleteViews">
+      <Parameter Name="IdArray" Mode="In" Type="String" />
+      <Parameter Name="NameArray" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_FilterSystemAudit" EntitySet="vwSystmAudits" ReturnType="Collection(LeonardEntities.vwSystmAudit)">
+      <Parameter Name="moduleId" Mode="In" Type="Int32" />
+      <Parameter Name="recordId" Mode="In" Type="Int32" />
+      <Parameter Name="dateModified" Mode="In" Type="DateTime" />
+      <Parameter Name="operation" Mode="In" Type="String" />
+      <Parameter Name="columnName" Mode="In" Type="String" />
+      <Parameter Name="createdBy" Mode="In" Type="Int32" />
+      <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetCustomersByUserId" ReturnType="Collection(LeonardEntities.sp_GetCustomersByUserId_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetModulePermisstion" ReturnType="Collection(LeonardEntities.sp_GetModulePermisstion_Result)">
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetModulesByRole" EntitySet="vwModules" ReturnType="Collection(LeonardEntities.vwModule)">
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetRoles" ReturnType="Collection(LeonardEntities.sp_GetRoles_Result)">
+      <Parameter Name="currentRoleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetRolesFieldsByRoleId" ReturnType="Collection(LeonardEntities.sp_GetRolesFieldsByRoleId_Result)">
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetSubView">
+      <Parameter Name="ModuleId" Mode="In" Type="Int32" />
+      <Parameter Name="ViewId" Mode="In" Type="Int32" />
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+      <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="sortDirection" Mode="In" Type="String" />
+      <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetTotalForView">
+      <Parameter Name="viewId" Mode="In" Type="Int32" />
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="return" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetView">
+      <Parameter Name="ModuleId" Mode="In" Type="Int32" />
+      <Parameter Name="ViewId" Mode="In" Type="Int32" />
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+      <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="sortDirection" Mode="In" Type="String" />
+      <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+      <Parameter Name="defaultOderBy" Mode="In" Type="Boolean" />
+      <Parameter Name="columnGroup" Mode="In" Type="String" />
+      <Parameter Name="groupJsonStr" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetViewCustom">
+      <Parameter Name="ViewId" Mode="In" Type="Int32" />
+      <Parameter Name="userId" Mode="In" Type="Int32" />
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+      <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="sortExpression" Mode="In" Type="String" />
+      <Parameter Name="filterStr" Mode="In" Type="String" />
+      <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+      <Parameter Name="columnGroup" Mode="In" Type="String" />
+      <Parameter Name="groupJsonStr" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InvoiceReportByDays" ReturnType="Collection(LeonardEntities.sp_InvoiceReportByDays_Result)">
+      <Parameter Name="createdBy" Mode="In" Type="Int32" />
+      <Parameter Name="numberOfDays" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InvoiceReportDashboard" ReturnType="Collection(LeonardEntities.sp_InvoiceReportDashboard_Result)">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="Int32" />
+      <Parameter Name="users" Mode="In" Type="String" />
+      <Parameter Name="byClient" Mode="In" Type="Boolean" />
+      <Parameter Name="currencyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InvoiceReportPerDays" ReturnType="Collection(LeonardEntities.sp_InvoiceReportPerDays_Result)">
+      <Parameter Name="createdBy" Mode="In" Type="Int32" />
+      <Parameter Name="numberOfDays" Mode="In" Type="Int32" />
+      <Parameter Name="currencyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_OrderReportByDays" ReturnType="Collection(LeonardEntities.sp_OrderReportByDays_Result)">
+      <Parameter Name="createdBy" Mode="In" Type="Int32" />
+      <Parameter Name="numberOfDays" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_OrderReportDashboard" ReturnType="Collection(LeonardEntities.sp_OrderReportDashboard_Result)">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="Int32" />
+      <Parameter Name="users" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="fn_GetRolesHierachy" IsComposable="true" ReturnType="Collection(Int32)">
+      <Parameter Name="roleId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Eli_Currency" EntityType="LeonardEntities.Eli_Currency" />
+    <EntitySet Name="Eli_CurrencyNames" EntityType="LeonardEntities.Eli_CurrencyNames" />
+    <EntitySet Name="Eli_DataTypes" EntityType="LeonardEntities.Eli_DataTypes" />
+    <EntitySet Name="Eli_EntityFields" EntityType="LeonardEntities.Eli_EntityFields" />
+    <EntitySet Name="Eli_FieldData" EntityType="LeonardEntities.Eli_FieldData" />
+    <EntitySet Name="Eli_FieldsSection" EntityType="LeonardEntities.Eli_FieldsSection" />
+    <EntitySet Name="Eli_FieldsSectionDetail" EntityType="LeonardEntities.Eli_FieldsSectionDetail" />
+    <EntitySet Name="Eli_ListDependency" EntityType="LeonardEntities.Eli_ListDependency" />
+    <EntitySet Name="Eli_ListDependencyDetail" EntityType="LeonardEntities.Eli_ListDependencyDetail" />
+    <EntitySet Name="Eli_ListNames" EntityType="LeonardEntities.Eli_ListNames" />
+    <EntitySet Name="Eli_ListValues" EntityType="LeonardEntities.Eli_ListValues" />
+    <EntitySet Name="Eli_Log" EntityType="LeonardEntities.Eli_Log" />
+    <EntitySet Name="Eli_LoginLog" EntityType="LeonardEntities.Eli_LoginLog" />
+    <EntitySet Name="Eli_MailTemplates" EntityType="LeonardEntities.Eli_MailTemplates" />
+    <EntitySet Name="Eli_ModuleRelationship" EntityType="LeonardEntities.Eli_ModuleRelationship" />
+    <EntitySet Name="Eli_Modules" EntityType="LeonardEntities.Eli_Modules" />
+    <EntitySet Name="Eli_Notes" EntityType="LeonardEntities.Eli_Notes" />
+    <EntitySet Name="Eli_OnlineUsers" EntityType="LeonardEntities.Eli_OnlineUsers" />
+    <EntitySet Name="Eli_Registry" EntityType="LeonardEntities.Eli_Registry" />
+    <EntitySet Name="Eli_RolesFields" EntityType="LeonardEntities.Eli_RolesFields" />
+    <EntitySet Name="Eli_RolesPermissions" EntityType="LeonardEntities.Eli_RolesPermissions" />
+    <EntitySet Name="Eli_SysAudit" EntityType="LeonardEntities.Eli_SysAudit" />
+    <EntitySet Name="Eli_Tax" EntityType="LeonardEntities.Eli_Tax" />
+    <EntitySet Name="Eli_TempViews" EntityType="LeonardEntities.Eli_TempViews" />
+    <EntitySet Name="Eli_ViewColumns" EntityType="LeonardEntities.Eli_ViewColumns" />
+    <EntitySet Name="Eli_ViewConditions" EntityType="LeonardEntities.Eli_ViewConditions" />
+    <EntitySet Name="Eli_ViewCustom" EntityType="LeonardEntities.Eli_ViewCustom" />
+    <EntitySet Name="Eli_ViewCustomColumns" EntityType="LeonardEntities.Eli_ViewCustomColumns" />
+    <EntitySet Name="Eli_ViewCustomConditions" EntityType="LeonardEntities.Eli_ViewCustomConditions" />
+    <EntitySet Name="Eli_ViewGroupBy" EntityType="LeonardEntities.Eli_ViewGroupBy" />
+    <EntitySet Name="Eli_ViewOrderBy" EntityType="LeonardEntities.Eli_ViewOrderBy" />
+    <EntitySet Name="Eli_Views" EntityType="LeonardEntities.Eli_Views" />
+    <EntitySet Name="SalesContractStates" EntityType="LeonardEntities.SalesContractState" />
+    <EntitySet Name="SalesContractTemplates" EntityType="LeonardEntities.SalesContractTemplate" />
+    <EntitySet Name="SalesCustomerUsers" EntityType="LeonardEntities.SalesCustomerUser" />
+    <EntitySet Name="SalesDocuments" EntityType="LeonardEntities.SalesDocument" />
+    <EntitySet Name="SalesInvoices" EntityType="LeonardEntities.SalesInvoice" />
+    <EntitySet Name="SalesInvServices" EntityType="LeonardEntities.SalesInvService" />
+    <EntitySet Name="SalesInvTaxes" EntityType="LeonardEntities.SalesInvTax" />
+    <EntitySet Name="SalesInvTemplates" EntityType="LeonardEntities.SalesInvTemplate" />
+    <EntitySet Name="SalesOrdersUsers" EntityType="LeonardEntities.SalesOrdersUser" />
+    <EntitySet Name="vwAllCustomers" EntityType="LeonardEntities.vwAllCustomer" />
+    <EntitySet Name="vwClients" EntityType="LeonardEntities.vwClient" />
+    <EntitySet Name="vwCustomViewColumns" EntityType="LeonardEntities.vwCustomViewColumn" />
+    <EntitySet Name="vwEntityFieldDatas" EntityType="LeonardEntities.vwEntityFieldData" />
+    <EntitySet Name="vwFieldNameDataTypes" EntityType="LeonardEntities.vwFieldNameDataType" />
+    <EntitySet Name="vwFields" EntityType="LeonardEntities.vwField" />
+    <EntitySet Name="vwFieldsDataTypes" EntityType="LeonardEntities.vwFieldsDataType" />
+    <EntitySet Name="vwListNameValues" EntityType="LeonardEntities.vwListNameValue" />
+    <EntitySet Name="vwModuleEnittyRelationships" EntityType="LeonardEntities.vwModuleEnittyRelationship" />
+    <EntitySet Name="vwModuleEntityFields" EntityType="LeonardEntities.vwModuleEntityField" />
+    <EntitySet Name="vwModuleHasEntityFields" EntityType="LeonardEntities.vwModuleHasEntityField" />
+    <EntitySet Name="vwModules" EntityType="LeonardEntities.vwModule" />
+    <EntitySet Name="vwOrderCustomers" EntityType="LeonardEntities.vwOrderCustomer" />
+    <EntitySet Name="vwPicklistDependencies" EntityType="LeonardEntities.vwPicklistDependency" />
+    <EntitySet Name="vwRegistries" EntityType="LeonardEntities.vwRegistry" />
+    <EntitySet Name="vwSystmAudits" EntityType="LeonardEntities.vwSystmAudit" />
+    <EntitySet Name="vwUserRoles" EntityType="LeonardEntities.vwUserRole" />
+    <AssociationSet Name="FK_SalesInvoices_Eli_Currency" Association="LeonardEntities.FK_SalesInvoices_Eli_Currency">
+      <End Role="Eli_Currency" EntitySet="Eli_Currency" />
+      <End Role="SalesInvoice" EntitySet="SalesInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_CustomFields_Eli_DataTypes" Association="LeonardEntities.FK_Eli_CustomFields_Eli_DataTypes">
+      <End Role="Eli_DataTypes" EntitySet="Eli_DataTypes" />
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_CustomFields_Eli_Modules" Association="LeonardEntities.FK_Eli_CustomFields_Eli_Modules">
+      <End Role="Eli_Modules" EntitySet="Eli_Modules" />
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_FieldData_Eli_CustomFields" Association="LeonardEntities.FK_Eli_FieldData_Eli_CustomFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_FieldData" EntitySet="Eli_FieldData" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_FieldsSectionDetail_Eli_EntityFields" Association="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_EntityFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_FieldsSectionDetail" EntitySet="Eli_FieldsSectionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_RolesFields_Eli_EntityFields" Association="LeonardEntities.FK_Eli_RolesFields_Eli_EntityFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_RolesFields" EntitySet="Eli_RolesFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewCustomColumns_Eli_EntityFields" Association="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_EntityFields">
+      <End Role="Eli_EntityFields" EntitySet="Eli_EntityFields" />
+      <End Role="Eli_ViewCustomColumns" EntitySet="Eli_ViewCustomColumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_FieldsSectionDetail_Eli_FieldsSection" Association="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_FieldsSection">
+      <End Role="Eli_FieldsSection" EntitySet="Eli_FieldsSection" />
+      <End Role="Eli_FieldsSectionDetail" EntitySet="Eli_FieldsSectionDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_PicklistValues_Eli_PicklistConditions" Association="LeonardEntities.FK_Eli_PicklistValues_Eli_PicklistConditions">
+      <End Role="Eli_ListDependency" EntitySet="Eli_ListDependency" />
+      <End Role="Eli_ListDependencyDetail" EntitySet="Eli_ListDependencyDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ListValues_Eli_ListNames" Association="LeonardEntities.FK_Eli_ListValues_Eli_ListNames">
+      <End Role="Eli_ListNames" EntitySet="Eli_ListNames" />
+      <End Role="Eli_ListValues" EntitySet="Eli_ListValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_RolesPermissions_Eli_Modules" Association="LeonardEntities.FK_Eli_RolesPermissions_Eli_Modules">
+      <End Role="Eli_Modules" EntitySet="Eli_Modules" />
+      <End Role="Eli_RolesPermissions" EntitySet="Eli_RolesPermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_Views_Eli_Modules" Association="LeonardEntities.FK_Eli_Views_Eli_Modules">
+      <End Role="Eli_Modules" EntitySet="Eli_Modules" />
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewColumns_Eli_Views" Association="LeonardEntities.FK_Eli_ViewColumns_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewColumns" EntitySet="Eli_ViewColumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewConditions_Eli_Views" Association="LeonardEntities.FK_Eli_ViewConditions_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewConditions" EntitySet="Eli_ViewConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewCustomColumns_Eli_ViewCustom" Association="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_ViewCustom">
+      <End Role="Eli_ViewCustom" EntitySet="Eli_ViewCustom" />
+      <End Role="Eli_ViewCustomColumns" EntitySet="Eli_ViewCustomColumns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewCustomConditions_Eli_ViewCustom" Association="LeonardEntities.FK_ViewCustomConditions_Eli_ViewCustom">
+      <End Role="Eli_ViewCustom" EntitySet="Eli_ViewCustom" />
+      <End Role="Eli_ViewCustomConditions" EntitySet="Eli_ViewCustomConditions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewGroupBy_Eli_Views" Association="LeonardEntities.FK_Eli_ViewGroupBy_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewGroupBy" EntitySet="Eli_ViewGroupBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewOrderBy_Eli_Views" Association="LeonardEntities.FK_Eli_ViewOrderBy_Eli_Views">
+      <End Role="Eli_Views" EntitySet="Eli_Views" />
+      <End Role="Eli_ViewOrderBy" EntitySet="Eli_ViewOrderBy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesContractStore_SalesContractTemplates" Association="LeonardEntities.FK_SalesContractStore_SalesContractTemplates">
+      <End Role="SalesContractTemplate" EntitySet="SalesContractTemplates" />
+      <End Role="SalesContractState" EntitySet="SalesContractStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvoices_SalesInvTemplates" Association="LeonardEntities.FK_SalesInvoices_SalesInvTemplates">
+      <End Role="SalesInvTemplate" EntitySet="SalesInvTemplates" />
+      <End Role="SalesInvoice" EntitySet="SalesInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvServices_SalesInvoices" Association="LeonardEntities.FK_SalesInvServices_SalesInvoices">
+      <End Role="SalesInvoice" EntitySet="SalesInvoices" />
+      <End Role="SalesInvService" EntitySet="SalesInvServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvTaxes_SalesInvoices" Association="LeonardEntities.FK_SalesInvTaxes_SalesInvoices">
+      <End Role="SalesInvoice" EntitySet="SalesInvoices" />
+      <End Role="SalesInvTax" EntitySet="SalesInvTaxes" />
+    </AssociationSet>
+    <EntitySet Name="SalesCustReferences" EntityType="LeonardEntities.SalesCustReference" />
+    <EntitySet Name="vwViewMenus" EntityType="LeonardEntities.vwViewMenu" />
+    <EntitySet Name="SalesCustomers" EntityType="LeonardEntities.SalesCustomer" />
+    <AssociationSet Name="FK_SalesCustomerRef_SalesCustomer" Association="LeonardEntities.FK_SalesCustomerRef_SalesCustomer">
+      <End Role="SalesCustomer" EntitySet="SalesCustomers" />
+      <End Role="SalesCustReference" EntitySet="SalesCustReferences" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesCustomerUsers_SalesCustomer" Association="LeonardEntities.FK_SalesCustomerUsers_SalesCustomer">
+      <End Role="SalesCustomer" EntitySet="SalesCustomers" />
+      <End Role="SalesCustomerUser" EntitySet="SalesCustomerUsers" />
+    </AssociationSet>
+    <FunctionImport Name="sp_GetAllOverdueApps" ReturnType="Collection(LeonardEntities.sp_GetAllOverdueApps_Result)">
+      <Parameter Name="Id" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="PartNumber" Mode="In" Type="String" />
+      <Parameter Name="CapitalizationPeriod" Mode="In" Type="String" />
+      <Parameter Name="ModifiedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="pageIndex" Mode="In" Type="Int32" />
+      <Parameter Name="pageSize" Mode="In" Type="Int32" />
+      <Parameter Name="sortExpression" Mode="In" Type="String" />
+      <Parameter Name="expectedMonth" Mode="In" Type="Int32" />
+      <Parameter Name="totalRow" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="vwViewColumns" EntityType="LeonardEntities.vwViewColumn" />
+    <EntitySet Name="vwApplications" EntityType="LeonardEntities.vwApplication" />
+    <EntitySet Name="Eli_Roles" EntityType="LeonardEntities.Eli_Roles" />
+    <AssociationSet Name="FK_Eli_RolesFields_Eli_Roles" Association="LeonardEntities.FK_Eli_RolesFields_Eli_Roles">
+      <End Role="Eli_Roles" EntitySet="Eli_Roles" />
+      <End Role="Eli_RolesFields" EntitySet="Eli_RolesFields" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_RolesPermissions_Eli_Roles" Association="LeonardEntities.FK_Eli_RolesPermissions_Eli_Roles">
+      <End Role="Eli_Roles" EntitySet="Eli_Roles" />
+      <End Role="Eli_RolesPermissions" EntitySet="Eli_RolesPermissions" />
+    </AssociationSet>
+    <EntitySet Name="SalesOrders" EntityType="LeonardEntities.SalesOrder" />
+    <EntitySet Name="SalesOrderCompletes" EntityType="LeonardEntities.SalesOrderComplete" />
+    <EntitySet Name="SalesOrderDeliveries" EntityType="LeonardEntities.SalesOrderDelivery" />
+    <AssociationSet Name="FK_SalesOrder_SalesCustomer" Association="LeonardEntities.FK_SalesOrder_SalesCustomer">
+      <End Role="SalesCustomer" EntitySet="SalesCustomers" />
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesDocuments_SalesOrder" Association="LeonardEntities.FK_SalesDocuments_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+      <End Role="SalesDocument" EntitySet="SalesDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesInvoices_SalesOrder" Association="LeonardEntities.FK_SalesInvoices_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+      <End Role="SalesInvoice" EntitySet="SalesInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrderComplete_SalesOrder" Association="LeonardEntities.FK_SalesOrderComplete_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+      <End Role="SalesOrderComplete" EntitySet="SalesOrderCompletes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrderDelivery_SalesOrder" Association="LeonardEntities.FK_SalesOrderDelivery_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+      <End Role="SalesOrderDelivery" EntitySet="SalesOrderDeliveries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrdersUsers_SalesOrder" Association="LeonardEntities.FK_SalesOrdersUsers_SalesOrder">
+      <End Role="SalesOrder" EntitySet="SalesOrders" />
+      <End Role="SalesOrdersUser" EntitySet="SalesOrdersUsers" />
+    </AssociationSet>
+    <EntitySet Name="Eli_User" EntityType="LeonardEntities.Eli_User" />
+    <AssociationSet Name="FK_Eli_User_Eli_Roles" Association="LeonardEntities.FK_Eli_User_Eli_Roles">
+      <End Role="Eli_Roles" EntitySet="Eli_Roles" />
+      <End Role="Eli_User" EntitySet="Eli_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_User_SysAudit" Association="LeonardEntities.FK_Eli_User_SysAudit">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="Eli_SysAudit" EntitySet="Eli_SysAudit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Eli_ViewCustom_Eli_User" Association="LeonardEntities.FK_Eli_ViewCustom_Eli_User">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="Eli_ViewCustom" EntitySet="Eli_ViewCustom" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesCustomerUsers_Eli_User" Association="LeonardEntities.FK_SalesCustomerUsers_Eli_User">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="SalesCustomerUser" EntitySet="SalesCustomerUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesOrdersUsers_Eli_User" Association="LeonardEntities.FK_SalesOrdersUsers_Eli_User">
+      <End Role="Eli_User" EntitySet="Eli_User" />
+      <End Role="SalesOrdersUser" EntitySet="SalesOrdersUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="GetReferenceListValues_Result">
+    <Property Type="Int32" Name="FieldId" Nullable="true" />
+    <Property Type="String" Name="FieldName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="Id" Nullable="true" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="sp_CustomerReportByDays_Result">
+    <Property Type="String" Name="CreatedDate" Nullable="true" MaxLength="6" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_CustomerReportDashboard_Result">
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_FilterSystemAudit_Result">
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="DateModified" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Module" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="MasterRecordId" Nullable="false" />
+    <Property Type="String" Name="Operation" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="ColumnName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ValueBefore" Nullable="true" />
+    <Property Type="String" Name="ValueAfter" Nullable="true" />
+    <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetCustomersByUserId_Result">
+    <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="CustomerId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetModulePermisstion_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="ModuleParent" Nullable="false" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="255" />
+    <Property Type="Boolean" Name="AllowRead" Nullable="false" />
+    <Property Type="Boolean" Name="AllowCreate" Nullable="false" />
+    <Property Type="Boolean" Name="AllowEdit" Nullable="false" />
+    <Property Type="Boolean" Name="AllowDelete" Nullable="false" />
+    <Property Type="Boolean" Name="AllowImport" Nullable="false" />
+    <Property Type="Boolean" Name="AllowExport" Nullable="false" />
+    <Property Type="Boolean" Name="AllowCreateView" Nullable="false" />
+    <Property Type="Boolean" Name="Dashboard" Nullable="false" />
+    <Property Type="Boolean" Name="ModuleCreateView" Nullable="false" />
+    <Property Type="Boolean" Name="ModuleAllowImport" Nullable="false" />
+    <Property Type="Boolean" Name="ModuleAllowExport" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetModulesByRole_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="FeatureName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+    <Property Type="Boolean" Name="Dashboard" Nullable="false" />
+    <Property Type="String" Name="DefaultTable" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="IconClass" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="false" />
+    <Property Type="Boolean" Name="IsPublished" Nullable="false" />
+    <Property Type="Int32" Name="DefaultViewId" Nullable="true" />
+    <Property Type="Boolean" Name="NeedPickList" Nullable="false" />
+    <Property Type="Boolean" Name="ReportModule" Nullable="false" />
+    <Property Type="String" Name="MenuIcon" Nullable="true" MaxLength="100" />
+    <Property Type="Boolean" Name="AllowCreateView" Nullable="false" />
+    <Property Type="Boolean" Name="AllowImport" Nullable="false" />
+    <Property Type="Boolean" Name="AllowExport" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_GetRoles_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="Parent" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="IsHostAdmin" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="sp_GetRolesFieldsByRoleId_Result">
+    <Property Type="Int32" Name="Id" Nullable="true" />
+    <Property Type="String" Name="FieldName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="Int32" Name="FId" Nullable="false" />
+    <Property Type="Int32" Name="RoleId" Nullable="true" />
+    <Property Type="Boolean" Name="Locked" Nullable="true" />
+    <Property Type="Boolean" Name="Visible" Nullable="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="true" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_InvoiceReportByDays_Result">
+    <Property Type="String" Name="CreatedDate" Nullable="true" MaxLength="6" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_InvoiceReportPerDays_Result">
+    <Property Type="String" Name="Date" Nullable="true" MaxLength="6" />
+    <Property Type="Decimal" Name="TotalNew" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TotalPaid" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_OrderReportByDays_Result">
+    <Property Type="String" Name="CreatedDate" Nullable="true" MaxLength="6" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_OrderReportDashboard_Result">
+    <Property Type="String" Name="CreatedDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+    <Property Type="Int32" Name="Total" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_InvoiceReportDashboard_Result">
+    <Property Type="String" Name="IssuedDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <EntityType Name="Eli_Currency">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Code" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Symbol" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="ConversionRate" Nullable="false" Precision="18" Scale="5" />
+    <Property Type="Boolean" Name="BaseCurrency" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <NavigationProperty Name="SalesInvoices" Relationship="LeonardEntities.FK_SalesInvoices_Eli_Currency" FromRole="Eli_Currency" ToRole="SalesInvoice" />
+  </EntityType>
+  <EntityType Name="Eli_CurrencyNames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Country" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Code" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Currency" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Symbol" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="String" Name="ModifiedBy" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+  </EntityType>
+  <EntityType Name="Eli_DataTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="IsText" Nullable="false" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Boolean" Name="IsTextArea" Nullable="false" />
+    <Property Type="Boolean" Name="IsTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsEmail" Nullable="false" />
+    <Property Type="Boolean" Name="IsUrl" Nullable="false" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsImage" Nullable="false" />
+    <Property Type="Boolean" Name="IsPublic" Nullable="false" />
+    <NavigationProperty Name="Eli_EntityFields" Relationship="LeonardEntities.FK_Eli_CustomFields_Eli_DataTypes" FromRole="Eli_DataTypes" ToRole="Eli_EntityFields" />
+  </EntityType>
+  <EntityType Name="Eli_EntityFields">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FieldName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="DataTypeId" Nullable="false" />
+    <Property Type="Int32" Name="MinLength" />
+    <Property Type="Int32" Name="DataLength" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="Int32" Name="ListNameId" />
+    <Property Type="String" Name="ListSql" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="AdvanceSearch" />
+    <Property Type="String" Name="DefaultValue" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Deletable" />
+    <Property Type="Boolean" Name="Searchable" />
+    <Property Type="Boolean" Name="Sortable" />
+    <Property Type="Boolean" Name="AllowGroup" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="Boolean" Name="IsUnique" Nullable="false" />
+    <Property Type="Boolean" Name="PrimaryKey" Nullable="false" />
+    <Property Type="Boolean" Name="ForeignKey" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Boolean" Name="IsWebform" Nullable="false" />
+    <Property Type="Boolean" Name="IsTextShow" />
+    <Property Type="String" Name="RegularExpression" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Point" />
+    <NavigationProperty Name="Eli_DataTypes" Relationship="LeonardEntities.FK_Eli_CustomFields_Eli_DataTypes" FromRole="Eli_EntityFields" ToRole="Eli_DataTypes" />
+    <NavigationProperty Name="Eli_Modules" Relationship="LeonardEntities.FK_Eli_CustomFields_Eli_Modules" FromRole="Eli_EntityFields" ToRole="Eli_Modules" />
+    <NavigationProperty Name="Eli_FieldData" Relationship="LeonardEntities.FK_Eli_FieldData_Eli_CustomFields" FromRole="Eli_EntityFields" ToRole="Eli_FieldData" />
+    <NavigationProperty Name="Eli_FieldsSectionDetail" Relationship="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_EntityFields" FromRole="Eli_EntityFields" ToRole="Eli_FieldsSectionDetail" />
+    <NavigationProperty Name="Eli_RolesFields" Relationship="LeonardEntities.FK_Eli_RolesFields_Eli_EntityFields" FromRole="Eli_EntityFields" ToRole="Eli_RolesFields" />
+    <NavigationProperty Name="Eli_ViewCustomColumns" Relationship="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_EntityFields" FromRole="Eli_EntityFields" ToRole="Eli_ViewCustomColumns" />
+    <Property Type="Boolean" Name="IsLoadReference" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_FieldData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CustFieldId" Nullable="false" />
+    <Property Type="String" Name="FieldData" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="MaterRecordId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="Eli_EntityFields" Relationship="LeonardEntities.FK_Eli_FieldData_Eli_CustomFields" FromRole="Eli_FieldData" ToRole="Eli_EntityFields" />
+  </EntityType>
+  <EntityType Name="Eli_FieldsSection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="SectionName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Byte" Name="SortOrder" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <NavigationProperty Name="Eli_FieldsSectionDetail" Relationship="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_FieldsSection" FromRole="Eli_FieldsSection" ToRole="Eli_FieldsSectionDetail" />
+  </EntityType>
+  <EntityType Name="Eli_FieldsSectionDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="SectionId" Nullable="false" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="Byte" Name="SortOrder" Nullable="false" />
+    <Property Type="Boolean" Name="LeftSide" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <NavigationProperty Name="Eli_EntityFields" Relationship="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_EntityFields" FromRole="Eli_FieldsSectionDetail" ToRole="Eli_EntityFields" />
+    <NavigationProperty Name="Eli_FieldsSection" Relationship="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_FieldsSection" FromRole="Eli_FieldsSectionDetail" ToRole="Eli_FieldsSection" />
+  </EntityType>
+  <EntityType Name="Eli_ListDependency">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="MasterFieldId" Nullable="false" />
+    <Property Type="Int32" Name="ChildFieldId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <NavigationProperty Name="Eli_ListDependencyDetail" Relationship="LeonardEntities.FK_Eli_PicklistValues_Eli_PicklistConditions" FromRole="Eli_ListDependency" ToRole="Eli_ListDependencyDetail" />
+  </EntityType>
+  <EntityType Name="Eli_ListDependencyDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ParentId" Nullable="false" />
+    <Property Type="Int32" Name="MasterValueId" Nullable="false" />
+    <Property Type="Int32" Name="ChildValueId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <NavigationProperty Name="Eli_ListDependency" Relationship="LeonardEntities.FK_Eli_PicklistValues_Eli_PicklistConditions" FromRole="Eli_ListDependencyDetail" ToRole="Eli_ListDependency" />
+  </EntityType>
+  <EntityType Name="Eli_ListNames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ListName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Module" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+    <NavigationProperty Name="Eli_ListValues" Relationship="LeonardEntities.FK_Eli_ListValues_Eli_ListNames" FromRole="Eli_ListNames" ToRole="Eli_ListValues" />
+  </EntityType>
+  <EntityType Name="Eli_ListValues">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ListNameId" Nullable="false" />
+    <Property Type="Int32" Name="LookupId" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AdditionalInfo" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ListOrder" Nullable="false" />
+    <Property Type="Boolean" Name="Editable" Nullable="false" />
+    <Property Type="String" Name="Color" MaxLength="7" FixedLength="true" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+    <NavigationProperty Name="Eli_ListNames" Relationship="LeonardEntities.FK_Eli_ListValues_Eli_ListNames" FromRole="Eli_ListValues" ToRole="Eli_ListNames" />
+  </EntityType>
+  <EntityType Name="Eli_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+    <Property Type="String" Name="Thread" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Level" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Logger" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="User" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Message" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Exception" MaxLength="4000" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Url" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_LoginLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="String" Name="IpAddress" MaxLength="16" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_MailTemplates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TemplateName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TemplateContent" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_ModuleRelationship">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MasterFieldId" Nullable="false" />
+    <Property Type="Int32" Name="ChildFieldId" Nullable="false" />
+    <Property Type="String" Name="MasterDisplayColumn" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Alias" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_Modules">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FeatureName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Dashboard" Nullable="false" />
+    <Property Type="String" Name="DefaultTable" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="IconClass" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MenuIcon" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" />
+    <Property Type="Int32" Name="Parent" Nullable="false" />
+    <Property Type="Boolean" Name="IsPublished" Nullable="false" />
+    <Property Type="Int32" Name="RelatedTo" />
+    <Property Type="Boolean" Name="NeedPickList" Nullable="false" />
+    <Property Type="Boolean" Name="ReportModule" Nullable="false" />
+    <Property Type="Boolean" Name="AllowCreateView" Nullable="false" />
+    <Property Type="Boolean" Name="AllowImport" Nullable="false" />
+    <Property Type="Boolean" Name="AllowExport" Nullable="false" />
+    <Property Type="Boolean" Name="IsWebform" Nullable="false" />
+    <NavigationProperty Name="Eli_EntityFields" Relationship="LeonardEntities.FK_Eli_CustomFields_Eli_Modules" FromRole="Eli_Modules" ToRole="Eli_EntityFields" />
+    <NavigationProperty Name="Eli_RolesPermissions" Relationship="LeonardEntities.FK_Eli_RolesPermissions_Eli_Modules" FromRole="Eli_Modules" ToRole="Eli_RolesPermissions" />
+    <NavigationProperty Name="Eli_Views" Relationship="LeonardEntities.FK_Eli_Views_Eli_Modules" FromRole="Eli_Modules" ToRole="Eli_Views" />
+  </EntityType>
+  <EntityType Name="Eli_Notes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="NoteDate" Nullable="false" Precision="0" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="RecordId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_OnlineUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="DateTime" Name="LoggedTime" Nullable="false" Precision="3" />
+    <Property Type="String" Name="AccessToken" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_Registry">
+    <Key>
+      <PropertyRef Name="RegistryID" />
+    </Key>
+    <Property Type="Int32" Name="RegistryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Value" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_RolesFields">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Boolean" Name="Locked" Nullable="false" />
+    <Property Type="Boolean" Name="Visible" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <NavigationProperty Name="Eli_EntityFields" Relationship="LeonardEntities.FK_Eli_RolesFields_Eli_EntityFields" FromRole="Eli_RolesFields" ToRole="Eli_EntityFields" />
+    <NavigationProperty Name="Eli_Roles" Relationship="LeonardEntities.FK_Eli_RolesFields_Eli_Roles" FromRole="Eli_RolesFields" ToRole="Eli_Roles" />
+  </EntityType>
+  <EntityType Name="Eli_RolesPermissions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Boolean" Name="AllowRead" Nullable="false" />
+    <Property Type="Boolean" Name="AllowCreate" Nullable="false" />
+    <Property Type="Boolean" Name="AllowEdit" Nullable="false" />
+    <Property Type="Boolean" Name="AllowDelete" Nullable="false" />
+    <Property Type="Boolean" Name="AllowImport" Nullable="false" />
+    <Property Type="Boolean" Name="AllowExport" Nullable="false" />
+    <Property Type="Boolean" Name="AllowCreateView" Nullable="false" />
+    <NavigationProperty Name="Eli_Modules" Relationship="LeonardEntities.FK_Eli_RolesPermissions_Eli_Modules" FromRole="Eli_RolesPermissions" ToRole="Eli_Modules" />
+    <NavigationProperty Name="Eli_Roles" Relationship="LeonardEntities.FK_Eli_RolesPermissions_Eli_Roles" FromRole="Eli_RolesPermissions" ToRole="Eli_Roles" />
+  </EntityType>
+  <EntityType Name="Eli_SysAudit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="DateModified" Precision="3" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="MasterRecordId" Nullable="false" />
+    <Property Type="String" Name="Operation" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ValueBefore" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ValueAfter" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="Eli_User" Relationship="LeonardEntities.FK_Eli_User_SysAudit" FromRole="Eli_SysAudit" ToRole="Eli_User" />
+  </EntityType>
+  <EntityType Name="Eli_Tax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TaxName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="TaxValue" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Eli_TempViews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ViewName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsPublic" Nullable="false" />
+    <Property Type="Boolean" Name="Shared" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="String" Name="QueryScript" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ParentId" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="LoadChildView" Nullable="false" />
+    <Property Type="Boolean" Name="DefaultView" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="ViewParentId" Nullable="false" />
+    <Property Name="IsCollapsed" Type="Boolean" />
+    <Property Name="CollapseStatus" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_ViewColumns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ViewId" Nullable="false" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="String" Name="Width" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Visible" Nullable="false" />
+    <Property Type="Boolean" Name="IsCommand" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="Eli_Views" Relationship="LeonardEntities.FK_Eli_ViewColumns_Eli_Views" FromRole="Eli_ViewColumns" ToRole="Eli_Views" />
+  </EntityType>
+  <EntityType Name="Eli_ViewConditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ViewId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="String" Name="Operator" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FilterValue" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FilterValue1" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsAND" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="Eli_Views" Relationship="LeonardEntities.FK_Eli_ViewConditions_Eli_Views" FromRole="Eli_ViewConditions" ToRole="Eli_Views" />
+  </EntityType>
+  <EntityType Name="Eli_ViewCustom">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ViewName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsPublic" Nullable="false" />
+    <Property Type="Boolean" Name="DefaultView" Nullable="false" />
+    <Property Type="String" Name="SelectClause" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FromClause" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="WhereClause" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DefaultFilterStr" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="PageSize" />
+    <Property Type="String" Name="OrderBy" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="GroupBy" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="MasterViewId" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="String" Name="Code" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Eli_ViewCustomColumns" Relationship="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_ViewCustom" FromRole="Eli_ViewCustom" ToRole="Eli_ViewCustomColumns" />
+    <NavigationProperty Name="Eli_ViewCustomConditions" Relationship="LeonardEntities.FK_ViewCustomConditions_Eli_ViewCustom" FromRole="Eli_ViewCustom" ToRole="Eli_ViewCustomConditions" />
+    <NavigationProperty Name="Eli_User" Relationship="LeonardEntities.FK_Eli_ViewCustom_Eli_User" FromRole="Eli_ViewCustom" ToRole="Eli_User" />
+  </EntityType>
+  <EntityType Name="Eli_ViewCustomColumns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ViewCustomId" Nullable="false" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Boolean" Name="Visible" Nullable="false" />
+    <Property Type="String" Name="DefaultWidth" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ColumnAlias" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TableAlias" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Type="Boolean" Name="IsDefault" />
+    <Property Type="Int32" Name="DataType" />
+    <Property Type="String" Name="DisplayText" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Eli_EntityFields" Relationship="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_EntityFields" FromRole="Eli_ViewCustomColumns" ToRole="Eli_EntityFields" />
+    <NavigationProperty Name="Eli_ViewCustom" Relationship="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_ViewCustom" FromRole="Eli_ViewCustomColumns" ToRole="Eli_ViewCustom" />
+  </EntityType>
+  <EntityType Name="Eli_ViewCustomConditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ViewId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="String" Name="Operator" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FilterValue" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FilterValue1" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsAND" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="Eli_ViewCustom" Relationship="LeonardEntities.FK_ViewCustomConditions_Eli_ViewCustom" FromRole="Eli_ViewCustomConditions" ToRole="Eli_ViewCustom" />
+  </EntityType>
+  <EntityType Name="Eli_ViewGroupBy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ViewId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="Eli_Views" Relationship="LeonardEntities.FK_Eli_ViewGroupBy_Eli_Views" FromRole="Eli_ViewGroupBy" ToRole="Eli_Views" />
+  </EntityType>
+  <EntityType Name="Eli_ViewOrderBy">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ViewId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="String" Name="OrderDirection" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="Eli_Views" Relationship="LeonardEntities.FK_Eli_ViewOrderBy_Eli_Views" FromRole="Eli_ViewOrderBy" ToRole="Eli_Views" />
+  </EntityType>
+  <EntityType Name="Eli_Views">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ViewName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsPublic" Nullable="false" />
+    <Property Type="Boolean" Name="Shared" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="String" Name="QueryScript" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ParentId" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="LoadChildView" Nullable="false" />
+    <Property Type="Boolean" Name="DefaultView" Nullable="false" />
+    <Property Type="Int32" Name="PageSize" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="MasterViewId" />
+    <NavigationProperty Name="Eli_Modules" Relationship="LeonardEntities.FK_Eli_Views_Eli_Modules" FromRole="Eli_Views" ToRole="Eli_Modules" />
+    <NavigationProperty Name="Eli_ViewColumns" Relationship="LeonardEntities.FK_Eli_ViewColumns_Eli_Views" FromRole="Eli_Views" ToRole="Eli_ViewColumns" />
+    <NavigationProperty Name="Eli_ViewConditions" Relationship="LeonardEntities.FK_Eli_ViewConditions_Eli_Views" FromRole="Eli_Views" ToRole="Eli_ViewConditions" />
+    <NavigationProperty Name="Eli_ViewGroupBy" Relationship="LeonardEntities.FK_Eli_ViewGroupBy_Eli_Views" FromRole="Eli_Views" ToRole="Eli_ViewGroupBy" />
+    <NavigationProperty Name="Eli_ViewOrderBy" Relationship="LeonardEntities.FK_Eli_ViewOrderBy_Eli_Views" FromRole="Eli_Views" ToRole="Eli_ViewOrderBy" />
+    <Property Type="String" Name="UserRole" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsCollapsed" Type="Boolean" />
+    <Property Name="CollapseStatus" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SalesContractState">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ContractId" Nullable="false" />
+    <Property Type="Int32" Name="StateId" Nullable="false" />
+    <NavigationProperty Name="SalesContractTemplate" Relationship="LeonardEntities.FK_SalesContractStore_SalesContractTemplates" FromRole="SalesContractState" ToRole="SalesContractTemplate" />
+  </EntityType>
+  <EntityType Name="SalesContractTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TemplateName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TemplateContent" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" />
+    <NavigationProperty Name="SalesContractStates" Relationship="LeonardEntities.FK_SalesContractStore_SalesContractTemplates" FromRole="SalesContractTemplate" ToRole="SalesContractState" />
+  </EntityType>
+  <EntityType Name="SalesCustomerUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CustomerId" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="SalesCustomer" Relationship="LeonardEntities.FK_SalesCustomerUsers_SalesCustomer" FromRole="SalesCustomerUser" ToRole="SalesCustomer" />
+    <NavigationProperty Name="Eli_User" Relationship="LeonardEntities.FK_SalesCustomerUsers_Eli_User" FromRole="SalesCustomerUser" ToRole="Eli_User" />
+  </EntityType>
+  <EntityType Name="SalesDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="OrderId" Nullable="false" />
+    <Property Type="String" Name="FileName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Folder" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="SalesOrder" Relationship="LeonardEntities.FK_SalesDocuments_SalesOrder" FromRole="SalesDocument" ToRole="SalesOrder" />
+  </EntityType>
+  <EntityType Name="SalesInvoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InvTemplateId" Nullable="false" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="Int32" Name="OrderId" />
+    <Property Type="DateTime" Name="IssuedDate" Nullable="false" Precision="0" />
+    <Property Type="String" Name="Details" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="Total" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="CurrencyId" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="ResponsibleUsers" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Eli_Currency" Relationship="LeonardEntities.FK_SalesInvoices_Eli_Currency" FromRole="SalesInvoice" ToRole="Eli_Currency" />
+    <NavigationProperty Name="SalesInvTemplate" Relationship="LeonardEntities.FK_SalesInvoices_SalesInvTemplates" FromRole="SalesInvoice" ToRole="SalesInvTemplate" />
+    <NavigationProperty Name="SalesInvServices" Relationship="LeonardEntities.FK_SalesInvServices_SalesInvoices" FromRole="SalesInvoice" ToRole="SalesInvService" />
+    <NavigationProperty Name="SalesInvTaxes" Relationship="LeonardEntities.FK_SalesInvTaxes_SalesInvoices" FromRole="SalesInvoice" ToRole="SalesInvTax" />
+    <NavigationProperty Name="SalesOrder" Relationship="LeonardEntities.FK_SalesInvoices_SalesOrder" FromRole="SalesInvoice" ToRole="SalesOrder" />
+  </EntityType>
+  <EntityType Name="SalesInvService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ServiceName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Comments" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="InvId" />
+    <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <NavigationProperty Name="SalesInvoice" Relationship="LeonardEntities.FK_SalesInvServices_SalesInvoices" FromRole="SalesInvService" ToRole="SalesInvoice" />
+  </EntityType>
+  <EntityType Name="SalesInvTax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="InvoiceId" Nullable="false" />
+    <Property Type="Int32" Name="TaxId" Nullable="false" />
+    <Property Type="Decimal" Name="TaxValue" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="SalesInvoice" Relationship="LeonardEntities.FK_SalesInvTaxes_SalesInvoices" FromRole="SalesInvTax" ToRole="SalesInvoice" />
+  </EntityType>
+  <EntityType Name="SalesInvTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TemplateName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TemplateContent" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" />
+    <NavigationProperty Name="SalesInvoices" Relationship="LeonardEntities.FK_SalesInvoices_SalesInvTemplates" FromRole="SalesInvTemplate" ToRole="SalesInvoice" />
+  </EntityType>
+  <EntityType Name="SalesOrdersUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="OrderId" Nullable="false" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <NavigationProperty Name="SalesOrder" Relationship="LeonardEntities.FK_SalesOrdersUsers_SalesOrder" FromRole="SalesOrdersUser" ToRole="SalesOrder" />
+    <NavigationProperty Name="Eli_User" Relationship="LeonardEntities.FK_SalesOrdersUsers_Eli_User" FromRole="SalesOrdersUser" ToRole="Eli_User" />
+  </EntityType>
+  <EntityType Name="vwAllCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="ResponsibleUser" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ResponsibleUser" Nullable="false" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwClient">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ResponsibleUser" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwCustomViewColumn">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ViewCustomId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="IsImage" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="Visible" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="TableAlias" />
+      <PropertyRef Name="TypeName" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="ViewCustomId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsText" Nullable="false" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Boolean" Name="IsTextArea" Nullable="false" />
+    <Property Type="Boolean" Name="IsTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsEmail" Nullable="false" />
+    <Property Type="Boolean" Name="IsUrl" Nullable="false" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsImage" Nullable="false" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="Boolean" Name="Sortable" />
+    <Property Type="Boolean" Name="Searchable" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="AllowGroup" />
+    <Property Type="Boolean" Name="Visible" Nullable="false" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="Boolean" Name="Deletable" />
+    <Property Type="String" Name="ColumnAlias" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TableAlias" Nullable="false" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Type="Boolean" Name="IsDefault" />
+    <Property Type="Boolean" Name="ForeignKey" />
+    <Property Type="Int32" Name="DataType" />
+    <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DisplayText" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DefaultWidth" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwEntityFieldData">
+    <Key>
+      <PropertyRef Name="TypeName" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="IsImage" />
+      <PropertyRef Name="IsPublic" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="DataTypeId" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="Locked" />
+      <PropertyRef Name="LeftSide" />
+      <PropertyRef Name="FieldOrder" />
+      <PropertyRef Name="SectionId" />
+      <PropertyRef Name="SectionName" />
+    </Key>
+    <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="IsText" Nullable="false" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Boolean" Name="IsTextArea" Nullable="false" />
+    <Property Type="Boolean" Name="IsTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsEmail" Nullable="false" />
+    <Property Type="Boolean" Name="IsUrl" Nullable="false" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsImage" Nullable="false" />
+    <Property Type="Boolean" Name="IsPublic" Nullable="false" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="String" Name="FieldName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="DataTypeId" Nullable="false" />
+    <Property Type="Int32" Name="MinLength" />
+    <Property Type="Int32" Name="DataLength" />
+    <Property Type="Boolean" Name="Deletable" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="String" Name="ListSql" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ListNameId" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="Boolean" Name="ForeignKey" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Boolean" Name="Visible" />
+    <Property Type="Boolean" Name="Locked" Nullable="false" />
+    <Property Type="Boolean" Name="LeftSide" Nullable="false" />
+    <Property Type="Byte" Name="FieldOrder" Nullable="false" />
+    <Property Type="Int32" Name="SectionId" Nullable="false" />
+    <Property Type="String" Name="SectionName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vwFieldNameDataType">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ViewId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="IsCommand" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="TypeName" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="LoadChildView" />
+      <PropertyRef Name="IsImage" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="Visible" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="Locked" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="ViewId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsCommand" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="String" Name="TypeName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsText" Nullable="false" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Boolean" Name="IsTextArea" Nullable="false" />
+    <Property Type="Boolean" Name="IsTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsEmail" Nullable="false" />
+    <Property Type="Boolean" Name="IsUrl" Nullable="false" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="LoadChildView" Nullable="false" />
+    <Property Type="String" Name="DefaultTable" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsImage" Nullable="false" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="Boolean" Name="Sortable" />
+    <Property Type="Boolean" Name="Searchable" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="AllowGroup" />
+    <Property Type="String" Name="Width" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="Visible" Nullable="false" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="Boolean" Name="Locked" Nullable="false" />
+    <Property Type="Boolean" Name="Show" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Boolean" Name="Deletable" />
+    <Property Type="Boolean" Name="IsTextShow" />
+  </EntityType>
+  <EntityType Name="vwField">
+    <Key>
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsCurrency" />
+    </Key>
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="AdvanceSearch" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="Sortable" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="AllowGroup" />
+  </EntityType>
+  <EntityType Name="vwFieldsDataType">
+    <Key>
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsText" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsTextArea" />
+      <PropertyRef Name="IsTime" />
+      <PropertyRef Name="IsEmail" />
+      <PropertyRef Name="IsUrl" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="DataTypeId" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="IsUnique" />
+      <PropertyRef Name="PrimaryKey" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="ForeignKey" />
+      <PropertyRef Name="Display" />
+    </Key>
+    <Property Type="String" Name="FieldName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsText" Nullable="false" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Boolean" Name="IsTextArea" Nullable="false" />
+    <Property Type="Boolean" Name="IsTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsEmail" Nullable="false" />
+    <Property Type="Boolean" Name="IsUrl" Nullable="false" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="Int32" Name="DataTypeId" Nullable="false" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="DataLength" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsUnique" Nullable="false" />
+    <Property Type="Boolean" Name="PrimaryKey" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="Boolean" Name="Deletable" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="ForeignKey" Nullable="false" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="String" Name="RegularExpression" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsTextShow" />
+    <Property Type="Int32" Name="Point" />
+  </EntityType>
+  <EntityType Name="vwListNameValue">
+    <Key>
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="LookupId" />
+      <PropertyRef Name="Description" />
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Active" />
+      <PropertyRef Name="ListOrder" />
+    </Key>
+    <Property Type="String" Name="FieldName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="ListNameId" />
+    <Property Type="Int32" Name="LookupId" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Boolean" Name="Active" Nullable="false" />
+    <Property Type="String" Name="AdditionalInfo" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ListOrder" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwModuleEnittyRelationship">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="MasterId" />
+      <PropertyRef Name="MasterFieldName" />
+      <PropertyRef Name="MasterModuleId" />
+      <PropertyRef Name="ChildId" />
+      <PropertyRef Name="ChildFieldName" />
+      <PropertyRef Name="ChildModuleId" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="MasterModule" />
+      <PropertyRef Name="ChildModule" />
+      <PropertyRef Name="DataTypeId" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="MasterId" Nullable="false" />
+    <Property Type="String" Name="MasterFieldName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="MasterForeignKey" />
+    <Property Type="Int32" Name="MasterModuleId" Nullable="false" />
+    <Property Type="String" Name="MasterDefaultTable" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MasterDisplayColumn" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MasterAlias" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ChildId" Nullable="false" />
+    <Property Type="String" Name="ChildFieldName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="ChildForeignKey" />
+    <Property Type="Int32" Name="ChildModuleId" Nullable="false" />
+    <Property Type="String" Name="ChildDefaultTable" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ChildDisplayColumn" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MasterModule" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ChildModule" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="DataTypeId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwModuleEntityField">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="FieldName" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="Display" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FieldName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="ForeignKey" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DefaultTable" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="Boolean" Name="Deletable" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="Boolean" Name="IsTextShow" />
+  </EntityType>
+  <EntityType Name="vwModuleHasEntityField">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="FeatureName" />
+      <PropertyRef Name="Dashboard" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Parent" />
+      <PropertyRef Name="IsPublished" />
+      <PropertyRef Name="NeedPickList" />
+      <PropertyRef Name="IsWebform" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FeatureName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Dashboard" Nullable="false" />
+    <Property Type="String" Name="DefaultTable" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="IconClass" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" />
+    <Property Type="Int32" Name="Parent" Nullable="false" />
+    <Property Type="Boolean" Name="IsPublished" Nullable="false" />
+    <Property Type="Int32" Name="RelatedTo" />
+    <Property Type="Boolean" Name="NeedPickList" Nullable="false" />
+    <Property Type="Boolean" Name="IsWebform" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwModule">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="DisplayName" />
+      <PropertyRef Name="FeatureName" />
+      <PropertyRef Name="Dashboard" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="Parent" />
+      <PropertyRef Name="IsPublished" />
+      <PropertyRef Name="ReportModule" />
+      <PropertyRef Name="NeedPickList" />
+      <PropertyRef Name="AllowCreateView" />
+      <PropertyRef Name="AllowImport" />
+      <PropertyRef Name="AllowExport" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FeatureName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="Dashboard" Nullable="false" />
+    <Property Type="String" Name="DefaultTable" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="IconClass" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" />
+    <Property Type="Int32" Name="Parent" Nullable="false" />
+    <Property Type="Boolean" Name="IsPublished" Nullable="false" />
+    <Property Type="Int32" Name="DefaultViewId" />
+    <Property Type="Boolean" Name="ReportModule" Nullable="false" />
+    <Property Type="Boolean" Name="NeedPickList" Nullable="false" />
+    <Property Type="String" Name="MenuIcon" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="AllowCreateView" Nullable="false" />
+    <Property Type="Boolean" Name="AllowImport" Nullable="false" />
+    <Property Type="Boolean" Name="AllowExport" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwOrderCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="IsActive" />
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="Status" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="CustomerId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwPicklistDependency">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="MasterFieldId" />
+      <PropertyRef Name="ChildFieldId" />
+      <PropertyRef Name="MasterValueId" />
+      <PropertyRef Name="ChildValueId" />
+    </Key>
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="MasterFieldId" Nullable="false" />
+    <Property Type="Int32" Name="ChildFieldId" Nullable="false" />
+    <Property Type="Int32" Name="MasterValueId" Nullable="false" />
+    <Property Type="Int32" Name="ChildValueId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwRegistry">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="RegistryID" />
+    </Key>
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Value" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="RegistryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="vwSystmAudit">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Module" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="MasterRecordId" />
+      <PropertyRef Name="Operation" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="DateModified" Precision="3" />
+    <Property Type="String" Name="Module" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="MasterRecordId" Nullable="false" />
+    <Property Type="String" Name="Operation" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ColumnName" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ValueBefore" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ValueAfter" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwUserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_SalesInvoices_Eli_Currency">
+    <End Type="LeonardEntities.Eli_Currency" Role="Eli_Currency" Multiplicity="0..1" />
+    <End Type="LeonardEntities.SalesInvoice" Role="SalesInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Currency">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvoice">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_CustomFields_Eli_DataTypes">
+    <End Type="LeonardEntities.Eli_DataTypes" Role="Eli_DataTypes" Multiplicity="1" />
+    <End Type="LeonardEntities.Eli_EntityFields" Role="Eli_EntityFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_DataTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_EntityFields">
+        <PropertyRef Name="DataTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_CustomFields_Eli_Modules">
+    <End Type="LeonardEntities.Eli_Modules" Role="Eli_Modules" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_EntityFields" Role="Eli_EntityFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Modules">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_EntityFields">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_FieldData_Eli_CustomFields">
+    <End Type="LeonardEntities.Eli_EntityFields" Role="Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_FieldData" Role="Eli_FieldData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_FieldData">
+        <PropertyRef Name="CustFieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_FieldsSectionDetail_Eli_EntityFields">
+    <End Type="LeonardEntities.Eli_EntityFields" Role="Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_FieldsSectionDetail" Role="Eli_FieldsSectionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_FieldsSectionDetail">
+        <PropertyRef Name="FieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_RolesFields_Eli_EntityFields">
+    <End Type="LeonardEntities.Eli_EntityFields" Role="Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_RolesFields" Role="Eli_RolesFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesFields">
+        <PropertyRef Name="FieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewCustomColumns_Eli_EntityFields">
+    <End Type="LeonardEntities.Eli_EntityFields" Role="Eli_EntityFields" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewCustomColumns" Role="Eli_ViewCustomColumns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_EntityFields">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustomColumns">
+        <PropertyRef Name="FieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_FieldsSectionDetail_Eli_FieldsSection">
+    <End Type="LeonardEntities.Eli_FieldsSection" Role="Eli_FieldsSection" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_FieldsSectionDetail" Role="Eli_FieldsSectionDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_FieldsSection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_FieldsSectionDetail">
+        <PropertyRef Name="SectionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_PicklistValues_Eli_PicklistConditions">
+    <End Type="LeonardEntities.Eli_ListDependency" Role="Eli_ListDependency" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ListDependencyDetail" Role="Eli_ListDependencyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ListDependency">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ListDependencyDetail">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ListValues_Eli_ListNames">
+    <End Type="LeonardEntities.Eli_ListNames" Role="Eli_ListNames" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ListValues" Role="Eli_ListValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ListNames">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ListValues">
+        <PropertyRef Name="ListNameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_RolesPermissions_Eli_Modules">
+    <End Type="LeonardEntities.Eli_Modules" Role="Eli_Modules" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_RolesPermissions" Role="Eli_RolesPermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Modules">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesPermissions">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_Views_Eli_Modules">
+    <End Type="LeonardEntities.Eli_Modules" Role="Eli_Modules" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_Views" Role="Eli_Views" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Modules">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_Views">
+        <PropertyRef Name="ModuleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewColumns_Eli_Views">
+    <End Type="LeonardEntities.Eli_Views" Role="Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewColumns" Role="Eli_ViewColumns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewColumns">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewConditions_Eli_Views">
+    <End Type="LeonardEntities.Eli_Views" Role="Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewConditions" Role="Eli_ViewConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewConditions">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewCustomColumns_Eli_ViewCustom">
+    <End Type="LeonardEntities.Eli_ViewCustom" Role="Eli_ViewCustom" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewCustomColumns" Role="Eli_ViewCustomColumns" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ViewCustom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustomColumns">
+        <PropertyRef Name="ViewCustomId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ViewCustomConditions_Eli_ViewCustom">
+    <End Type="LeonardEntities.Eli_ViewCustom" Role="Eli_ViewCustom" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewCustomConditions" Role="Eli_ViewCustomConditions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_ViewCustom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustomConditions">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewGroupBy_Eli_Views">
+    <End Type="LeonardEntities.Eli_Views" Role="Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewGroupBy" Role="Eli_ViewGroupBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewGroupBy">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewOrderBy_Eli_Views">
+    <End Type="LeonardEntities.Eli_Views" Role="Eli_Views" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewOrderBy" Role="Eli_ViewOrderBy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Views">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewOrderBy">
+        <PropertyRef Name="ViewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesContractStore_SalesContractTemplates">
+    <End Type="LeonardEntities.SalesContractTemplate" Role="SalesContractTemplate" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesContractState" Role="SalesContractState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesContractTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesContractState">
+        <PropertyRef Name="ContractId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvoices_SalesInvTemplates">
+    <End Type="LeonardEntities.SalesInvTemplate" Role="SalesInvTemplate" Multiplicity="1" />
+    <End Type="LeonardEntities.SalesInvoice" Role="SalesInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesInvTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvoice">
+        <PropertyRef Name="InvTemplateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvServices_SalesInvoices">
+    <End Type="LeonardEntities.SalesInvoice" Role="SalesInvoice" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesInvService" Role="SalesInvService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesInvoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvService">
+        <PropertyRef Name="InvId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvTaxes_SalesInvoices">
+    <End Type="LeonardEntities.SalesInvoice" Role="SalesInvoice" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesInvTax" Role="SalesInvTax" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesInvoice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvTax">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SalesCustReference">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Relationship" Nullable="false" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="CustomerId" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <NavigationProperty Name="SalesCustomer" Relationship="LeonardEntities.FK_SalesCustomerRef_SalesCustomer" FromRole="SalesCustReference" ToRole="SalesCustomer" />
+  </EntityType>
+  <EntityType Name="vwViewMenu">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="ModuleName" />
+      <PropertyRef Name="ViewName" />
+      <PropertyRef Name="ViewId" />
+      <PropertyRef Name="Total" />
+      <PropertyRef Name="Shared" />
+      <PropertyRef Name="DefaultView" />
+      <PropertyRef Name="SortOrder" />
+    </Key>
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ViewName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ViewId" Nullable="false" />
+    <Property Type="Int32" Name="Total" Nullable="false" />
+    <Property Type="Boolean" Name="Shared" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="Boolean" Name="DefaultView" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="String" Name="UserRole" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SalesCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="DateOfBirth" Nullable="false" Precision="0" />
+    <Property Type="Int32" Name="SocialNum" />
+    <Property Type="String" Name="DriverLicense" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="HomePhone" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CellPhone" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PhysicalStreet" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PhysicalCity" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="PhysicalState" />
+    <Property Type="String" Name="PhysicalZip" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="MailingStreet" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MailingCity" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="MailingState" />
+    <Property Type="String" Name="MailingZip" MaxLength="6" FixedLength="true" Unicode="true" />
+    <Property Type="DateTime" Name="AtAddressSince" Precision="0" />
+    <Property Type="Int32" Name="ResidenceType" />
+    <Property Type="Int32" Name="LandType" />
+    <Property Type="String" Name="LandlordName" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LandlordPhone" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="CheckingAccount" />
+    <Property Type="Boolean" Name="SavingAccount" />
+    <Property Type="Boolean" Name="EnrollAutoPay" />
+    <Property Type="String" Name="CoName" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CoDateOfBirth" Precision="0" />
+    <Property Type="Int32" Name="CoSocialNum" />
+    <Property Type="String" Name="CoDriverLicense" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CoCellPhone" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CoEmail" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Employer" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="Since" Precision="0" />
+    <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Supervisor" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CoEmployer" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CoSince" Precision="0" />
+    <Property Type="String" Name="CoPhone" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CoSupervisor" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TypeOfBusiness" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="BusinessSince" Precision="0" />
+    <Property Type="String" Name="ResponsibleUsers" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Boolean" Name="SelfEmployed" />
+    <NavigationProperty Name="SalesCustReferences" Relationship="LeonardEntities.FK_SalesCustomerRef_SalesCustomer" FromRole="SalesCustomer" ToRole="SalesCustReference" />
+    <NavigationProperty Name="SalesCustomerUsers" Relationship="LeonardEntities.FK_SalesCustomerUsers_SalesCustomer" FromRole="SalesCustomer" ToRole="SalesCustomerUser" />
+    <Property Type="String" Name="IncomeExplanation" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CustomerInitials" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsSameMailingAddress" />
+    <NavigationProperty Name="SalesOrders" Relationship="LeonardEntities.FK_SalesOrder_SalesCustomer" FromRole="SalesCustomer" ToRole="SalesOrder" />
+  </EntityType>
+  <Association Name="FK_SalesCustomerRef_SalesCustomer">
+    <End Type="LeonardEntities.SalesCustomer" Role="SalesCustomer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesCustReference" Role="SalesCustReference" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCustomer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesCustReference">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesCustomerUsers_SalesCustomer">
+    <End Type="LeonardEntities.SalesCustomer" Role="SalesCustomer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesCustomerUser" Role="SalesCustomerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCustomer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesCustomerUser">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="sp_GetAllOverdueApps_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="PartNumber" Nullable="true" MaxLength="20" />
+    <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="CapitalizationPeriod" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <EntityType Name="vwViewColumn">
+    <Key>
+      <PropertyRef Name="FieldId" />
+      <PropertyRef Name="ColumnName" />
+      <PropertyRef Name="ModuleId" />
+      <PropertyRef Name="SortOrder" />
+      <PropertyRef Name="IsDate" />
+      <PropertyRef Name="IsList" />
+      <PropertyRef Name="IsMultiSelecttBox" />
+      <PropertyRef Name="IsCheckBox" />
+      <PropertyRef Name="LabelDisplay" />
+      <PropertyRef Name="Display" />
+      <PropertyRef Name="IsDateTime" />
+      <PropertyRef Name="IsDecimal" />
+      <PropertyRef Name="IsInteger" />
+      <PropertyRef Name="IsCurrency" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="Locked" />
+      <PropertyRef Name="Mandatory" />
+      <PropertyRef Name="IsLoadReference" />
+    </Key>
+    <Property Type="Int32" Name="FieldId" Nullable="false" />
+    <Property Type="String" Name="ColumnName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="ModuleId" Nullable="false" />
+    <Property Type="Int32" Name="SortOrder" Nullable="false" />
+    <Property Type="Boolean" Name="IsDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsList" Nullable="false" />
+    <Property Type="Boolean" Name="IsMultiSelecttBox" Nullable="false" />
+    <Property Type="Boolean" Name="IsCheckBox" Nullable="false" />
+    <Property Type="Int32" Name="ListNameId" />
+    <Property Type="String" Name="LabelDisplay" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="ForeignKey" />
+    <Property Type="String" Name="ListSql" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="AdvanceSearch" />
+    <Property Type="Boolean" Name="Display" Nullable="false" />
+    <Property Type="Boolean" Name="IsDateTime" Nullable="false" />
+    <Property Type="Boolean" Name="IsDecimal" Nullable="false" />
+    <Property Type="Boolean" Name="IsInteger" Nullable="false" />
+    <Property Type="Boolean" Name="Sortable" />
+    <Property Type="Boolean" Name="IsCurrency" Nullable="false" />
+    <Property Type="Boolean" Name="AllowGroup" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="Boolean" Name="Locked" Nullable="false" />
+    <Property Type="Int32" Name="Point" />
+    <Property Type="Boolean" Name="Visible" />
+    <Property Type="Boolean" Name="IsTextShow" />
+    <Property Type="Boolean" Name="Mandatory" Nullable="false" />
+    <Property Type="Boolean" Name="IsLoadReference" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwApplication">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="StatusCode" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Status" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="StatusCode" Nullable="false" />
+    <Property Type="String" Name="Name" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PartNumber" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="TotalMonthly" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="StoreNumber" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="String" Name="ResponsibleUsers" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Eli_Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Description" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Parent" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsHostAdmin" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="3" />
+    <Property Type="Int32" Name="ModifiedBy" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
+    <NavigationProperty Name="Eli_RolesFields" Relationship="LeonardEntities.FK_Eli_RolesFields_Eli_Roles" FromRole="Eli_Roles" ToRole="Eli_RolesFields" />
+    <NavigationProperty Name="Eli_RolesPermissions" Relationship="LeonardEntities.FK_Eli_RolesPermissions_Eli_Roles" FromRole="Eli_Roles" ToRole="Eli_RolesPermissions" />
+    <NavigationProperty Name="Eli_User" Relationship="LeonardEntities.FK_Eli_User_Eli_Roles" FromRole="Eli_Roles" ToRole="Eli_User" />
+  </EntityType>
+  <Association Name="FK_Eli_RolesFields_Eli_Roles">
+    <End Type="LeonardEntities.Eli_Roles" Role="Eli_Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_RolesFields" Role="Eli_RolesFields" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesFields">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_RolesPermissions_Eli_Roles">
+    <End Type="LeonardEntities.Eli_Roles" Role="Eli_Roles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_RolesPermissions" Role="Eli_RolesPermissions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_RolesPermissions">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SalesOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="GPCustomerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AcceptDate" Type="DateTime" Precision="0" />
+    <Property Name="PromoCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="GPOrderNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="StoreNumber" Type="Int32" />
+    <Property Name="IsOldCustomer" Type="Boolean" />
+    <Property Name="PartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsNewPart" Type="Boolean" />
+    <Property Name="MonthlyPayment1" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MonthlyPayment2" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaidAtSigning" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RampPaidAtSign" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ReductionPayment" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RampReduction" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tax" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RampTax" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalMonthly" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RampPartNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CapitalizationPeriod" Type="Int32" />
+    <Property Name="LesseeSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SignatureDate" Type="DateTime" Precision="3" />
+    <Property Name="SignatureIP" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="CoSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CoSignatureDate" Type="DateTime" Precision="3" />
+    <Property Name="CoSignatureIP" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+    <Property Name="ResponsibleUsers" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="POSTicketNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RentToOwn" Type="Boolean" />
+    <Property Name="SaleDate" Type="DateTime" Precision="0" />
+    <Property Name="IsFinalize" Type="Boolean" />
+    <Property Name="TotalPoint" Type="Int32" />
+    <Property Name="SaleTax" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NumberOfPayment" Type="Int32" Nullable="false" />
+    <Property Name="IsAddPromotion" Type="Boolean" />
+    <Property Name="PromotionAmt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DisapprovedReason" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsApproveOrder" Type="Boolean" />
+    <Property Name="SalesTaxPercent" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RampSalePrice" Type="Decimal" Precision="18" Scale="3" />
+    <Property Name="DriverAssigned" Type="Boolean" Nullable="false" />
+    <Property Name="IsSold" Type="Boolean" />
+    <NavigationProperty Name="SalesCustomer" Relationship="LeonardEntities.FK_SalesOrder_SalesCustomer" FromRole="SalesOrder" ToRole="SalesCustomer" />
+    <NavigationProperty Name="SalesDocuments" Relationship="LeonardEntities.FK_SalesDocuments_SalesOrder" FromRole="SalesOrder" ToRole="SalesDocument" />
+    <NavigationProperty Name="SalesInvoices" Relationship="LeonardEntities.FK_SalesInvoices_SalesOrder" FromRole="SalesOrder" ToRole="SalesInvoice" />
+    <NavigationProperty Name="SalesOrderCompletes" Relationship="LeonardEntities.FK_SalesOrderComplete_SalesOrder" FromRole="SalesOrder" ToRole="SalesOrderComplete" />
+    <NavigationProperty Name="SalesOrderDeliveries" Relationship="LeonardEntities.FK_SalesOrderDelivery_SalesOrder" FromRole="SalesOrder" ToRole="SalesOrderDelivery" />
+    <NavigationProperty Name="SalesOrdersUsers" Relationship="LeonardEntities.FK_SalesOrdersUsers_SalesOrder" FromRole="SalesOrder" ToRole="SalesOrdersUser" />
+  </EntityType>
+  <EntityType Name="SalesOrderComplete">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="NeedRepair" Type="Boolean" />
+    <Property Name="RepairNote" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Answer1" Type="Boolean" />
+    <Property Name="Answer2" Type="Boolean" />
+    <Property Name="Answer3" Type="Boolean" />
+    <Property Name="Answer4" Type="Boolean" />
+    <Property Name="Answer5" Type="Boolean" />
+    <Property Name="DeliveryType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DeliveryOther" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ActBlocksUsed" Type="Int32" />
+    <Property Name="ActHoursOfLabor" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ActMilesToSite" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="BalanceDue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AdditionalCharge" Type="Boolean" Nullable="false" />
+    <Property Name="PaymentType" Type="Int32" />
+    <Property Name="BlockCharge" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="LaborCharge" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="MileageCharge" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmountDue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WarrantyReceived" Type="Boolean" />
+    <Property Name="Satisfy" Type="Boolean" />
+    <Property Name="NoSatisfyComment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="Signature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SignDate" Type="DateTime" Precision="3" />
+    <Property Name="SignIP" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="FollowUpCall" Type="Boolean" />
+    <Property Name="CallDate" Type="DateTime" Precision="3" />
+    <Property Name="SpokeWithCustomer" Type="Boolean" />
+    <Property Name="FollowUpComment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ManagerSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ManagerSignDate" Type="DateTime" Precision="3" />
+    <Property Name="ManagerSignIP" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="DeliverSignature" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DeliverSignDate" Type="DateTime" Precision="3" />
+    <Property Name="DeliverSignIP" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="DeliveryPersonInitials" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="LeftVoiceMail" Type="Boolean" />
+    <NavigationProperty Name="SalesOrder" Relationship="LeonardEntities.FK_SalesOrderComplete_SalesOrder" FromRole="SalesOrderComplete" ToRole="SalesOrder" />
+  </EntityType>
+  <EntityType Name="SalesOrderDelivery">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="DeliveryType" Type="Int32" Nullable="false" />
+    <Property Name="DeliveryDate1" Type="DateTime" Precision="0" />
+    <Property Name="DeliveryDate2" Type="DateTime" Precision="0" />
+    <Property Name="DeliveryTime" Type="Int32" />
+    <Property Name="MilesToSite" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CustomerPresent" Type="Boolean" Nullable="false" />
+    <Property Name="LoadDoorFacing" Type="Int32" />
+    <Property Name="MoveFromAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MoveToAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DeliveryRequirement" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="DirectionToSite" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerInitials" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="InitialDate" Type="DateTime" Precision="3" />
+    <Property Name="CustomerSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerSignDate" Type="DateTime" Precision="3" />
+    <Property Name="CustomerSignIP" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="WaiverAccepted" Type="Boolean" />
+    <Property Name="CustomerAccepted" Type="Boolean" />
+    <Property Name="DriverName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DriverSignature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DriverSignDate" Type="DateTime" Precision="3" />
+    <Property Name="DriverSignIP" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SalesOrder" Relationship="LeonardEntities.FK_SalesOrderDelivery_SalesOrder" FromRole="SalesOrderDelivery" ToRole="SalesOrder" />
+  </EntityType>
+  <Association Name="FK_SalesOrder_SalesCustomer">
+    <End Type="LeonardEntities.SalesCustomer" Role="SalesCustomer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesOrder" Role="SalesOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesCustomer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrder">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesDocuments_SalesOrder">
+    <End Type="LeonardEntities.SalesOrder" Role="SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesDocument" Role="SalesDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesDocument">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesInvoices_SalesOrder">
+    <End Type="LeonardEntities.SalesOrder" Role="SalesOrder" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesInvoice" Role="SalesInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesInvoice">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrderComplete_SalesOrder">
+    <End Type="LeonardEntities.SalesOrder" Role="SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesOrderComplete" Role="SalesOrderComplete" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrderComplete">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrderDelivery_SalesOrder">
+    <End Type="LeonardEntities.SalesOrder" Role="SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesOrderDelivery" Role="SalesOrderDelivery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrderDelivery">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrdersUsers_SalesOrder">
+    <End Type="LeonardEntities.SalesOrder" Role="SalesOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesOrdersUser" Role="SalesOrdersUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SalesOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrdersUser">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Eli_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LoginName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="ActivationCode" Type="Guid" />
+    <Property Name="Avatar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="StoreId" Type="Int32" />
+    <Property Name="Signature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Eli_Roles" Relationship="LeonardEntities.FK_Eli_User_Eli_Roles" FromRole="Eli_User" ToRole="Eli_Roles" />
+    <NavigationProperty Name="Eli_SysAudit" Relationship="LeonardEntities.FK_Eli_User_SysAudit" FromRole="Eli_User" ToRole="Eli_SysAudit" />
+    <NavigationProperty Name="Eli_ViewCustom" Relationship="LeonardEntities.FK_Eli_ViewCustom_Eli_User" FromRole="Eli_User" ToRole="Eli_ViewCustom" />
+    <NavigationProperty Name="SalesCustomerUsers" Relationship="LeonardEntities.FK_SalesCustomerUsers_Eli_User" FromRole="Eli_User" ToRole="SalesCustomerUser" />
+    <NavigationProperty Name="SalesOrdersUsers" Relationship="LeonardEntities.FK_SalesOrdersUsers_Eli_User" FromRole="Eli_User" ToRole="SalesOrdersUser" />
+  </EntityType>
+  <Association Name="FK_Eli_User_Eli_Roles">
+    <End Type="LeonardEntities.Eli_Roles" Role="Eli_Roles" Multiplicity="1" />
+    <End Type="LeonardEntities.Eli_User" Role="Eli_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_User_SysAudit">
+    <End Type="LeonardEntities.Eli_User" Role="Eli_User" Multiplicity="0..1" />
+    <End Type="LeonardEntities.Eli_SysAudit" Role="Eli_SysAudit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_SysAudit">
+        <PropertyRef Name="ModifiedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Eli_ViewCustom_Eli_User">
+    <End Type="LeonardEntities.Eli_User" Role="Eli_User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.Eli_ViewCustom" Role="Eli_ViewCustom" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Eli_ViewCustom">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesCustomerUsers_Eli_User">
+    <End Type="LeonardEntities.Eli_User" Role="Eli_User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesCustomerUser" Role="SalesCustomerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesCustomerUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesOrdersUsers_Eli_User">
+    <End Type="LeonardEntities.Eli_User" Role="Eli_User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LeonardEntities.SalesOrdersUser" Role="SalesOrdersUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eli_User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SalesOrdersUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,97 @@
+﻿<div ng-controller="EditPicklistDependencyCtrl" class="padding10">
+    <form role="form" class="form-inline">
+        <div class="form-group input-group-sm">
+            <label>{{ languages.PICKLIST_DEPENDENCY.MODULE_NAME_LABEL }}</label>
+            <ui-select class="form-group-control" ng-model="picklisObj.ModuleId"
+                ng-change="Module_Changed()"
+                ng-disabled="Controls.ModuleControl.Disable"
+                theme="select2">
+                <ui-select-match>{{$select.selected.Description}}</ui-select-match>
+                <ui-select-choices repeat="item.Id as item in pickListForm.ModuleId | propsFilter: {Description: $select.search}">
+                    <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group input-group-sm">
+            <label>{{ languages.PICKLIST_DEPENDENCY.SOURCE_FIELD_LABEL }}</label>
+            <ui-select class="form-group-control" ng-model="picklisObj.MasterFieldId"
+                ng-change="SourceField_Changed()"
+                ng-disabled="Controls.SourceControl.Disable"
+                theme="select2">
+                <ui-select-match>{{$select.selected.LabelDisplay}}</ui-select-match>
+                <ui-select-choices repeat="item.Id as item in pickListForm.SourceFields | propsFilter: {LabelDisplay: $select.search}">
+                    <div ng-bind-html="item.LabelDisplay | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group input-group-sm">
+            <label>{{ languages.PICKLIST_DEPENDENCY.TARGET_FIELD_LABEL }}</label>
+            <ui-select class="form-group-control" ng-model="picklisObj.ChildFieldId"
+                ng-change="TargetField_Changed()"
+                ng-disabled="Controls.TargetControl.Disable"
+                theme="select2">
+                <ui-select-match>{{$select.selected.LabelDisplay}}</ui-select-match>
+                <ui-select-choices repeat="item.Id as item in pickListForm.TargetFields | propsFilter: {LabelDisplay: $select.search}">
+                    <div ng-bind-html="item.LabelDisplay | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="form-group input-group-sm">
+            <button class="btn btn-default btn-sm" ng-disabled="Controls.NextButtonControl.Disable"
+                    ng-click="Next_Clicked()" ng-show="Controls.NextButtonControl.Visible">
+                {{ languages.PICKLIST_DEPENDENCY.NEXT_BUTTON }}
+            </button>
+            <button class="btn btn-default btn-sm" ng-disabled="Controls.CancelButtonControl.Disable"
+                    ng-click="Cancel_Clicked()" ng-show="Controls.CancelButtonControl.Visible">
+                {{ languages.PICKLIST_DEPENDENCY.CANCEL_BUTTON }}
+            </button>
+        </div>
+    </form>
+    <div class="row padding10" ng-show="Controls.SelectSourceValueButtonControl.Visible">
+        <div class="col-xs-2 col-xs-offset-10">
+            <button class="btn btn-default btn-block btn-sm" ng-disabled="Controls.SelectSourceValueButtonControl.Disable"
+                    ng-click="Select_SourceValues()">
+                {{ languages.PICKLIST_DEPENDENCY.SELECT_SOURCE_VALUES_BUTTON }}
+            </button>
+        </div>
+    </div>
+    <div ng-show="Controls.SelectSourceValueButtonControl.Visible" ng-style="{'width':((TableObj.Columns.length + 1) * 150 + 10)+'px'}" style="padding-right: 10px;">
+        <table class="table table-bordered">
+            <colgroup>
+                <col style="width: 150px;" />
+                <col ng-repeat="item in TableObj.Columns" style="width: 150px;" />
+            </colgroup>
+            <thead>
+                <tr class="headerrow">
+                    <th>
+                        <div class="checkbox">
+                            {{ FirstColumn.SourceName }}
+                        </div>
+                    </th>
+                    <th ng-repeat="(i,item) in TableObj.Columns">
+                        <div class="checkbox input-group-sm">
+                            <label>
+                                <input type="checkbox" ng-model="item.Selected"
+                                       ng-change="SourceValue_CheckChanged(i)"> <span ng-bind="item.Description"></span>
+                            </label>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(i,item1) in TableObj.Rows">
+                    <td data-ng-if="i == 0" rowspan="{{ TableObj.Rows.length }}">{{ FirstColumn.TargetName }}</td>
+                    <td ng-repeat="(j,item2) in TableObj.Columns">
+                        <div class="checkbox input-group-sm">
+                            <label>
+                                <input type="checkbox" ng-model="item1[j].Selected"
+                                       ng-change="TargetValue_CheckChanged(j,i)"> <span ng-bind="item1[j].ChildValueName"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-include=" '/appviews/layouts/dialog.html' "></div>
+</div>

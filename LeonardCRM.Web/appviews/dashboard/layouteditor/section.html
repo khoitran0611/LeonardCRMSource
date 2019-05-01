@@ -1,0 +1,123 @@
+﻿<div ng-controller="DetailFieldSectionCtrl">
+    <div ng-init="InitFieldDetail(sectionObj,$index)">
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="5">
+                                <div class="form-inline">
+                                    <div class="form-group input-group-sm">
+                                        <label>{{ languages.LAYOUT_EDITOR.FIELD_NAME }}</label>
+                                        <select class="form-control" ng-model="sectionLeftFieldObj.FieldId"
+                                                ng-options="item.Id as item.LabelDisplay for item in CustomFields"
+                                                ng-change="LeftFieldChanged()" ng-hide="CustomFields.length == 0"></select>
+                                    </div>
+                                    <div class="form-group input-group-sm">
+                                        <button type="button" class="btn btn-default btn-sm" ng-hide="CustomFields.length == 0" ng-click="AddLeftField()"
+                                                tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.ADD_FIELD_BUTTON }}">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--<th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in sectionLeftFieldObjs">
+                            <td style="width: 75%">{{ item.LabelDisplay }}</td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-click="MoveRight(item)"
+                                        tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.MOVE_RIGHT_BUTTON }}">
+                                    <i class="glyphicon glyphicon glyphicon-chevron-right"></i>
+                                </button>
+                                
+                                
+                                
+                            </td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-hide="$first" ng-click="AsideLefMoveUp($index)"
+                                        tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.MOVE_UP_BUTTON }}">
+                                    <i class="glyphicon glyphicon-chevron-up"></i>
+                                </button>
+                            </td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-hide="$last" ng-click="AsideLeftMoveDown($index)"
+                                        tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.MOVE_DOWN_BUTTON }}">
+                                    <i class="glyphicon glyphicon-chevron-down"></i>
+                                </button>
+                            </td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-click="RemoveField(item)"
+                                        tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.DELETE_BUTTON }}">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="5">
+                                <div class="form-inline">
+                                    <div class="form-group input-group-sm">
+                                        <label>{{ languages.LAYOUT_EDITOR.FIELD_NAME }}</label>
+                                        <select class="form-control" ng-model="sectionRightFieldObj.FieldId"
+                                                ng-options="item.Id as item.LabelDisplay for item in CustomFields"
+                                                ng-change="RightFieldChanged()" ng-hide="CustomFields.length == 0"></select>
+                                    </div>
+                                    <div class="form-group input-group-sm">
+                                        <button type="button" class="btn btn-default btn-sm" ng-hide="CustomFields.length == 0" ng-click="AddRightField()"
+                                                tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.ADD_FIELD_BUTTON }}">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--<th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in sectionRightFieldObjs">
+                            <td style="width: 75%">{{ item.LabelDisplay }}</td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-click="MoveLeft(item)"
+                                        tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.MOVE_LEFT_BUTTON }}">
+                                    <i class="glyphicon glyphicon glyphicon-chevron-left"></i>
+                                </button>
+                            </td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-hide="$first" ng-click="AsideRightMoveUp($index)"
+                                        tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.MOVE_UP_BUTTON }}">
+                                    <i class="glyphicon glyphicon-chevron-up"></i>
+                                </button>
+                            </td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-hide="$last" ng-click="AsideRightMoveDown($index)"
+                                        tooltip-placement="top" uib-tooltip="{{ languages.LAYOUT_EDITOR.MOVE_DOWN_BUTTON }}">
+                                    <i class="glyphicon glyphicon-chevron-down"></i>
+                                </button>
+                            </td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-xs" ng-click="RemoveField(item)"
+                                        tooltip-placement="top" tooltip="{{ languages.LAYOUT_EDITOR.DELETE_BUTTON }}">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿<div class="overlay"></div>
+<div class="eli-window-container" ng-controller="windowCtrl">
+    <div class="eli-window-title">
+        {{ CurrentParam.Title }}
+        <a class="eli-window-close-ico pull-right" ng-click="closeWindow()">
+            <i class="glyphicon glyphicon-remove-circle"></i>
+        </a>
+        <a class="eli-window-save-ico pull-right" ng-show="hasEditPermissions" ng-click="saveData()" tooltip-append-to-body="false" tooltip-placement="bottom" tooltip="{{languages.TOOLBAR.SAVE_BUTTON}}">
+            <i class="glyphicon glyphicon-floppy-save"></i>
+        </a>
+    </div>
+    <div class="eli-scroll">
+        <div class="scrollbar-dynamic" data-jquery-scrollbar="jqueryScrollbarOptions">
+            <div class="eli-window-body">
+                <div ng-include="CurrentParam.Url" onload="loadBodyCompleted()"></div>
+            </div>
+        </div>
+    </div>
+</div>

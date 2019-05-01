@@ -1,0 +1,17 @@
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\Eli.Common.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\Eli.Common.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\DocumentFormat.OpenXml.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\Excel.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\log4net.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\LumenWorks.Framework.IO.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\TuesPechkin.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\TuesPechkin.Wkhtmltox.WinAnyCPU.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\TuesPechkin.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\Excel.pdb
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\log4net.xml
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\bin\Debug\LumenWorks.Framework.IO.xml
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\obj\Debug\Eli.Common.csprojResolveAssemblyReference.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\obj\Debug\Eli.Common.csproj.CoreCompileInputs.cache
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\obj\Debug\Eli.Common.dll
+D:\Working\Projects\Elisoft\Source_LeonardCRM\1.0\Eli.Common\obj\Debug\Eli.Common.pdb

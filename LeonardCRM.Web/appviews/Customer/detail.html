@@ -1,0 +1,332 @@
+﻿<form name="customerForm" id="customerForm" ng-controller="EditSalesCustomerCtrl">
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <div>
+                <ul id="CustomerTab" class="nav nav-tabs">
+                    <li><a href="#CustomerBasic" data-toggle="tab">{{languages.SALES_CUSTOMER.BASIC_INFOMATION}}</a></li>
+                    <li><a href="#CustomerSocialLink" data-toggle="tab">{{languages.SALES_CUSTOMER.SOCIAL_LINK}}</a></li>
+                    <li><a href="#CustomerNotes" data-toggle="tab">{{languages.SALES_CUSTOMER.NOTES}}</a></li>
+                    <li><a href="#CustomerSystemAudit" data-toggle="tab">{{languages.SYSTEM_AUDIT.TAB_LABEL}}</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane" id="CustomerBasic">
+                        <div class="panelbody">
+                            
+                            <div class="form-horizontal">
+                                <div class="row">
+                                    <fieldset class="col-xs-12 fieldset">
+                                        <legend class="fieldsetlegend">{{languages.SALES_CUSTOMER.GENERAL_INFOMATION}}</legend>
+                                        <div class="row fieldsetbody">
+                                            <div class="form-group col-xs-12 dynamic-group" ng-show="customer.PhotoControl.Visible">
+                                                <label class="col-xs-2 control-label">{{languages.SALES_CUSTOMER.PHOTO}}</label>
+                                                <!--ng-show="uploader.isUploading"-->
+                                                <div class="col-xs-10">
+                                                    <div class="thumbnail upload-button-mask">
+                                                        <div ng-show="uploader.isUploading" class="upload-button-mask-busy"></div>
+                                                        <img ng-src="{{ photo }}" alt=""/>
+                                                        <input type="file" nv-file-select uploader="uploader" ng-class="{'display-none':customer.PhotoControl.Locked}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.NameControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.NAME}}</label>
+                                                <div class="col-xs-8">
+                                                    <div class="row">
+                                                        <div class="col-xs-4 input-group-sm" ng-show="customer.TitleControl.Visible">
+                                                            <select class="form-control" ng-disabled="customer.TitleControl.Locked"
+                                                                    ng-options="item.Id as item.Description for item in pickListForm.Title"
+                                                                    ng-model="customer.Title"></select>
+                                                        </div>
+                                                        <div class="input-group-sm" ng-class="{'col-xs-8':customer.TitleControl.Visible,'col-xs-12':!customer.TitleControl.Visible}">
+                                                            <input type="text" ng-disabled="customer.NameControl.Locked"
+                                                                   class="form-control" ng-model="customer.Name"
+                                                                   data-validation-length="2-100" data-validation="length"
+                                                                   data-validation-error-msg="{{languages.SALES_CUSTOMER.NAME_ERROR_MSG}}" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.Email1Control.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.EMAIL1}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="email" class="form-control" ng-model="customer.Email1"
+                                                           ng-disabled="customer.Email1Control.Locked"
+                                                           data-validation="email length" data-validation-length="4-250"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.EMAIL_ERROR_MSG}}" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.Email2Control.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.EMAIL2}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="email" class="form-control" id="txtEmail2" ng-model="customer.Email2"
+                                                           ng-disabled="customer.Email2Control.Locked"
+                                                           data-validation="email length" data-validation-length="max250" data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.EMAIL_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.WorkPhoneControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.WORK_NUMBER}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.WorkPhone"
+                                                           ng-disabled="customer.WorkPhoneControl.Locked"
+                                                           data-validation="length" data-validation-length="max100"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.WORK_PHONE_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.CellPhoneControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.CELL_NUMBER}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.CellPhone"
+                                                           ng-disabled="customer.CellPhoneControl.Locked"
+                                                           data-validation="length" data-validation-length="max100"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.CELL_NUMBER_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.HomePhoneControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.HOME_NUMBER}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.HomePhone"
+                                                           ng-disabled="customer.HomePhoneControl.Locked"
+                                                           data-validation="length" data-validation-length="max100"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.HOME_NUMBER_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.FaxControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.FAX}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.Fax"
+                                                           ng-disabled="customer.FaxControl.Locked"
+                                                           data-validation="length" data-validation-length="max100"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.FAX_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.CompanyNameControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.COMPANY_NAME}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.CompanyName"
+                                                           ng-disabled="customer.CompanyNameControl.Locked"
+                                                           data-validation="length" data-validation-length="max250"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.COMPANY_NAME_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.DepartmentControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.DEPARTMENT}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.Department"
+                                                           ng-disabled="customer.DepartmentControl.Locked"
+                                                           data-validation="length" data-validation-length="max100"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.DEPARTMENT_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.Address1Control.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.ADDRESS1}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.Address1"
+                                                           ng-disabled="customer.Address1Control.Locked"
+                                                           data-validation="length" data-validation-length="max250"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.ADDRESS1_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.Address2Control.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.ADDRESS2}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.Address2"
+                                                           ng-disabled="customer.Address2Control.Locked"
+                                                           data-validation="length" data-validation-length="max250"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.ADDRESS2_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.WebsiteControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.WEBSITE}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" class="form-control" ng-model="customer.Website"
+                                                           ng-disabled="customer.WebsiteControl.Locked"
+                                                           data-validation="urlValid length" data-validation-length="max250"
+                                                           data-validation-optional="true"
+                                                           data-validation-error-msg="{{languages.SALES_CUSTOMER.WEBSITE_ERROR_MSG}}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.SourceControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.SOURCE}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <select class="form-control" ng-disabled="customer.SourceControl.Locked"
+                                                            ng-options="item.Id as item.Description for item in pickListForm.Source" ng-model="customer.Source"></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.ResponsibleUsersControl.Visible">
+                                                <label class="col-xs-4 control-label">
+                                                    {{languages.SALES_CUSTOMER.RESPONSIBLE_USER}}
+                                                    <span>(<span class="mandatorysign">*</span>)</span>
+                                                </label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                     <ui-select class="form-control" multiple ng-model="customer.UserIds"
+                                                        theme="bootstrap" ng-disabled="customer.ResponsibleUsersControl.Locked" sortable="true">
+                                                        <ui-select-match>{{$item.Description }}</ui-select-match>
+                                                        <ui-select-choices repeat="item.Id as item in pickListForm.ResponsibleUsers | propsFilter: {Description: $select.search}">
+                                                            <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                                        </ui-select-choices>
+                                                    </ui-select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xs-6 dynamic-group">
+                                                <label class="col-xs-4 control-label">
+                                                    {{languages.SALES_CUSTOMER.STATUS}}
+                                                </label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <select class="form-control" ng-model="customer.Status">
+                                                        <option ng-repeat="item in pickListForm.Status" value="{{item.Id}}">{{item.Description}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xs-6 dynamic-group">
+                                                <label class="col-xs-4 control-label">
+                                                    {{languages.SALES_CUSTOMER.INDUSTRY}}
+                                                </label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <select class="form-control" ng-model="customer.Industry">
+                                                        <option ng-repeat="item in pickListForm.Industry" value="{{item.Id}}">{{item.Description}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        <div class="form-group col-xs-6 dynamic-group">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.SALES_CUSTOMER.ANNUALREVENUE}}
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input type="text" numbers-only class="form-control" ng-model="customer.AnnualRevenue">
+                                            </div>
+                                        </div>
+                                            <div class="form-group col-xs-6 dynamic-group">
+                                                <label class="col-xs-4 control-label">
+                                                    {{languages.SALES_CUSTOMER.NOOFEMPLOYEE}}
+                                                </label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="text" numbers-only class="form-control" ng-model="customer.NoofEmployee">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xs-6 dynamic-group" ng-show="customer.DoNotCallControl.Visible">
+                                                <label class="col-xs-4 control-label">{{languages.SALES_CUSTOMER.DO_NOT_CALL}}</label>
+                                                <div class="col-xs-8 input-group-sm">
+                                                    <input type="checkbox" ng-disabled="customer.DoNotCallControl.Locked"
+                                                            ng-model="customer.DoNotCall" class="donotcallcheckbox">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="row">
+                                    <div ng-include="'/appviews/customfield/customfield.html'"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="tab-pane" id="CustomerSocialLink">
+                        <div class="panelbody">
+                            <div class="filter">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <span class="col-xs-6 input-group-sm">
+                                            <input name="txtLink" type="text" class="form-control" ng-model="customerlink"
+                                                   data-validation="url length" data-validation-length="max250"
+                                                   data-validation-optional="true" ng-customvalidateinput="pattern"
+                                                   data-validation-error-msg="{{languages.SALES_CUSTOMER.LINK_ERROR_MSG}}">
+                                        </span>
+                                        <span class="col-lg-3">
+                                            <button type="button" ng-disabled="!customerForm.txtLink.$valid" class="col-xs-6 btn btn-danger btn-sm" ng-show="hasPermission" 
+                                                    ng-click="addLink()">{{languages.SALES_CUSTOMER.ADD_LINK}}</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr ng-repeat="item in customer.SalesCustLinks">
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                {{item.Link}}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <button class="btn btn-danger btn-xs" ng-show="hasPermission" ng-click="deleteLink($index)"><i class="glyphicon glyphicon-trash"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane" id="CustomerNotes">
+                        <div class="panelbody">
+                            <div ng-include="'/appviews/note/notes.html'"></div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="CustomerSystemAudit">
+                        <div class="panelbody">
+                            <div ng-include="'/appviews/systemaudit/index.html'"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panelbody" ng-repeat="item in customer.RelateViews">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <fieldset class="col-xs-12 fieldset" ng-class="{'fieldset-topborder':item.Collapsed}">
+                            <legend class="fieldsetlegend" ng-click="item.Collapsed = !item.Collapsed">
+                                <span class="legendcollapse">
+                                    <i ng-class="{'glyphicon':true,'glyphicon-plus':item.Collapsed==true,'glyphicon-minus':item.Collapsed == false} "></i>
+                                </span><span>{{ item.Name }}</span>
+                            </legend>
+                            <div class="row panel-body" uib-collapse="item.Collapsed">
+                                <div ng-include="item.Url"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

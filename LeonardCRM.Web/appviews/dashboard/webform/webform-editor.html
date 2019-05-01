@@ -1,0 +1,102 @@
+﻿<div ng-controller="WebformEditorCtrl" class="padding10 form-horizontal">
+    <div class="row">
+        <button type="button" ng-click="showForm()" class="btn btn-sm btn-danger pull-right ng-binding" style="margin-bottom: 10px; margin-left: 10px">
+            <i class="glyphicon glyphicon-list-alt"></i> {{languages.WEBFORM.SHOW_FORM}}
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>{{languages.WEBFORM.WEBFORM}}</b>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="form-group col-xs-6 dynamic-group" ng-show="webform.FormNameControl.Visible">
+                                <label class="col-xs-4 control-label">
+                                    {{languages.WEBFORM.NAME}}
+                                    <span>(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input type="text" class="form-control" ng-model="webform.FormName"
+                                           ng-disabled="webform.FormNameControl.Locked" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-6 dynamic-group" ng-show="webform.FormNameControl.Visible">
+                                <label class="col-xs-4 control-label">
+                                    {{languages.WEBFORM.MODULE}}
+                                    <span>(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <select id="ddlModule" ng-model="webform.ModuleId" class="form-control" ng-change="changeModule()"
+                                            ng-disabled="webform.ModuleIdControl.Locked || !isNew" ng-options="module.Id as module.DisplayName for module in modules">
+                                        <!--<option ng-repeat="module in modules" value="{{module.Id}}">{{module.DisplayName}}</option>-->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-6 dynamic-group" ng-show="webform.AssignedToControl.Visible">
+                                <label class="col-xs-4 control-label">
+                                    {{languages.WEBFORM.RESPONSIBLE_USER}}
+                                    <span>(<span class="mandatorysign">*</span>)</span>
+                                </label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <select class="form-control" ng-model="webform.AssignedTo" ng-disabled="customer.ResponsibleUsersControl.Locked"
+                                            ng-disabled="webform.AssignedToControl.Locked">
+                                        <option ng-repeat="item in users" value="{{item.Id}}">{{item.Description}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-6 dynamic-group" ng-show="webform.ReturnUrlControl.Visible">
+                                <label class="col-xs-4 control-label">{{languages.WEBFORM.RETURN_URL}}</label>
+                                <div class="col-xs-8 input-group-sm">
+                                    <input type="text" class="form-control" ng-model="webform.ReturnUrl"
+                                           ng-disabled="webform.ReturnUrlControl.Locked">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 dynamic-group" ng-show="webform.DescriptionControl.Visible">
+                                <label class="col-xs-2 control-label">{{languages.WEBFORM.DESCRIPTION}}</label>
+                                <div class="col-xs-10 input-group-sm">
+                                    <textarea class="form-control" ng-model="webform.Description" rows="3" ng-disabled="webform.DescriptionControl.Locked" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 dynamic-group" ng-show="webform.IsActiveControl.Visible">
+                                <label class="col-xs-2 control-label">{{languages.WEBFORM.ACTIVE}}</label>
+                                <div class="col-xs-4 input-group-sm">
+                                    <input type="checkbox" ng-model="webform.IsActive" style="margin-right: 10px;"
+                                           ng-disabled="webform.IsActiveControl.Locked">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>{{languages.WEBFORM.DETAILS}}</b>
+                </div>
+                <div class="panel-body">
+                    <table class="table webform-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>{{languages.WEBFORM.FIELD_NAME}}</th>
+                                <th>{{languages.WEBFORM.FIELD_OVERRIDE_VALUE}}</th>
+                                <th>{{languages.WEBFORM.FIELD_REQUIRED}}</th>
+                                <th>{{languages.WEBFORM.FIELD_REFERENCE_FIELD}}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="webformFields">
+                            
+                        </tbody>                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

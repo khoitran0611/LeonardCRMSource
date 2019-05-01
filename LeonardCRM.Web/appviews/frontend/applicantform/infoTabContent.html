@@ -1,0 +1,575 @@
+﻿<form name="applicantForm" id="applicantForm" ng-controller="InfoTabContentCtrl">
+    <fieldset ng-disabled="!applicant.Editable">
+        <section class="content">
+            <div class="row">
+                <h3 class="text-center">{{languages.APPLICANT_FORM.HEADING}}</h3>
+                <h5 class="text-center">{{languages.APPLICANT_FORM.LETTER_HEADING}}</h5>
+
+                <div class="box-body">
+                    <!--Application Information-->
+                    <div class="col-md-12" ng-if="!onlyShowCustomer">
+                        <span>(<span class="mandatorysign">*</span>) <i>required fields</i></span>
+                        <h4 class="box-title applicant-box-title">{{languages.APPLICANT_FORM.APPLICATION_INFO}}</h4>
+                        <div class="form-horizontal row">
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.STORE_NO_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-md-8 col-sm-8">
+                                    <input type="number" class="form-control input-sm" ng-disabled="true" data-validation="required" ng-model="applicant.SalesOrders[0].StoreNumber" data-validation-error-msg="{{languages.APPLICANT_FORM.STORE_NUMBER_REQUIRE_ERROR_MSG}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label class="col-md-4 col-sm-4  control-label">{{languages.APPLICANT_FORM.PART_NO_FIELD}}:</label>
+                                <div class="col-md-8 col-sm-8">
+                                    <!--<input type="text" class="form-control input-sm" maxlength="20" ng-disabled="true" data-validation="required" ng-model="applicant.SalesOrders[0].PartNumber" data-validation-error-msg="{{languages.APPLICANT_FORM.PART_NUMBER_REQUIRE_ERROR_MSG}}">-->
+                                    <input type="text" class="form-control input-sm" maxlength="20" ng-model="applicant.SalesOrders[0].PartNumber" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--With the "Rent" process-->
+                    <!--Applicant-->
+                    <div class="col-md-6" ng-if="!isSoldProcess">
+                        <h4 class="col-md-12 box-title applicant-box-title">{{languages.APPLICANT_FORM.APPLICANT_SECTION_TITLE}}</h4>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+
+                                <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.NAME_APPLICANT_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control input-sm" name="customer-name" data-validation="required" ng-model="applicant.Name" data-validation-error-msg="{{languages.APPLICANT_FORM.NAME_AT_LEAST_ERROR_MSG}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">
+                                    {{languages.APPLICANT_FORM.DOB_APPLICANT_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:<br />
+                                    <em class="text-uppercase">{{' (' + dateFormat + ')'}}</em>
+                                </label>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <input class="form-control input-sm cal-xs" placeholder="{{dateFormat}}" on-open-focus="false" is-open="opened" data-validation="date" required data-validation-format="{{dateFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.DOB_REQUIRE_ERROR_MSG}}" show-weeks="showWeeks" type="text" ng-model="applicant.DateOfBirth" ng-change="checkDOB(applicant.DateOfBirth, false)" uib-datepicker-popup="{{dateFormat}}" datepicker-options="birthDateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                        <span class="btn input-group-addon" ng-click="opened = applicant.Editable">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">{{languages.APPLICANT_FORM.SECURITY_APPLICANT_FIELD}}:</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control input-sm" ng-model="applicant.SocialNum" data-validation="length" data-validation-length="0-9" data-validation-error-msg="Social Security # is invalid. Max 9 digits!">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">
+                                    {{languages.APPLICANT_FORM.DRIVER_LICENSE_APPLICANT_FIELD}}:<span>(<span class="mandatorysign">*</span>)</span>
+                                    <br />
+                                    <em>{{languages.APPLICANT_FORM.PHOTOCOPY_REQUIRED}}</em>
+                                </label>
+
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.DriverLicense" maxlength="20" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.DRIVER_LICENSE_REQUIRE_ERROR_MSG}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">
+                                    {{languages.APPLICANT_FORM.PHONE_APPLICANT_FIELD}}:<br />
+                                    <em>{{languages.APPLICANT_FORM.LANDLINE_ONLY}}</em>
+                                </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control input-sm" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model=" applicant.HomePhone" maxlength="20">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">{{languages.APPLICANT_FORM.CELL_PHONE_APPLICANT_FIELD}}:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control input-sm" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.CellPhone" maxlength="20">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class="col-sm-6 control-label">{{languages.APPLICANT_FORM.EMAIL_APPLICANT_FIELD}}:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control input-sm ipt-app-email" ng-model="applicant.Email" data-validation="email" data-validation-error-msg="Applicant email is invalid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Co-Applicant-->
+                    <div class="col-md-6" ng-if="!isSoldProcess">
+                        <h4 class="col-md-12 box-title applicant-box-title">{{languages.APPLICANT_FORM.CO_APPLICANT_SECTION_TITLE}}</h4>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.NAME_CO_APPLICANT_FIELD}}:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control input-sm" name="co-customer-name" ng-model="applicant.CoName">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">
+                                    {{languages.APPLICANT_FORM.DOB_CO_APPLICANT_FIELD}}:<br />
+                                    <em class="text-uppercase">{{' (' + dateFormat + ')'}}</em>
+                                </label>
+                                <div class="col-sm-6 overflow-datepicker">
+                                    <div class="input-group">
+                                        <input class="form-control input-sm cal-xs" placeholder="{{dateFormat}}" data-validation="date" data-validation-optional="true" data-validation-format="{{dateFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.CO_DOB_REQUIRE_ERROR_MSG}}" on-open-focus="false" is-open="opened1" show-weeks="showWeeks" type="text" ng-model="applicant.CoDateOfBirth" ng-change="checkDOB(applicant.CoDateOfBirth, true)" uib-datepicker-popup="{{dateFormat}}" datepicker-options="birthDateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                        <span class="btn input-group-addon" ng-click="opened1 = applicant.Editable">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">{{languages.APPLICANT_FORM.SECURITY_CO_APPLICANT_FIELD}}:</label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control input-sm" ng-model="applicant.CoSocialNum" data-validation="length" data-validation-length="0-9" data-validation-error-msg="Co-Name Social Security # is invalid. Max 9 digits!">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">
+                                    {{languages.APPLICANT_FORM.DRIVER_LICENSE_CO_APPLICANT_FIELD}}:
+                                    <br />
+                                    <em>{{languages.APPLICANT_FORM.PHOTOCOPY_REQUIRED}}</em>
+                                </label>
+
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.CoDriverLicense" maxlength="20">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">{{languages.APPLICANT_FORM.CELL_PHONE_CO_APPLICANT_FIELD}}:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control input-sm" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.CoCellPhone" maxlength="20">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-6 control-label">{{languages.APPLICANT_FORM.EMAIL_CO_APPLICANT_FIELD}}:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.CoEmail">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--With the "Sold" process-->
+                    <!--Applicant-->
+                    <div class="col-md-12" ng-if="isSoldProcess">
+                        <h4 class="col-md-12 box-title applicant-box-title">{{languages.APPLICANT_FORM.APPLICANT_SECTION_TITLE}}</h4>
+                        <div class="form-horizontal row">
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.NAME_APPLICANT_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-md-8 col-sm-8">
+                                    <input type="text" class="form-control input-sm" name="customer-name" data-validation="required" ng-model="applicant.Name" data-validation-error-msg="{{languages.APPLICANT_FORM.NAME_AT_LEAST_ERROR_MSG}}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.EMAIL_APPLICANT_FIELD}}:</label>
+                                <div class="col-md-8 col-sm-8">
+                                    <input type="text" class="form-control input-sm ipt-app-email" ng-model="applicant.Email" data-validation="email" data-validation-error-msg="Applicant email is invalid">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label class="col-md-4 col-sm-4 control-label">
+                                    {{languages.APPLICANT_FORM.PHONE_APPLICANT_FIELD}}:<br />
+                                    <em>{{languages.APPLICANT_FORM.LANDLINE_ONLY}}</em>
+                                </label>
+                                <div class="col-md-8 col-sm-8">
+                                    <input type="text" class="form-control input-sm" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model=" applicant.HomePhone" maxlength="20">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 form-group">
+                                <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.CELL_PHONE_APPLICANT_FIELD}}:</label>
+                                <div class="col-md-8 col-sm-8">
+                                    <input type="text" class="form-control input-sm" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.CellPhone" maxlength="20">
+                                </div>
+                            </div>
+
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+
+                    <!--Address-->
+                    <div class="col-md-12">
+                        <h4 class="box-title applicant-box-title">{{languages.APPLICANT_FORM.ADDRESS_SECTION_TITLE}}</h4>
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <!------------Mailing Adress------------------->
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.MAILLING_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="text" class="form-control input-sm" ng-model="applicant.MailingStreet" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_ADDRESS_REQUIRE_ERROR_MSG}}" ng-change="changedMaillingAddress()" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.CITY_MAILLING_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="text" class="form-control input-sm" ng-model="applicant.MailingCity" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_CITY_REQUIRE_ERROR_MSG}}" ng-change="changedMaillingAddress()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.ZIP_PHYSICAL_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="text" class="form-control input-sm" ng-model="applicant.MailingZip" maxlength="6" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_ZIP_REQUIRE_ERROR_MSG}}" ng-change="changedMaillingAddress()">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.STATE_PHYSICAL_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <select class="form-control input-sm" data-validation="required" data-validation-error-msg="Mailing State is required" ng-model="applicant.MailingState" ng-options="item.Id as item.Description for item in maillingStates" ng-change="changedMaillingAddress()"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!------------Physical Adress------------------->
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="text" class="form-control input-sm physical-address" ng-model="applicant.PhysicalStreet" ng-disabled="applicant.IsSameMailingAddress" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_REQUIRE_ERROR_MSG}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.CITY_PHYSICAL_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="text" class="form-control input-sm physical-address" ng-model="applicant.PhysicalCity" ng-disabled="applicant.IsSameMailingAddress" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_CITY_REQUIRE_ERROR_MSG}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.ZIP_MAILLING_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="text" class="form-control input-sm physical-address" ng-model="applicant.PhysicalZip" ng-disabled="applicant.IsSameMailingAddress" maxlength="6" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_ZIP_REQUIRE_ERROR_MSG}}">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                            <label class="col-md-4 col-sm-4 control-label">{{languages.APPLICANT_FORM.STATE_MAILLING_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <select class="form-control input-sm physical-address" data-validation="required" data-validation-error-msg="Physical State is required" ng-disabled="applicant.IsSameMailingAddress" ng-model="applicant.PhysicalState" ng-options="item.Id as item.Description for item in states"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="!isSoldProcess">
+                                <label class="col-sm-2 control-label">
+                                    {{languages.APPLICANT_FORM.AT_ADDRESS_SINCE_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:<br />
+                                    <em class="text-uppercase">{{'(' + monthFormat + ')'}}</em>
+                                </label>
+
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <input class="form-control input-sm cal-xs" placeholder="{{monthFormat}}" data-validation="date" required data-validation-format="{{monthFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.ADDRESS_SINCE_REQUIRE_ERROR_MSG}}" on-open-focus="false" is-open="opened2" show-weeks="showWeeks" type="text" ng-model="applicant.AtAddressSince" uib-datepicker-popup="{{monthFormat}}" datepicker-options="addressSinceOptions" ng-change="checkAddressSince()" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" required />
+                                        <span class="btn input-group-addon" ng-click="opened2 = applicant.Editable">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.OWN_RENT_RESIDENCE_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <div class="radio">
+                                        <label ng-repeat="t in residenceTypes">
+                                            <input type="radio" name="resType" ng-model="applicant.ResidenceType" ng-change="updateLandLordInfo()" data-validation="required" ng-value="t.Id">
+                                            {{t.Description}}&nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.OWN_RENT_LAND_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <div class="radio">
+                                        <label ng-repeat="t in landTypes">
+                                            <input type="radio" name="landType" data-validation="required" ng-change="updateLandLordInfo()" ng-model="applicant.LandType" ng-value="t.Id">
+                                            {{t.Description}}&nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center" ng-if="!isSoldProcess">
+                                <b>{{languages.APPLICANT_FORM.NOTE_LABEL}}</b>
+                            </div>
+
+                            <div class="form-group" ng-if="!isSoldProcess">
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.NAME_LANDLORD_FIELD}}:</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.LandlordName" ng-disabled="!isEnableLandLordField()">
+                                </div>
+                                <label class="col-sm-1 control-label">{{languages.APPLICANT_FORM.PHONE_ADDRESS_FIELD}}:</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.LandlordPhone" data-inputmask='"mask": "(999) 999-9999"' data-mask maxlength="20" ng-disabled="!isEnableLandLordField()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--References-->
+                    <div class="col-md-12" ng-if="!isSoldProcess">
+                        <h4 class="box-title applicant-box-title">{{languages.APPLICANT_FORM.REFERENCES_SECTION_TITLE}}</h4>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    {{languages.APPLICANT_FORM.NAME_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:<br />
+                                    <em>{{languages.APPLICANT_FORM.CLOSEST_RELATIVE}}</em>
+                                </label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.SalesCustReferences[0].Name" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.REF_NAME_1_REQUIRE_ERROR_MSG}}">
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.RELATIONSHIP_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control input-sm" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.RELATIONSHIP_1_REQUIRE_ERROR_MSG}}" ng-model="applicant.SalesCustReferences[0].Relationship" ng-options="item.Id as item.Description for item in relationships"></select>
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.PHONE_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control input-sm" maxlength="20" data-inputmask='"mask": "(999) 999-9999"' ng-model="applicant.SalesCustReferences[0].Phone" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHONE_1_REQUIRE_ERROR_MSG}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    {{languages.APPLICANT_FORM.NAME_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:<br />
+                                    <em>{{languages.APPLICANT_FORM.CLOSEST_RELATIVE}}</em>
+                                </label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.SalesCustReferences[1].Name" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.REF_NAME_2_REQUIRE_ERROR_MSG}}">
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.RELATIONSHIP_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control input-sm" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.RELATIONSHIP_2_REQUIRE_ERROR_MSG}}" ng-model="applicant.SalesCustReferences[1].Relationship" ng-options="item.Id as item.Description for item in relationships"></select>
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.PHONE_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control input-sm" maxlength="20" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.SalesCustReferences[1].Phone" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHONE_2_REQUIRE_ERROR_MSG}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">
+                                    {{languages.APPLICANT_FORM.NAME_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:<br />
+                                    <em>{{languages.APPLICANT_FORM.CLOSEST_RELATIVE}}</em>
+                                </label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control input-sm" ng-model="applicant.SalesCustReferences[2].Name" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.REF_NAME_3_REQUIRE_ERROR_MSG}}">
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.RELATIONSHIP_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control input-sm" ng-model="applicant.SalesCustReferences[2].Relationship" ng-options="item.Id as item.Description for item in relationships" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.RELATIONSHIP_3_REQUIRE_ERROR_MSG}}"></select>
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.PHONE_REF_FIELD}}<span>(<span class="mandatorysign">*</span>)</span>:</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control input-sm" maxlength="20" data-inputmask='"mask": "(999) 999-9999"' data-mask ng-model="applicant.SalesCustReferences[2].Phone" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHONE_3_REQUIRE_ERROR_MSG}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Income Information-->
+                    <div class="col-md-12" ng-if="!isSoldProcess">
+                        <h4 class="box-title applicant-box-title">{{languages.APPLICANT_FORM.EMPLOYMENT_SECTION_TITLE}}</h4>
+                        <div class="form-horizontal">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label"></label>
+                                    <div style="width: 630px;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12 form-inline">
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="applicant.SelfEmployed" name="employ-kind" ng-value="true" ng-focus="applicant.IncomeExplanation = null">
+                                            {{languages.APPLICANT_FORM.SELF_EMPLOYED}}
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="applicant.SelfEmployed" name="employ-kind" ng-value="false" ng-focus="applicant.TypeOfBusiness = null; applicant.IncomeExplanation = null;">
+                                            {{languages.APPLICANT_FORM.EMPLOYED_KIND_VALUE}}
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" ng-model="applicant.SelfEmployed" name="employ-kind" ng-value="null">
+                                            {{languages.APPLICANT_FORM.OTHER_INCOME_VALUE}}
+                                        </label>
+                                        <input type="text" class="form-control visible-lg-inline visible-md-inline visible-sm-inline visible-xs-inline input-sm" style="width: 190px; max-width: 25vw; margin-left: 10px;" ng-model="applicant.IncomeExplanation" ng-disabled="applicant.SelfEmployed != null" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.EMPLOYER_FIELD}}:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-sm" ng-model="applicant.Employer">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.SINCE_EMPLOY_FIELD}}<em class="text-uppercase">{{' (' + monthFormat + ')'}}</em>:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input class="form-control input-sm cal-xs" placeholder="{{monthFormat}}" on-open-focus="false" is-open="opened3" type="text" data-validation="date" data-validation-optional="true" data-validation-format="{{monthFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.SINCE_REQUIRE_ERROR_MSG}}" ng-model="applicant.Since" uib-datepicker-popup="{{monthFormat}}" datepicker-options="monthOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                            <span class="btn input-group-addon" ng-click="opened3 = applicant.Editable">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.WORK_PHONE_FIELD}}:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-sm" ng-model="applicant.Phone" maxlength="20" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.SUPERVISOR_FIELD}}:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-sm" ng-model="applicant.Supervisor">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">
+                                        {{languages.APPLICANT_FORM.TYPE_OF_BUSINESS_FIELD}}:<br />
+                                        <em>{{languages.APPLICANT_FORM.IF_SELF_EMPLOYED}}</em>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-sm" ng-model="applicant.TypeOfBusiness" ng-disabled="applicant.SelfEmployed == false">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.CO_NAME_EMPLOYER_FIELD}}:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-sm" ng-model="applicant.CoEmployer">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.SINCE_EMPLOY_FIELD}}<em class="text-uppercase">{{' (' + monthFormat + ')'}}</em>:</label>
+                                    <div class="col-sm-8 overflow-datepicker">
+                                        <div class="input-group">
+                                            <input class="form-control input-sm cal-xs" placeholder="{{monthFormat}}" on-open-focus="false" is-open="opened4" type="text" data-validation="date" data-validation-optional="true" data-validation-format="{{monthFormat.toLowerCase()}}" data-validation-error-msg="{{languages.APPLICANT_FORM.CO_SINCE_REQUIRE_ERROR_MSG}}" ng-model="applicant.CoSince" uib-datepicker-popup="{{monthFormat}}" datepicker-options="monthOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                                            <span class="btn input-group-addon" ng-click="opened4 = applicant.Editable">
+                                                <i class="glyphicon glyphicon-calendar"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.CO_NAME_WORK_PHONE_FIELD}}:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-sm" ng-model="applicant.CoPhone" maxlength="20" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-4 control-label">{{languages.APPLICANT_FORM.CO_NAME_SUPERVISOR_FIELD}}:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control input-sm" ng-model="applicant.CoSupervisor">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--Banking Information-->
+                    <div class="col-md-12 col-sm-12 col-xs-12" ng-if="!isSoldProcess">
+                        <h4 class="box-title applicant-box-title">{{languages.APPLICANT_FORM.PAYMENT_SECTION_TITLE}}</h4>
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.CHECKING_ACCOUNT}}:</label>
+                                <div class="col-sm-1">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" ng-model="applicant.CheckingAccount" ng-value="true">
+                                            {{languages.APPLICANT_FORM.YES_LABEL}}
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" ng-model="applicant.CheckingAccount" ng-value="false">
+                                            {{languages.APPLICANT_FORM.NO_LABEL}}
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.SAVING_ACCOUNT}}:</label>
+                                <div class="col-sm-1">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" ng-model="applicant.SavingAccount" ng-value="true">
+                                            {{languages.APPLICANT_FORM.YES_LABEL}}
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" ng-model="applicant.SavingAccount" ng-value="false">
+                                            {{languages.APPLICANT_FORM.NO_LABEL}}
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <label class="col-sm-2 control-label">{{languages.APPLICANT_FORM.ENROLL_IN_AUTOPAY}}:</label>
+                                <div class="col-sm-4">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" ng-model="applicant.EnrollAutoPay" ng-value="true">
+                                            {{languages.APPLICANT_FORM.YES_LABEL}} <em>{{languages.APPLICANT_FORM.YES_ENROLL_NOTE}}</em>
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" ng-model="applicant.EnrollAutoPay" ng-value="false">
+                                            {{languages.APPLICANT_FORM.NO_LABEL}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end body-->
+
+                <div class="box-footer" ng-if="applicant.Editable && !applicant.IsBelongAdmin">
+                    <button type="button" promise-btn="cancelPromise" style="margin-left: 10px;" class="btn btn-flat-danger pull-right ng-binding" ng-click="cancelApp(applicantId)">{{languages.APPLICANT_FORM.CANCEL_BTN}}</button>
+                    <button type="button" promise-btn="savePromise" class="btn btn-flat pull-right" ng-disabled="applicantForm.$pristine" ng-click="save()">{{languages.APPLICANT_FORM.SAVE_CHANGE_BTN}}</button>
+                </div>
+            </div>
+        </section>
+    </fieldset>
+</form>

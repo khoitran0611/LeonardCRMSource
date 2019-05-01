@@ -1,0 +1,68 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12 form-group">
+    <label class="submit-app-question">{{languages.APPLICANT_FORM.QUESTION_ADDRESS_SECTION}}</label>
+    <div class="checkbox-inline" style="margin-left: 5px;">
+        <label>
+            <input type="checkbox" ng-model="applicant.IsSameMailingAddress" ng-change="changeSameMailingChk()"><b>{{languages.APPLICANT_FORM.YES_LABEL}}</b></label>
+    </div>
+</div>
+
+<div class="col-xs-12" ng-class="{'col-lg-6 col-md-6 col-sm-6': applicant.IsSameMailingAddress != true, 'col-lg-12 col-md-12 col-sm-12' : applicant.IsSameMailingAddress == true}">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label class="submit-app-section"><span class="col-lg-5 col-md-6 col-sm-5 col-xs-6 submit-app-section-header">{{languages.APPLICANT_FORM.MAILLING_ADDRESS_FIELD}}</span></label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 pd0" ng-class="{'col-lg-12 col-md-12 col-sm-12': applicant.IsSameMailingAddress != true, 'col-lg-6 col-md-6 col-sm-6' : applicant.IsSameMailingAddress == true}">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.MAILLING_ADDRESS_FIELD}}<span>(<span class="mandatorysign">*</span>)</span></label>
+                <input type="text" class="form-control" ng-model="applicant.MailingStreet" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_ADDRESS_REQUIRE_ERROR_MSG}}">
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.CITY_MAILLING_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <input type="text" class="form-control" ng-model="applicant.MailingCity" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_CITY_REQUIRE_ERROR_MSG}}">
+            </div>
+        </div>
+        <div class="col-xs-12 pd0" ng-class="{'col-lg-12 col-md-12 col-sm-12': applicant.IsSameMailingAddress != true, 'col-lg-6 col-md-6 col-sm-6' : applicant.IsSameMailingAddress == true}">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.ZIP_PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <input type="text" class="form-control" ng-model="applicant.MailingZip" maxlength="6" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILLING_ZIP_REQUIRE_ERROR_MSG}}">
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+                <label>{{languages.APPLICANT_FORM.STATE_PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+                <select class="form-control" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.MAILING_STATE_REQUIRE_ERROR_MSG}}" ng-model="applicant.MailingState" ng-options="item.Id as item.Description for item in maillingStates"></select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-hide="applicant.IsSameMailingAddress == true">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label class="submit-app-section"><span class="col-lg-5 col-md-6 col-sm-5 col-xs-6 submit-app-section-header">{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_FIELD}}</span></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control physical-address" ng-model="applicant.PhysicalStreet" ng-disabled="applicant.IsSameMailingAddress" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_ADDRESS_REQUIRE_ERROR_MSG}}">
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.CITY_PHYSICAL_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control physical-address" ng-model="applicant.PhysicalCity" ng-disabled="applicant.IsSameMailingAddress" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_CITY_REQUIRE_ERROR_MSG}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.ZIP_MAILLING_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <input type="text" class="form-control physical-address" ng-model="applicant.PhysicalZip" ng-disabled="applicant.IsSameMailingAddress" maxlength="6" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_ZIP_REQUIRE_ERROR_MSG}}">
+        </div>
+
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 form-group">
+            <label>{{languages.APPLICANT_FORM.STATE_MAILLING_ADDRESS_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+            <select class="form-control physical-address" data-validation="required" data-validation-error-msg="{{languages.APPLICANT_FORM.PHYSICAL_STATE_REQUIRE_ERROR_MSG}}" ng-disabled="applicant.IsSameMailingAddress" ng-model="applicant.PhysicalState" ng-options="item.Id as item.Description for item in states"></select>
+        </div>
+    </div>
+</div>

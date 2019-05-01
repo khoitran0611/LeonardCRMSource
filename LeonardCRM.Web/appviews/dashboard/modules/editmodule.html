@@ -1,0 +1,61 @@
+﻿<div ng-controller="EditModuleCtrl" class="padding10">
+    <div class="col-md-6">
+        <div class="form-group input-group-sm">
+            <label>{{ languages.MODULES.MODULE_NAME }}</label>
+            <input type="text" class="form-control" ng-model="currentModuleObj.DisplayName">
+        </div>
+        <div class="form-group input-group-sm">
+            <label>{{ languages.MODULES.ICON_CLASS }}</label>
+            <input type="text" class="form-control" ng-model="currentModuleObj.IconClass">
+        </div>
+
+        <div class="form-group input-group-sm">
+            <input type="checkbox" class="donotcallcheckbox" ng-model="currentModuleObj.IsActive">
+            <label>{{ languages.MODULES.IS_ACTIVE }}</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group input-group-sm">
+            <label>{{ languages.MODULES.DESCRIPTION }}</label>
+            <textarea class="form-control" ng-model="currentModuleObj.Description"
+                      style="height: 100px;"></textarea>
+        </div>
+        <div class="form-group input-group-sm">
+            <label>{{ languages.MODULES.MENU_ICON }}</label>
+            <div class="col-md-12 form-horizontal" role="form">
+                <div class="form-group" ng-show="fileName.length > 0">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img class="customerimage" ng-src="{{ showimage(fileName) }}  " alt="" imageonload />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6" ng-show="fileName.length > 0">
+                                <button class="btn btn-sm btn-danger" tooltip-append-to-body="true"
+                                        tooltip-placement="bottom" tooltip="{{languages.SALES_CUSTOMER.DELETE}}"
+                                        ng-click="DeletePhoto(currentModuleObj.MenuIcon)">
+                                    <i class="glyphicon glyphicon-trash"></i> Delete
+                                </button>
+                            </div>
+                            <div class="col-md-6" ng-show="fileName.length == 0">
+                                <span class="btn btn-danger fileinput-button">
+                                    <span>{{languages.SALES_CUSTOMER.CHOOSE}}</span>
+                                    <input type="file" data-validation="mime size" data-validation-max-size="100kb"
+                                            data-validation-allowing="{{languages.IMAGE_FORMATS}}"
+                                            data-validation-error-msg="{{languages.COMMON.INVALID_IMAGE_FORMAT}}" 
+                                            nv-file-select uploader="uploader" ng-model="currentModuleObj.Photo" ng-disabled="disabled" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

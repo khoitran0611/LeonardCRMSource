@@ -1,0 +1,1 @@
+update Eli_EntityFields set DataTypeId = 5 where FieldName = 'CustomerId' and ModuleId = 3

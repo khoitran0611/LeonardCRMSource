@@ -1,0 +1,80 @@
+﻿<div ng-controller="NoteCtrl">
+    <div class="row">
+        <div class="col-md-12">            
+            <div>
+                <table class="table note">
+                    <thead>
+                        <tr class="headetable">
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.NOTES.NOTE_DATE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{languages.NOTES.NOTE_DESCRIPTION}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="checkbox" ng-model="note.IsActive" ng-change="onlyActive_Checked()" />
+                                        <span>
+                                            {{languages.NOTES.ONLY_ACTIVE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(i,item) in notes track by $index">
+                            <td>
+                                <div class=" row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            {{ item.NoteDate | date:date_format }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span ng-bind-html="bindTrustHtml(item.Description)"></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span>
+                                            <input type="checkbox"
+                                                   ng-model="item.IsActive" ng-disabled="true">
+                                        </span>                                        
+                                    </div>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

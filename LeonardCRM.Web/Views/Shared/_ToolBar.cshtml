@@ -1,0 +1,83 @@
+﻿@using LeonardCRM.DataLayer.ModelEntities
+@model Eli_RolesPermissions
+<div ng-controller="toolbarCtrl">
+    <div class="pull-right" style="margin-left: 20px">
+        @{ Html.RenderAction("LoginInfo", "Account"); }
+    </div>
+    @{
+        if (Model != null)
+        {
+            if (Model.AllowCreate)
+            {
+                <button type="button" ng-hide="windowOpen || isEdit || isAddNew || (!showAddButton)" ng-click="Add()" class="btn btn-sm btn-danger">
+                    <i class="glyphicon glyphicon-plus-sign"></i> {{languages.TOOLBAR.ADD_NEW_BUTTON}}
+                </button>
+            }
+            if (Model.AllowEdit)
+            {
+                <button ng-show="isEdit || isAddNew" type="button" ng-click="Save()" class="btn btn-sm btn-success">
+                    <i class="glyphicon glyphicon-floppy-save"></i> {{languages.TOOLBAR.SAVE_BUTTON}}
+                </button>
+                <button ng-hide="(!isEdit && !isAddNew) || !showCancelButton" type="button" ng-click="Cancel()" class="btn btn-sm btn-warning">
+                    <i class="glyphicon glyphicon-minus-sign"></i> {{languages.TOOLBAR.CANCEL_BUTTON}}
+                </button>
+            }
+            if (Model.AllowDelete)
+            {
+
+                <button ng-hide="!isDelete || windowOpen || isEdit || isAddNew" type="button" ng-click="Delete()" class="btn btn-sm btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i> {{languages.TOOLBAR.DELETE_BUTTON}}
+                </button>
+            }
+            if (Model.AllowRead)
+            {
+                <button type="button" ng-hide="windowOpen || isAddNew || isEdit" ng-click="Refresh()" class="btn btn-sm btn-info">
+                    <i class="glyphicon glyphicon-refresh"></i> {{languages.TOOLBAR.REFRESH_BUTTON}}
+                </button>
+            }
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-sm dropdown-toggle" tooltip-append-to-body="true" tooltip-placement="left" tooltip="{{languages.TOOLBAR.MORE_OPTIONS_BUTTON}}" type="button" data-toggle="dropdown">
+                    <i class=" glyphicon glyphicon-cog"></i>&nbsp;<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    @if (Model.AllowExport)
+                    {
+                        <li ng-hide="windowOpen || isAddNew || isEdit"><a ng-click="ExportCSV()">{{languages.TOOLBAR.EXPORT_CSV_BUTTON}}</a></li>
+                        <li ng-hide="windowOpen || isAddNew || isEdit"><a ng-click="ExportFromDbToCSV()">{{languages.TOOLBAR.EXPORT_ALL_DATA_CSV_BUTTON}}</a></li>
+                        <li ng-hide="!isExportPDF"><a ng-click="ExportPDF()">{{languages.TOOLBAR.EXPORT_PDF_BUTTON}}</a></li>
+                    }
+                    @if (Model.AllowImport)
+                    {
+                        <li ng-hide="windowOpen || isAddNew || isEdit"><a ng-click="ImportDataToDB()">{{languages.TOOLBAR.IMPORT_BUTTON}}</a></li>                            
+                    }
+                    <li class="divider"></li>
+                    @*<li><a>...</a></li>*@
+                </ul>
+            </div>
+            if (Model.AllowRead)
+            {
+                <div class="btn-group pull-right">
+                    <div style="width: 200px; float: left; margin-right: 10px;" ng-hide="!showAdvanceSearch || windowOpen || isAddNew || isEdit">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" ng-model="textSearch" style="height: 30px;" ng-enter="search()" />
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="search()" style="height: 30px;"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            if (Model.AllowRead)
+            {
+            
+                
+                <div ng-hide="!showAdvanceSearch || windowOpen || isAddNew || isEdit" class="pull-right">
+                    <div class="col-md-12" ng-include=" '/appviews/layouts/advance-search-form.html' ">
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+        

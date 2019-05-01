@@ -1,0 +1,461 @@
+﻿<form name="customerAccpetanceForm" id="customerAccpetanceForm" ng-controller="CustomerAcceptTabContentCtrl">
+    <fieldset ng-disabled="applicant.SalesOrders[0].Status === completedStatus"> 
+        <section class="content">
+            <div class="row">
+                <!--Top Information-->
+                <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+                    <div class="pull-right col-md-1 col-sm-2 col-xs-2 form-horizontal" style="padding: 0; min-width: 153px;">
+                        <div class="form-group">
+                            <div class="col-md-1 col-sm-2 col-xs-3"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.LOT_FIELD}}:</b>&nbsp;{{ applicant.SalesOrders[0].StoreNumber }}</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-1 col-sm-2 col-xs-3">
+                                <b>{{languages.CUSTOMER_ACCEPTANCE_FORM.RTO_FIELD}}:</b>&nbsp;{{applicant.SalesOrders[0].RentToOwn == true ? languages.CUSTOMER_ACCEPTANCE_FORM.RTO_YES_TEXT : languages.CUSTOMER_ACCEPTANCE_FORM.RTO_NO_TEXT}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-center" style="clear: both; padding-top: 20px;"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.HEADING}}</b></h3>
+                <h3 class="text-center" style="margin-top: 5px;">{{languages.CUSTOMER_ACCEPTANCE_FORM.SUB_HEADING}}</h3>
+
+                <div class="box-body customer-acceptance-content-form">
+                    <h5 class="text-center">{{languages.CUSTOMER_ACCEPTANCE_FORM.LETTER_HEADING}}</h5>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 delivery-to-cutomer-section">
+                        <!--Delivery To Customer Section-->
+                        <h4 class="box-title applicant-box-title"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.DELIVERY_CUSTOMER_SECTION}}</b></h4>
+
+                        <div class="col-md-12 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.NAME_FIELD}}</label>
+                            <input type="text" class="form-control input-sm" ng-model="applicant.Name" ng-disabled="true">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.ADDRESS_FIELD}}</label>
+                            <input type="text" class="form-control input-sm" ng-model="applicant.PhysicalStreet" ng-disabled="true">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.CITY_FIELD}}</label>
+                            <input type="text" class="form-control input-sm" ng-model="applicant.PhysicalCity" ng-disabled="true">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.STATE_FIELD}}</label>
+                            <select class="form-control input-sm" ng-model="applicant.PhysicalState" ng-disabled="true" ng-options="item.Id as item.Description for item in picklistForm.States"></select>
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.ZIP_FIELD}}</label>
+                            <input type="text" class="form-control input-sm" ng-disabled="true" ng-model="applicant.PhysicalZip">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.DAYTIME_PHONE_FIELD}}</label>
+                            <input type="text" class="form-control input-sm" ng-disabled="true" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="" ng-model="applicant.HomePhone" maxlength="20">
+                        </div>
+
+                        <div class="col-md-3 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.OTHER_PHONE_FIELD}}</label>
+                            <input type="text" class="form-control input-sm" ng-disabled="true" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="" ng-model="applicant.CellPhone" maxlength="20">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.EMAIL_ADDRESS_FIELD}}</label>
+                            <input type="text" class="form-control input-sm" ng-disabled="true" ng-model="applicant.Email">
+                        </div>
+
+                    </div>
+
+                    <!--Product Infomation Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12 product-info-section">
+                        <h4 class="box-title applicant-box-title"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.PRODUCT_INFO_SECTION}}</b></h4>
+
+                        <div class="col-md-2 form-group">
+                            <label class="col-md-12 control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.SOLD_DATE_FIELD}}</label>
+                            <span class="col-md-12">{{applicant.SalesOrders[0].SaleDate | date:dateFormat}}</span>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="col-md-12 control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.DELIVERY_DATE_FIELD}}</label>
+                            <span class="col-md-12">{{applicant.SalesOrders[0].SalesOrderCompletes[0].DeliveryDate | date:dateFormat}}</span>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="col-md-12 control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.INVOICE_NUMBER_FIELD}}</label>
+                            <span class="col-md-12">{{applicant.SalesOrders[0].POSTicketNumber}}</span>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="col-md-12 control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.SERIAL_NUMBER_FIELD}}</label>
+                            <span class="col-md-12" ng-show="applicant.SalesOrders[0].SerialNumber != null && applicant.SalesOrders[0].SerialNumber != ''">{{applicant.SalesOrders[0].SerialNumber}}</span>
+                            <span class="col-md-12" ng-show="applicant.SalesOrders[0].Status !== completedStatus && (applicant.SalesOrders[0].SerialNumber == null || applicant.SalesOrders[0].SerialNumber == '')"><input class="form-control input-sm" ng-model="serialNumber"/></span>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="col-md-12 control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.PART_NUMBER_FIELD}}</label>
+                            <span class="col-md-12">{{applicant.SalesOrders[0].PartNumber}}</span>
+                        </div>
+
+                        <div class="col-md-2 form-group">
+                            <label class="col-md-12 control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.COLOR_FIELD}}</label>
+                            <span class="col-md-12">{{applicant.SalesOrders[0].Color}}</span>
+                        </div>
+                    </div>
+
+                    <!--Building Repair / Maintenance Information Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12 building-maintenance-info-section">
+                        <div class="box-title applicant-box-title col-md-12 col-sm-12">
+                            <span class="col-lg-5 col-md-5 col-sm-12" style="padding-left: 0px;"><b style="font-size: 18px;">{{languages.CUSTOMER_ACCEPTANCE_FORM.REPAIR_MAINTANCE_INFO_SECTION}}</b></span>
+                            <div class="col-lg-7 col-md-7 col-sm-12">
+                                <label class="col-sm-3 label-control">{{languages.CUSTOMER_ACCEPTANCE_FORM.REPAIR_QUESTION}}</label>
+                                <div class="col-sm-9 radio" style="margin-top: 0px; padding-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].NeedRepair" ng-disabled="applicant.IsCustomer" ng-focus="applicant.SalesOrders[0].SalesOrderCompletes[0].RepairNote = null;"  ng-value="false" name="rdRepair">{{languages.CUSTOMER_ACCEPTANCE_FORM.REPAIR_ANSWER_NO_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].NeedRepair" ng-disabled="applicant.IsCustomer" ng-value="true" name="rdRepair">{{languages.CUSTOMER_ACCEPTANCE_FORM.REPAIR_ANSWER_YES_TEXT}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control input-sm" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].RepairNote" ng-disabled="!applicant.SalesOrders[0].SalesOrderCompletes[0].NeedRepair || applicant.IsCustomer">
+                        </div>
+                    </div>
+
+                    <!--Delivery Infomation Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12 delivery-info-section">
+                        <h4 class="box-title applicant-box-title"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.DELIVERY_INFO_SECTION}}</b> - <i>{{languages.CUSTOMER_ACCEPTANCE_FORM.DELIVERY_INFO_GUIDE}}</i></h4>
+                        <div class="col-md-6 form-horizontal">
+                            <div class="col-sm-12 form-group">
+                                <span class="col-sm-10 radio">{{languages.CUSTOMER_ACCEPTANCE_FORM.QUESTION_1}}</span>
+                                <div class="col-sm-2 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer1" ng-value="true" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo1">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_YES_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer1" ng-value="false" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo1">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_NO_TEXT}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                <span class="col-sm-10 radio">{{languages.CUSTOMER_ACCEPTANCE_FORM.QUESTION_2}}</span>
+                                <div class="col-sm-2 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer2" ng-value="true" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo2">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_YES_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer2" ng-value="false" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo2">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_NO_TEXT}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                <span class="col-sm-10 radio">{{languages.CUSTOMER_ACCEPTANCE_FORM.QUESTION_3}}</span>
+                                <div class="col-sm-2 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer3" ng-value="true" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo3">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_YES_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer3" ng-value="false" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo3">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_NO_TEXT}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                <span class="col-sm-10 radio">{{languages.CUSTOMER_ACCEPTANCE_FORM.QUESTION_4}}</span>
+                                <div class="col-sm-2 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer4" ng-value="true" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo4">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_YES_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer4" ng-value="false" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo4">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_NO_TEXT}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                <span class="col-sm-10 radio">{{languages.CUSTOMER_ACCEPTANCE_FORM.QUESTION_5}}</span>
+                                <div class="col-sm-2 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer5" ng-value="true" ng-disabled="applicant.IsCustomer" name="rdDeliveryInfo5">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_YES_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Answer5" 
+                                               ng-focus="applicant.SalesOrders[0].SalesOrderCompletes[0].ActBlocksUsed = null;applicant.SalesOrders[0].SalesOrderCompletes[0].ActHoursOfLabor = null; applicant.SalesOrders[0].SalesOrderCompletes[0].ActMilesToSite = null; applicant.SalesOrders[0].SalesOrderCompletes[0].AdditionalCharge=false; autoCaculatePrice();" 
+                                               ng-disabled="applicant.IsCustomer" ng-value="false" name="rdDeliveryInfo5">{{languages.CUSTOMER_ACCEPTANCE_FORM.ANSWER_NO_TEXT}}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="col-md-7">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th class="col-md-5 col-sm-4 col-xs-4">{{languages.CUSTOMER_ACCEPTANCE_FORM.STANDARD_COL}}</th>
+                                            <th class="col-md-4 col-sm-4 col-xs-4">{{languages.CUSTOMER_ACCEPTANCE_FORM.ACTUAL_COL}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{languages.CUSTOMER_ACCEPTANCE_FORM.BLOCK_USER_ROW}}</td>
+                                            <td></td>
+                                            <td>
+                                                <input type="text" class="form-control input-sm" numbers-only ng-disabled="!applicant.SalesOrders[0].SalesOrderCompletes[0].Answer5 || applicant.IsCustomer" ng-change="autoCaculatePrice()" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].ActBlocksUsed" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{languages.CUSTOMER_ACCEPTANCE_FORM.LABOR_HOURS_ROW}}</td>
+                                            <td>{{languages.CUSTOMER_ACCEPTANCE_FORM.STANDARD_LABOR_HOURS_VALUE}}</td>
+                                            <td>
+                                                <input type="text" class="form-control input-sm" numbers-only ng-disabled="!applicant.SalesOrders[0].SalesOrderCompletes[0].Answer5 || applicant.IsCustomer" ng-change="autoCaculatePrice()" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].ActHoursOfLabor" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{languages.CUSTOMER_ACCEPTANCE_FORM.MILE_TO_DELIVERY_SITE_ROW}}</td>
+                                            <td>{{languages.CUSTOMER_ACCEPTANCE_FORM.STANDARD_MILES_VALUE}}</td>
+                                            <td>
+                                                <input type="text" class="form-control input-sm" numbers-only ng-disabled="!applicant.SalesOrders[0].SalesOrderCompletes[0].Answer5 || applicant.IsCustomer" ng-change="autoCaculatePrice()" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].ActMilesToSite" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-4 form-group">
+                                <div class="radio" ng-repeat="item in picklistForm.deliveryTypes">
+                                    <label>
+                                        <input type="checkbox" ng-model="item.checked" ng-disabled="applicant.IsCustomer" ng-change="onToggleDeliveryTypeCheckbox(item.Id, item.checked)"  ng-value="item.Id" name="rdDeliveryInfo" />
+                                        <b style="margin-left:5px;">{{item.Description}}</b> {{item.AdditionalInfo != null && item.AdditionalInfo != '' ? '(' + item.AdditionalInfo + ')': ''}}
+                                    </label>
+                                </div>
+                                <div class="col-md-12" style="padding-left: 21px;">
+                                    <input type="text" class="form-control"
+                                        ng-disabled="!isEnableOtherDeliveryType || applicant.IsCustomer" 
+                                        ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].DeliveryOther" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="col-md-6 form-group">
+                                <div style="border-bottom: 1px solid;">
+                                    <br />
+                                    <img width="250" ng-show="applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverySignatureUrl != null" ng-src="{{applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverySignatureUrl}}"/>
+                                    <button type="button" class="btn btn-primary" ng-show="applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverSignature == null || applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverSignature == ''" ng-click="openSignPopup(keyDeliverySignaturePop)">{{languages.CUSTOMER_ACCEPTANCE_FORM.DELIVERY_SIGN_BTN}}</button>
+                                </div>                               
+                                <div >{{languages.CUSTOMER_ACCEPTANCE_FORM.DELIVERY_SIGNATURE_TEXT}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Additional Charges & Payment Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="box-title applicant-box-title col-md-12 col-sm-12">
+                            <span class="col-lg-4 col-md-5 col-sm-12" style="padding-left: 0px;"><b style="font-size: 18px;">{{languages.CUSTOMER_ACCEPTANCE_FORM.CHARGES_PAYMENT_SECTION}}</b></span>
+                            <div class="col-lg-8 col-md-7 col-sm-12">
+                                <div class="col-lg-4 col-md-12 radio" style="padding-bottom: 0; margin-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="radio" ng-focus="applicant.SalesOrders[0].SalesOrderCompletes[0].BalanceDue = null" ng-disabled="applicant.IsCustomer" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].IsPaidFull" ng-value="true" name="rdChargesPayment"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.PAID_FULL_OPTION}}</b></label>
+                                </div>
+                                <div class="col-lg-4 col-md-12 col-sm-12 radio" style="padding-bottom: 0; margin-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].IsPaidFull" ng-disabled="applicant.IsCustomer" ng-value="false" name="rdChargesPayment"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.DEPOSIT_OPTION}}</b></label>
+                                </div>
+                                <div class="col-lg-4 col-md-12 col-sm-12 checkbox" style="padding-bottom: 0; margin-top: 0px; margin-bottom: 0px;">
+                                    <label>
+                                        <input type="checkbox" ng-disabled="true" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].AdditionalCharge"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.ADDITION_CHARGES_OPTION}}</b> - {{languages.CUSTOMER_ACCEPTANCE_FORM.ADDITION_CHARGES_OPTION_NOTE}}</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-5 col-sm-12">
+                            <h5><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.ADDITION_CHARGES_HEADING}}:</b> <i style="font-size: 12px;">{{languages.CUSTOMER_ACCEPTANCE_FORM.ADDITION_CHARGES_HEADING_NOTE}}</i></h5>
+                            <p>
+                                {{languages.CUSTOMER_ACCEPTANCE_FORM.ADDITION_CHARGES_LINE1}}
+                                <br />
+                                {{languages.CUSTOMER_ACCEPTANCE_FORM.ADDITION_CHARGES_LINE2}}
+                                <br />
+                                {{languages.CUSTOMER_ACCEPTANCE_FORM.ADDITION_CHARGES_LINE3}}
+                                <br />
+                            </p>
+                        </div>
+                        <div class="col-md-7 col-sm-12">
+                            <h5><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.PAYMENT_INFO_HEADING}}:</b></h5>
+                            <div class="col-md-3 form-group">
+                                <div class="radio" ng-repeat="type in picklistForm.PaymentTypes">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].PaymentType" ng-disabled="applicant.IsCustomer" ng-value="type.Id" name="rdPaymentInfo">{{type.Description}} <i style="font-size: 11px;">{{type.AdditionalInfo}}</i></label>
+                                </div>
+                            </div>
+                            <div class="col-md-9" style="padding-left: 0;">
+                                <div class="col-md-12 form-group">
+                                    <label class="col-md-4 label-control">{{languages.CUSTOMER_ACCEPTANCE_FORM.PAYMENT_BALANCE_FIELD}}: </label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control input-sm" ng-disabled="applicant.IsCustomer" numbers-only ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].BalanceDue" ng-disabled="applicant.SalesOrders[0].SalesOrderCompletes[0].IsPaidFull" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="col-md-4 label-control">{{getUnitPrice(languages.CUSTOMER_ACCEPTANCE_FORM.PAYMENT_BLOCK_FIELD, registry.BLOCK_UNIT_PRICE)}}: </label>
+                                    <div class="col-md-8">                                        
+                                        <label class="form-control input-sm" disabled>
+                                            {{applicant.SalesOrders[0].SalesOrderCompletes[0].BlockCharge | currency : currencyDisplay : formatDecimalPlaces}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="col-md-4 label-control">{{getUnitPrice(languages.CUSTOMER_ACCEPTANCE_FORM.PAYMENT_LABOR_FIELD, registry.MAN_HOUR_UNIT_PRICE)}}:</label>
+                                    <div class="col-md-8">
+                                        <label class="form-control input-sm" disabled>
+                                            {{applicant.SalesOrders[0].SalesOrderCompletes[0].LaborCharge | currency : currencyDisplay : formatDecimalPlaces}}
+                                        </label>                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="col-md-4 label-control">{{getUnitPrice(languages.CUSTOMER_ACCEPTANCE_FORM.PAYMENT_MILE_FIELD, registry.LOADED_MILE_UNIT_PRICE)}}:</label>
+                                    <div class="col-md-8">                                        
+                                        <label class="form-control input-sm" disabled>
+                                            {{applicant.SalesOrders[0].SalesOrderCompletes[0].MileageCharge | currency : currencyDisplay : formatDecimalPlaces}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="col-md-4 label-control">{{languages.CUSTOMER_ACCEPTANCE_FORM.PAYMENT_TOTAL_FIELD}}: </label>
+                                    <div class="col-md-8">
+                                        <label class="form-control input-sm" disabled>
+                                            {{(parseNumber(applicant.SalesOrders[0].SalesOrderCompletes[0].BalanceDue) + parseNumber(applicant.SalesOrders[0].SalesOrderCompletes[0].BlockCharge) + parseNumber(applicant.SalesOrders[0].SalesOrderCompletes[0].LaborCharge) + parseNumber(applicant.SalesOrders[0].SalesOrderCompletes[0].MileageCharge)) | currency : currencyDisplay : formatDecimalPlaces}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-3 form-group">
+                                    <label class="control-label">{{languages.CUSTOMER_ACCEPTANCE_FORM.DELIVERY_INITALS_FIELD}}</label>
+                                    <input type="text" class="form-control input-sm" ng-disabled="applicant.IsCustomer" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].DeliveryPersonInitials">
+                                </div>
+                                <div class="col-md-9 form-group">
+                                    <div style="border-bottom: 1px solid; min-height: 60px;">
+                                        <img width="250" ng-show="applicant.SalesOrders[0].SalesOrderCompletes[0].CustomerSignatureUrl != null" ng-src="{{applicant.SalesOrders[0].SalesOrderCompletes[0].CustomerSignatureUrl}}"/>
+                                    </div>                                    
+                                    <div>{{languages.CUSTOMER_ACCEPTANCE_FORM.CUSTOMER_SIGNATURE_TEXT}}</div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+                    <!--Warranty / Customer Acceptance & Comments Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h4 class="box-title applicant-box-title col-md-12 col-sm-12"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.WARRANTY_SECTION}} - </b><i>{{languages.CUSTOMER_ACCEPTANCE_FORM.WARRANTY_SECTION_NOTE}}</i></h4>
+                        <div class="col-md-6">
+                            <h5><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.WARRANTY_HEADING}}: </b></h5>
+                            <div class="form-group">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].WarrantyReceived" ng-value="true" name="rdWarranty">{{languages.CUSTOMER_ACCEPTANCE_FORM.WARRANTY_YES_OPTION_TEXT}}
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].WarrantyReceived" ng-value="false" name="rdWarranty">{{languages.CUSTOMER_ACCEPTANCE_FORM.WARRANTY_NO_OPTION_TEXT}}
+                                    </label>
+                                </div>
+                            </div>
+                            <h5><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.CUSTOMER_COMMENT}}: </b></h5>
+                            <div class="form-group">
+                                <label>{{languages.CUSTOMER_ACCEPTANCE_FORM.SATIFY_QUESTION}}</label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Satisfy" ng-focus="applicant.SalesOrders[0].SalesOrderCompletes[0].NoSatisfyComment = null;" ng-value="true" name="rdCustomerCmd" />{{languages.CUSTOMER_ACCEPTANCE_FORM.SATIFY_ANSWER_YES_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Satisfy" ng-value="false" name="rdCustomerCmd" />{{languages.CUSTOMER_ACCEPTANCE_FORM.SATIFY_ANSWER_NO_TEXT}} - <i>{{languages.CUSTOMER_ACCEPTANCE_FORM.SATIFY_ANSWER_NO_NOTE}}</i></label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12 form-group" style="padding-left: 0;">
+                                <textarea class="form-control" rows="5" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].NoSatisfyComment" ng-disabled="applicant.SalesOrders[0].SalesOrderCompletes[0].Satisfy == null || applicant.SalesOrders[0].SalesOrderCompletes[0].Satisfy"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="box">
+                                {{languages.CUSTOMER_ACCEPTANCE_FORM.RATING_SERVICE_SALE}}:
+                                <select class="form-control rating-select" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].Rating" id="service-rating" ng-options="item.Id as item.Description for item in picklistForm.ServiceRatings"></select>
+                            </div>
+                            <div>
+                                {{languages.CUSTOMER_ACCEPTANCE_FORM.WARRANTY_TEXT1}} <u>{{applicant.Name}}</u>{{languages.CUSTOMER_ACCEPTANCE_FORM.WARRANTY_TEXT2}}
+                            </div>
+                            <div>
+                                <div style="border-bottom: 1px solid;">
+                                    <br />
+                                    <img width="250" style="margin-top:15px;" ng-show="applicant.SalesOrders[0].SalesOrderCompletes[0].CustomerSignatureUrl != null" ng-src="{{applicant.SalesOrders[0].SalesOrderCompletes[0].CustomerSignatureUrl}}"/>
+                                    <button type="button" class="btn btn-primary" ng-show="applicant.SalesOrders[0].SalesOrderCompletes[0].Signature == null || applicant.SalesOrders[0].SalesOrderCompletes[0].Signature == ''" ng-click="openSignPopup(keySignaturePop)">{{languages.CUSTOMER_ACCEPTANCE_FORM.CUSTOMER_SIGN_BTN}}</button>
+                                </div>
+                                <div>{{languages.CUSTOMER_ACCEPTANCE_FORM.CUSTOMER_SIGNATURE_TEXT}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Lot Manager Follow-Up Section-->
+                    <div class="col-md-12 col-sm-12 col-xs-12" ng-show="false">
+                        <h4 class="box-title applicant-box-title  col-md-12 col-sm-12"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.MANAGER_SECTION}}</b></h4>
+                        <div class="form-horizontal">
+                            <div class="col-md-3 form-group">
+                                <span class="col-sm-8 radio">{{languages.CUSTOMER_ACCEPTANCE_FORM.FOLLOW_UP_QUESTION}}</span>
+                                <div class="col-sm-4 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].FollowUpCall" ng-value="true" name="rdFollowUp">{{languages.CUSTOMER_ACCEPTANCE_FORM.FOLLOW_UP_ANSWER_YES_TEXT}}</label>
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].FollowUpCall" ng-value="false" name="rdFollowUp">{{languages.CUSTOMER_ACCEPTANCE_FORM.FOLLOW_UP_ANSWER_NO_TEXT}}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 form-group" style="padding-top: 7px;">
+                                <label class="col-md-3 label-control">{{languages.CUSTOMER_ACCEPTANCE_FORM.CALL_DATE_FIELD}}: </label>
+                                <div class="col-md-9">
+                                    <input class="form-control input-sm cal-xs" placeholder="{{dateFormat}}" show-weeks="showWeeks" type="text" datepicker-popup="{{dateFormat}}" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].CallDate" datepicker-options="dateOptions" close-text="{{languages.NOTES.CLOSE_CALENDAR}}" required />
+                                </div>
+                            </div>
+
+                            <div class="col-md-2  form-group" style="padding-top: 7px;">
+                                <label class="col-md-5 label-control">{{languages.CUSTOMER_ACCEPTANCE_FORM.CALL_TIME_FIELD}}: </label>
+                                <div class="col-md-7  bootstrap-timepicker">
+                                    <input type="text" class="form-control timepicker" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].CallTime">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <div class="col-md-6 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].SpokeWithCustomer" ng-value="true" name="rdFollowUpOption">{{languages.CUSTOMER_ACCEPTANCE_FORM.FOLLOW_UP_OPTION1}}</label>
+                                </div>
+                                <div class="col-md-6 radio">
+                                    <label>
+                                        <input type="radio" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].SpokeWithCustomer" ng-value="false" name="rdFollowUpOption">{{languages.CUSTOMER_ACCEPTANCE_FORM.FOLLOW_UP_OPTION2}}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <label class="col-md-12" for="comment">{{languages.CUSTOMER_ACCEPTANCE_FORM.FOLLOW_UP_COMMENT}}</label>
+                                <div class="col-md-12">
+                                    <textarea class="form-control" maxlength="250" id="comment" ng-model="applicant.SalesOrders[0].SalesOrderCompletes[0].FollowUpComment"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div style="border-bottom: 1px solid; min-height: 60px;"></div>
+                                <div>{{languages.CUSTOMER_ACCEPTANCE_FORM.MANAGER_NAME_FIELD}}</div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <div style="border-bottom: 1px solid; min-height: 60px;"></div>
+                                <div>{{languages.CUSTOMER_ACCEPTANCE_FORM.MANAGER_SIGNATURE_FIELD}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="col-md-12 col-sm-12 col-xs-12" ng-show="false">
+                        <h5 class="box-title applicant-box-title"><b>{{languages.CUSTOMER_ACCEPTANCE_FORM.FOOTER}}:</b> {{languages.CUSTOMER_ACCEPTANCE_FORM.FOOTER_NOTE}} </h5>
+                    </div>
+                </div>
+
+                <div class="box-footer">                    
+                    <div class="col-md-12 col-sm-12 col-xs-12">                        
+                        <button type="button" promise-btn="savePromise" ng-if="applicant.SalesOrders[0].Status !== completedStatus" class="btn btn-flat pull-right" 
+                                ng-disabled="applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverSignature == null || 
+                                             applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverSignature == ''" ng-click="saveOrderComplete()">{{languages.CUSTOMER_ACCEPTANCE_FORM.SAVE_BTN}}</button>
+                        <label style="margin-top: 10px" class="label label-danger pull-right" ng-show="applicant.SalesOrders[0].SalesOrderCompletes[0].Signature == null || applicant.SalesOrders[0].SalesOrderCompletes[0].Signature == '' || applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverSignature == null || applicant.SalesOrders[0].SalesOrderCompletes[0].DeliverSignature == ''">{{languages.DELIVERY_REQUEST_FORM.REQUIRED_FIELDS_ERROR}}</label>
+                    </div>
+                </div>
+                <!--end body-->
+            </div>
+        </section>
+    </fieldset>
+</form>

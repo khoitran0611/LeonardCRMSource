@@ -1,0 +1,128 @@
+﻿@{
+    Layout = "~/Views/Shared/_AuthenLayout.cshtml";
+}
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>Leonard</b>USA</a>
+    </div>
+    @if (ViewBag.Success.Count > 0)
+    {
+        <div class="login-box-body">
+            @*<p class="login-box-msg">@ViewBag.CongratulationHeading</p>*@
+            <div class="alert alert-success">
+                @foreach (var item in ViewBag.Success)
+                {
+                    <text>
+                        <div>
+                            @Html.Raw(item)
+                        </div>
+                    </text>
+                }
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="login-box-body">
+            <p class="login-box-msg">@ViewBag.FormHeader</p>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @id = "ajaxForm" }))
+            {
+                if (ViewBag.Errors.Count > 0)
+                {
+                    <div class="alert alert-danger">
+                        <strong>@ViewBag.ErrorTitle</strong><br>
+                        @foreach (var item in ViewBag.Errors)
+                        {
+                            <text>
+                                <div>
+                                    * @item
+                                </div>
+                            </text>
+                        }
+
+                    </div>
+                }
+
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="@ViewBag.Name" data-validation="name_validate" name="Name" value="@Model.Name" />
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input class="form-control" type="email" data-validation="email" data-validation-error-msg="@ViewBag.InvalidEmail" name="Email" value="@Model.Email" placeholder="@ViewBag.Email" />
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" value="@Model.Password" data-validation="required" data-validation-error-msg="@ViewBag.ReqiredPassword" class="form-control" id="password" name="Password" placeholder="@ViewBag.Password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="@ViewBag.PasswordConfirm" data-validation="required" data-validation-error-msg="@ViewBag.ReqiredPasswordConfirm" value="@Model.PasswordConfirm" name="PasswordConfirm">
+                    <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    <img id="img_captcha" alt="" src="/Handler/captcha.aspx?r=@Guid.NewGuid().ToString("N")" />
+                    <a href="/Register" class="btn btn-default btn-sm" id="refreshCaptcha" onclick="return false;"><i class="glyphicon glyphicon-refresh"></i></a>
+                </div>
+                <div class="form-group has-feedback">
+                    <input class="form-control" id="txtCaptcha" type="text" maxlength="6" data-validation="required" placeholder="@ViewBag.Captcha" data-validation-error-msg="@ViewBag.ReqiredCaptcha" name="Captcha" value="@Model.Captcha" />
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <a class="sign-in-link" href="/login">@ViewBag.LoginButton</a>
+                    </div><!-- /.col -->
+                    <div class="col-xs-6">
+                        <button class="btn btn-primary btn-block btn-flat" type="submit">@ViewBag.RegisterButton</button>
+                    </div><!-- /.col -->
+                </div>
+            }
+        </div>
+    }
+
+</div>
+@section styles
+{
+    <style>
+        .alert {
+            padding: 5px;
+        }
+    </style>
+
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var myLanguage = {
+                errorTitle: '@ViewBag.ErrorTitle'
+            };
+
+            $.formUtils.addValidator({
+                name: 'name_validate',
+                validatorFunction: function (value, $el, config, language, $form) {                    
+                    return value != null && value != '' && value.trim().split(' ').length >= 2;
+                },
+                errorMessage: '@ViewBag.ReqiredName',
+                errorMessageKey: 'nameValidator'
+            });
+
+            $.validate({
+                language: myLanguage,
+                validateOnBlur: false, // disable validation when input looses focus
+                errorMessagePosition: 'top', // Instead of 'element' which is default
+                scrollToTopOnError: true // Set this property to true if you have a long form                
+            });
+            function refreshCaptcha() {
+                var url = "/Account/GetNewGuid";
+                $.get(url, function (data) {
+                    var src = "/Handler/captcha.aspx?r=" + data;
+                    $("#img_captcha").attr("src", src);
+                });
+            }
+            $('#refreshCaptcha').click(function () {
+                $("#txtCaptcha").val('');
+                refreshCaptcha();
+            });
+        });
+    </script>
+}

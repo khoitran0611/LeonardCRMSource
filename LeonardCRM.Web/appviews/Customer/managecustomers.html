@@ -1,0 +1,16 @@
+﻿<div ng-controller="ManageSalesCustomersCtrl">
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="pagination anphabe">
+                <li ng-class="{active:activeAnphabe == 'All'}"><a ng-click="filterAlphabet('All')">{{languages.SALES_CUSTOMER.SHOW_ALL}}</a></li>
+                <li ng-repeat="(index,anphabe) in BrowseAllCustomers track by $index" ng-class="{active:activeAnphabe == anphabe}"><a ng-click="filterAlphabet(anphabe)">{{anphabe}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <button ng-hide="!isShowSurvey" type="button" ng-click="addSurvey()" class="btn btn-sm btn-danger pull-right" style="margin-bottom: 10px; margin-left: 10px">
+        <i class="glyphicon glyphicon-list-alt"></i> {{languages.SURVEY.ADD_SURVEY}}
+    </button>
+    <div ng-include="gridUrl"></div>
+    <div ng-include="dialogUrl"></div>
+    <div ng-include=" '/appviews/layouts/dialog.html' "></div>
+</div>

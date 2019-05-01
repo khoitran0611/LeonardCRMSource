@@ -1,0 +1,115 @@
+﻿<div ng-controller="EditEntityFieldCtrl" class="padding10">
+    <form id="fieldForm" name="fieldForm" class="row" role="form">
+        <div class="col-md-5">
+            <div class="form-group input-group-sm" ng-show="currentField.FieldNameControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.FIELD_NAME }}</label>
+                <input type="text" class="form-control" data-validation="custom"
+                    data-validation-regexp="^([a-z,A-Z]+)$" data-validation-error-msg="{{languages.ENTITY_FIELD.FIELD_NAME_ERROR_MSG}}"
+                    ng-disabled="currentField.Id > 0 || currentField.FieldNameControl.Locked" ng-model="currentField.FieldName">
+            </div>
+            <div class="form-group input-group-sm" ng-hide="!currentField.Deletable || !currentField.DataTypeIdControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.DATA_TYPE }}</label>
+                <select class="form-control" ng-disabled="currentField.DataTypeIdControl.Locked || (currentField.Id > 0 && currentField.Deletable)" ng-model="currentField.DataTypeId" ng-change="dataTypeChanged()"
+                    ng-options="item.Id as item.TypeName for item in dataTypeSource">
+                </select>
+            </div>
+            <div class="form-group input-group-sm" ng-hide="!currentField.Deletable || !currentField.ListNameIdControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.LIST_NAME }}</label>
+                <select class="form-control" ng-disabled="currentField.ListNameIdControl.Locked || (!currentDataType.IsList && !currentDataType.IsMultiSelecttBox)" ng-model="currentField.ListNameId"
+                    ng-options="item.Id as item.ListName for item in listName">
+                </select>
+            </div>
+            <div class="form-group input-group-sm" ng-show="currentField.DescriptionControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.DESCRIPTION }}</label>
+                <textarea class="form-control" ng-model="currentField.Description" ng-disabled="currentField.DescriptionControl.Locked"
+                    style="height: 90px;"></textarea>
+            </div>
+            <div class="form-group input-group-sm" ng-show="currentField.RegularExpressionControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.REGULAREXPRESSION }}</label>
+                <input type="text" class="form-control" ng-model="currentField.RegularExpression" ng-disabled="currentField.RegularExpressionControl.Locked"/>
+            </div>
+			<div class="form-group input-group-sm" ng-show="currentField.PointControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.POINT }}</label>
+                <input type="text" class="form-control" ng-model="currentField.Point" data-validation="alphanumeric" ng-disabled="currentField.PointControl.Locked"/>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="form-group input-group-sm" ng-show="currentField.LabelDisplayControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.LABLE_DISPLAY }}</label>
+                <input type="text" class="form-control" data-validation="required"
+                    data-validation-error-msg="{{languages.ENTITY_FIELD.LABEL_DISPLAY_ERROR_MSG}}" ng-model="currentField.LabelDisplay" ng-disabled="currentField.LabelDisplayControl.Locked">
+            </div>
+            <div class="form-group input-group-sm" ng-hide="!currentField.Deletable || !currentField.DataLengthControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.DATA_LENGTH }}</label>
+                <input type="text" class="form-control" ng-disabled="showDataLength || currentField.DataLengthControl.Locked" ng-model="currentField.DataLength" />
+            </div>
+            <div class="form-group input-group-sm" ng-hide="!currentField.Deletable || !currentField.DefaultValueControl.Visible">
+                <label>{{ languages.ENTITY_FIELD.DEFAULT_VALUE }}</label>
+                <input type="text" class="form-control" ng-model="currentField.DefaultValue" ng-disabled="currentField.DefaultValueControl.Locked"/>
+            </div>
+            <div class="form-group">
+                <label>{{ languages.ENTITY_FIELD.OPTION }}</label>
+                <div class="checkbox">
+                    <div class="row">
+                        <label class="col-md-6" ng-show="currentField.MandatoryControl.Visible">
+                            <input type="checkbox" ng-model="currentField.Mandatory" ng-disabled="currentField.MandatoryControl.Locked"/>
+                            <span class="label-checkbox">{{ languages.ENTITY_FIELD.MANDATORY }}</span>
+                        </label>
+                        <label class="col-md-6" ng-show="currentField.AdvanceSearchControl.Visible">
+                            <input type="checkbox" ng-model="currentField.AdvanceSearch" />
+                            <span class="label-checkbox" ng-disabled="currentField.AdvanceSearchControl.Locked">{{ languages.ENTITY_FIELD.ADVANCE_SEARCH }}</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <div class="row">
+                        <label class="col-md-6" ng-show="currentField.SearchableControl.Visible">
+                            <input type="checkbox" ng-model="currentField.Searchable" ng-disabled="currentField.SearchableControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.SEARCHABLE }}
+                        </label>
+                        <label class="col-md-6" ng-show="currentField.SortableControl.Visible">
+                            <input type="checkbox" ng-model="currentField.Sortable" ng-disabled="currentField.SortableControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.SORTABLE }}
+                        </label>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <div class="row">
+                        <label class="col-md-6" ng-show="currentField.DisplayControl.Visible">
+                            <input type="checkbox" ng-model="currentField.Display" ng-disabled="currentField.DisplayControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.DISPLAY }}
+                        </label>
+                        <label class="col-md-6" ng-show="currentField.IsActiveControl.Visible">
+                            <input type="checkbox" ng-model="currentField.IsActive" ng-disabled="currentField.IsActiveControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.IS_ACTIVE }}
+                        </label>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <div class="row">
+                        <label class="col-md-6" ng-show="currentField.AllowGroupControl.Visible">
+                            <input type="checkbox" ng-model="currentField.AllowGroup" ng-disabled="currentField.AllowGroupControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.ALL_GROUP }}
+                        </label>
+                        <label class="col-md-6" ng-show="currentField.IsWebformControl.Visible">
+                            <input type="checkbox" ng-model="currentField.IsWebform" ng-disabled="currentField.IsWebformControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.WEBFORM }}
+                        </label>
+                    </div>
+                </div>
+                <div class="checkbox">
+                    <div class="row">
+                        <label class="col-md-6" ng-show="currentField.IsTextShowControl.Visible">
+                            <input type="checkbox" ng-model="currentField.IsTextShow" ng-disabled="currentField.IsTextShowControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.IS_TEXT_SHOW }}
+                        </label>
+                        <label class="col-md-6" ng-show="currentField.IsLoadReferenceControl.Visible">
+                            <input type="checkbox" ng-model="currentField.IsLoadReference" ng-disabled="currentField.IsLoadReferenceControl.Locked"/>
+                            {{ languages.ENTITY_FIELD.IS_LOAD_REFERENCE }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

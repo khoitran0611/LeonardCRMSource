@@ -1,0 +1,121 @@
+﻿<form class="form-horizontal" role="form" name="userForm" id="userForm">
+    <div class="form-group hidden">
+        <label for="txtUserName" class="col-sm-4 control-label">{{languages.USERS.USERNAME}}</label>
+        <div class="col-sm-7">
+            <input type="text" ng-maxlength="20" ng-disabled="user.Id > 0" class="form-control input-sm" id="txtUserName" ng-model="user.LoginName">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="txtFullname" class="col-sm-4 control-label">{{languages.USERS.NAME}}</label>
+        <div class="col-sm-7">
+            <input type="text" ng-disabled="user.Name == 'Administrator'" required class="form-control input-sm" id="txtFullname" ng-model="user.Name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="txtPassword" class="col-sm-4 control-label">{{languages.USERS.PASSWORD}}</label>
+        <div class="col-sm-7">
+            <input type="password" required ng-minlength="6" ng-maxlength="32" class="form-control input-sm" id="txtPassword" name="txtPassword" ng-model="user.Password">
+            <span class="alert-danger" ng-show="userForm.txtPassword.$invalid">{{languages.USERS.PASSWORD_TOOLTIP}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="txtPasswordConfirm" class="col-sm-4 control-label">{{languages.USERS.CONFIRM_PASSWORD}}</label>
+        <div class="col-sm-7">
+            <input type="password" class="form-control input-sm" required id="txtPasswordConfirm" ng-model="user.PasswordConfirm">
+            <span class="alert-danger" ng-show="user.PasswordConfirm != user.Password">{{languages.USERS.PASSWORD_MATCH}}</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="txtEmail" class="col-sm-4 control-label">{{languages.USERS.EMAIL}}</label>
+        <div class="col-sm-7">
+            <input type="email" required class="form-control input-sm" id="txtEmail" ng-model="user.Email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="txtPhone" class="col-sm-4 control-label">{{languages.USERS.PHONE}}</label>
+        <div class="col-sm-7">
+            <input type="text" class="form-control input-sm" id="txtPhone" ng-model="user.Phone">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ddlRole" class="col-sm-4 control-label">{{languages.USERS.ROLE}}</label>
+        <div class="col-sm-4">
+            <select class="form-control input-sm" required id="ddlRole" ng-options="item.Id as item.Name for item in roles" ng-model="user.RoleId"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ddlStatus" class="col-sm-4 control-label">{{languages.USERS.STATUS}}</label>
+        <div class="col-sm-4">
+            <select class="form-control input-sm" required id="ddlStatus" ng-options="item.Id as item.Description for item in pickListForm.Status" ng-model="user.Status"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ddlStore" class="col-sm-4 control-label">{{languages.USERS.STORE}}</label>
+        <div class="col-sm-4">
+            <ui-select id="ddlStore" name="store" class="form-control" ng-model="user.StoreId" theme="select2">
+                <ui-select-match allow-clear="true">{{$select.selected.Description}}</ui-select-match>
+                <ui-select-choices repeat="list.Id as list in pickListForm.Store | propsFilter: {Description: $select.search}">
+                    <div ng-bind-html="list.Description | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">{{languages.USERS.AVATAR}}</label>
+        <div class="col-sm-6" style="width: 300px">
+            <div class="col-md-12 text-left" ng-show="user.Avatar != null && user.Avatar.length > 0" style="padding-left: 0 !important">
+                <div class="col-md-10" style="padding-left: 0 !important">
+                    <img class="customerimage" width="70" height="70" ng-src="{{photo}}" alt="" imageonload />
+                    <button class="btn btn-sm btn-danger btnDeleteCustomerPhoto" ng-show="hasPermission" ng-click="DeletePhoto(user.Avatar)"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
+            </div>
+            <div class="col-md-12" ng-show="user.Avatar == null || user.Avatar.length == 0" style="padding-left: 0 !important; width: 300px">
+                <div class="col-md-5" ng-show="uploader.queue.length == 0 && filesUploaded.length == 0 && (user.Avatar == null || user.Avatar == '')" style="padding-left: 0 !important">
+                    <span class="btn btn-sm btn-danger fileinput-button">
+                        <span>{{languages.SALES_CUSTOMER.CHOOSE}}</span>
+                        <input type="file" data-validation="mime size" data-validation-max-size="100kb"
+                               data-validation-allowing="{{languages.IMAGE_FORMATS}}"
+                               data-validation-error-msg="{{languages.COMMON.INVALID_IMAGE_FORMAT}}"
+                               nv-file-select uploader="uploader" ng-model="customer.Photo" ng-disabled="disabled">
+                    </span>
+                </div>
+                <div class="col-md-12" ng-repeat="item in uploader.queue" style="padding-left: 0 !important">
+                    <div class="col-md-12" style="padding-left: 0 !important">
+                        <div class="form-control customerfilename" style="padding-left: 0 !important">
+                            <i class="glyphicon glyphicon-ok" ng-show="item.isUploaded"></i>
+                            <strong>{{ item.file.name }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="width: 150px; padding-left: 0 !important">
+                        <div class="customerprogressbar" ng-show="uploader.hasHTML5">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="width: 105px;">
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="item.upload()" ng-show="!item.isUploaded">
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="item.remove()" ng-show="!item.isUploaded">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-12" ng-repeat="item in filesUploaded">
+                    <button type="button" class="btn btn-sm btn-danger" ng-click="DeletePhoto(item.name)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="ddlStatus" class="col-sm-4 control-label">{{languages.USERS.SIGNATURE}}</label>
+        <div class="col-sm-8">
+            <textarea ng-model="user.Signature" style="height: 300px;" ng-if="isActiveEditor" class="form-control" ui-tinymce></textarea>
+            <textarea ng-model="user.Signature" style="height: 300px;" ng-if="!isActiveEditor" class="form-control" ui-tinymce></textarea>
+        </div>
+    </div>
+</form>

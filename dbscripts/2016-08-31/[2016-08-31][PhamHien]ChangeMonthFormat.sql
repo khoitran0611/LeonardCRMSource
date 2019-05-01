@@ -1,0 +1,1 @@
+UPDATE Eli_Registry SET Value = 'MM/yyyy' WHERE Name = 'MONTH_FORMAT'

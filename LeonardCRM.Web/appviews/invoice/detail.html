@@ -1,0 +1,169 @@
+﻿<form name="invoiceform" id="invoiceform" class="row" ng-controller="InvoicesDetailCtrl">
+    <div class="col-md-12">
+        <!--begin tab pane-->
+        <div>
+            <ul id="Invoicetab" class="nav nav-tabs">
+                <li><a href="#InvoiceBasicInfo" data-toggle="tab">{{languages.INVOICES.BASIC_INFORMATION}}</a></li>
+                <li><a href="#InvoiceNotes" data-toggle="tab">{{languages.NOTES.NOTES}}</a></li>
+                <li><a href="#InvoiceSystemAudit" data-toggle="tab">{{languages.SYSTEM_AUDIT.TAB_LABEL}}</a></li>
+            </ul>
+
+            <!--begin tab content-->
+            <div class="tab-content">
+                <!--begin basic info tab-->
+                <div class="tab-pane" id="InvoiceBasicInfo">
+                    <div class="panelbody">
+                        <div class="form-horizontal" ng-init="myInit()">
+                            <div class="row">
+
+                                <fieldset class="col-xs-12 fieldset">
+                                    <legend class="fieldsetlegend">{{languages.INVOICES.GENERAL_INFOMATION}}</legend>
+                                    <div class="row fieldsetbody">
+                                        <div class="form-group col-xs-6 dynamic-group" ng-show="invoice.IssuedDateControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.INVOICES.ISSUED_DATE}}
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <input class="form-control cal-xs" show-weeks="showWeeks" type="text"
+                                                       uib-datepicker-popup="{{date_format}}" ng-model="invoice.IssuedDate" ng-focus="opened = true"
+                                                       is-open="opened" uib-datepicker-options="dateOptions"
+                                                       ng-disabled="invoice.IssuedDateControl.Locked"
+                                                       close-text="{{languages.NOTES.CLOSE_CALENDAR}}"
+                                                       data-validation="date" data-validation-format="{{date_format}}"
+                                                       data-validation-error-msg="{{languages.INVOICES.INCORRECT_DATE_MSG}}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 dynamic-group" ng-show="invoice.InvTemplateIdControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.INVOICES.INOICE_TEMPLATE}}
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <ui-select name="invtemplate" class="form-control" ng-model="invoice.InvTemplateId" ng-disabled="invoice.InvTemplateIdControl.Locked"  theme="select2">
+                                                    <ui-select-match allow-clear="false">{{$select.selected.Description}}</ui-select-match>
+                                                    <ui-select-choices repeat="list.Id as list in pickListForm.InvTemplateId | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="list.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 dynamic-group" ng-show="invoice.DetailsControl.Visible">
+                                            <label class="col-xs-4 control-label">{{languages.INVOICES.INVOICE_DETAIL}}</label>
+                                            <div class="col-xs-8">
+                                                <textarea class="form-control notetextarea"
+                                                          ng-disabled="invoice.DetailsControl.Locked" ng-model="invoice.Details"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 dynamic-group" ng-show="invoice.StatusControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.INVOICES.STATUS}}
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <ui-select name="Status" class="form-control" ng-model="invoice.Status" ng-disabled="invoice.StatusControl.Locked"  theme="select2">
+                                                    <ui-select-match allow-clear="false">{{$select.selected.Description}}</ui-select-match>
+                                                    <ui-select-choices repeat="item.Id as item in pickListForm.Status | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 dynamic-group" ng-show="invoice.OrderIdControl.Visible">
+                                            <label class="col-xs-4 control-label">{{languages.INVOICES.INVOICE_ORDER}}</label>
+                                            <div class="input-group-sm col-xs-8">
+                                                <ui-select name="OrderId" class="form-control" ng-model="invoice.OrderId" ng-disabled="invoice.OrderIdControl.Locked"  theme="select2">
+                                                    <ui-select-match allow-clear="true">{{$select.selected.Description}}</ui-select-match>
+                                                    <ui-select-choices repeat="item.Id as item in pickListForm.OrderId | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xs-6 dynamic-group" ng-show="invoice.ResponsibleUsersControl.Visible">
+                                            <label class="col-xs-4 control-label">
+                                                {{languages.INVOICES.RESPONSIBLE_USER}}
+                                                <span>(<span class="mandatorysign">*</span>)</span>
+                                            </label>
+                                            <div class="col-xs-8 input-group-sm">
+                                                <ui-select name="UserIds" class="form-control" ng-model="invoice.UserIds" ng-disabled="invoice.UserIdsControl.Locked"  theme="select2">
+                                                    <ui-select-match allow-clear="true">{{$select.selected.Description}}</ui-select-match>
+                                                    <ui-select-choices repeat="item.Id as item in pickListForm.ResponsibleUsers | propsFilter: {Description: $select.search}">
+                                                        <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+
+                            </div>
+                            <div class="row">
+                                <div ng-include="'/appviews/customfield/customfield.html'"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end basic info tab-->
+                <!--begin note tab -->
+                <div class="tab-pane" id="InvoiceNotes">
+                    <div class="panelbody">
+                        <div ng-include="'/appviews/note/notes.html'"></div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane" id="InvoiceSystemAudit">
+                    <div class="panelbody">
+                        <div ng-include="'/appviews/systemaudit/index.html'"></div>
+                    </div>
+                </div>
+            </div>
+            <!--end tab content-->
+        </div>
+        <!--end tab pane-->
+
+        <div class="panelbody">
+            <div class="form-horizontal">
+                <div class="row">
+                    <fieldset class="col-xs-12 fieldset" ng-class="{'fieldset-topborder':SectionControls.ServiceSection.Collapsed}">
+                        <legend class="fieldsetlegend" ng-click="SectionControls.ServiceSection.Collapsed = !SectionControls.ServiceSection.Collapsed">
+                            <span class="legendcollapse">
+                                <i ng-class="{'glyphicon':true,'glyphicon-plus':SectionControls.ServiceSection.Collapsed==true,'glyphicon-minus':SectionControls.ServiceSection.Collapsed == false} "></i>
+                            </span><span>{{languages.INVOICES.INVOICE_SERVICE}}</span>
+                        </legend>
+                        <div class="row panel-body" uib-collapse="SectionControls.ServiceSection.Collapsed">
+                            <div class="col-xs-12 text-right">
+                                <div class="col-xs-12 form-inline">
+                                    <div class="form-group">
+                                        <label>Currency</label>
+                                        <select ng-model="invoice.CurrencyId" class="form-control input-sm">
+                                            <option ng-repeat="item in pickListForm.CurrencyId" ng-selected="invoice.CurrencyId == item.Id" value="{{item.Id}}">{{item.Description}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="margintop10" ng-include="'/appviews/service/details.html'"></div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+

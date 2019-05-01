@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="190f61bee95b43eb9462e45766af7e6d" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Currency" Width="1.5" PointX="9.19128728899699" PointY="13.432280695732814" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_CurrencyNames" Width="1.5" PointX="6.780684876619226" PointY="8.02730487660845" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_DataTypes" Width="1.5" PointX="5.0010959119541081" PointY="9.2465074403428034" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_EntityFields" Width="1.5" PointX="4.3930638490212441" PointY="14.138500279811444" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_FieldData" Width="1.5" PointX="5.8977894326196" PointY="23.118001829422081" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_FieldsSection" Width="1.5" PointX="5.6739541896031955" PointY="5.0713208192360222" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_FieldsSectionDetail" Width="1.5" PointX="10.89812912926922" PointY="27.519938794672459" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ListDependency" Width="1.5" PointX="2.581044731000925" PointY="9.5741639032839636" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ListDependencyDetail" Width="1.5" PointX="7.6773940993833332" PointY="15.88791576767709" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ListNames" Width="1.5" PointX="8.0052916482115588" PointY="28.302101342148195" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ListValues" Width="1.5" PointX="3.9171608667434943" PointY="6.9539222898678492" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Log" Width="1.5" PointX="4.8935248297143374" PointY="14.904829628255605" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_LoginLog" Width="1.5" PointX="8.2206190303995363" PointY="30.314316182543671" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_MailTemplates" Width="1.5" PointX="1.4850305642397284" PointY="12.720538622103883" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ModuleRelationship" Width="1.5" PointX="6.387383477011408" PointY="1.9279208639300991" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Modules" Width="1.5" PointX="8.4332331011226564" PointY="13.512650585506414" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Notes" Width="1.5" PointX="4.734721806242467" PointY="3.4278273896443787" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_OnlineUsers" Width="1.5" PointX="7.7162196616252041" PointY="17.93647459984593" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Registry" Width="1.5" PointX="0.039300749096693822" PointY="29.240557281878104" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_RolesFields" Width="1.5" PointX="9.794832357109911" PointY="31.171577438326356" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_RolesPermissions" Width="1.5" PointX="6.72779203892117" PointY="10.225434457056892" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_SysAudit" Width="1.5" PointX="10.167654219161559" PointY="24.560791295282911" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Tax" Width="1.5" PointX="2.1509040231587848" PointY="11.060098876738968" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_TempViews" Width="1.5" PointX="1.6777807034914289" PointY="6.5200457156263507" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ViewColumns" Width="1.5" PointX="1.7346712396175932" PointY="1.1321960394886304" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ViewConditions" Width="1.5" PointX="6.4847835164911967" PointY="17.556177147457458" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ViewCustom" Width="1.5" PointX="0.14358043118546737" PointY="3.1769967093956639" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ViewCustomColumns" Width="1.5" PointX="6.7896202983286322" PointY="15.021939582667285" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ViewCustomConditions" Width="1.5" PointX="1.9824097258888231" PointY="30.994298308619438" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ViewGroupBy" Width="1.5" PointX="10.914554127917883" PointY="13.799517623055502" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_ViewOrderBy" Width="1.5" PointX="0.23601758491062447" PointY="1.6178939201021072" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Views" Width="1.5" PointX="9.167023500971041" PointY="25.633850288406876" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesContractState" Width="1.5" PointX="7.8799288197792734" PointY="2.8239650888480083" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesContractTemplate" Width="1.5" PointX="7.421656891434294" PointY="29.360859452449187" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesCustomerUser" Width="1.5" PointX="3.0924212797975263" PointY="10.512976889737406" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesDocument" Width="1.5" PointX="3.3325727299473122" PointY="11.493728777157948" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesInvoice" Width="1.5" PointX="6.800651754625445" PointY="3.02040861687642" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesInvService" Width="1.5" PointX="6.5825975437567568" PointY="28.927805288195518" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesInvTax" Width="1.5" PointX="4.1755886823756567" PointY="13.828419214965971" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesInvTemplate" Width="1.5" PointX="10.374663830909256" PointY="27.12525464367366" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesOrdersUser" Width="1.5" PointX="1.5437796924001441" PointY="15.527770526487274" />
+        <EntityTypeShape EntityType="LeonardEntities.vwAllCustomer" Width="1.5" PointX="10.894006428725088" PointY="13.328941008694908" />
+        <EntityTypeShape EntityType="LeonardEntities.vwClient" Width="1.5" PointX="11.606117868612575" PointY="6.0185711709868963" />
+        <EntityTypeShape EntityType="LeonardEntities.vwCustomViewColumn" Width="1.5" PointX="10.703637610517275" PointY="29.558916060979904" />
+        <EntityTypeShape EntityType="LeonardEntities.vwEntityFieldData" Width="1.5" PointX="5.76971687458908" PointY="20.744794676427169" />
+        <EntityTypeShape EntityType="LeonardEntities.vwFieldNameDataType" Width="1.5" PointX="8.41626279820514" PointY="12.386443307803219" />
+        <EntityTypeShape EntityType="LeonardEntities.vwField" Width="1.5" PointX="8.5304405859347625" PointY="18.592500784710282" />
+        <EntityTypeShape EntityType="LeonardEntities.vwFieldsDataType" Width="1.5" PointX="6.1623867816116595" PointY="18.004643195310909" />
+        <EntityTypeShape EntityType="LeonardEntities.vwListNameValue" Width="1.5" PointX="9.274137490090979" PointY="12.951667225431496" />
+        <EntityTypeShape EntityType="LeonardEntities.vwModuleEnittyRelationship" Width="1.5" PointX="2.8120421035271335" PointY="3.922944413462162" />
+        <EntityTypeShape EntityType="LeonardEntities.vwModuleEntityField" Width="1.5" PointX="1.2722692123019459" PointY="12.54155661749726" />
+        <EntityTypeShape EntityType="LeonardEntities.vwModuleHasEntityField" Width="1.5" PointX="4.5365964363033866" PointY="5.2091377550778617" />
+        <EntityTypeShape EntityType="LeonardEntities.vwModule" Width="1.5" PointX="9.2735542605042234" PointY="7.0572937461814345" />
+        <EntityTypeShape EntityType="LeonardEntities.vwOrderCustomer" Width="1.5" PointX="3.4530319159166103" PointY="16.871882372010443" />
+        <EntityTypeShape EntityType="LeonardEntities.vwPicklistDependency" Width="1.5" PointX="9.4604665718322938" PointY="26.295234379496069" />
+        <EntityTypeShape EntityType="LeonardEntities.vwRegistry" Width="1.5" PointX="10.967049059908394" PointY="12.476678347437026" />
+        <EntityTypeShape EntityType="LeonardEntities.vwSystmAudit" Width="1.5" PointX="7.7937137930624711" PointY="24.718686219639466" />
+        <EntityTypeShape EntityType="LeonardEntities.vwUserRole" Width="1.5" PointX="5.0483599049264374" PointY="16.0375451967295" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesInvoices_Eli_Currency" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_CustomFields_Eli_DataTypes" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_CustomFields_Eli_Modules" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_FieldData_Eli_CustomFields" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_EntityFields" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_RolesFields_Eli_EntityFields" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_EntityFields" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_FieldsSectionDetail_Eli_FieldsSection" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_PicklistValues_Eli_PicklistConditions" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ListValues_Eli_ListNames" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_RolesPermissions_Eli_Modules" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_Views_Eli_Modules" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ViewColumns_Eli_Views" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ViewConditions_Eli_Views" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ViewCustomColumns_Eli_ViewCustom" />
+        <AssociationConnector Association="LeonardEntities.FK_ViewCustomConditions_Eli_ViewCustom" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ViewGroupBy_Eli_Views" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ViewOrderBy_Eli_Views" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesContractStore_SalesContractTemplates" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesInvoices_SalesInvTemplates" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesInvServices_SalesInvoices" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesInvTaxes_SalesInvoices" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesCustReference" Width="1.5" PointX="5.0526866601094076" PointY="15.866441108224187" />
+        <EntityTypeShape EntityType="LeonardEntities.vwViewMenu" Width="1.5" PointX="0.5768126587275475" PointY="2.2413362424081824" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesCustomer" Width="1.5" PointX="3.590728781926785" PointY="21.921363930181304" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesCustomerRef_SalesCustomer" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesCustomerUsers_SalesCustomer" />
+        <EntityTypeShape EntityType="LeonardEntities.vwViewColumn" Width="1.5" PointX="1.3192962544594409" PointY="24.953702953156878" />
+        <EntityTypeShape EntityType="LeonardEntities.vwApplication" Width="1.5" PointX="2.2480140096731547" PointY="27.220150572815982" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_Roles" Width="1.5" PointX="2.431712699323759" PointY="16.286274768545422" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_RolesFields_Eli_Roles" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_RolesPermissions_Eli_Roles" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesOrder" Width="1.5" PointX="5.875" PointY="38.375" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesOrderComplete" Width="1.5" PointX="8.125" PointY="35.625" />
+        <EntityTypeShape EntityType="LeonardEntities.SalesOrderDelivery" Width="1.5" PointX="8.125" PointY="46.5" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesOrder_SalesCustomer" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesDocuments_SalesOrder" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesInvoices_SalesOrder" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesOrderComplete_SalesOrder" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesOrderDelivery_SalesOrder" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesOrdersUsers_SalesOrder" />
+        <EntityTypeShape EntityType="LeonardEntities.Eli_User" Width="1.5" PointX="4.875" PointY="52.25" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_User_Eli_Roles" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_User_SysAudit" />
+        <AssociationConnector Association="LeonardEntities.FK_Eli_ViewCustom_Eli_User" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesCustomerUsers_Eli_User" />
+        <AssociationConnector Association="LeonardEntities.FK_SalesOrdersUsers_Eli_User" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

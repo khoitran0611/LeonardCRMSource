@@ -1,0 +1,111 @@
+﻿@using Eli.Common
+@{
+    Layout = "~/Views/Shared/_AuthenLayout.cshtml";
+}
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b>Leonard</b>USA</a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        @using (Html.BeginForm("Authenticate", "Account", FormMethod.Post, new { @id = "form1" }))
+        {
+            <div class="text-center">
+                @{
+            if (!String.IsNullOrEmpty(Request["st"]))
+            {
+                var status = Request["st"];
+                if (status == LoginStatus.LoginFail.ToString() || status == LoginStatus.NoAccount.ToString())
+                {
+                    <div class="alert alert-danger">@ViewBag.NO_ACCOUNT</div>
+                }
+                else if (status == LoginStatus.NotActivated.ToString())
+                {
+                    <div class="alert alert-danger">@ViewBag.ACCOUNT_NOT_ACTIVATED</div>
+                }
+                else if (status == LoginStatus.BanStatus.ToString())
+                {
+                    <div class="alert alert-danger">@ViewBag.ACCOUNT_BANNED</div>
+                }
+            }
+            var cookie = Request.Cookies.Get(ConfigValues.AUTHEN_COOKIE_KEY);
+            if (cookie != null && !string.IsNullOrEmpty(cookie["ud"]))
+            {
+                var text = SecurityHelper.Decrypt(cookie["ud"]).Split('|');
+                ViewBag.UserName = text[0];
+                ViewBag.Password = text[1];
+                ViewBag.Remember = true;
+            }
+            else
+            {
+                ViewBag.UserName = ViewBag.Password = "";
+                ViewBag.Remember = false;
+            }
+                }
+
+            </div>
+            <div class="form-group has-feedback">
+                <input type="email" value="@ViewBag.UserName" data-validation="required" data-validation-error-msg="Please enter your email" class="form-control" id="username" name="username" placeholder="@ViewBag.USER_NAME">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" value="@ViewBag.Password" data-validation="required" data-validation-error-msg="Please enter your password" class="form-control" id="password" name="password" placeholder="@ViewBag.PASSWORD_RES">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="checkbox icheck">
+                            <input type="checkbox" checked="@ViewBag.Remember" id="remember" name="remember">
+                            @ViewBag.REMEMEBR
+                    </div>
+                </div><!-- /.col -->
+                <div class="col-xs-5">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" id="btnSubmit"><i class="glyphicon glyphicon-user"></i> @ViewBag.BUTTON_LOGIN</button>
+                </div><!-- /.col -->
+            </div>
+        }
+        <a href="/PasswordRecovery">@ViewBag.FORGOT_PASSWORD</a><br>
+        @Html.ActionLink("Register a new membership", "Register", null, new { @class = "text-center" })
+    </div><!-- /.login-box-body -->
+</div><!-- /.login-box -->
+@section styles
+{
+    <style>
+        .alert {
+            padding: 5px;
+        }
+
+        .formcenter {
+            top: 20%;
+            bottom: 30%;
+            left: 30%;
+            right: 30%;
+        }
+
+        .formError {
+            left: 180px !important;
+            max-width: 330px !important;
+        }
+    </style>
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var myLanguage = {
+                errorTitle: '@ViewBag.ErrorTitle'
+            };
+            $.validate({
+                language: myLanguage,
+                validateOnBlur: false, // disable validation when input looses focus
+                errorMessagePosition: 'top', // Instead of 'element' which is default
+                scrollToTopOnError: false // Set this property to true if you have a long form
+            });
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+}

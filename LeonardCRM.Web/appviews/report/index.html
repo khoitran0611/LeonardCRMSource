@@ -1,0 +1,55 @@
+﻿<!--<div class="container">-->
+    <div class="row-fluid" ng-controller="reportCtrl">
+        <div ng-switch="subview">
+            <div class="form-horizontal col-md-10" ng-show="subview != undefined">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">{{languages.REPORT.CHART_OPTIONS}}</legend>
+                    <div class="control-group">
+                        <div class="row-fluid">
+                            <div class="control-group span6">
+                                <div class="col-md-1" style="width: 85px">
+                                    <label class="control-label" for="chartType">{{languages.REPORT.CHART_OPTIONS_NUMBER_OF_GRIDLINES}}</label>
+                                </div>
+                                <div class="col-md-1 input-group-sm" style="margin-right: 30px">
+                                    <input class="form-control small" type="number" min="0" max="100" ng-model="gridLines" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="control-group span6">
+                                <div class="col-md-1" style="width: 85px">
+                                    <label class="control-label" for="chartType">{{languages.REPORT.CHART_OPTIONS_CHARTTYPE}}</label>
+                                </div>
+                                <div class="col-md-2 input-group-sm">
+                                    <select class="form-control" id="chartType" ng-model="chartType">
+                                        <option value="AreaChart">AreaChart</option>
+                                        <option value="PieChart">PieChart</option>
+                                        <option value="ColumnChart">ColumnChart</option>
+                                        <option value="LineChart">LineChart</option>
+                                        <option value="Table">Table</option>
+                                        <option value="BarChart">BarChart</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+            </div>
+            <div ng-switch-when="customer">
+                <div ng-include=" '/appviews/report/customer.html' "></div>
+            </div>
+            <div ng-switch-when="order">
+                <div ng-include=" '/appviews/report/order.html' "></div>
+            </div>
+            <div ng-switch-when="invoice">
+                <div ng-include=" '/appviews/report/invoice.html' "></div>
+            </div>
+            <div ng-switch-default>
+                <h3>Report Dashboard</h3>
+            </div>
+        </div>
+    </div>
+<!--</div>-->
+

@@ -1,0 +1,99 @@
+﻿<div ng-controller="PickListDetail">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{languages.PICKLIST.BASIC_INFORMATION}}
+            </div>
+            <div class="panel-body">
+                <form name="picklistform" id="picklistform" class="col-md-12 form-horizontal" role="form" ng-init="myInit()">
+                    <div class="form-group">
+                        <label class="col-md-2  control-label">{{languages.PICKLIST.MODULE}}</label>
+                        <div class="col-md-4">
+                            <ui-select class="form-control" multiple="" ng-model="listname.ModuleIds" theme="bootstrap" sortable="true">
+                                <ui-select-match ui-lock-choice="false">{{$item.DisplayName }}</ui-select-match>
+                                <ui-select-choices repeat="item.Id as item in modules | propsFilter: {DisplayName: $select.search}">
+                                    <div ng-bind-html="item.DisplayName | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <label for="txtName" class="col-md-2 control-label">{{languages.PICKLIST.NAME}}</label>
+                        <div class="col-md-4">
+                            <input ng-disabled="{{picklistId > 0}}" type="text" class="form-control" name="txtName" ng-model="listname.ListName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">{{languages.PICKLIST.DESC}}</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="txtDescription" ng-model="listname.Description" />
+                        </div>
+                        <label class="col-md-2 control-label">{{languages.PICKLIST.ACTIVE}}</label>
+                        <div class="col-md-4">
+                            <input ng-disabled="picklistId ==0 || picklistId == null" ng-model="listname.Active" type="checkbox" id="chbActive" class="donotcallcheckbox" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{languages.PICKLIST.LISTVALUE}}
+                </div>
+                <div class="panel-body">
+                    <form name="picklistform" id="Form1" class="col-md-12 form-horizontal" role="form">
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-4 control-label">{{languages.PICKLIST.LISTVALUE_DESC}}</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="txtDes" ng-model="listvalue.Description" />
+                                </div>
+
+                                 <label style="padding-top: 17px" class="col-md-4 control-label">{{languages.PICKLIST.ADDITIONAL_INFO}}</label>
+                                <div class="col-md-8" style="padding-top: 10px">
+                                    <input type="text" class="form-control" id="Text1" ng-model="listvalue.AdditionalInfo" />
+                                </div>
+                                <label style="padding-top: 17px" class="col-md-4 control-label">{{languages.PICKLIST.COLOR}}</label>
+                                <div class="col-md-8" style="padding-top: 10px">
+                                    <input colorpicker="" class="form-control" ng-model="listvalue.Color" type="text" style="width: 100px">
+                                </div>
+                                <label  class="col-md-4 control-label">{{languages.PICKLIST.ACTIVE}}</label>
+                                <div class="col-md-4">
+                                    <input ng-disabled="editing == false || listvalue.Editable == false" ng-model="listvalue.Active" type="checkbox" id="Checkbox1" class="donotcallcheckbox" />
+                                </div>
+                            </div>
+
+                            <div class=" col-md-6 form-group" style="float: right">
+                                <div class="col-md-12 well">
+                                    <ul class="nav nav-pills nav-stacked columncontainer fields-container"
+                                        ui-sortable="sortableOptions1" ng-model="listname.Eli_ListValues">
+                                        <li style="background-color: {{listvalue.Color!=''?listvalue.Color:'none'}}" ng-class="{'active':editing && listvalue.Description == templistvalue.Description }" class="field" ng-repeat="listvalue in listname.Eli_ListValues" ng-model="listname.Eli_ListValues">
+                                            <a style="color:#000">{{listvalue.Editable? listvalue.Description : listvalue.Description + ' (Default)'}}
+                                                {{listvalue.AdditionalInfo.length > 0 ?' ('+ listvalue.AdditionalInfo + ')' :''}}
+                                                <button class="btn btn-danger btn-xs pull-right" tooltip-animation="true"  tooltip-placement="bottom" tooltip-append-to-body="true" tooltip="{{listvalue.Active? languages.PICKLIST.ACTIVE:languages.PICKLIST.INACTIVE}}"><i  ng-class="{'glyphicon glyphicon-ok':listvalue.Active,'glyphicon glyphicon-minus-sign':!listvalue.Active}"></i></button>
+                                                <button ng-show="listvalue.Id ==0 || listvalue.Id == null " style="margin-right: 10px" class="btn btn-danger btn-xs pull-right" ng-click="deleteListValue($index)"><i class="glyphicon glyphicon-trash" ></i></button>
+                                                <button style="margin-right: 10px;" class="btn btn-danger btn-xs pull-right" ng-click="editListValue($index)"><i class="glyphicon glyphicon-edit "></i></button>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-4">
+                                    <input id="btnAdd" value="{{languages.PICKLIST.SAVE_CMD}}" type="button" ng-disabled="listvalue.Description.length == 0 || listvalue.Description == null  " class="btn btn-sm btn-danger" ng-click="AddListValue()" />
+                                    <input id="btnCancel" value="{{languages.PICKLIST.CANCEL_CMD}}" type="button" ng-disabled="listvalue.Description.length == 0 || listvalue.Description == null  " class="btn btn-sm btn-danger" ng-click="Cancel()" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

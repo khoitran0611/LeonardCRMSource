@@ -1,0 +1,215 @@
+﻿<form id="settingForm" name="settingForm" ng-controller="SettingsCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>{{languages.HOST_SETTING.HEADLINE}}</b>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12 form-horizontal" role="form">
+                        <div class="form-group input-group-sm">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.ITEM_PER_PAGE}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <select class="form-control" ng-model="regs.ITEMS_PER_PAGE"
+                                        uib-tooltip="{{languages.HOST_SETTING.ITEM_PER_PAGE}}"
+                                        uib-tooltip-trigger="mouseenter"
+                                        uib-tooltip-animation="true" uib-tooltip-placement="top" ng-options="item as item for item in items_per_page"></select>
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.SMTP_SERVER}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.SMTP_SERVER"
+                                       uib-tooltip="{{languages.HOST_SETTING.SMTP_SERVER_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.MAX_PAGE_NUMBER}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <select class="form-control" ng-model="regs.MAX_PAGE_NUMBERS"
+                                        uib-tooltip="{{languages.HOST_SETTING.MAX_PAGE_NUMBER_NOTE}}"
+                                        uib-tooltip-trigger="mouseenter"
+                                        uib-tooltip-animation="true" uib-tooltip-placement="top" ng-options="item as item for item in max_pages"></select>
+                            </div>
+
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.SMTP_EMAIL}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.SMTP_CREDENTIAL_EMAIL"
+                                       uib-tooltip="{{languages.HOST_SETTING.SMTP_EMAIL_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--<label class="col-md-2 control-label">{{languages.HOST_SETTING.DEFAULT_THEME}}</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" ng-model="regs.DEFAULT_THEME"
+                                            tooltip="{{languages.HOST_SETTING.DEFAULT_THEME_NOTE}}"
+                                            tooltip-trigger="mouseenter"
+                                            tooltip-animation="true" tooltip-placement="top">
+                                        <option ng-repeat="(index,item) in themes" value="{{item.FileName}}">{{item.Theme}}</option>
+                                    </select>
+                                </div>-->
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.DEFAULT_LANGUAGE}}</label>
+                            <div class="col-md-4">
+                                <select class="form-control" ng-model="regs.DEFAULT_LANGUAGE"
+                                        uib-tooltip="{{languages.HOST_SETTING.DEFAULT_LANGUAGE_NOTE}}"
+                                        uib-tooltip-trigger="mouseenter"
+                                        uib-tooltip-animation="true" uib-tooltip-placement="top" ng-options="item.FileName as item.Theme for item in langs"></select>
+                            </div>
+
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.SMTP_PASSWORD}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="password" class="form-control" ng-model="regs.SMTP_CREDENTIAL_PASSWORD"
+                                       uib-tooltip="{{languages.HOST_SETTING.SMTP_PASSWORD_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.DEFAULT_TITLE}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.DEFAULT_TITLE"
+                                       uib-tooltip="{{languages.HOST_SETTING.DEFAULT_TITLE_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.SMTP_PORT}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.SMTP_PORT"
+                                       uib-tooltip="{{languages.HOST_SETTING.SMTP_PORT_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.NOTIFICATION_FROM_EMAIL}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.NOTIFICATION_FROM_EMAIL"
+                                       uib-tooltip="{{languages.HOST_SETTING.NOTIFICATION_FROM_EMAIL_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.SMTP_SSL}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="checkbox" class="donotcallcheckbox" ng-model="regs.SMTP_SSL"
+                                       uib-tooltip="{{languages.HOST_SETTING.SMTP_SSL_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.MAX_UPLOAD_FILE_SIZE}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <select class="form-control" ng-model="regs.MAX_UPLOAD_FILESIZE"
+                                        uib-tooltip="{{languages.HOST_SETTING.ITEM_PER_PAGE}}"
+                                        uib-tooltip-trigger="mouseenter"
+                                        uib-tooltip-animation="true" uib-tooltip-placement="top" ng-options="item as item for item in max_pages"></select>
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.ENABLE_ERROR_LOG_EMAIL}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="checkbox" class="donotcallcheckbox" ng-model="regs.ENABLE_ERROR_LOG_EMAIL"
+                                       uib-tooltip="{{languages.HOST_SETTING.ENABLE_ERROR_LOG_EMAIL_NOTE}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.CURRENCY}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <select class="form-control" ng-model="regs.CURRENCY"
+                                        uib-tooltip="{{languages.HOST_SETTING.CURRENCY}}"
+                                        uib-tooltip-trigger="mouseenter"
+                                        uib-tooltip-animation="true" uib-tooltip-placement="top">
+                                    <option ng-selected="regs.CURRENCY == item.Symbol" ng-repeat="item in currencies" value="{{item.Symbol}}">{{item.Name + ' (' + item.Symbol + ')'}}</option>
+                                </select>
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.DATETIME_FORMAT}}</label>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 com-xs-8 input-group-sm">
+                                        <input class="form-control" ng-model="regs.DATE_FORMAT"
+                                               uib-tooltip="{{languages.HOST_SETTING.DATETIME_FORMAT_NOTE}}"
+                                               uib-tooltip-trigger="mouseenter"
+                                               uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 com-xs-4 input-group-sm">
+                                        <select class="col-lg-6 form-control" ng-model="regs.TIME_FORMAT">
+                                            <option value=""></option>
+                                            <option value="hh:mm a">12hrs</option>
+                                            <option value="HH:mm">24hrs</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.TOTAL_APPROVAL_POINTS}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="number" class="form-control" ng-model="regs.TOTAL_POINTS"
+                                       uib-tooltip="Total points to be automatically approved when submitting an application"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.BLOCK_UNIT_PRICE}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="number" class="form-control" ng-model="regs.BLOCK_UNIT_PRICE"
+                                       uib-tooltip="Cost to charge for each additional block"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.MAN_HOUR_UNIT_PRICE}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="number" class="form-control" ng-model="regs.MAN_HOUR_UNIT_PRICE"
+                                       uib-tooltip="Cost to charge for each additional hour"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.LOADED_MILE_UNIT_PRICE}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="number" class="form-control" ng-model="regs.LOADED_MILE_UNIT_PRICE"
+                                       uib-tooltip="Cost to charge for each additional mileage"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.FORMAT_DECIMAL_PLACES}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="number" class="form-control" ng-model="regs.FORMAT_DECIMAL_PLACES"
+                                       uib-tooltip="Decimal places to format"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.ACCOUNTING_USER_EMAIL}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.ACCOUNTING_USER_EMAIL" />
+                            </div>
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.REPAIR_USER_EMAIL}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.REPAIR_USER_EMAIL" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{languages.HOST_SETTING.NO_USER_EMAIL}}</label>
+                            <div class="col-md-4 input-group-sm">
+                                <input type="text" class="form-control" ng-model="regs.NO_USER_EMAIL" 
+                                       uib-tooltip="{{languages.HOST_SETTING.NO_USER_EMAIL_TIP}}"
+                                       uib-tooltip-trigger="mouseenter"
+                                       uib-tooltip-animation="true" uib-tooltip-placement="top"  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</form>

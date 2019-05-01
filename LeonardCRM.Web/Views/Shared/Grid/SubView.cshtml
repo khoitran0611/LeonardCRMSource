@@ -1,0 +1,445 @@
+﻿@using LeonardCRM.DataLayer.ModelEntities
+@model IList<vwFieldNameDataType>
+
+<div ng-controller="GridCtrl" ng-init="Grid_Init(@ViewBag.ModuleId,@ViewBag.ViewId,'@ViewBag.ModuleName',@ViewBag.ID,'@ViewBag.ColumnNames','@ViewBag.GroupByColumn','@ViewBag.SortExpression',@ViewBag.PageSize,'@ViewBag.IsShareView')">
+    <div class="toolbar-grid">
+        <button type="button" class="btn btn-danger btn-xs" ng-click="addNew('@ViewBag.ModuleName')"><i class="glyphicon glyphicon-plus-sign"></i> {{languages.GRID_VIEW.ADD_NEW}}</button>
+    </div>
+    <div class="divtable subdynamic">
+        @*Heading Table*@
+        <section class="row">
+            <div class="col-xs-12">
+                <div class="headerrow">
+                    <div class="col-xs-1 divcol selectcolumn">
+                    </div>
+
+                    @foreach (vwFieldNameDataType item in Model.Where(item => item.Display))
+                    {
+                        if ((item.Sortable.HasValue && item.Sortable.Value) || item.Sortable == null)
+                        {
+                            if (item.ColumnName == "Id")
+                            {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["IdWidth"];">
+                        <div class="headercell">
+                            <a ng-click="sortGrid('@item.ColumnName','@item.Name',@item.ModuleId,@item.ViewId)">
+                                @item.LabelDisplay
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Asc'" class="up-caret"></i>
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Desc'" class="caret"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                            }
+                            else
+                            {
+                                if (item.IsImage)
+                                {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ImageWidth"];">
+                        <div class="headercell">
+                            <a ng-click="sortGrid('@item.ColumnName','@item.Name',@item.ModuleId,@item.ViewId)">
+                                @item.LabelDisplay
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Asc'" class="up-caret"></i>
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Desc'" class="caret"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                                }
+                                else if (item.IsInteger || item.IsDecimal || item.IsCurrency)
+                                {
+                    <div class="col-xs-3 divcol" style="width: @ViewData["ColWidth"];">
+                        <div class="headercell text-center">
+                            <a ng-click="sortGrid('@item.ColumnName','@item.Name',@item.ModuleId,@item.ViewId)">
+                                @item.LabelDisplay
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Asc'" class="up-caret"></i>
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Desc'" class="caret"></i>
+                            </a>
+                        </div>
+                    </div>
+                                }
+                                else
+                                {
+                    <div class="col-xs-3 divcol" style="width: @ViewData["ColWidth"];">
+                        <div class="headercell">
+                            <a ng-click="sortGrid('@item.ColumnName','@item.Name',@item.ModuleId,@item.ViewId)">
+                                @item.LabelDisplay
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Asc'" class="up-caret"></i>
+                                <i ng-if="pageInfoGrid.SortExpression ==  '@item.ColumnName Desc'" class="caret"></i>
+                            </a>
+                        </div>
+                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (item.ColumnName == "Id")
+                            {
+                    <div class="col-xs-3 divcol" style="width:@ViewData["IdWidth"];">
+                        <div class="headercell"><span>@item.LabelDisplay</span></div>
+                    </div>
+                            }
+                            else
+                            {
+                                if (item.IsImage)
+                                {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ImageWidth"];">
+                        <div class="headercell"><span>@item.LabelDisplay</span></div>
+                    </div>
+
+                                }
+                                else
+                                {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class="headercell"><span>@item.LabelDisplay</span></div>
+                    </div>
+
+                                }
+                            }
+                        }
+                    }
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </section>
+
+        @*Filter Table*@
+        <section class="row">
+            <div class="col-xs-12">
+                <div class="gridlocalfilter">
+
+                    <div class="col-xs-1 divcol selectcolumn">
+                        <div class="coverbuttonfilter">
+                            <button type="button" tooltip-animation="true" tooltip-placement="right" tooltip="{{ languages.COMMON.FILTER_BUTTON_NOTE }}" class="btn btn-danger btn-xs" ng-click="serverFilter(true)"><i class="glyphicon glyphicon-filter"></i></button>
+                        </div>
+                    </div>
+
+
+                    @foreach (vwFieldNameDataType item in Model.Where(item => item.Display))
+                    {
+                        if ((item.Searchable.HasValue && item.Searchable.Value) || item.Searchable == null)
+                        {
+                            if (item.ColumnName == "Id")
+                            {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["IdWidth"];">
+                        <div class=" input-group-sm">
+                            <input type="text" ng-model="localFilterObj.@item.ColumnName" class="form-control input-sm">
+                        </div>
+                    </div>
+
+                            }
+                            else
+                            {
+                                if (item.IsImage)
+                                {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ImageWidth"];">
+                        <div class="">
+                        </div>
+                    </div>
+
+                                }
+                                else if (item.IsCheckBox)
+                                {
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class="">
+                        </div>
+                    </div>
+                                }
+                                else if (item.IsDate || item.IsDateTime)
+                                {
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class="date-picker">
+                            <input type="text" class="form-control input-sm cal-xs" show-weeks="showWeeks" ng-focus="open@(item.ColumnName) = true" is-open="open@(item.ColumnName)"
+                                   uib-datepicker-popup="{{dateFormat}}" placeholder="{{dateFormat}}" ng-model="localFilterObj.@item.ColumnName"
+                                   datepicker-options="dateOptions"
+                                   close-text="{{languages.NOTES.CLOSE_CALENDAR}}" />
+                        </div>
+                    </div>
+                                }
+                                else if (item.IsList)
+                                {
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class=" input-group-sm">
+                            <input type="hidden" ng-init="localFilterObj.Collection._@item.ColumnName = []" />
+                            <select id="ddlParentIds" style="width: 100%;" ui-select2="select2Options"
+                                    ng-model="localFilterObj.@item.ColumnName">
+                                <option value="">&nbsp;</option>
+                                <option ng-repeat="item in localFilterObj.Collection._@item.ColumnName" value="{{item.Id}}">{{item.Description}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                                }
+                                else if (item.IsMultiSelecttBox)
+                                {
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class=" input-group-sm">
+                            <input type="hidden" ng-init="localFilterObj.Collection._@item.ColumnName = []" />
+                           @* <select id="ddlParentIds" style="width: 100%;" ui-select2="select2Options" multiple
+                                    ng-model="localFilterObj.@item.ColumnName">
+                                <option ng-repeat="item in localFilterObj.Collection._@item.ColumnName" value="{{item.Id}}">{{item.Description}}</option>
+                            </select>*@
+                            <ui-select class="form-control"  multiple ng-model="localFilterObj.@item.ColumnName"
+                                theme="bootstrap" sortable="true">
+                                <ui-select-match>{{$item.Description }}</ui-select-match>
+                                <ui-select-choices repeat="item in localFilterObj.Collection._@item.ColumnName | propsFilter: {Description: $select.search}">
+                                    <div ng-bind-html="item.Description | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                                }
+                                else if (item.IsInteger || item.IsDecimal || item.IsCurrency)
+                                {
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class=" input-group-sm">
+                            <input type="text" ng-model="localFilterObj.@item.ColumnName" class="form-control input-sm text-right">
+                        </div>
+                    </div>
+                                }
+                                else
+                                {
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class=" input-group-sm">
+                            <input type="text" ng-model="localFilterObj.@item.ColumnName" class="form-control input-sm">
+                        </div>
+                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (item.ColumnName == "Id")
+                            {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["IdWidth"];">
+                        <div class="">
+                        </div>
+                    </div>
+
+                            }
+                            else
+                            {
+                                if (item.IsImage)
+                                {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ImageWidth"];">
+                        <div class="">
+                        </div>
+                    </div>
+
+                                }
+                                else
+                                {
+
+                    <div class="col-xs-3 divcol" style="width:@ViewData["ColWidth"];">
+                        <div class="">
+                        </div>
+                    </div>
+
+                                }
+                            }
+                        }
+                    }
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </section>
+
+        @*Body Table*@
+        <div class="row drow" ng-repeat="@ViewBag.Item in datasource | filter:{@ViewBag.LocalFilter}  | orderBy:predicate:reverse">
+            <div class="col-xs-12">
+                <div class="gridrow" ng-class-odd="'rowindex'" ng-class-even="'altrowindex'">
+                    @if (Model[0].LoadChildView)
+                    {
+                    <div class="col-xs-1 divcol selectcolumn">
+                        <div class="rowcell selectingrid">
+                            <button type="button" class="btn btn-default btn-xs @ViewBag.Item{{@string.Format("{0}.Id", ViewBag.Item)}}bt" ng-click="LoadChildView('@ViewBag.Item',@string.Format("{0}.Id", ViewBag.Item),@ViewBag.ViewId,@ViewBag.ModuleId,'@ViewBag.ModuleName')"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    }
+                    else
+                    {
+                    <div class="col-xs-1 divcol selectcolumn">
+                        <div class="rowcell selectingrid">
+
+                        </div>
+                    </div>
+                    }
+
+                    @foreach (vwFieldNameDataType item in Model.Where(item => item.Display))
+                    {
+                        if (item.ColumnName == "Id")
+                        {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["IdWidth"];">
+                        <span class="rowcell">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}">#{{@(ViewBag.Item).@item.ColumnName}}</span>
+                        </span>
+                    </a>
+
+                        }
+                        else
+                        {
+                            if (item.IsImage)
+                            {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ImageWidth"];">
+                        <span class="rowcell">
+                            <span>
+                                <img ng-hide="@(ViewBag.Item).@item.ColumnName == '' || @(ViewBag.Item).@item.ColumnName == null" class="imageingrid img-circle" ng-src="{{ showimage( @(ViewBag.Item).@item.ColumnName )}}" imageonload />
+                            </span>
+                        </span>
+                    </a>
+
+                            }
+                            else if (item.IsDateTime)
+                            {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" timeago title='{{@(ViewBag.Item).@item.ColumnName|date:dateTimeFormat}}' ng-bind="@(ViewBag.Item).@item.ColumnName"></span>
+                        </span>
+                    </a>
+
+                            }
+                            else if (item.IsDate)
+                            {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" title='{{@(ViewBag.Item).@item.ColumnName|date:dateFormat}}' ng-bind="@(ViewBag.Item).@item.ColumnName|date:dateFormat"></span>
+                        </span>
+                    </a>
+
+                            }
+                            else if (item.IsCheckBox)
+                            {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()')"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()')"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell">
+                            <span>
+                                <input type="checkbox" ng-checked="@(ViewBag.Item).@item.ColumnName" ng-disabled="true" />
+                            </span>
+                        </span>
+                    </a>
+
+                            }
+                            else if (item.IsTextArea)
+                            {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" title="{{@(ViewBag.Item).@item.ColumnName}}" ng-bind-html="bindTrustHtml(@(ViewBag.Item).@item.ColumnName)"></span>
+                        </span>
+                    </a>
+
+                            }
+                            else if (item.IsCurrency)
+                            {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell text-right">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" title="{{@(ViewBag.Item).@item.ColumnName|currency:''}}" ng-bind="@(ViewBag.Item).@item.ColumnName|currency:''"></span>
+                        </span>
+                    </a>
+
+                            }
+                            else if (item.IsInteger)
+                            {
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell text-right">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" title="{{@(ViewBag.Item).@item.ColumnName}}">{{@(ViewBag.Item).@item.ColumnName}}</span>
+                        </span>
+                    </a>
+                            }
+                            else if (item.IsDecimal)
+                            {
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell text-right">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" title="{{@(ViewBag.Item).@item.ColumnName|number:2}}">{{@(ViewBag.Item).@item.ColumnName|number:2}}</span>
+                        </span>
+                    </a>
+                            }
+                            else if (item.IsList)
+                            {
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"]; background-color: {{getColor(@(ViewBag.Item).@item.ColumnName)}}">
+                        <span class="rowcell">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" title="{{getListDescription(@(ViewBag.Item).@item.ColumnName)}}">{{getListDescription(@(ViewBag.Item).@item.ColumnName)}}</span>
+                        </span>
+                    </a>
+
+                            }
+                            else
+                            {
+
+                    <a ng-mouseover="RowHover(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       ng-click="RowClick(@item.ModuleId,@item.ViewId,@string.Format("{0}.Id", ViewBag.Item),'@item.Name.ToLower()', '@item.ColumnName', @item.IsCommand.ToString().ToLower())"
+                       class="col-xs-3 divcol rowlink"
+                       style="width: @ViewData["ColWidth"];">
+                        <span class="rowcell">
+                            <span ng-class="{'link-underline': '@item.IsCommand.ToString().ToLower()' == 'true'}" title="{{@(ViewBag.Item).@item.ColumnName}}">{{@(ViewBag.Item).@item.ColumnName}}</span>
+                        </span>
+                    </a>
+
+                            }
+                        }
+                    }
+                    <div class="clear"></div>
+                    <div>
+                        <div class="col-xs-12">
+                            <div class="dn @ViewBag.Item{{@string.Format("{0}.Id", ViewBag.Item)}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 gridempty" ng-show="@ViewBag.HashTableLength == 0">
+            {{languages.COMMON.NO_RESULT}}
+        </div>
+
+    </div>
+
+    <div>
+        @{
+            Html.RenderPartial("Paging/_PagingGridPartial");
+        }
+    </div>
+</div>

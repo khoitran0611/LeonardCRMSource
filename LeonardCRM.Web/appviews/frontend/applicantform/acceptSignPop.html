@@ -1,0 +1,28 @@
+﻿<form class="form-horizontal">
+    <div id="customer-sigPad" class="sigPad">
+        <label for="name">{{languages.CUSTOMER_ACCEPTANCE_FORM.PRINT_CUSTOMER_NAME}}</label>
+        <input type="text" name="name" id="print-name-customer" class="name">
+
+        <label style="margin-top:15px" for="typed-customer-siganture" class="typeSignLabel">{{languages.CUSTOMER_ACCEPTANCE_FORM.TYPED_SIGNATURE_LABEL}}</label>
+        <input style="margin-bottom:15px" type="text" id="typed-customer-siganture" class="typeSignInput" placeholder="{{languages.CUSTOMER_ACCEPTANCE_FORM.TYPED_SIGNATURE_PLACEHOLDER}}"/>
+
+        <p class="typeItDesc">{{languages.CUSTOMER_ACCEPTANCE_FORM.CUSTOMER_SIGN_TEXT}}</p>
+        <p class="drawItDesc">{{languages.CUSTOMER_ACCEPTANCE_FORM.CUSTOMER_SIGN_TEXT}}</p>
+
+        <ul class="sigNav">
+            <li class="typeIt"><a href="#type-it">{{languages.CUSTOMER_ACCEPTANCE_FORM.TYPE_SIGN_TEXT}}</a></li>
+            <li class="drawIt"><a href="#draw-it">{{languages.CUSTOMER_ACCEPTANCE_FORM.SIGN_HERE_TEXT}}</a></li>
+            <li class="clearButton"><a href="#clear">{{languages.CUSTOMER_ACCEPTANCE_FORM.CLEAR_SIGNATURE_BTN}}</a></li>
+        </ul>
+        <div class="sig sigWrapper">
+            <div class="typed" style="display: block; font-size: 67px; padding-top: 37px; border-color:#666666;"></div>
+            <canvas id="customerSignCanvas" class="pad" width="350" height="110"></canvas>
+            <input type="hidden" name="output" class="output">
+        </div>
+    </div>    
+
+   <div class="form-group list-inline" style="border-top: 1px solid #e5e5e5; padding-right: 15px; padding-top: 15px; margin-top:20px;">
+        <button ng-click="hidePopup()" style="margin-right: 5px; float: right" class="btn btn-sm btn-default" type="button">{{languages.CUSTOMER_ACCEPTANCE_FORM.CANCEL_SIGNATURE_BTN}}</button>
+        <button ng-click="saveSignPopup()" style="margin-right: 5px; float: right" class="btn btn-sm btn-primary" type="button">{{languages.CUSTOMER_ACCEPTANCE_FORM.ACCEPT_SIGNATURE_BTN}}</button>
+    </div>
+</form>

@@ -1,0 +1,22 @@
+﻿<style type="text/css">
+    .optional-part-number-text {
+        font-size: 13px;
+        font-weight: normal;        
+    }
+</style>
+<div class="col-md-12 col-sm-12 col-xs-12 form-group">
+    <label class="submit-app-question">{{languages.APPLICANT_FORM.QUESTION_APP_INFO_SECTION}}</label>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group visible-md visible-sm"></div>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group visible-md visible-sm"><span class="optional-part-number-text"><i>{{languages.APPLICANT_FORM.OPTIONAL_PART_NUM_TEXT}}</i></span></div>
+<div class="col-md-6 col-sm-6 col-xs-12 form-group">
+    <label>{{languages.APPLICANT_FORM.STORE_NO_FIELD}}<span> (<span class="mandatorysign">*</span>)</span></label>
+    <input type="text" autocomplete="off" placeholder="Type to search. E.g. NC or 132" maxlength="10" id="store-id" class="form-control" data-validation="required" ng-model="applicant.StoreNumber" uib-typeahead="s.AdditionalInfo for s in stores| filter:searchStore" typeahead-template-url="customTemplate.html" uib-typeahead-show-hint="true" uib-typeahead-min-length="0" data-validation-error-msg="{{languages.APPLICANT_FORM.STORE_NUMBER_REQUIRE_ERROR_MSG}}" ng-blur="checkStoreValue();">
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12 form-group">
+    <label>{{languages.APPLICANT_FORM.PART_NO_FIELD}}  <span class="optional-part-number-text hidden-md hidden-sm">-<i>{{languages.APPLICANT_FORM.OPTIONAL_PART_NUM_TEXT}}</i></span></label>
+    <input type="text" class="form-control" maxlength="20" ng-model="applicant.PartNumber">
+</div>
+
+
