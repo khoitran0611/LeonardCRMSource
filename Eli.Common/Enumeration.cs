@@ -7,7 +7,7 @@ namespace Eli.Common
     {
         Active = 1,
         Suspended = 2,
-        Not_Activated = 3,
+        Not_Activated = 11,
         //Add new Status
     }
 
